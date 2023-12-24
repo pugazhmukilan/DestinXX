@@ -144,6 +144,7 @@ class _HomeState extends State<Home> {
                                 imagepath:"assets/icon_assets/job_user.png",
                                 operation: (){
                                   //NAVIGATOR
+                                  _showBottomAlertDialog(context);
                                 }
                               ),
                               FeaturesButton(startcolor: Color.fromARGB(255, 249, 19, 19),
@@ -153,6 +154,7 @@ class _HomeState extends State<Home> {
                                 imagepath:"assets/icon_assets/News.png",
                                 operation: (){
                                   //NAVIGATOR
+                                  _showBottomAlertDialog(context);
                                 }
                               ),
                               FeaturesButton(startcolor: Color.fromARGB(255, 138, 86, 249),
@@ -162,6 +164,7 @@ class _HomeState extends State<Home> {
                                 imagepath:"assets/icon_assets/job_user.png",
                                 operation: (){
                                   //NAVIGATOR
+                                  _showBottomAlertDialog(context);
                                 }
                               ),
                               FeaturesButton(startcolor: Color.fromARGB(255, 242, 229, 95),
@@ -171,6 +174,7 @@ class _HomeState extends State<Home> {
                                 imagepath:"assets/icon_assets/report.png",
                                 operation: (){
                                     //NAVIGATOR
+                                    _showBottomAlertDialog(context);
                                 }
                               ),
                           ],
