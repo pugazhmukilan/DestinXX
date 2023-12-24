@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "807718658302",
+    "firebase_url": "https://destinx-c4de9-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "destinx-c4de9",
+    "storage_bucket": "destinx-c4de9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807718658302:android:3fd382eb72d21c3f9a05af",
+        "android_client_info": {
+          "package_name": "com.example.destin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNk4Jr1en1XrriNK-5RuJ91R1LTBtbzPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
