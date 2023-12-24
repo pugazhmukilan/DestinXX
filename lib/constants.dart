@@ -288,40 +288,30 @@ void showErrorDialog(BuildContext context, String errorMessage,String title) {
 
 
 
-
-void showBottomPopup(BuildContext context, String message) {
-  showModalBottomSheet(
-    shape: RoundedRectangleBorder(
-    borderRadius:BorderRadius.circular(30)),
-  anchorPoint: Offset.fromDirection(1),
-    useSafeArea: false,
-    isScrollControlled: true,
-    
+void _showBottomAlertDialog(BuildContext context) {
+  showDialog(
     context: context,
     builder: (BuildContext context) {
-      return Container(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                
-                Text(
-              message,
-              style: TextStyle(fontSize: 18.0),
+      return Padding(
+        padding: const EdgeInsets.all(7.0),
+        child: Container(
+          child: AlertDialog(
+            elevation: 12,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            buttonPadding: EdgeInsets.all(5),
+            backgroundColor: Colors.black.withOpacity(0.8),
+            alignment: Alignment.bottomCenter,
+            title: Text(
+              'This page is under construction',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white),
             ),
-              ],
-            ),
-            
-            
-          ],
+          ),
         ),
       );
-    },
-  );
-
- 
+},);
 }
-

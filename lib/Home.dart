@@ -134,7 +134,7 @@ class _HomeState extends State<Home> {
                                 imagepath:"assets/icon_assets/report.png",
                                 operation: (){
                                     //NAVIGATOR
-                                    showBottomPopup(context, "This page is underdevelopment");
+                                    _showBottomAlertDialog(context);
                                 }
                               ),
                               FeaturesButton(startcolor: Color.fromARGB(255, 138, 86, 249),
@@ -359,3 +359,34 @@ class FeaturesButton extends StatelessWidget {
 }
 
 
+
+
+
+
+void _showBottomAlertDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(7.0),
+        child: Container(
+          child: AlertDialog(
+            elevation: 12,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            buttonPadding: EdgeInsets.all(5),
+            backgroundColor: Colors.black.withOpacity(0.8),
+            alignment: Alignment.bottomCenter,
+            title: Text(
+              'This page is under construction',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white),
+            ),
+          ),
+        ),
+      );
+},);
+}
