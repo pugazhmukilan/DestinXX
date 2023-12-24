@@ -2,7 +2,6 @@ import 'package:destin/firebasefunctions.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
-import 'main.dart';
 
 //USE THE SHARED PREFERENCE FILE TO SAME THE DATE LOCALLY NOW THEN WE CAN GO FOR THE DATABASE
 late String SavedName ='';
@@ -25,17 +24,8 @@ class _ResumeState extends State<Resume> {
 DateTime _dateTime = DateTime.now();
 @override
   void initState() {
-    // TODO: implement initState
-    SavedName = prefs!.getString('username') ?? '';
-    Date = prefs!.getString("date")??'';
-    Month=prefs!.getString("month")??"";
-    Year=prefs!.getString("year")??"";
-    Intro=prefs!.getString("introduction")??"";
-    Skills=prefs!.getString("skill")??"";
-    Language=prefs!.getString("language")??"";
-    Experience=prefs!.getString("experience")??"";
-    Education=prefs!.getString("education")??"";
-
+    
+    getResumeDetails();
     
 
 
@@ -362,15 +352,7 @@ DateTime _dateTime = DateTime.now();
                                   onPressed: ()async{
                                     //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE 
                                     //STORING THE USERNAME
-                                    await prefs!.setString("username",Nametexteditor.text);
-                                    await prefs!.setString("introduction",Introtexteditor.text);
-                                    await prefs!.setString("skill",Skilltexteditor.text);
-                                    await prefs!.setString("language",Langtexteditor.text);
-                                    await prefs!.setString("experience",Exptexteditor.text);
-                                    await prefs!.setString("education",Edutexteditor.text);
-                                    await prefs!.setString("date",Datetexteditor.text);
-                                    await prefs!.setString("month",Monthtexteditor.text);
-                                    await prefs!.setString("year",Yeartexteditor.text);
+                                   
                                     
                                     addFieldToUserDocument( "UserName", Nametexteditor.text);
                                     addFieldToUserDocument( "DBeducation", Edutexteditor.text);
@@ -495,4 +477,23 @@ class Date_element extends StatelessWidget {
        ),
     );
   }
+}
+
+
+
+
+Future<void> getResumeDetails()async{
+  SavedName =  await getFieldFromUserDocument("UserName");
+  Date =  await getFieldFromUserDocument("DBdate");
+  Month =  await getFieldFromUserDocument("DBmonth");
+  Year =  await getFieldFromUserDocument("DByear");
+  Intro =  await getFieldFromUserDocument("DBintro");
+  Skills =  await getFieldFromUserDocument("DBskills");
+  Language =  await getFieldFromUserDocument("DBlanguage");
+  Experience =  await getFieldFromUserDocument("DBexperience");
+  Education =  await getFieldFromUserDocument("DBeducation");
+  print(SavedName);
+  print(Date);
+  print(Month);
+  print(Skills);
 }

@@ -130,3 +130,47 @@ Future<void> addFieldToUserDocument( String fieldName, String content) async {
     print('Error adding field to user document: $error');
   }
 }
+
+Future<String> getFieldFromUserDocument(String fieldName) async {
+  print("============================================="+UserID);
+  try {
+    // Get the Firestore instance
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Reference to the "Users" collection
+    CollectionReference usersCollection = firestore.collection("Users");
+
+    // Reference to the specific user document
+    DocumentReference userDocument = usersCollection.doc(UserID);
+
+    // Get the snapshot of the user document
+    DocumentSnapshot documentSnapshot = await userDocument.get();
+
+    // Check if the document exists and contains the specified field
+    if (documentSnapshot.exists && documentSnapshot.data() != null) {
+      Map<String, dynamic> userData = documentSnapshot.data() as Map<String, dynamic>;
+
+      // Check if the field exists in the document
+      if (userData.containsKey(fieldName)) {
+        dynamic fieldValue = userData[fieldName];
+        
+        print('Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
+        return fieldValue.toString(); // Assuming the field value is a String
+      } else {
+        print('Field $fieldName does not exist in user document with ID $UserID');
+        return null!;
+      }
+    } else {
+      print('User document with ID $UserID does not exist');
+      return null!;
+    }
+  } catch (error) {
+    print('Error getting field from user document: $error');
+    return null!;
+  }
+}
+
+
+Future<void> getResumeDetails(String field1,String field2,String field3, String field4 ,String field5,String field6,String field7)async{
+  
+}

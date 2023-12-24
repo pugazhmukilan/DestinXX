@@ -55,6 +55,7 @@ class _ReportState extends State<Report> {
                     children: [
                       Row(children: [
                         IconButton(onPressed: (){
+                          if (mounted)
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
 
                         }, icon: Icon(Icons.arrow_back_ios_new_outlined,size: 40,),),
@@ -70,276 +71,297 @@ class _ReportState extends State<Report> {
                       ),
 
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(borderRadius: KMyborder,color: Kmainboard),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            physics: BouncingScrollPhysics(),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          
 
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
 
-                                if (screenWidth  >850)
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(width:50),
-                                    Expanded(
+                              if (screenWidth  >850)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(width:50),
+                                  Expanded(
+                                    
+                                    child: Image(image: AssetImage("assets/image_assets/reportpage_image.png"))),
+                                  SizedBox(width:50),
+                                  Expanded(
+
+                                    flex:2,
+                                    child: Container(
+                                      width:500,
                                       
-                                      child: Image(image: AssetImage("assets/image_assets/reportpage_image.png"))),
-                                    SizedBox(width:50),
-                                    Expanded(
-
-                                      flex:2,
-                                      child: Container(
-                                        width:500,
-                                        
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(right:40,left:40,top:10,bottom:10),
-                                          child: Text("Thank you for your participation in the interview. It was a pleasure meeting with you and discussing your skills and experiences. Your insights and enthusiasm for the position were greatly appreciated",
-                                          style: TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w400,color: Colors.black,fontSize: 25),textAlign: TextAlign.justify,),
-                                        ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right:40,left:40,top:10,bottom:10),
+                                        child: Text("Thank you for your participation in the interview. It was a pleasure meeting with you and discussing your skills and experiences. Your insights and enthusiasm for the position were greatly appreciated",
+                                        style: TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w400,color: Colors.black,fontSize: 25),textAlign: TextAlign.justify,),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height:30,),
-                                if (screenWidth  >850)
-                                Padding(
-                                  padding: const EdgeInsets.only(left:60,bottom:30),
-                                  child: Text("Overall analysis",style: Ktitletextstyle,),
-                                ),
-                                if (screenWidth  >850 )
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(130, 10, 15, 10),
-                                      child: percentage_indicator(percentage:0.4,
-                                      color:Colors.green,
-                                      text:"4/10"),
                                     ),
-
-                                    Expanded(
-                                      child: Container(
-                                        
-                                        
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(top:10,bottom:10,left:30,right:30),
-                                          child: Text("Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress."
-                                          ,style: Kreporttextstyle,),
-                                        )),
-                                    ),
-                                    
+                                  )
+                                ],
+                              ),
+                              SizedBox(height:30,),
+                              if (screenWidth  >850)
+                              Padding(
+                                padding: const EdgeInsets.only(left:60,bottom:30),
+                                child: Text("Overall analysis",style: Ktitletextstyle,),
+                              ),
+                              if (screenWidth  >850 )
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
                                   
-                                  ],
-                                ),
-                                if (screenWidth  >850)
-                                SizedBox(height:30),
-                                if (screenWidth  >850)
-                                Padding(
-                                  padding: const EdgeInsets.only(left:60,bottom:30),
-                                  child: Text("Details",style: Ktitletextstyle,),
-                                ),
-                                if (screenWidth  >850 )
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Container(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              percentage_indicator(percentage: 0.8, color: Colors.orange, text: "8/10"),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top:10,bottom:5,left:5,right:5),
-                                                child: Text("Confidence",style:Kcommontextstyle),
-                                              ),
-                                            ],
-                                                                          
-                                          ),
-                                                                          
-                                        ),
-                                      ),
-                                    ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(130, 10, 15, 10),
+                                    child: percentage_indicator(percentage:0.4,
+                                    color:Colors.green,
+                                    text:"4/10"),
+                                  ),
 
-                                    Expanded(
+                                  Expanded(
+                                    child: Container(
+                                      
+                                      
                                       child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Container(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              percentage_indicator(percentage: 0.4, color: const Color.fromARGB(255, 218, 92, 241), text: "4/10"),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top:10,bottom:5,left:5,right:5),
-                                                child: Text("TBD",style:Kcommontextstyle),
-                                              ),
-                                            ],
-                                                                          
-                                          ),
-                                                                          
-                                        ),
-                                      ),
-                                    ),
-
-
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Container(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              percentage_indicator(percentage: 0.6, color: const Color.fromARGB(255, 255, 216, 59), text: "6/10"),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top:10,bottom:5,left:5,right:5),
-                                                child: Text("Fluency",style:Kcommontextstyle),
-                                              ),
-                                            ],
-                                                                          
-                                          ),
-                                                                          
-                                        ),
-                                      ),
-                                    ),
+                                        padding: const EdgeInsets.only(top:10,bottom:10,left:30,right:30),
+                                        child: Text("Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress."
+                                        ,style: Kreporttextstyle,),
+                                      )),
+                                  ),
                                   
-                                  ],
-                                ),
-                                /*Expanded(
-                                    child: ListView.builder(
-                                      itemCount: question.length,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(question[index], style: Kcommontextstyle),
-                                              SizedBox(height: 5),
-                                              Text(answer[index], style: Kcommontextstyle),
-                                              SizedBox(height: 5),
-                                              Text("FEEDBACK", style: Kcommontextstyle),
-                                              SizedBox(height: 5),
-                                              Text(feedback[index], style: Kcommontextstyle),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),*/
                                 
+                                ],
+                              ),
+                              if (screenWidth  >850)
+                              SizedBox(height:30),
+                              if (screenWidth  >850)
+                              Padding(
+                                padding: const EdgeInsets.only(left:60,bottom:30),
+                                child: Text("Details",style: Ktitletextstyle,),
+                              ),
+                              if (screenWidth  >850 )
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
                                   
-
-
-                                //IF THE SCREEN WIDTH IS LESSER THAN THE GIVEN VALUE THEN THIS WILL GET EXECUTED
-                                if (screenWidth <850)
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-
-                                  children: [
-                                    SizedBox(height:30),
-                                    Image(image: AssetImage("assets/image_assets/reportpage_image.png")),
-
-                                    Container(
-                                        height:250,
-                                        
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(top:10,bottom:10,left:22,right:22),
-                                          child: Text("Thank you for your participation in the interview. It was a pleasure meeting with you and discussing your skills and experiences. Your insights and enthusiasm for the position were greatly appreciated",
-                                          style: TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w400,color: Colors.black,fontSize: 20,),textAlign: TextAlign.justify,),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            percentage_indicator(percentage: 0.8, color: Colors.orange, text: "8/10"),
+                                            Padding(
+                                              padding: const EdgeInsets.only(top:10,bottom:5,left:5,right:5),
+                                              child: Text("Confidence",style:Kcommontextstyle),
+                                            ),
+                                          ],
+                                                                        
                                         ),
+                                                                        
                                       ),
-                                    Text("Overall analysis",style: Ktitletextstyle,),
-
-                                    Padding(
-                                      padding: const EdgeInsets.only(top:30),
-                                      child: percentage_indicator(percentage:0.4,
-                                      color:Colors.green,
-                                      text:"4/10"),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Text("Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress."
-                                            ,style: Kreporttextstyle,textAlign: TextAlign.justify,),
+                                  ),
+
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            percentage_indicator(percentage: 0.4, color: const Color.fromARGB(255, 218, 92, 241), text: "4/10"),
+                                            Padding(
+                                              padding: const EdgeInsets.only(top:10,bottom:5,left:5,right:5),
+                                              child: Text("TBD",style:Kcommontextstyle),
+                                            ),
+                                          ],
+                                                                        
+                                        ),
+                                                                        
+                                      ),
                                     ),
-                                    //CONFIDENCE
-                                    SizedBox(height:30),
-                                    Center(child: Text("Details",style: Ktitletextstyle,)),
-                                    SizedBox(height:15),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-                                      child: percentage_indicator(percentage: 0.8, color: Colors.orange, text: "8/10"),
+                                  ),
+
+
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            percentage_indicator(percentage: 0.6, color: const Color.fromARGB(255, 255, 216, 59), text: "6/10"),
+                                            Padding(
+                                              padding: const EdgeInsets.only(top:10,bottom:5,left:5,right:5),
+                                              child: Text("Fluency",style:Kcommontextstyle),
+                                            ),
+                                          ],
+                                                                        
+                                        ),
+                                                                        
+                                      ),
                                     ),
-                                    SizedBox(height:10),
-                                    Text("Confidence",style:Kcommontextstyle),
-
-
-                                    //TBD
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-                                      child: percentage_indicator(percentage: 0.4, color: const Color.fromARGB(255, 218, 92, 241), text: "4/10"),
-                                    ),
-                                    SizedBox(height:10),
-                                    Text("TBD",style:Kcommontextstyle),
-
-                                    //FLUENCY
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-                                      child: percentage_indicator(percentage: 0.6, color: const Color.fromARGB(255, 255, 216, 59), text: "6/10"),
-                                    ),
-                                    SizedBox(height:10),
-                                    Text("Fluency",style:Kcommontextstyle),
-
-
-                                  ],
-                                ),
+                                  ),
                                 
-                                Container(
-                                  width:double.infinity,
-                                  height:2000,
-                                  
+                                ],
+                              ),
+                              /*Expanded(
                                   child: ListView.builder(
-                                  itemCount: question.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(bottom:15,top:15),
-                                      child: Container(
-                                        color: Kgreycolor_light,
+                                    itemCount: question.length,
+                                    itemBuilder: (context, index) {
+                                      return Container(
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(question[index], style: TextStyle(fontFamily: "Inter", fontSize: 25, fontWeight: FontWeight.w600)),
-                                            SizedBox(height: 10),
+                                            Text(question[index], style: Kcommontextstyle),
+                                            SizedBox(height: 5),
                                             Text(answer[index], style: Kcommontextstyle),
-                                            SizedBox(height: 20),
-                                            Text("FEEDBACK", style: TextStyle(fontFamily: "Inter", fontSize: 25, fontWeight: FontWeight.w600)),
-                                            SizedBox(height: 10),
+                                            SizedBox(height: 5),
+                                            Text("FEEDBACK", style: Kcommontextstyle),
+                                            SizedBox(height: 5),
                                             Text(feedback[index], style: Kcommontextstyle),
                                           ],
                                         ),
-                                      ),
-                                    );
-                                  },
-                                                              ),
-                                ),
-                              ],
+                                      );
+                                    },
+                                  ),
+                                ),*/
+                                 
 
-                            ),
+                              
+                                
+
+
+                              //IF THE SCREEN WIDTH IS LESSER THAN THE GIVEN VALUE THEN THIS WILL GET EXECUTED
+                              if (screenWidth <850)
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+
+                                children: [
+                                  SizedBox(height:30),
+                                  Image(image: AssetImage("assets/image_assets/reportpage_image.png")),
+
+                                  Container(
+                                      height:250,
+                                      
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top:10,bottom:10,left:22,right:22),
+                                        child: Text("Thank you for your participation in the interview. It was a pleasure meeting with you and discussing your skills and experiences. Your insights and enthusiasm for the position were greatly appreciated",
+                                        style: TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w400,color: Colors.black,fontSize: 20,),textAlign: TextAlign.justify,),
+                                      ),
+                                    ),
+                                  Text("Overall analysis",style: Ktitletextstyle,),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:30),
+                                    child: percentage_indicator(percentage:0.4,
+                                    color:Colors.green,
+                                    text:"4/10"),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text("Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress."
+                                          ,style: Kreporttextstyle,textAlign: TextAlign.justify,),
+                                  ),
+                                  //CONFIDENCE
+                                  SizedBox(height:30),
+                                  Center(child: Text("Details",style: Ktitletextstyle,)),
+                                  SizedBox(height:15),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                    child: percentage_indicator(percentage: 0.8, color: Colors.orange, text: "8/10"),
+                                  ),
+                                  SizedBox(height:10),
+                                  Text("Confidence",style:Kcommontextstyle),
+
+
+                                  //TBD
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                    child: percentage_indicator(percentage: 0.4, color: const Color.fromARGB(255, 218, 92, 241), text: "4/10"),
+                                  ),
+                                  SizedBox(height:10),
+                                  Text("TBD",style:Kcommontextstyle),
+
+                                  //FLUENCY
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                    child: percentage_indicator(percentage: 0.6, color: const Color.fromARGB(255, 255, 216, 59), text: "6/10"),
+                                  ),
+                                  SizedBox(height:10),
+                                  Text("Fluency",style:Kcommontextstyle),
+
+
+                                ],
+                              ),
+                              
+                              /*Container(
+                                width:double.infinity,
+                                height:2000,
+                                
+                                child: ListView.builder(
+                                itemCount: question.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom:15,top:15),
+                                    child: Container(
+                                      color: Kgreycolor_light,
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(question[index], style: TextStyle(fontFamily: "Inter", fontSize: 25, fontWeight: FontWeight.w600)),
+                                          SizedBox(height: 10),
+                                          Text(answer[index], style: Kcommontextstyle),
+                                          SizedBox(height: 20),
+                                          Text("FEEDBACK", style: TextStyle(fontFamily: "Inter", fontSize: 25, fontWeight: FontWeight.w600)),
+                                          SizedBox(height: 10),
+                                          Text(feedback[index], style: Kcommontextstyle),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                                            ),
+                              ),*/
+                              for (int i=0;i<question.length;i++)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom:15,top:15),
+                                    child: Container(
+                                      width:double.infinity,
+                                      color: Kgreycolor_light,
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(question[i], style: TextStyle(fontFamily: "Inter", fontSize: 25, fontWeight: FontWeight.w600)),
+                                          SizedBox(height: 10),
+                                          Text(answer[i], style: Kcommontextstyle),
+                                          SizedBox(height: 20),
+                                          Text("FEEDBACK", style: TextStyle(fontFamily: "Inter", fontSize: 25, fontWeight: FontWeight.w600)),
+                                          SizedBox(height: 10),
+                                          Text(feedback[i], style: Kcommontextstyle),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                              
+                            ],
+
                           ),
                         ),
                       ),
@@ -462,3 +484,42 @@ class FeaturesButton extends StatelessWidget {
     );
   }
 }
+/*return Padding(
+                                         padding: const EdgeInsets.only(bottom: 15, top: 15),
+                                         child: Container(
+                                           color: Kgreycolor_light,
+                                           padding: const EdgeInsets.all(10.0),
+                                           child: Column(
+                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                             children: [
+                                               Text(
+                                                 question[index],
+                                                 style: TextStyle(
+                                                   fontFamily: "Inter",
+                                                   fontSize: 25,
+                                                   fontWeight: FontWeight.w600,
+                                                 ),
+                                               ),
+                                               SizedBox(height: 10),
+                                               Text(
+                                                 answer[index],
+                                                 style: Kcommontextstyle,
+                                               ),
+                                               SizedBox(height: 20),
+                                               Text(
+                                                 "FEEDBACK",
+                                                 style: TextStyle(
+                                                   fontFamily: "Inter",
+                                                   fontSize: 25,
+                                                   fontWeight: FontWeight.w600,
+                                                 ),
+                                               ),
+                                               SizedBox(height: 10),
+                                               Text(
+                                                 feedback[index],
+                                                 style: Kcommontextstyle,
+                                               ),
+                                             ],
+                                           ),
+                                         ),
+                                       );*/

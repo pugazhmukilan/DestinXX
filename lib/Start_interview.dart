@@ -1,17 +1,14 @@
 
 import 'package:camera/camera.dart';
 import  "package:flutter/material.dart";
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import "Report.dart";
 import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
 bool ispressed = false;
-SpeechToText _speechToText = SpeechToText();
-  bool _speechEnabled = false;
-  String _lastWords = '';
+
 
 
 
@@ -25,11 +22,15 @@ class Startinterview extends StatefulWidget {
 }
 
 class _StartinterviewState extends State<Startinterview> {
+
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = 'Press the button and start speaking.';
   
   @override
   void initState(){
    
-    _initSpeech();
+    _speech = stt.SpeechToText();
     try{
       dispose();
 
@@ -71,34 +72,6 @@ class _StartinterviewState extends State<Startinterview> {
     }
 
 
-    void _initSpeech() async {
-    _speechEnabled = await _speechToText.initialize();
-    setState(() {});
-  }
-
-  /// Each time to start a speech recognition session
-  void _startListening() async {
-    await _speechToText.listen(onResult: _onSpeechResult);
-    setState(() {});
-  }
-
-  /// Manually stop the active speech recognition session
-  /// Note that there are also timeouts that each platform enforces
-  /// and the SpeechToText plugin supports setting timeouts on the
-  /// listen method.
-  void _stopListening() async {
-    await _speechToText.stop();
-    setState(() {});
-  }
-
-  /// This is the callback that the SpeechToText plugin calls when
-  /// the platform returns recognized words.
-  void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
-      _lastWords = result.recognizedWords;
-    });
-  }
-
 
 
      @override
@@ -106,6 +79,28 @@ class _StartinterviewState extends State<Startinterview> {
     cameraController.dispose();
     super.dispose();
   }
+
+  //speech to text part
+   void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (status) {
+          print('Speech recognition status: $status');
+        },
+        onError: (error) => print('Error: $error'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (result) => setState(() => _text = result.recognizedWords),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
 
     
 
@@ -183,6 +178,8 @@ class _StartinterviewState extends State<Startinterview> {
                           ),
                         )),
 
+                      Text(_isListening ? 'Stop Listening' : 'Start Listening'),
+
                       
                       SizedBox(
                         height:30
@@ -196,24 +193,15 @@ class _StartinterviewState extends State<Startinterview> {
                                     : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 211, 45, 4),
                                     minimumSize: Size(150, 80),
                                     onSurface: Colors.yellow,),
-                                    onPressed: ()async{
-                                    if (ispressed == true){
-                                      print("recorder finished");
-                                      print(ispressed);
-                                      _stopListening();
-                                      print(_lastWords);
-                                      dispose();
+                                    onPressed: (){
+                                   
                                      Navigator.pop(context);
                                      
                                      Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
                                      
-                                    }
+                                    
 
-                                    if (ispressed == false)
-                                      print("recording started");
-                                      print(ispressed);
-                                      _startListening();
-                                     ispressed = true;
+                                   
 
                                     
                                 

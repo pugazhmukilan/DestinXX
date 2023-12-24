@@ -1,11 +1,9 @@
-import "dart:async";
-
 import "package:destin/firebasefunctions.dart";
+import "package:destin/loadingscreen.dart";
 import 'package:flutter/material.dart';
 
 import "Home.dart" ;
 import "Interview.dart";
-import "Resume.dart";
 
 
 double screenWidth = 0;
@@ -156,7 +154,7 @@ class _SideState extends State<Side> {
                             Side_bar_element(name:"Resume",imagelink:"assets/icon_assets/resume_icon.png",operation: (){
                             print("Resume");
                             Navigator.pop(context);
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Resume()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoadingPage()));
                                                 }),
                           
                               ],
@@ -172,17 +170,7 @@ class _SideState extends State<Side> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
 
-                          Padding(
-                            padding: const EdgeInsets.only(bottom:10),
-                            child: GestureDetector(
-                              onTap: (){
-
-                              },
-
-                              child:Text("Delete Account",style:TextStyle(fontFamily: "Inter",fontSize: 17,fontWeight: FontWeight.w600,color: Color.fromARGB(255, 93, 93, 93)),textAlign: TextAlign.center,),
-                            )
-
-                          ),
+                          
                           
                           GestureDetector(
                         onTap: (){
@@ -319,12 +307,7 @@ void showBottomPopup(BuildContext context, String message) {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the bottom sheet
-                  },
-                ),
+                
                 Text(
               message,
               style: TextStyle(fontSize: 18.0),
@@ -339,9 +322,6 @@ void showBottomPopup(BuildContext context, String message) {
     },
   );
 
-  // Automatically close the bottom sheet after 4 seconds
-  Timer(Duration(seconds: 2), () {
-    Navigator.of(context).pop();
-  });
+ 
 }
 
