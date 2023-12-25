@@ -8,22 +8,46 @@ late List<String> Interview_questions;
 final List<TextEditingController> controllers = [];
 
 class Textinterview extends StatefulWidget {
-  const Textinterview({super.key});
+  final String type; // Add this line
+
+  const Textinterview({required this.type, Key? key}) : super(key: key);
+
 
   @override
-  State<Textinterview> createState() => _TextinterviewState();
+  State<Textinterview> createState() => _TextinterviewState(type: type);
 }
 
 class _TextinterviewState extends State<Textinterview> {
+  late String type;
+  _TextinterviewState({required this.type});
 
    // List of controllers for each question
 
   @override
   void initState() {
     super.initState();
-    //ADDING QUESTION TO THE LIST
-    Interview_questions = randomElementsList(HR_question);
-    print(Interview_questions);
+    //ADDING QUESTION TO THE LIST BASED ON THE CONDITIONS
+    if (type =="HR"){
+        Interview_questions = randomElementsList(HR_question);
+        print(Interview_questions);}
+    else if(type == "Management"){
+      Interview_questions = randomElementsList(Management_questions);
+      print(Interview_questions);
+
+    }
+    else if(type == "Technology"){
+      Interview_questions = randomElementsList(Tech_questions);
+      print(Interview_questions);
+
+    }
+
+    else if(type == "Design"){
+          Interview_questions = randomElementsList(Design_questions);
+          print(Interview_questions);
+
+        }
+
+    
 
     //ADDING THE CONTROLLERS FOR EACH ASNWERS FOR THE QUESTION
     for (int i = 0; i < Interview_questions.length; i++) {
@@ -32,6 +56,55 @@ class _TextinterviewState extends State<Textinterview> {
   }
   @override
   Widget build(BuildContext context) {
+    if (Interview_questions.isEmpty){
+      return Scaffold(
+        body: Center(
+          child: Container(
+            width:double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset("assets/image_assets/Empty_noquestions.png",height: 400,width:400),
+                        SizedBox(
+                          height:30,
+                        ),
+                        Text("No Question found!",style:TextStyle(fontFamily: "Inter1",fontWeight: FontWeight.w500,color: Colors.red,fontSize: 30),textAlign: TextAlign.center,),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text("No questions have been created for this interview yet wait untill next update",style:Kcommontextstyle,textAlign: TextAlign.center,),
+                         SizedBox(
+                          height:40,
+                         ),
+                         
+                         ElevatedButton(
+                          onPressed: () {
+                            // Add your button onPressed logic here
+                           Navigator.pop(context);
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            
+                            primary: Colors.black, // background color
+                            onPrimary: Colors.white, // text color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0), // rounded corners
+                            ),
+                          ),
+                          child: Container(
+                            height:50,
+                            width:200,
+                            child: Center(child: Text('Back'))),
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+        )
+      );
+    }
     return Scaffold(
       backgroundColor: Kbackgroundcolor,
       body:Padding(

@@ -4,18 +4,18 @@ import "Start_interview.dart";
 import "Text_interview.dart";
 import 'constants.dart';
 
-class designPage extends StatefulWidget {
+class HRPage extends StatefulWidget {
 
 
-  const designPage({super.key});
+  const HRPage({super.key});
 
   @override
-  State<designPage> createState() => _designPageState();
+  State<HRPage> createState() => _HRPageState();
 }
 
-class _designPageState extends State<designPage> {
-  String imagelink = "assets/image_assets/Design-vector.png";
-  String body = "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.";
+class _HRPageState extends State<HRPage> {
+  String imagelink = "assets/image_assets/HR_interview.png";
+  String body = "An HR interview, also known as a screening interview or preliminary interview, is conducted by the Human Resources department early in the recruitment process. It serves as a filter to identify candidates who align with the company culture and possess the fundamental skills and experiences for the advertised role.";
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;

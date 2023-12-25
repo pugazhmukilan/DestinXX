@@ -203,7 +203,7 @@ class _managementPageState extends State<managementPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"Management"))));
                                         },
                                         width:
                                             260, //Place to set the router to the text based page
@@ -279,7 +279,7 @@ class _managementPageState extends State<managementPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"Management"))));
                                         },
                                         width:
                                             260, //Place to set the router to the text based page

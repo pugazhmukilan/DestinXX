@@ -32,6 +32,9 @@ TextStyle Kreporttextstyle = const  TextStyle(fontFamily: "Inter",fontWeight: Fo
 BorderRadius KMyborder = BorderRadius.circular(10);
 
 
+List <String> Design_questions=[];
+List<String> Management_questions=[];
+List<String> Tech_questions=[];
 List<String> HR_question = [
   "Can you tell me a little about yourself?",
   "What made you apply for this position?",

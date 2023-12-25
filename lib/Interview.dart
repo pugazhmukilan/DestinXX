@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import "HR_page.dart";
 import 'constants.dart';
 import 'designPage.dart';
 import 'managementPage.dart';
@@ -96,6 +97,33 @@ class _InterviewState extends State<Interview> {
                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>designPage()));
                                 }
                               ),
+                              
+                          ],
+                        ),
+                     
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            
+                              FeaturesButton(startcolor: Color.fromARGB(255, 249, 19, 19),
+                                endcolor:Color.fromARGB(255, 249, 70, 167) ,
+                                subtext: "Start your Interview",
+                                maintext: "HR interview",
+                                imagepath:"assets/icon_assets/technology.png",
+                                operation: (){
+                                    //NAVIGATOR
+                                    
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HRPage()));
+                                }
+                              ),
+                              
                               
                           ],
                         ),
