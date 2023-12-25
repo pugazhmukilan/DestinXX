@@ -1,3 +1,4 @@
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
 import "Resume.dart";
@@ -27,7 +28,30 @@ class _LoadingPageState extends State<LoadingPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // Return a loading indicator while waiting for the data
-              return CircularProgressIndicator();
+              //return CircularProgressIndicator();
+              return Padding(
+                padding: const EdgeInsets.only(top:30,bottom:30,left:100,right:100),
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/image_assets/loading_for_fetching.png",height: 200,width: 200,),
+                      SizedBox(
+                        height:10
+                      ),
+                      CircularProgressIndicator(),
+                      SizedBox(
+                        height:10
+                      ),
+                      Text("Fetching your Resume data!",style: Kcommontextstyle,),
+                       
+                      
+              
+                    ],
+                  ),
+                ),
+              );
             } else if (snapshot.hasError) {
               // Handle errors
               return Text('Error: ${snapshot.error}');

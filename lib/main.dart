@@ -14,6 +14,7 @@ import 'firebase_options.dart';
 
 
 SharedPreferences? prefs;
+
 late List<CameraDescription> cameras;
 Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ Future<void> main()async {
 
   prefs = await SharedPreferences.getInstance();
   cameras = await availableCameras();
+ 
 
   runApp( MainApp(isloggedin));
 }

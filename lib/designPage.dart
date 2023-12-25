@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
 
 import "Start_interview.dart";
 import "Text_interview.dart";
+import 'constants.dart';
 
 class designPage extends StatefulWidget {
 
@@ -207,7 +207,7 @@ class _designPageState extends State<designPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"Design"))));
                                         },
                                         width:
                                             260, //Place to set the router to the text based page
@@ -283,7 +283,7 @@ class _designPageState extends State<designPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"Design"))));
                                         },
                                         width:
                                             260, //Place to set the router to the text based page

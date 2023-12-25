@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'Interview.dart';
+import "Report.dart";
 import 'constants.dart';
 List<String> answers = [];
-final List<String> questions = ["hello?","hello??","bye","bye","hello?","hello??","bye","bye","hello??","bye"
-    // Define your 10 questions here
-  ];
-  final List<TextEditingController> controllers = [];
+late List<String> Interview_questions;
+final List<TextEditingController> controllers = [];
 
 class Textinterview extends StatefulWidget {
   const Textinterview({super.key});
@@ -22,7 +21,12 @@ class _TextinterviewState extends State<Textinterview> {
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < questions.length; i++) {
+    //ADDING QUESTION TO THE LIST
+    Interview_questions = randomElementsList(HR_question);
+    print(Interview_questions);
+
+    //ADDING THE CONTROLLERS FOR EACH ASNWERS FOR THE QUESTION
+    for (int i = 0; i < Interview_questions.length; i++) {
       controllers.add(TextEditingController()); // Initialize controllers for each question
     }
   }
@@ -47,7 +51,7 @@ class _TextinterviewState extends State<Textinterview> {
                       Navigator.pop(context);
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
                     }, icon:Icon(Icons.arrow_back_ios) ),
-                     Text("Text based Interview", style: Ktitletextstyle),
+                     Expanded(child: Text("Text based Interview", style: Ktitletextstyle)),
                    ],
                  ),
                  Divider(
@@ -65,10 +69,10 @@ class _TextinterviewState extends State<Textinterview> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (int i = 0; i < questions.length; i++)
+                            for (int i = 0; i < Interview_questions.length; i++)
                               QuestionWidget(
                                 index: i,
-                                question: questions[i],
+                                question: Interview_questions[i],
                                 controller: controllers[i],
                               ),
                             SizedBox(
@@ -82,10 +86,15 @@ class _TextinterviewState extends State<Textinterview> {
                                           ),
                                           onPressed: ()async{
                                        for (int i = 0; i < controllers.length; i++) {
+                                        print("====================================================================");
+                                            print("QUESTION ${i} =========== ${Interview_questions[i]}\n");
+                                            print(" =========== ${controllers[i].text}\n");
+
+                                            
                                             answers.add(controllers[i].text); // Add user input to answers list
                                            }
                                                                     
-                                                                    
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));                          
                                         },
                                                                       
                                       child: Text("Submit answers",style: TextStyle(fontFamily: "Inter",

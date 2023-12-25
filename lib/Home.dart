@@ -121,11 +121,14 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Features",style:Kcommontextstyle),
+                      
                         SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
+                        controller: _scrollController,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                             
                             
                               FeaturesButton(startcolor: Color.fromARGB(255, 242, 229, 95),
                                 endcolor:Color.fromARGB(255, 244, 141, 190) ,
@@ -181,6 +184,79 @@ class _HomeState extends State<Home> {
                         ),
                                       
                                             ),
+                      SizedBox(
+                        height:5
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                        GestureDetector(
+                      onLongPress: (){
+                         _scrollController.animateTo(
+                          _scrollController.offset - 200.0,
+                          curve: Curves.linear,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      onTap: () {
+                        // Scroll to the left
+                        _scrollController.animateTo(
+                          _scrollController.offset - 200.0,
+                          curve: Curves.linear,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: 
+                       Container(
+                        height:30,
+                        decoration: BoxDecoration(color:  Color.fromARGB(204, 0, 0, 0),borderRadius: BorderRadius.only(topLeft: Radius.circular(0),bottomLeft: Radius.circular(20))
+                        ),
+                         child: Padding(
+                           padding: const EdgeInsets.only(left: 10),
+                           child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Kgreytextcolor,
+                                               ),
+                         ),
+                       ),
+                    ),
+
+
+
+                    GestureDetector(
+                      onLongPress: (){
+                         _scrollController.animateTo(
+                          _scrollController.offset + 200.0,
+                          curve: Curves.linear,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      onTap: () {
+                        // Scroll to the left
+                        _scrollController.animateTo(
+                          _scrollController.offset + 200.0,
+                          curve: Curves.linear,
+                          duration: Duration(milliseconds: 500),
+                        );
+                      },
+                      child: 
+                       Container(
+                        height: 30,
+                        decoration: BoxDecoration(color: Color.fromARGB(204, 0, 0, 0),borderRadius: BorderRadius.only(topRight: Radius.circular(0),bottomRight: Radius.circular(20))
+                        ),
+                         child: Padding(
+                           padding: const EdgeInsets.only(right:10),
+                           child: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Kgreytextcolor,
+                                               ),
+                         ),
+                       ),
+                    ),
+                        ],
+                      ),
+                      
                       Padding(
                         padding: const EdgeInsets.only(top:10,bottom:10),
                         child: Container(

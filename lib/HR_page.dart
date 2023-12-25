@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
 import "Start_interview.dart";
-import 'Text_interview.dart';
+import "Text_interview.dart";
 import 'constants.dart';
 
-class techinterviewPage extends StatefulWidget {
-  const techinterviewPage({super.key});
+class designPage extends StatefulWidget {
+
+
+  const designPage({super.key});
 
   @override
-  State<techinterviewPage> createState() => _techinterviewPageState();
+  State<designPage> createState() => _designPageState();
 }
 
-class _techinterviewPageState extends State<techinterviewPage> {
+class _designPageState extends State<designPage> {
+  String imagelink = "assets/image_assets/Design-vector.png";
+  String body = "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.";
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -23,7 +27,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
             children: [
               Expanded(
                 flex: 1,
-                child: Side(),
+                child:Side(),
               ),
               Expanded(
                 flex: 4,
@@ -46,7 +50,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                         height: 60,
                                         width: 900,
                                         child: Text(
-                                          'Technology Interview',
+                                         'HR Interview',
                                           style: TextStyle(
                                               fontFamily: 'Inter',
                                               fontSize: 40,
@@ -78,7 +82,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                     children: [
                                       //Row for the image asset and the overview paragraph
                                      
-                                      Expanded(child: Image.asset("assets/image_assets/techpgimage.png")),
+                                      Expanded(child: Image.asset(imagelink)),
                                        SizedBox(
                                         width: 120,
                                       ),
@@ -106,7 +110,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                                     Padding(
                                                       padding: const EdgeInsets.all(15.0),
                                                       child: Text(
-                                                        'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.',
+                                                        body,
                                                         style: TextStyle(
                                                             fontFamily: 'Inter',
                                                             fontSize: 18,
@@ -129,7 +133,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                     :Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                         Image.asset("assets/image_assets/techpgimage.png"),
+                                         Image.asset(imagelink),
                                         SizedBox(
                                         height: 100,
                                       ),
@@ -155,7 +159,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                                    Padding(
                                                      padding: const EdgeInsets.all(15.0),
                                                      child: Text(
-                                                       'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.',
+                                                       body,
                                                        style: TextStyle(
                                                            fontFamily: 'Inter',
                                                            fontSize: 18,
@@ -203,7 +207,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"Technology"))));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"HR"))));
                                         },
                                         width:
                                             260, //Place to set the router to the text based page
@@ -279,7 +283,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"Technology"))));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Textinterview(type:"HR"))));
                                         },
                                         width:
                                             260, //Place to set the router to the text based page
@@ -392,6 +396,8 @@ class _techinterviewPageState extends State<techinterviewPage> {
   }
 }
 
+//class
+
 class MyElevatedButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final double? width;
@@ -441,3 +447,7 @@ class MyElevatedButton extends StatelessWidget {
     );
   }
 }
+
+
+/*'Transform your management role interviews with our state-of-the-art\n AI interview app! Effortlessly integrate a mix of general inquiries,\n fundamental projects, and strategic questions to holistically evaluate \ncandidates capabilities. Redefine your hiring approach for a \n                             leadership-driven tomorrow',*/
+/* */

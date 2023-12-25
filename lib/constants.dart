@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import "package:destin/firebasefunctions.dart";
 import "package:destin/loadingscreen.dart";
 import 'package:flutter/material.dart';
@@ -28,6 +30,88 @@ TextStyle Kreporttextstyle = const  TextStyle(fontFamily: "Inter",fontWeight: Fo
 //picking the image from the file using the some modules
 
 BorderRadius KMyborder = BorderRadius.circular(10);
+
+
+List<String> HR_question = [
+  "Can you tell me a little about yourself?",
+  "What made you apply for this position?",
+  "How did you hear about our company?",
+  "What do you know about our company?",
+  "Why do you want to work here?",
+  "What are your strengths and weaknesses?",
+  "Describe a challenging situation you faced at work and how you handled it.",
+  "How do you handle stress and pressure?",
+  "Can you provide an example of a successful project you worked on?",
+  "How do you prioritize your work and manage your time?",
+  "What is your management style?",
+  "How do you handle conflicts with colleagues?",
+  "Where do you see yourself in five years?",
+  "What do you consider your greatest professional achievement?",
+  "How do you stay updated on industry trends and changes?",
+  "Why should we hire you?",
+  "What motivates you to do your best work?",
+  "How do you handle feedback and criticism?",
+  "Can you give an example of a time when you had to adapt to a change at work?",
+  "Describe your ideal work environment.",
+  "How do you handle tight deadlines?",
+  "What skills do you bring to this role that make you a good fit?",
+  "How do you stay organized and keep track of tasks?",
+  "Can you describe a situation where you demonstrated leadership skills?",
+  "How do you handle multiple priorities?",
+  "What do you think is the most challenging aspect of this role?",
+  "How do you ensure that your work is accurate and error-free?",
+  "How do you approach building relationships with colleagues?",
+  "Can you share an example of a time when you had to deal with a difficult team member?",
+  "How do you contribute to a positive team environment?",
+  "What are your salary expectations?",
+  "How do you handle tight deadlines and stressful situations?",
+  "What strategies do you use for effective communication?",
+  "Can you share an experience where you had to solve a complex problem?",
+  "How do you handle confidential information and sensitive situations?",
+  "How do you ensure diversity and inclusion in the workplace?",
+  "What are your favorite HR tools or software?",
+  "How do you keep up-to-date with employment laws and regulations?",
+  "Can you describe your experience with performance reviews?",
+  "How do you handle employee relations issues?",
+  "Can you share an example of a time when you had to mediate a conflict between employees?",
+  "How do you approach recruitment and talent acquisition?",
+  "What role do you think HR plays in employee development?",
+  "How do you ensure a fair and unbiased recruitment process?",
+  "Can you provide an example of a successful employee engagement initiative you implemented?",
+  "How do you handle employee terminations or layoffs?",
+  "How do you measure the success of HR programs or initiatives?",
+  "Can you share an experience where you had to deal with a challenging employee situation?",
+  "How do you stay current with changes in employment law?",
+  "Can you share an example of a time when you had to handle a confidential employee matter?"
+];
+
+//GENERATING REANDOWM ELEMEWNT FROM THE ORIGINAL LIST TO NEW LIST
+List<String> randomElementsList(List<String> inputList) {
+  final random = Random();
+  final shuffledList = inputList.toList()..shuffle(random); // Shuffle the list
+  final uniqueElements = <String>{}; // Set to store unique elements
+
+  // Add elements to the set until it has 10 unique elements or the list is exhausted
+  for (var element in shuffledList) {
+    if (uniqueElements.length < 10) {
+      uniqueElements.add(element);
+    } else {
+      break; // No need to continue if we already have 10 unique elements
+    }
+  }
+
+  return uniqueElements.toList(); // Convert the set back to a list
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
