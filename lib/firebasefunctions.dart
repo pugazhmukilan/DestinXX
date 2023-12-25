@@ -157,10 +157,12 @@ Future<String> getFieldFromUserDocument(String fieldName) async {
         print('Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
         return fieldValue.toString(); // Assuming the field value is a String
       } else {
+        dynamic FieldValue = "";
         print('Field $fieldName does not exist in user document with ID $UserID');
         return null!;
       }
     } else {
+      dynamic FieldValue = "";
       print('User document with ID $UserID does not exist');
       return null!;
     }
@@ -171,7 +173,4 @@ Future<String> getFieldFromUserDocument(String fieldName) async {
 }
 
 
-Future<void> getResumeDetails(String field1,String field2,String field3, String field4 ,String field5,String field6,String field7)async{
-  
-}
 

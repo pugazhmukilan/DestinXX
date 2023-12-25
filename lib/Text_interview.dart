@@ -56,6 +56,7 @@ class _TextinterviewState extends State<Textinterview> {
   }
   @override
   Widget build(BuildContext context) {
+    
     if (Interview_questions.isEmpty){
       return Scaffold(
         body: Center(
@@ -106,6 +107,7 @@ class _TextinterviewState extends State<Textinterview> {
       );
     }
     return Scaffold(
+      
       backgroundColor: Kbackgroundcolor,
       body:Padding(
         padding: const EdgeInsets.all(25.0),
@@ -137,11 +139,49 @@ class _TextinterviewState extends State<Textinterview> {
                     child: Container(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        physics: AlwaysScrollableScrollPhysics(),
+                        
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                           
+                            Container(
+                              
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                    Image.asset("assets/image_assets/instruction.png",height: 200,width:200,),
+                                    SizedBox(width: 30.0),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right:100,left:100),
+                                        child: Container(
+                                          width:800,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Text("Instructions",style:TextStyle(fontFamily: "Inter",fontSize: 25,fontWeight: FontWeight.w600,color:Colors.black)),
+                                              SizedBox(height:10),
+                                              Text("Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+                                              style: Kcommontextstyle,textAlign: TextAlign.justify,)
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+
+
+                          
+
+
+                            SizedBox(
+                              height:80,
+                            ),
                             for (int i = 0; i < Interview_questions.length; i++)
                               QuestionWidget(
                                 index: i,
@@ -219,7 +259,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: Text(widget.question),
+          child: Text("${widget.index+1})  ${widget.question}",style: TextStyle(fontFamily: "Inter",fontSize: 17,fontWeight: FontWeight.w500),),
         ),
         
         typingfield(editor: controllers[widget.index], h: 200, hinttext: "answer....", len: 500),
@@ -264,6 +304,7 @@ class typingfield extends StatelessWidget {
              decoration: InputDecoration(
                border: InputBorder.none, // Remove default border
                hintText: 'Here...',
+               hintStyle: TextStyle(fontFamily: "inter",fontSize: 10,color: const Color.fromARGB(255, 148, 148, 148))
              ),
                ),
          ),

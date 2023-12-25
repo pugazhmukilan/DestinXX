@@ -81,9 +81,9 @@ class _LoadingPageState extends State<LoadingPage> {
 
 Future<String> getResumeDetails()async{
   SavedName =  await getFieldFromUserDocument("UserName");
-  Date =  await getFieldFromUserDocument("DBdate");
-  Month =  await getFieldFromUserDocument("DBmonth");
-  Year =  await getFieldFromUserDocument("DByear");
+  Dob =  await getFieldFromUserDocument("DBdob");
+  
+  
   Intro =  await getFieldFromUserDocument("DBintro");
   Skills =  await getFieldFromUserDocument("DBskills");
   Language =  await getFieldFromUserDocument("DBlanguage");

@@ -5,9 +5,7 @@ import 'constants.dart';
 
 //USE THE SHARED PREFERENCE FILE TO SAME THE DATE LOCALLY NOW THEN WE CAN GO FOR THE DATABASE
 late String SavedName ='';
-late String Date = "";
-late String Month = "";
-late String Year = '';
+late String Dob='';
 late String Intro = '';
 late String Skills = '';
 late String Language = '';
@@ -31,21 +29,36 @@ DateTime _dateTime = DateTime.now();
 
     
   }
-/*void _showDatePicker() {
+void _showDatePicker() {
   showDatePicker(
     context: context,
     initialDate: DateTime.now(),
     firstDate: DateTime(2000),
     lastDate: DateTime(2025),
-    initialDatePickerMode: DatePickerMode.day, // Set the mode to select only the day
+    initialDatePickerMode: DatePickerMode.day,
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          primaryColor: Colors.blue, // Adjust the primary color if needed
+          // Adjust the accent color if needed
+          colorScheme: ColorScheme.light(primary: Colors.blue),
+          buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+        ),
+        child: child!,
+      );
+    },
   ).then((value) {
     if (value != null) {
       setState(() {
+        // Create a new DateTime instance without the time part
         _dateTime = DateTime(value.year, value.month, value.day);
+        Dob = _dateTime.toString();
       });
     }
   });
-}*/
+}
+
+
   
   @override
   Widget build(BuildContext context) {
@@ -59,9 +72,7 @@ DateTime _dateTime = DateTime.now();
     TextEditingController Langtexteditor = TextEditingController(text: Language != null ? Language:'');
     TextEditingController Exptexteditor = TextEditingController(text: Experience != null ? Experience:'');
     TextEditingController Edutexteditor = TextEditingController(text: Education != null ? Education:'');
-    TextEditingController Datetexteditor = TextEditingController(text: Date != null ? Date:'');
-    TextEditingController Monthtexteditor = TextEditingController(text: Month != null ? Month:'');
-    TextEditingController Yeartexteditor = TextEditingController(text: Year != null ? Year:'');
+    
     
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -182,29 +193,21 @@ DateTime _dateTime = DateTime.now();
                                        SizedBox(
                                       height:10
                                     ),
-                                    Text("Date of Birth",style:Kresumetextstyle,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                    
+                                  
+                                  Text("Date of Birth",style:Kresumetextstyle,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:10),
+                                    child: Row(
                                       children: [
-                                        Date_element(editor: Datetexteditor, h: 60, w: 80, hinttext: "Date",length:2),
-                                        Date_element(editor: Monthtexteditor, h: 60, w: 80, hinttext: "Month",length:2),
-                                        Date_element(editor: Yeartexteditor, h: 60, w: 80, hinttext: "Year",length:4),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                    height: 40,
-                                  ),
-                                    Row(
-                                      children:[ ]
-                                    ),
-                                    SizedBox(
-                                    height: 40,
-                                  ),
-                                  //ELEVATED BUTTON FOR PIVKING DATE WORKING FINE
-                                  //HAS SOME COMPLICATION WITH THE HOT RELOAD 
-                                  //SO NOT USING FOR NOT  
-                                 /*ElevatedButton(
+                                        Container(
+                                          height:60,
+                                          width:200,
+                                          decoration: BoxDecoration(color:Kgreycolor_light,borderRadius: BorderRadius.circular(20)),
+                                          child: Center(child: Text(Dob,style: TextStyle(fontFamily: "Inter",fontSize: 15  ,color:Color.fromARGB(255, 121, 121, 121), fontWeight: FontWeight.w600),)),
+                                        ),
+                                        SizedBox(width:20),
+                                        ElevatedButton(
                                   
                                   style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 255, 106, 6),
                                   minimumSize: Size(70, 40),
@@ -216,7 +219,18 @@ DateTime _dateTime = DateTime.now();
                                 
                               child: Text("Choose Date",style: TextStyle(fontFamily: "Inter",
                                 fontSize: 13,fontWeight: FontWeight.w600,
-                                color:Colors.white),)),*/
+                                color:Colors.white),)),
+                                      ],
+                                    ),
+                                  ),
+                                    
+                                    SizedBox(
+                                    height: 40,
+                                  ),
+                                  //ELEVATED BUTTON FOR PIVKING DATE WORKING FINE
+                                  //HAS SOME COMPLICATION WITH THE HOT RELOAD 
+                                  //SO NOT USING FOR NOT  
+                                 
                                    
                                     //DATE PICKER
                                     ],
@@ -361,10 +375,8 @@ DateTime _dateTime = DateTime.now();
                                     addFieldToUserDocument( "DBintro", Introtexteditor.text);
                                     addFieldToUserDocument( "DBlanguage", Langtexteditor.text);
                                     addFieldToUserDocument( "DBskills", Skilltexteditor.text);
-                                    addFieldToUserDocument( "DBmonth", Monthtexteditor.text);
-                                    addFieldToUserDocument( "DBdate", Datetexteditor.text);
-                                    addFieldToUserDocument( "DByear", Yeartexteditor.text);
-                              
+                                    addFieldToUserDocument( "DBdob", _dateTime.toString());
+                                    
                                 },
                                 
                               child: Text("Save",style: TextStyle(fontFamily: "Inter",
@@ -484,16 +496,14 @@ class Date_element extends StatelessWidget {
 
 Future<void> getResumeDetails()async{
   SavedName =  await getFieldFromUserDocument("UserName");
-  Date =  await getFieldFromUserDocument("DBdate");
-  Month =  await getFieldFromUserDocument("DBmonth");
-  Year =  await getFieldFromUserDocument("DByear");
+  Dob =  await getFieldFromUserDocument("DBdate");
+ 
   Intro =  await getFieldFromUserDocument("DBintro");
   Skills =  await getFieldFromUserDocument("DBskills");
   Language =  await getFieldFromUserDocument("DBlanguage");
   Experience =  await getFieldFromUserDocument("DBexperience");
   Education =  await getFieldFromUserDocument("DBeducation");
   print(SavedName);
-  print(Date);
-  print(Month);
+  
   print(Skills);
 }
