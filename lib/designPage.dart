@@ -242,7 +242,7 @@ class _designPageState extends State<designPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview(type:"Design"))));
                                         },
                                         width:
                                             260, //Place to set the router to the voice and text based page
@@ -318,7 +318,7 @@ class _designPageState extends State<designPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                          Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview(type:"Design"))));
                                         },
                                         width:
                                             260, //Place to set the router to the voice and text based page

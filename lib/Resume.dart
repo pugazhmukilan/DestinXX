@@ -1,3 +1,4 @@
+import 'package:destin/Signuppage.dart';
 import 'package:destin/firebasefunctions.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,8 @@ late String Skills = '';
 late String Language = '';
 late String Experience = '';
 late String Education = '';
+late String Phone = '';
+late String Email ='';
 class Resume extends StatefulWidget {
   
   @override
@@ -23,7 +26,8 @@ DateTime _dateTime = DateTime.now();
 @override
   void initState() {
     
-    getResumeDetails();
+    //getResumeDetails();
+    
     
 
 
@@ -72,6 +76,8 @@ void _showDatePicker() {
     TextEditingController Langtexteditor = TextEditingController(text: Language != null ? Language:'');
     TextEditingController Exptexteditor = TextEditingController(text: Experience != null ? Experience:'');
     TextEditingController Edutexteditor = TextEditingController(text: Education != null ? Education:'');
+    TextEditingController Phonetexteditor = TextEditingController(text: Phone != null ? Phone:'');
+    TextEditingController Emailtexteditor = TextEditingController(text: Email != null ? Email:'');
     
     
     double screenWidth = MediaQuery.of(context).size.width;
@@ -201,10 +207,10 @@ void _showDatePicker() {
                                     child: Row(
                                       children: [
                                         Container(
-                                          height:60,
+                                          height:40,
                                           width:200,
-                                          decoration: BoxDecoration(color:Kgreycolor_light,borderRadius: BorderRadius.circular(20)),
-                                          child: Center(child: Text(Dob,style: TextStyle(fontFamily: "Inter",fontSize: 15  ,color:Color.fromARGB(255, 121, 121, 121), fontWeight: FontWeight.w600),)),
+                                          decoration: BoxDecoration(color:Kgreycolor_light,borderRadius: BorderRadius.circular(10)),
+                                          child: Center(child: Text(Dob,style: TextStyle(fontFamily: "Inter",fontSize: 13   ,color:Color.fromARGB(255, 121, 121, 121), fontWeight: FontWeight.w600),)),
                                         ),
                                         SizedBox(width:20),
                                         ElevatedButton(
@@ -221,6 +227,50 @@ void _showDatePicker() {
                                 fontSize: 13,fontWeight: FontWeight.w600,
                                 color:Colors.white),)),
                                       ],
+                                    ),
+                                  ),
+                                  SizedBox(height:30),
+                                  Text("Email",style: Kresumetextstyle,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:10),
+                                    child: Container(
+                                      decoration: BoxDecoration(borderRadius: KMyborder,color: Kgreycolor_light,),
+                                      height:30,
+                                      width:200,
+                                  
+                                      child: Center(child: Padding(
+                                        padding: const EdgeInsets.only(left:15),
+                                        child: TextField(controller: emailcontroller,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Email..."
+                                        ),
+                                        ),
+                                      )),
+                                    ),
+                                  ),
+
+
+                                  SizedBox(height:30),
+                                  Text("Phone",style: Kresumetextstyle,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:10),
+                                    child: Container(
+                                      decoration: BoxDecoration(borderRadius: KMyborder,color: Kgreycolor_light,),
+                                      height:30,
+                                      width:200,
+                                  
+                                      child: Center(child: Padding(
+                                        padding: const EdgeInsets.only(left:15),
+                                        child: TextField(controller: Phonetexteditor,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Phone number..."
+                                        ),
+                                        ),
+                                      )),
                                     ),
                                   ),
                                     
@@ -371,11 +421,12 @@ void _showDatePicker() {
                                     addFieldToUserDocument( "UserName", Nametexteditor.text);
                                     addFieldToUserDocument( "DBeducation", Edutexteditor.text);
                                     addFieldToUserDocument( "DBexperience", Exptexteditor.text);
-                                    
+                                    addFieldToUserDocument("DBemail", Emailtexteditor.text);
+                                    addFieldToUserDocument("DBphone", Phonetexteditor.text);
                                     addFieldToUserDocument( "DBintro", Introtexteditor.text);
                                     addFieldToUserDocument( "DBlanguage", Langtexteditor.text);
                                     addFieldToUserDocument( "DBskills", Skilltexteditor.text);
-                                    addFieldToUserDocument( "DBdob", _dateTime.toString());
+                                    addFieldToUserDocument( "DBdob", Dob);
                                     
                                 },
                                 
@@ -496,14 +547,15 @@ class Date_element extends StatelessWidget {
 
 Future<void> getResumeDetails()async{
   SavedName =  await getFieldFromUserDocument("UserName");
-  Dob =  await getFieldFromUserDocument("DBdate");
- 
+  Dob =  await getFieldFromUserDocument("DBdob");
+  Email = await getFieldFromUserDocument("DBemail");
+  Phone = await getFieldFromUserDocument("DBphone");
   Intro =  await getFieldFromUserDocument("DBintro");
   Skills =  await getFieldFromUserDocument("DBskills");
   Language =  await getFieldFromUserDocument("DBlanguage");
   Experience =  await getFieldFromUserDocument("DBexperience");
   Education =  await getFieldFromUserDocument("DBeducation");
   print(SavedName);
-  
+  print(Phone);
   print(Skills);
 }

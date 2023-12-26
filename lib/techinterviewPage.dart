@@ -238,7 +238,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview(type:"Technology"))));
                                         },
                                         width:
                                             260, //Place to set the router to the voice and text based page
@@ -314,7 +314,7 @@ class _techinterviewPageState extends State<techinterviewPage> {
                                       child: MyElevatedButton(
                                         onPressed: () {
                                          Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview())));
+                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Startinterview(type:"Technology"))));
                                         },
                                         width:
                                             260, //Place to set the router to the voice and text based page

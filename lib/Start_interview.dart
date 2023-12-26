@@ -1,36 +1,62 @@
 
 import 'package:camera/camera.dart';
 import  "package:flutter/material.dart";
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
+import 'Interview.dart';
 import "Report.dart";
 import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
 bool ispressed = false;
-
+late List<String> Interview_questions;
+List<String> answers = [];
+bool next_button_live = true;
+int question_increment = 0;
 
 
 
 
 late CameraController cameraController;
 class Startinterview extends StatefulWidget {
+  final String type; // Add this line
+
+  const Startinterview({required this.type, Key? key}) : super(key: key);
   
 
   @override
-  State<Startinterview> createState() => _StartinterviewState();
+  State<Startinterview> createState() => _StartinterviewState(type:type);
 }
 
 class _StartinterviewState extends State<Startinterview> {
-
-  late stt.SpeechToText _speech;
-  bool _isListening = false;
-  String _text = 'Press the button and start speaking.';
+  late String type;
+  _StartinterviewState({required this.type});
+  
+  
   
   @override
   void initState(){
+    if (type =="HR"){
+        Interview_questions = randomElementsList(HR_question);
+        print(Interview_questions);}
+    else if(type == "Management"){
+      Interview_questions = randomElementsList(Management_questions);
+      print(Interview_questions);
+
+    }
+    else if(type == "Technology"){
+      Interview_questions = randomElementsList(Tech_questions);
+      print(Interview_questions);
+
+    }
+
+    else if(type == "Design"){
+          Interview_questions = randomElementsList(Design_questions);
+          print(Interview_questions);
+
+        }
+
    
-    _speech = stt.SpeechToText();
+    
     try{
       dispose();
 
@@ -81,25 +107,7 @@ class _StartinterviewState extends State<Startinterview> {
   }
 
   //speech to text part
-   void _listen() async {
-    if (!_isListening) {
-      bool available = await _speech.initialize(
-        onStatus: (status) {
-          print('Speech recognition status: $status');
-        },
-        onError: (error) => print('Error: $error'),
-      );
-      if (available) {
-        setState(() => _isListening = true);
-        _speech.listen(
-          onResult: (result) => setState(() => _text = result.recognizedWords),
-        );
-      }
-    } else {
-      setState(() => _isListening = false);
-      _speech.stop();
-    }
-  }
+   
 
 
     
@@ -112,6 +120,55 @@ class _StartinterviewState extends State<Startinterview> {
     if (cameras.isEmpty){
       
       return Nocamera();
+    }
+    if (Interview_questions.isEmpty){
+      return Scaffold(
+        body: Center(
+          child: Container(
+            width:double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset("assets/image_assets/Empty_noquestions.png",height: 400,width:400),
+                        SizedBox(
+                          height:30,
+                        ),
+                        Text("No Question found!",style:TextStyle(fontFamily: "Inter1",fontWeight: FontWeight.w500,color: Colors.red,fontSize: 30),textAlign: TextAlign.center,),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text("No questions have been created for this interview yet wait untill next update",style:Kcommontextstyle,textAlign: TextAlign.center,),
+                         SizedBox(
+                          height:40,
+                         ),
+                         
+                         ElevatedButton(
+                          onPressed: () {
+                            // Add your button onPressed logic here
+                           Navigator.pop(context);
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            
+                            primary: Colors.black, // background color
+                            onPrimary: Colors.white, // text color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0), // rounded corners
+                            ),
+                          ),
+                          child: Container(
+                            height:50,
+                            width:200,
+                            child: Center(child: Text('Back'))),
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+        )
+      );
     }
     
     return Scaffold(
@@ -134,7 +191,9 @@ class _StartinterviewState extends State<Startinterview> {
                     children: [
                       Row(children: [
                         IconButton(onPressed: (){
-                          Navigator.pop(context);
+                          
+                          showConfirmationDialog(context);
+                         
 
                         }, icon: Icon(Icons.arrow_back_ios_new_outlined,size: 40,),),
                         SizedBox(width: 20,),
@@ -147,6 +206,7 @@ class _StartinterviewState extends State<Startinterview> {
                         indent: 0,
                         endIndent: 0,
                       ),
+                      Text(type),
 
                       //video container
                       if (!cameraController.value.isInitialized)
@@ -178,7 +238,11 @@ class _StartinterviewState extends State<Startinterview> {
                           ),
                         )),
 
-                      Text(_isListening ? 'Stop Listening' : 'Start Listening'),
+
+                      SizedBox(
+                        height:20
+                      ),
+                     Center(child: Text("${question_increment+1}) ${Interview_questions[question_increment]}",style:Kcommontextstyle))    ,                 
 
                       
                       SizedBox(
@@ -187,18 +251,32 @@ class _StartinterviewState extends State<Startinterview> {
                       Center(
                         child: ElevatedButton(
                                     
-                                    style:ispressed == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
+                                    style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
                                     minimumSize: Size(150, 80),
                                     onSurface: Colors.yellow,)
-                                    : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 211, 45, 4),
+                                    : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
                                     minimumSize: Size(150, 80),
                                     onSurface: Colors.yellow,),
                                     onPressed: (){
-                                   
+                                      if (next_button_live == false){
                                      Navigator.pop(context);
                                      
                                      Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
+                                     setState(() {
+                                       next_button_live = true;
+                                       question_increment =0;
+                                     });
                                      
+                                     }
+                                     
+                                     else{
+                                      setState(() {
+                                        question_increment++;
+                                        if (question_increment == 9){
+                                          next_button_live = false;
+                                        }
+                                      });
+                                     }
                                     
 
                                    
@@ -208,10 +286,10 @@ class _StartinterviewState extends State<Startinterview> {
                                 
                                   },
                                   
-                                child:ispressed ==false? Text("Start",style: TextStyle(fontFamily: "Inter",
+                                child:next_button_live ==false? Text("Finish",style: TextStyle(fontFamily: "Inter",
                                   fontSize: 20,fontWeight: FontWeight.w600,
                                   color:Colors.white),):
-                                   Text("Stop",style: TextStyle(fontFamily: "Inter",
+                                   Text("Next Question",style: TextStyle(fontFamily: "Inter",
                                   fontSize: 20,fontWeight: FontWeight.w600,
                                   color:Colors.white),)),
                       ),

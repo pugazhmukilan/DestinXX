@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import "Home.dart" ;
 import "Interview.dart";
+import  "Start_interview.dart";
 
 
 double screenWidth = 0;
@@ -401,4 +402,63 @@ void _showBottomAlertDialog(BuildContext context) {
         ),
       );
 },);
+}
+
+
+//this dialogue box is shown when the ppl exit the interview in the middle of the interview
+void showConfirmationDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(
+          "On going interview",
+          style: TextStyle(color: Colors.red),
+        ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Are you sure you want to leave this interview in the middle?",
+              style: TextStyle(color: Colors.black),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
+              onPrimary: Colors.white,
+            ),
+            child: Text('No'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              
+                            next_button_live = true;
+                            question_increment = 0;
+                        
+              Navigator.of(context).pop();
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview())); // Close the dialog
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              onPrimary: Colors.white,
+            ),
+            child: Text('Yes'),
+          ),
+        ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 5.0,
+      );
+    },
+  );
 }
