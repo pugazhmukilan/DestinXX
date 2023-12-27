@@ -123,8 +123,7 @@ class _TextinterviewState extends State<Textinterview> {
                  Row(
                    children: [
                     IconButton(onPressed: (){
-                      Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
+                     showConfirmationDialog(context);
                     }, icon:Icon(Icons.arrow_back_ios) ),
                      Expanded(child: Text("Text based Interview", style: Ktitletextstyle)),
                    ],
