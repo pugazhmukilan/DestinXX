@@ -18,6 +18,7 @@ SharedPreferences? prefs;
 late List<CameraDescription> cameras;
 Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
@@ -26,7 +27,14 @@ Future<void> main()async {
   bool isloggedin = await checkLoginStatus();
 
   prefs = await SharedPreferences.getInstance();
+  try{
   cameras = await availableCameras();
+  }
+  on Exception catch (_, e){
+    print("error in getting cameras");
+    print(e.toString());
+    return;
+  }
  
 
   runApp( MainApp(isloggedin));

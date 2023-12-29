@@ -2,6 +2,7 @@ import 'dart:math';
 
 import "package:destin/firebasefunctions.dart";
 import "package:destin/loadingscreen.dart";
+import "package:destin/quiztypes.dart";
 import 'package:flutter/material.dart';
 
 import "Home.dart" ;
@@ -13,6 +14,7 @@ double screenWidth = 0;
 late String UserName ;
 late String UserID;
 String projectName  = "ProjectX";
+Color Kquizlinecolor = Color.fromARGB(255, 219, 219, 219);
 Color  Kbackgroundcolor = const Color.fromARGB(255, 29, 29, 29);
 Color  Ksidebarcolor =  const Color.fromARGB(255, 29, 29, 29);
 Color  Kmainboard = Color.fromARGB(255, 255, 255, 255);
@@ -27,6 +29,7 @@ TextStyle Kcommontextstyle = const TextStyle(fontFamily: "Inter",fontSize: 20,fo
 TextStyle Kresumetextstyle = const TextStyle(fontFamily: "Inter",fontSize: 20,fontWeight:FontWeight.w800,color: Color.fromARGB(255, 104, 103, 103));
 TextStyle Kprogressbarnumber = const TextStyle(fontFamily: "Inter",fontSize: 20,fontWeight: FontWeight.w800,color: Colors.black);
 TextStyle Kreporttextstyle = const  TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w400,color: Colors.black,fontSize: 23);
+TextStyle Kquizcattext = TextStyle(fontFamily: "Inter",fontSize: 25,fontWeight: FontWeight.w600,color: const Color.fromARGB(255, 92, 92, 92));
 //profile image for the user 
 //picking the image from the file using the some modules
 
@@ -230,7 +233,8 @@ class _SideState extends State<Side> {
                             }),
                                               
                             Side_bar_element(name:"Quizs",imagelink:"assets/icon_assets/dev_icon.png",operation: (){
-                            print("Developers");
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: ((context) => Quiztypes())));
                                                 }),
                             Side_bar_element(name:"Interview",imagelink:"assets/icon_assets/tie_side_icon.png",operation: (){
                             print("INterview");

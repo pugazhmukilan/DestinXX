@@ -28,6 +28,7 @@ class Startinterview extends StatefulWidget {
 }
 
 class _StartinterviewState extends State<Startinterview> {
+  
   late String type;
   _StartinterviewState({required this.type});
   
@@ -97,6 +98,7 @@ class _StartinterviewState extends State<Startinterview> {
     
     }
 
+  
 
 
 
