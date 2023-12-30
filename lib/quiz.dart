@@ -694,7 +694,106 @@ const String quizData = '''
               "'std::mutex' is used for creating and managing locks to synchronize access to shared resources in multithreaded programs in C++."
             ],
             "correctIndex": 3
-          }
+          },
+          {
+              "question": "Explain the concept of move semantics in C++11.",
+              "options": [
+                "Move semantics is a technique for efficient transfer of resources from one object to another, reducing unnecessary copying.",
+                "Move semantics is used for moving between different threads in C++ programs.",
+                "Move semantics is a reserved keyword with no functionality in C++.",
+                "Move semantics is a way to implement garbage collection in C++."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "What is the Rule of Three in C++?",
+              "options": [
+                "The Rule of Three states that a C++ class should have a constructor, destructor, and a copy constructor.",
+                "The Rule of Three is a guideline for using only three design patterns in C++ programs.",
+                "The Rule of Three is a technique for optimizing memory allocation in C++.",
+                "The Rule of Three states that a C++ class should not have more than three member variables."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "Explain the difference between 'const' and 'constexpr' in C++.",
+              "options": [
+                "'const' is used for defining constant variables at runtime, while 'constexpr' is used for defining constants at compile-time.",
+                "'const' and 'constexpr' are interchangeable keywords in C++.",
+                "'const' is used for defining constant variables at compile-time, while 'constexpr' is used for defining constants at runtime.",
+                "'const' is a reserved keyword with no functionality in C++."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "What is the purpose of the 'std::forward' function in C++?",
+              "options": [
+                "'std::forward' is used for moving objects between different threads in C++.",
+                "'std::forward' is a reserved keyword with no functionality in C++.",
+                "'std::forward' is used for perfect forwarding, preserving the value category of the passed argument.",
+                "'std::forward' is used for reversing the order of elements in a container in C++."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "Explain the concept of RAII (Resource Acquisition Is Initialization) in C++ and provide an example.",
+              "options": [
+                "RAII is a technique for creating resource leaks in C++ programs.",
+                "RAII is a feature for managing resources, where resource acquisition is tied to object initialization and resource release to object destruction.",
+                "RAII is a reserved keyword with no functionality in C++.",
+                "RAII is used for defining recursive functions in C++."
+              ],
+              "correctIndex": 1
+            },
+
+            {
+              "question": "What are lambda expressions and how are they used in C++?",
+              "options": [
+                "Lambda expressions are used for creating anonymous classes in C++.",
+                "Lambda expressions are a reserved keyword with no functionality in C++.",
+                "Lambda expressions are used for creating inline functions without the need for a separate function declaration.",
+                "Lambda expressions are a way to define template functions in C++."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "Explain the concept of CRTP (Curiously Recurring Template Pattern) in C++.",
+              "options": [
+                "CRTP is a pattern for creating recursive templates in C++.",
+                "CRTP is a reserved keyword with no functionality in C++.",
+                "CRTP is a pattern where a class template inherits from a class that is a template specialization of the template class itself.",
+                "CRTP is a technique for optimizing memory allocation in C++."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "What is the purpose of the 'std::tuple' in C++?",
+              "options": [
+                "'std::tuple' is used for defining tuples, which are collections of elements of different types in C++.",
+                "'std::tuple' is a reserved keyword with no functionality in C++.",
+                "'std::tuple' is used for creating recursive templates in C++.",
+                "'std::tuple' is used for defining constant variables in C++."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "Explain the role of the 'decltype' keyword in C++.",
+              "options": [
+                "'decltype' is used for defining template classes in C++.",
+                "'decltype' is a keyword reserved for future use and has no current functionality in C++.",
+                "'decltype' is used for declaring derived classes.",
+                "'decltype' is used for obtaining the type of an expression or variable at compile-time."
+              ],
+              "correctIndex": 3
+            }
+
 
 
            
@@ -819,6 +918,104 @@ const String quizData = '''
                 "Heap memory is used for global variables, while Stack memory is used for storing local variables."
               ],
               "correctIndex": 1
+            },
+            {
+              "question": "Explain the concept of 'Lambda Expressions' in Java 8 and provide an example.",
+              "options": [
+                "Lambda expressions are a way to create anonymous classes in Java.",
+                "Lambda expressions are a reserved keyword with no functionality in Java.",
+                "Lambda expressions are used for creating inline functions without the need for a separate method declaration in Java.",
+                "Lambda expressions are a feature for defining recursive functions in Java."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "What is the purpose of the 'CompletableFuture' class in Java and how does it differ from traditional Futures?",
+              "options": [
+                "'CompletableFuture' is used for defining asynchronous tasks with callbacks in Java.",
+                "'CompletableFuture' is a reserved keyword with no functionality in Java.",
+                "'CompletableFuture' is used for handling exceptions in Java.",
+                "'CompletableFuture' is a feature for creating concurrent programs in Java."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "Explain the differences between 'Checked' and 'Unchecked' exceptions in Java.",
+              "options": [
+                "'Checked' exceptions are checked at compile-time, while 'Unchecked' exceptions are checked at runtime.",
+                "'Checked' exceptions are checked at runtime, while 'Unchecked' exceptions are checked at compile-time.",
+                "'Checked' exceptions are a reserved keyword with no functionality in Java.",
+                "'Checked' and 'Unchecked' exceptions are interchangeable terms in Java."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "What is the purpose of the 'Stream API' in Java 8 and how is it used for functional programming?",
+              "options": [
+                "'Stream API' is used for defining streams of input/output operations in Java.",
+                "'Stream API' is a reserved keyword with no functionality in Java.",
+                "'Stream API' is used for processing collections of data in a functional programming style in Java.",
+                "'Stream API' is used for defining abstract classes in Java."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "Explain the concept of 'Default Methods' in Java interfaces and their role in backward compatibility.",
+              "options": [
+                "'Default Methods' are used for defining methods with default implementations in Java interfaces.",
+                "'Default Methods' are a reserved keyword with no functionality in Java.",
+                "'Default Methods' are used for handling exceptions in Java.",
+                "'Default Methods' are used for defining private methods in Java."
+              ],
+              "correctIndex": 0
+            },
+
+            {
+              "question": "What is the purpose of the 'java.nio' package in Java, and how does it differ from the traditional 'java.io' package?",
+              "options": [
+                "'java.nio' is used for defining new input/output streams in Java.",
+                "'java.nio' is a reserved keyword with no functionality in Java.",
+                "'java.nio' is used for non-blocking I/O operations and supports buffers, channels, and selectors in Java.",
+                "'java.nio' is used for handling exceptions in Java."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "Explain the concept of 'ThreadLocal' in Java and its use in multithreaded programming.",
+              "options": [
+                "'ThreadLocal' is a reserved keyword with no functionality in Java.",
+                "'ThreadLocal' is used for creating global variables in multithreaded programs in Java.",
+                "'ThreadLocal' is used for creating thread-local variables, where each thread has its own copy.",
+                "'ThreadLocal' is used for defining abstract classes in Java."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "What are 'Annotations' in Java, and how are they used for metadata?",
+              "options": [
+                "'Annotations' are a way to define arrays in Java.",
+                "'Annotations' are a reserved keyword with no functionality in Java.",
+                "'Annotations' are used for adding metadata to Java code and can be retrieved at runtime using reflection.",
+                "'Annotations' are used for creating instances of classes in Java."
+              ],
+              "correctIndex": 2
+            },
+
+            {
+              "question": "Explain the purpose of 'Garbage Collection' in Java, and how does it work?",
+              "options": [
+                "'Garbage Collection' is a reserved keyword with no functionality in Java.",
+                "'Garbage Collection' is used for creating and managing garbage objects in Java.",
+                "'Garbage Collection' is used for automatically reclaiming memory occupied by objects that are no longer in use.",
+                "'Garbage Collection' is used for defining abstract classes in Java."
+              ],
+              "correctIndex": 2
             }
 
             ]
