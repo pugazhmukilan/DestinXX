@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Quizpage.dart';
 import 'constants.dart';
-import 'quizpage.dart';
 double screenWidth=0;
 class Quiztypes extends StatefulWidget {
   
@@ -76,12 +76,31 @@ class _QuiztypesState extends State<Quiztypes> {
                                 Row(children: [
                                   qtype(operation:() {
                                     Navigator.pop(context);
-                                   // Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
+                                   //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
                                     Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Technical", subcategory: "Java"))));
                                   
                                   },
                                   
-                                  name: "Java",)
+                                  name: "Java",),
+
+
+                                  qtype(operation:() {
+                                    Navigator.pop(context);
+                                    //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "C++"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Technical", subcategory: "C++"))));
+                                  
+                                  },
+                                  
+                                  name: "C++",),
+
+                                  qtype(operation:() {
+                                    Navigator.pop(context);
+                                   // Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Technical", subcategory: "Python"))));
+                                  
+                                  },
+                                  
+                                  name: "Python"),
                                   
                                 ],)
                               ],

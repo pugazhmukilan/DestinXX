@@ -1016,7 +1016,7 @@ const String quizData = '''
                 "'Garbage Collection' is used for defining abstract classes in Java."
               ],
               "correctIndex": 2
-            }
+            },
             {
               "question": "Explain the concept of 'Functional Interfaces' in Java and their role in lambda expressions.",
               "options": [
@@ -2304,7 +2304,7 @@ const String quizData = '''
           ]
         }
       ]
-    }
+    },
 
       {
         "name": "Management",
