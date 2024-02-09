@@ -52,7 +52,7 @@ class _QuiztypesState extends State<Quiztypes> {
             child: Container(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                physics:BouncingScrollPhysics() ,
+                physics:AlwaysScrollableScrollPhysics() ,
                 child:Column(
                   children: [
                     Column(
@@ -67,6 +67,7 @@ class _QuiztypesState extends State<Quiztypes> {
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
+                          physics: AlwaysScrollableScrollPhysics(),
                           
                           child: Container(
                             child: Column(
@@ -123,6 +124,48 @@ class _QuiztypesState extends State<Quiztypes> {
                           color: Kquizlinecolor
                         ),
 
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  qtype(operation:() {
+                                    Navigator.pop(context);
+                                   //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Design", subcategory: "Graphic Design"))));
+                                  
+                                  },
+                                  
+                                  name: "Graphic Design",),
+
+
+                                  qtype(operation:() {
+                                    Navigator.pop(context);
+                                    //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "C++"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Design", subcategory: "UI/UX Design"))));
+                                  
+                                  },
+                                  
+                                  name: "UI/UX Design",),
+
+                                  qtype(operation:() {
+                                    Navigator.pop(context);
+                                   // Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Design", subcategory: "Product Design"))));
+                                  
+                                  },
+                                  
+                                  name: "Product Design"),
+                                  
+                                ],)
+                              ],
+                            ),
+                          )),
+
 
                         Text("HR",style:Kquizcattext,),
                         Divider(
@@ -167,12 +210,15 @@ class qtype extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: operation,
-      child: Container(
-        width:50,
-        height:50,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color:Color.fromARGB(255, 227, 232, 255)),
-        
-        child:  Center(child: Text(name,style: TextStyle(fontFamily: "jetBrainsMono",fontSize: 15,fontWeight: FontWeight.w300),))),
+      child: Padding(
+        padding: const EdgeInsets.only(right:10),
+        child: Container(
+          width:150,
+          height:50,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color:Color.fromARGB(255, 227, 232, 255)),
+          
+          child:  Center(child: Text(name,style: TextStyle(fontFamily: "jetBrainsMono",fontSize: 15,fontWeight: FontWeight.w300),))),
+      ),
     );
   }
 }

@@ -1,12 +1,14 @@
 
 import 'package:camera/camera.dart';
 import  "package:flutter/material.dart";
+import 'package:speech_to_text/speech_to_text.dart';
 
 import 'Interview.dart';
 import "Report.dart";
 import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
+late bool _speechEnabled ;
 bool ispressed = false;
 late List<String> Interview_questions;
 List<String> answers = [];
@@ -28,6 +30,10 @@ class Startinterview extends StatefulWidget {
 }
 
 class _StartinterviewState extends State<Startinterview> {
+  final SpeechToText _speechToText = SpeechToText();
+  
+  String _wordSpoken = "";
+  double _confidenceLevel = 0;
   
   late String type;
   _StartinterviewState({required this.type});
@@ -36,6 +42,7 @@ class _StartinterviewState extends State<Startinterview> {
   
   @override
   void initState(){
+    //initSpeech();
     if (type =="HR"){
         Interview_questions = randomElementsList(HR_question);
         print(Interview_questions);}
@@ -97,6 +104,44 @@ class _StartinterviewState extends State<Startinterview> {
     
     
     }
+
+   void initSpeech() async {
+  print("Speech initialized");
+
+    _speechEnabled = await _speechToText.initialize();
+    setState(() {
+      _startListening();
+    });
+
+}
+
+  void _startListening() async {
+    print("going to print the speech");
+   
+    await _speechToText.listen(onResult: _onspeechResult,listenMode: ListenMode.confirmation,pauseFor: Duration(minutes: 2),partialResults: true);
+    setState(() {
+      
+    });
+    
+  
+    
+  }
+
+  void _onspeechResult(result) {
+    setState(() {
+      _wordSpoken = "${result.recognizedWords}";
+      print(_wordSpoken);
+      print("islistening ${_speechToText.isListening}");
+      
+      
+    });
+  }
+
+  void _stopListening() async {
+    print("stopping");
+    await _speechToText.stop();
+    setState(() {});
+  }
 
   
 
@@ -232,6 +277,7 @@ class _StartinterviewState extends State<Startinterview> {
                           ),
                         ),
                       ),
+                      Text("This is the word spoken by you $_wordSpoken"),
                       if (cameraController.value.isInitialized)
                       Expanded(
                         child: Center(

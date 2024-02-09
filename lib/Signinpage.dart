@@ -20,8 +20,8 @@ class Signinpage extends StatefulWidget {
 }
 
 class _SigninpageState extends State<Signinpage> {
-  late String email;
-  late String password;
+  late String email="";
+  late String password="";
   bool _obscureText = true;
   TextEditingController emailcontroller=TextEditingController();
   TextEditingController passwordcontroller=TextEditingController();
@@ -33,11 +33,11 @@ class _SigninpageState extends State<Signinpage> {
       
         backgroundColor: Kbackgroundcolor,
         body: Padding(
-          padding:  EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(0.0),
           child: Row(
             children: [
-              if (screenwidth >900)
-              Expanded(
+             // if (screenwidth >900)
+              /*Expanded(
                 flex: 2,
                 child: Container(
                   height: double.infinity,
@@ -101,7 +101,7 @@ class _SigninpageState extends State<Signinpage> {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               Expanded(
                 flex: 5,
                 child: Container(
@@ -120,17 +120,20 @@ class _SigninpageState extends State<Signinpage> {
                         const SizedBox(
                           height: 240,
                           width: 350,
-                          child: Image(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/image_assets/signin.png')),
+                          child: Hero(
+                            transitionOnUserGestures: true,
+                            tag:"destinxlogo",
+                            child: Image(
+                                
+                                image: AssetImage('assets/logos/Mobile_firstPageLogo.png')),
+                          ),
                         ),
                         const SizedBox(
                           height: 40,
                         ),
-                        SizedBox(
-                          //Email address text input textfield
-                          height: 90,
-                          width: 400,
+                        
+                        Padding(
+                          padding: const EdgeInsets.only(right:20,left:20),
                           child: Column(
                             children: [
                               const Row(
@@ -139,13 +142,15 @@ class _SigninpageState extends State<Signinpage> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text(
-                                      'Email',
-                                      style: TextStyle(
-                                          fontFamily: 'Inter',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
+                                    Center(
+                                      child: Text(
+                                        'Email',
+                                        style: TextStyle(
+                                            fontFamily: 'Inter',
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
                                     ),
                                   ]),
                               const SizedBox(
@@ -154,7 +159,7 @@ class _SigninpageState extends State<Signinpage> {
                               Container(
                                 //This is for the email in put textfield
                                 height: 52,
-                                width: 380,
+                                width: double.infinity,
                                 decoration: BoxDecoration(
                                     color: const Color.fromRGBO(232, 232, 232, 1),
                                     borderRadius: BorderRadius.circular(35)),
@@ -177,76 +182,87 @@ class _SigninpageState extends State<Signinpage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        screenwidth < 200
-                            ? const Text(
-                                'Allignment error',
-                                style: TextStyle(fontSize: 15, color: Colors.black),
-                              )
-                            : SizedBox(
-                                //Password text input textfield
-                                height: 90,
-                                width: 400,
-                                child: Column(
-                                  children: [
-                                    const Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'PASSWORD',
-                                            style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ]),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Container(
-                                      height: 52,
-                                      width: 380,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromRGBO(
-                                              232, 232, 232, 1),
-                                          borderRadius: BorderRadius.circular(35)),
-                                      child: TextField(
-                                        controller: passwordcontroller,
-                                        onChanged: (value) => password,
-                                        obscureText: _obscureText,
-                                        decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              //Icon button to add the visibility icon to the password textfield
-                                              icon: Icon(
-                                                _obscureText
-                                                    ? Icons.visibility_off
-                                                    : Icons.visibility,
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  _obscureText = !_obscureText;
-                                                });
-                                              },
-                                            ),
-                                            border: InputBorder.none,
-                                            hintText: 'Password',
-                                            hintStyle: const TextStyle(
-                                                fontFamily: 'Inter', fontSize: 15),
-                                            contentPadding:
-                                                const EdgeInsets.all(20)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                       Padding(
+                         padding: const EdgeInsets.only(left:20,right:20),
+                         child: Column(
+                           children: [
+                             const Row(
+                                 mainAxisAlignment: MainAxisAlignment.start,
+                                 children: [
+                                   SizedBox(
+                                     width: 10,
+                                   ),
+                                   Text(
+                                     'PASSWORD',
+                                     style: TextStyle(
+                                         fontFamily: 'Inter',
+                                         fontSize: 18,
+                                         fontWeight: FontWeight.bold,
+                                         color: Colors.black),
+                                   ),
+                                 ]),
+                             const SizedBox(
+                               height: 5,
+                             ),
+                             Container(
+                               height: 52,
+                               width: 380,
+                               decoration: BoxDecoration(
+                                   color: const Color.fromRGBO(
+                                       232, 232, 232, 1),
+                                   borderRadius: BorderRadius.circular(35)),
+                               child: TextField(
+                                 controller: passwordcontroller,
+                                 onChanged: (value) => password,
+                                 obscureText: _obscureText,
+                                 decoration: InputDecoration(
+                                     suffixIcon: IconButton(
+                                       //Icon button to add the visibility icon to the password textfield
+                                       icon: Icon(
+                                         _obscureText
+                                             ? Icons.visibility_off
+                                             : Icons.visibility,
+                                       ),
+                                       onPressed: () {
+                                         setState(() {
+                                           _obscureText = !_obscureText;
+                                         });
+                                       },
+                                     ),
+                                     border: InputBorder.none,
+                                     hintText: 'Password',
+                                     hintStyle: const TextStyle(
+                                         fontFamily: 'Inter', fontSize: 15),
+                                     contentPadding:
+                                         const EdgeInsets.all(20)),
+                               ),
+                             ),
+                           ],
+                         ),
+                       ),
                         const SizedBox(
                           height: 30,
                         ),
                         ElevatedButton(
                           onPressed: () async{
+                             showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Color.fromARGB(104, 250, 101, 91),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                CircularProgressIndicator(),
+                                SizedBox(height: 10),
+                                Text("logging in..."),
+                              ],
+                            ),
+                          );
+                        },
+                             );
+                    
                             
                           try{
                             
@@ -260,8 +276,8 @@ class _SigninpageState extends State<Signinpage> {
                             addemail(emailcontroller.text);
                             addpassword(passwordcontroller.text);
                           
-                            print(emailcontroller.text);
-                            print( passwordcontroller.text);
+                           // print(emailcontroller.text);
+                            //print( passwordcontroller.text);
                             UserID = emailcontroller.text;
                             //getthe username
                             UserName = await getUserName(UserID);
@@ -278,8 +294,8 @@ class _SigninpageState extends State<Signinpage> {
                           }
                         }
                         catch(e){
-                          print(e);
-                          showErrorDialog(context, "Can't able to Login check your Email and password","Login Error");
+                          
+                          showErrorDialog(context, e.toString(),"Login Error");
                           //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
                           print ("error");
 
@@ -287,7 +303,7 @@ class _SigninpageState extends State<Signinpage> {
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
-                                  const Color.fromRGBO(172, 118, 243, 1),
+                                  const Color.fromRGBO(255, 52, 52,1),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: const SizedBox(

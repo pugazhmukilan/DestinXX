@@ -33,7 +33,7 @@ class _GetdetailsLoaderState extends State<GetdetailsLoader> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset("assets/logos/Desktop_StartingPageLogoNtext.png"),
+        child: Image.asset("assets/logos/Mobile_firstPageLogo.png"),
       ),
     );
   }

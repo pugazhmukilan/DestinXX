@@ -19,11 +19,12 @@ class _LoginpageState extends State<Loginpage> {
       backgroundColor: Kbackgroundcolor,
         
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(0.0),
           child: Row(
+
             children: [
-              if (screenwidth >900)
-              Expanded(
+              //if (screenwidth >900)
+             /* Expanded(
                 flex: 2,
                 child: Container(
                   height: double.infinity,
@@ -85,9 +86,9 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               Expanded(
-                flex: 5,
+                //flex: 5,
                 child: Container(
                   height:double.infinity,
                  decoration: BoxDecoration(color: Kmainboard,borderRadius: KMyborder),
@@ -95,12 +96,21 @@ class _LoginpageState extends State<Loginpage> {
                  child:SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                         
-                          const Image(
-                              image: AssetImage('assets/image_assets/interview.png')),
+                         SizedBox(
+                          height:50
+                         ),
+                           Padding(
+                             padding: const EdgeInsets.only(left:60,right:60,bottom:50),
+                             child: Hero(
+                              transitionOnUserGestures: true,
+                              tag:"destinxlogo",
+                               child: Image(
+                                  image: AssetImage('assets/logos/Mobile_firstPageLogo.png')),
+                             ),
+                           ),
                           SizedBox(
                                   //Container for the alignment of the following statement and the sigin page router button
                                  
@@ -150,7 +160,7 @@ class _LoginpageState extends State<Loginpage> {
                                           width: 100,
                                           child: Center(
                                             child: Text(
-                                              'Sigin',
+                                              'Signin',
                                               style: TextStyle(
                                                   fontFamily: 'Inter',
                                                   fontSize: 15,
@@ -263,6 +273,7 @@ class _LoginpageState extends State<Loginpage> {
                                     ),
                                   ],
                                 ),
+                               
                               ],
                             ),
                           )

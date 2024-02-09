@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:destin/autologgergetdetails.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +49,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: Kbackgroundcolor,
       home: Scaffold(
-        body:isloggedin? GetdetailsLoader():Loginpage(),
+        //body:isloggedin? GetdetailsLoader():Loginpage(),
+         body:Loginpage(),
       ),
     );
   }

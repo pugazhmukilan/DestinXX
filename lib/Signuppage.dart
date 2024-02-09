@@ -19,24 +19,24 @@ class Signuppage extends StatefulWidget {
 }
 
 class _SignuppageState extends State<Signuppage> {
-  late String email;
-  late String password;
-  late String name;
+  late String email=emailcontroller.text;
+  late String password=passwordcontroller.text;
+  late String name=usernamecontroller.text;
   bool _obscureText = true;
   
 
   @override
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
+    //double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       
         backgroundColor: Kbackgroundcolor,
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(0.0),
           child: Row(
             children: [
-              if (screenwidth >900)
-              Expanded(
+              //if (screenwidth >900)
+             /* Expanded(
                 //container for the left side of the page
                 flex: 2,
                 child: Container(
@@ -130,7 +130,7 @@ class _SignuppageState extends State<Signuppage> {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               Expanded(
                 flex: 5,
                 child: Container(
@@ -148,194 +148,182 @@ class _SignuppageState extends State<Signuppage> {
                         const SizedBox(
                           height: 240,
                           width: 350,
-                          child: Image(
-                              fit: BoxFit.fill,
-                              image: AssetImage('assets/image_assets/signin.png')),
+                          child: Hero(
+                            transitionOnUserGestures: true,
+                            tag:"destinxlogo",
+                            child: Image(
+                               
+                                image: AssetImage('assets/logos/Mobile_firstPageLogo.png')),
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        screenwidth <
-                                100 // The conditions to avoid the render overflow of the Name textfield
-                            ? const Text(
-                                'Allignment error',
-                                style: TextStyle(fontSize: 15, color: Colors.black),
-                              )
-                            : SizedBox(
-                                height: 90,
-                                width: 400,
-                                child: Column(
+                        
+                        Padding(
+                          padding: const EdgeInsets.only(left:20,right:20),
+                          child: Column(
+                            children: [
+                              const Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'NAME',
-                                            style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ]),
-                                    const SizedBox(
-                                      height: 5,
+                                    SizedBox(
+                                      width: 10,
                                     ),
-                                    Container(
-                                      height: 52,
-                                      width: 380,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromRGBO(
-                                              232, 232, 232, 1),
-                                          borderRadius: BorderRadius.circular(35)),
-                                      child: TextField(
-                                        controller: usernamecontroller,
-                                        onChanged: (value) => name,
-                                        obscureText: false,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Name',
-                                            hintStyle: TextStyle(
-                                                fontFamily: 'Inter', fontSize: 15),
-                                            contentPadding: EdgeInsets.all(20)),
-                                      ),
+                                    Text(
+                                      'NAME',
+                                      style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
                                     ),
-                                  ],
+                                  ]),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                height: 52,
+                                width: 380,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(
+                                        232, 232, 232, 1),
+                                    borderRadius: BorderRadius.circular(35)),
+                                child: TextField(
+                                  controller: usernamecontroller,
+                                  onChanged: (value) => name,
+                                  obscureText: false,
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Name',
+                                      hintStyle: TextStyle(
+                                          fontFamily: 'Inter', fontSize: 15),
+                                      contentPadding: EdgeInsets.all(20)),
                                 ),
                               ),
+                            ],
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        screenwidth < 100
-                            ? const Text(
-                                'Allignment error',
-                                style: TextStyle(fontSize: 15, color: Colors.black),
-                              ) //This is condition used to avoid the render overflow of the email textfield
-                          
-                            : SizedBox(
-                                height: 90,
-                                width: 400,
-                                child: Column(
+                        Padding(
+                          padding: const EdgeInsets.only(left:20,right:20),
+                          child: Column(
+                            children: [
+                              const Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'Email',
-                                            style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ]),
-                                    const SizedBox(
-                                      height: 5,
+                                    SizedBox(
+                                      width: 10,
                                     ),
-                                    Container(
-                                      //This is for the email in put textfield
-                                      height: 52,
-                                      width: 380,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromRGBO(
-                                              232, 232, 232, 1),
-                                          borderRadius: BorderRadius.circular(35)),
-                                      child: TextField(
-                                        controller: emailcontroller,
-                                        onChanged: (value) => email,
-                                        obscureText: false,
-                                        keyboardType: TextInputType.emailAddress,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Email',
-                                            hintStyle: TextStyle(
-                                                fontFamily: 'Inter', fontSize: 15),
-                                            contentPadding: EdgeInsets.all(20)),
-                                      ),
+                                    Text(
+                                      'Email',
+                                      style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
                                     ),
-                                  ],
+                                  ]),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                //This is for the email in put textfield
+                                height: 52,
+                                width: 380,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(
+                                        232, 232, 232, 1),
+                                    borderRadius: BorderRadius.circular(35)),
+                                child: TextField(
+                                  controller: emailcontroller,
+                                  onChanged: (value) => email,
+                                  obscureText: false,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Email',
+                                      hintStyle: TextStyle(
+                                          fontFamily: 'Inter', fontSize: 15),
+                                      contentPadding: EdgeInsets.all(20)),
                                 ),
                               ),
+                            ],
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        screenwidth <
-                                100 //This is the condition used to avoid the render overflow of the following password textfield
-                            ? const Text(
-                                'Allignment error',
-                                style: TextStyle(fontSize: 15, color: Colors.black),
-                              )
-                            : SizedBox(
-                                height: 84,
-                                width: 400,
-                                child: Column(
-                                  children: [
-                                    const Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'PASSWORD',
-                                              style: TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black),
+                        Padding(
+                          padding: const EdgeInsets.only(left:20,right:20),
+                          child: SizedBox(
+                                  height: 84,
+                                  width: 400,
+                                  child: Column(
+                                    children: [
+                                      const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: 12,
                                             ),
-                                          ),
-                                        ]),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 52,
-                                        width: 380,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromRGBO(
-                                                232, 232, 232, 1),
-                                            borderRadius:
-                                                BorderRadius.circular(35)),
-                                        child: TextField(
-                                          controller: passwordcontroller,
-                                          onChanged: (value) => password,
-                                          obscureText: _obscureText,
-                                          decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                //Icon button to add the visibility icon to the password textfield
-                                                icon: Icon(
-                                                  _obscureText
-                                                      ? Icons.visibility_off
-                                                      : Icons.visibility,
-                                                ),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    _obscureText = !_obscureText;
-                                                  });
-                                                },
+                                            Expanded(
+                                              child: Text(
+                                                'PASSWORD',
+                                                style: TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black),
                                               ),
-                                              border: InputBorder.none,
-                                              hintText: 'Password',
-                                              hintStyle: const TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 15),
-                                              contentPadding:
-                                                  const EdgeInsets.all(20)),
+                                            ),
+                                          ]),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          height: 52,
+                                          width: 380,
+                                          decoration: BoxDecoration(
+                                              color: const Color.fromRGBO(
+                                                  232, 232, 232, 1),
+                                              borderRadius:
+                                                  BorderRadius.circular(35)),
+                                          child: TextField(
+                                            controller: passwordcontroller,
+                                            onChanged: (value) => password,
+                                            obscureText: _obscureText,
+                                            decoration: InputDecoration(
+                                                suffixIcon: IconButton(
+                                                  //Icon button to add the visibility icon to the password textfield
+                                                  icon: Icon(
+                                                    _obscureText
+                                                        ? Icons.visibility_off
+                                                        : Icons.visibility,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _obscureText = !_obscureText;
+                                                    });
+                                                  },
+                                                ),
+                                                border: InputBorder.none,
+                                                hintText: 'Password',
+                                                hintStyle: const TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 15),
+                                                contentPadding:
+                                                    const EdgeInsets.all(20)),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -346,10 +334,14 @@ class _SignuppageState extends State<Signuppage> {
                         barrierDismissible: false,
                         builder: (BuildContext context) {
                           return AlertDialog(
+                            backgroundColor: Color.fromARGB(104, 250, 101, 91),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CircularProgressIndicator(),
+                                CircularProgressIndicator(
+                                  color: Colors.white,
+                                  semanticsLabel: "hello",
+                                ),
                                 SizedBox(height: 10),
                                 Text("Creating Account..."),
                               ],
@@ -357,12 +349,23 @@ class _SignuppageState extends State<Signuppage> {
                           );
                         },
                       );
+                      if (name.isEmpty){
+                        showErrorDialog1(context, "UserName can't be empty!", "No UserName");
+                        
+                      }
+                      else{
+                      try{
+                        
                        await createaccount(context,emailcontroller.text, passwordcontroller.text);
-                      
+                      }
+                      catch(e){
+                        print(e);
+                        showErrorDialog(context, e.toString(), "Signup Error");
+                      }}
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
-                                  const Color.fromRGBO(172, 118, 243, 1),
+                                  const Color.fromRGBO(255, 52, 52,1),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: const SizedBox(
@@ -435,10 +438,81 @@ Future<void> createaccount(BuildContext context, String email, String password) 
       await addDocument("Users",UserID,UserName);//adddoc is called to create a document
     }
     else{
-      showErrorDialog(context,"Signup Failed","Failed to signUp.");
+      showErrorDialog1(context,"Signup Failed","Failed to signUp.");
     }
   } catch (e) {
-    showErrorDialog(context, "${e}", "SignUp Error");
+    showErrorDialog1(context, "${e}", "SignUp Error");
     
   }
+}
+class ErrorDialog1 extends StatelessWidget {
+  final String title;
+  final String content;
+
+  const ErrorDialog1({
+    Key? key,
+    required this.title,
+    required this.content,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Kmainboard,
+      title: Text(title),
+      content: Text(content),
+      actions: [
+        ElevatedButton(
+          child: Text('OK'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+}
+
+void showErrorDialog1(BuildContext context, String errorMessage,String title) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(
+          title,
+          style: TextStyle(color: Colors.red),
+        ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              errorMessage,
+              style: TextStyle(color: Colors.black),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Signuppage())); // Close the dialog
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
+              onPrimary: Colors.white,
+            ),
+            child: Text('OK'),
+          ),
+        ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 5.0,
+      );
+    },
+  );
 }
