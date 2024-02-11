@@ -23,7 +23,7 @@ Future<void> main()async {
 );
   
   await SharedPreferences.getInstance();
-  bool isloggedin = await checkLoginStatus();
+  //bool isloggedin = await checkLoginStatus();
 
   prefs = await SharedPreferences.getInstance();
   try{
@@ -36,12 +36,13 @@ Future<void> main()async {
   }
  
 
-  runApp( MainApp(isloggedin));
+  //runApp( MainApp(isloggedin));
+  runApp( MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  final bool isloggedin;
-  MainApp(this.isloggedin);
+  //final bool isloggedin;
+  //MainApp(this.isloggedin);
 
   @override
   Widget build(BuildContext context) {

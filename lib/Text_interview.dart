@@ -88,8 +88,7 @@ class _TextinterviewState extends State<Textinterview> {
                           },
                           style: ElevatedButton.styleFrom(
                             
-                            primary: Colors.black, // background color
-                            onPrimary: Colors.white, // text color
+                            foregroundColor: Colors.white, backgroundColor: Colors.black, // text color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0), // rounded corners
                             ),

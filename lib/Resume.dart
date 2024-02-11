@@ -216,8 +216,7 @@ void _showDatePicker() {
                                         ElevatedButton(
                                   
                                   style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 255, 106, 6),
-                                  minimumSize: Size(70, 40),
-                                  onSurface: Colors.red,),
+                                  minimumSize: Size(70, 40), disabledForegroundColor: Colors.red.withOpacity(0.38), disabledBackgroundColor: Colors.red.withOpacity(0.12),),
                                   onPressed: (){
                                       _showDatePicker();
                               
@@ -411,8 +410,7 @@ void _showDatePicker() {
                                 child: ElevatedButton(
                                   
                                   style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 3, 205, 10),
-                                  minimumSize: Size(200, 80),
-                                  onSurface: Colors.yellow,),
+                                  minimumSize: Size(200, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
                                   onPressed: ()async{
                                     //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE 
                                     //STORING THE USERNAME

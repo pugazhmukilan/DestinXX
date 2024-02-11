@@ -501,8 +501,7 @@ void showErrorDialog1(BuildContext context, String errorMessage,String title) {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Signuppage())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
             child: Text('OK'),
           ),

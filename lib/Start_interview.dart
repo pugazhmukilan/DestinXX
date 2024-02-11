@@ -199,8 +199,7 @@ class _StartinterviewState extends State<Startinterview> {
                           },
                           style: ElevatedButton.styleFrom(
                             
-                            primary: Colors.black, // background color
-                            onPrimary: Colors.white, // text color
+                            foregroundColor: Colors.white, backgroundColor: Colors.black, // text color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0), // rounded corners
                             ),
@@ -300,11 +299,9 @@ class _StartinterviewState extends State<Startinterview> {
                         child: ElevatedButton(
                                     
                                     style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
-                                    minimumSize: Size(150, 80),
-                                    onSurface: Colors.yellow,)
+                                    minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),)
                                     : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
-                                    minimumSize: Size(150, 80),
-                                    onSurface: Colors.yellow,),
+                                    minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
                                     onPressed: (){
                                       if (next_button_live == false){
                                      Navigator.pop(context);

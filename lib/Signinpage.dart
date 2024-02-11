@@ -20,12 +20,13 @@ class Signinpage extends StatefulWidget {
 }
 
 class _SigninpageState extends State<Signinpage> {
-  late String email="";
-  late String password="";
+  
   bool _obscureText = true;
   TextEditingController emailcontroller=TextEditingController();
   TextEditingController passwordcontroller=TextEditingController();
+  
 
+  
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -165,7 +166,7 @@ class _SigninpageState extends State<Signinpage> {
                                     borderRadius: BorderRadius.circular(35)),
                                 child: TextField(
                                   controller: emailcontroller,
-                                  onChanged: (value) => email,
+                                  //onChanged: (value) =>  setState(() => emailcontroller = value),
                                   obscureText: false,
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: const InputDecoration(
@@ -213,7 +214,7 @@ class _SigninpageState extends State<Signinpage> {
                                    borderRadius: BorderRadius.circular(35)),
                                child: TextField(
                                  controller: passwordcontroller,
-                                 onChanged: (value) => password,
+                                 //onChanged: (value) =>  setState(() => password = value),
                                  obscureText: _obscureText,
                                  decoration: InputDecoration(
                                      suffixIcon: IconButton(
@@ -254,9 +255,11 @@ class _SigninpageState extends State<Signinpage> {
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CircularProgressIndicator(),
+                                CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
                                 SizedBox(height: 10),
-                                Text("logging in..."),
+                                Text("logging in...",style:TextStyle(color:Colors.white)),
                               ],
                             ),
                           );
@@ -265,11 +268,12 @@ class _SigninpageState extends State<Signinpage> {
                     
                             
                           try{
+                            print(emailcontroller.text);
                             
                           
-                          final user = await _auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text);
-                          // ignore: unnecessary_null_comparison
-                          if (user != null){
+                            await _auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text);
+                          
+                          
                             print("everthying went well");
 
                             //ading it in the sgared preference for the suto login
@@ -289,12 +293,10 @@ class _SigninpageState extends State<Signinpage> {
                             passwordcontroller.clear();
                             //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Congrulation", content: " You Successfully Logged In")));
                             
-                          }else{
-                            showErrorDialog(context, "User Not found","Login Error");
-                          }
+                         
                         }
                         catch(e){
-                          
+                          Navigator.pop(context);
                           showErrorDialog(context, e.toString(),"Login Error");
                           //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
                           print ("error");

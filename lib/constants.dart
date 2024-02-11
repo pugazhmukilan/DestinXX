@@ -516,8 +516,7 @@ void showErrorDialog(BuildContext context, String errorMessage,String title) {
               Navigator.of(context).pop(); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
             child: Text('OK'),
           ),
@@ -589,8 +588,7 @@ void showConfirmationDialog(BuildContext context) {
               Navigator.of(context).pop(); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
             child: Text('No'),
           ),
@@ -605,8 +603,7 @@ void showConfirmationDialog(BuildContext context) {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.blue,
             ),
             child: Text('Yes'),
           ),

@@ -142,8 +142,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                     resetQuiz();
                   },
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.blue,
             ),
             child: Text('Play Again'),
           ),
@@ -157,8 +156,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
             child: Text('Quit'),
           ),
@@ -244,14 +242,11 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                             onPressed: () {
                               checkAnswer(index);
                             },
-                            style: ElevatedButton.styleFrom(backgroundColor: Kgreycolor_light,
-                            shadowColor: Colors.transparent,
+                            style: ElevatedButton.styleFrom(foregroundColor: Colors.green, backgroundColor: Colors.green,
+                            shadowColor: Colors.transparent, disabledForegroundColor: Colors.green.withOpacity(0.38), disabledBackgroundColor: Colors.green.withOpacity(0.12),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             textStyle: TextStyle(fontFamily: "Inter",fontSize: 15,fontWeight:FontWeight.w500,color:Colors.black),
-                            onSurface: Colors.green,
-                            primary: Colors.green,
-                            onPrimary: Colors.green,
-                            foregroundColor: Colors.black
+                            
                             ),
                             child: Text(questions[currentQuestionIndex]['options'][index],textAlign: TextAlign.center,),
                           ),
@@ -297,8 +292,7 @@ void showConfirmationDialog(BuildContext context,) {
               Navigator.of(context).pop(); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.blue,
             ),
             child: Text('No'),
           ),
@@ -312,8 +306,7 @@ void showConfirmationDialog(BuildContext context,) {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-              onPrimary: Colors.white,
+              foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
             child: Text('Quit'),
           ),
