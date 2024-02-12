@@ -1,3 +1,4 @@
+import 'package:destin/Resume.dart';
 import 'package:flutter/material.dart';
 
 import 'Interview.dart';
@@ -5,7 +6,7 @@ import 'constants.dart';
 import "firebasefunctions.dart";
 import "main.dart";
 double screenWidth=0;
-
+int currentIndex = 0;
 class Home extends StatefulWidget {
   
 
@@ -14,6 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
    ScrollController _scrollController = ScrollController();
    @override
    void initState(){
@@ -33,9 +35,63 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
+    
+    List<Widget> body = const [
+      Icon(Icons.home),
+      Icon(Icons.menu),
+      Icon(Icons.person),
+    ];
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Kbackgroundcolor,
+      bottomNavigationBar:BottomNavigationBar(
+        type:BottomNavigationBarType.fixed,
+        backgroundColor: Kbackgroundcolor,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
+        selectedFontSize: 12,
+        unselectedFontSize: 10,
+        selectedIconTheme: IconThemeData(size:22),
+
+        items:[
+            BottomNavigationBarItem(icon: Icon(Icons.home),label:"Home",),
+            BottomNavigationBarItem(icon: Icon(Icons.meeting_room_outlined),label:"Interview"),
+            BottomNavigationBarItem(icon: Icon(Icons.file_copy_outlined),label:"Resume"),
+            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined),label:"Accounts"),
+          ],
+        currentIndex: currentIndex,
+        onTap: (int newIndex){
+          setState(() {
+            currentIndex=newIndex;
+            print("index is equal to+++++++ ${currentIndex}");
+            if (currentIndex ==0){
+
+            }
+            else if ( currentIndex ==1 ){
+
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
+            }
+            else if (currentIndex == 2){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Resume()));
+
+            }
+            else if (currentIndex == 3){
+              //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
+              _showBottomAlertDialog(context);
+            }
+
+          },);
+
+
+           shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
+      );
+
+          
+
+        },
+       
+       ) ,
       body:Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -450,20 +506,22 @@ void _showBottomAlertDialog(BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(7.0),
         child: Container(
+          
           child: AlertDialog(
-            elevation: 12,
+            elevation: 40,
+            
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             buttonPadding: EdgeInsets.all(5),
-            backgroundColor: Colors.black.withOpacity(0.8),
+            backgroundColor: Colors.black.withOpacity(0.6),
             alignment: Alignment.bottomCenter,
             title: Text(
               'This page is under construction',
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
-                  color: Colors.white),
+                  color: Color.fromARGB(255, 255, 205, 23)),
             ),
           ),
         ),

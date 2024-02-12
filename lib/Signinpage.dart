@@ -1,6 +1,7 @@
 import 'package:destin/firebasefunctions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import "Home.dart";
@@ -10,6 +11,52 @@ import 'constants.dart';
 
 
 final _auth= FirebaseAuth.instance;
+
+/*GOOGLE AUTHENTICATION FIREBASE USING GOOGLE ACCOUNT*/
+/*GOOGLE AUTHENTICATION FIREBASE USING GOOGLE ACCOUNT*/
+/*GOOGLE AUTHENTICATION FIREBASE USING GOOGLE ACCOUNT*/
+/*GOOGLE AUTHENTICATION FIREBASE USING GOOGLE ACCOUNT*/
+
+final GoogleSignIn googleSignIn = GoogleSignIn();
+
+Future<void> signInWithGoogle() async {
+  try {
+    // Trigger the Google Sign-in flow
+    final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
+    if (googleSignInAccount != null) {
+      // Obtain the GoogleSignInAuthentication object
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+      // Create a new credential using the Google ID token and access token
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken,
+      );
+
+      // Sign in to Firebase with the Google credential
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Retrieve the user's email address
+      final String? email = userCredential.user?.email;
+      if (email != null) {
+        print('User email: $email');
+
+        // Now you can use the email address as needed, such as storing it in shared preferences or accessing user-specific data.
+        
+        // Example:
+        UserName = await getUserName(email);
+        print("++++++++++++++++++++++++++++++done");
+        // Also, handle navigation or any other operations you need to perform after sign-in.
+        // ...
+      }
+    }
+  } catch (error) {
+    print('Error signing in with Google: $error');
+    // Handle sign-in errors here
+  }
+}
+
+
 
 
 class Signinpage extends StatefulWidget {
@@ -241,7 +288,52 @@ class _SigninpageState extends State<Signinpage> {
                            ],
                          ),
                        ),
-                        const SizedBox(
+                        SizedBox(
+                          height: 30,
+                        ),
+
+                    /*GOOGLE SINGIN GOOGLE SIGNIN*/
+                    /*GOOGLE SINGIN GOOGLE SIGNIN*/
+                    /*GOOGLE SINGIN GOOGLE SIGNIN*/
+
+                    Padding(
+                      padding: const EdgeInsets.only(left:20,right:20),
+                      child: GestureDetector(
+                        
+                        onTap: ()async{
+                        try{
+                         await signInWithGoogle();
+                        
+                          
+                          Navigator.pop(context);
+                          print("++++====================================================");
+                          print("++++====================================================");
+                          print("++++====================================================");
+                          print("signing in using google");
+                          print("++++====================================================");
+                          print("++++====================================================");
+                          print("++++====================================================");
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
+                        
+                        }
+                        catch(e){
+                          Navigator.pop(context);
+                          showErrorDialog(context, e.toString(),"Login Error");
+                          //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
+                          print ("error");
+
+                        }
+                          // Sign in failed
+
+                      
+                        },
+                        child: Image.asset("assets/image_assets/Google_auth_button.png"),),
+                        
+                    
+                    ),
+                          
+
+                         SizedBox(
                           height: 30,
                         ),
                         ElevatedButton(
