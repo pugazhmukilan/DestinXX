@@ -2,7 +2,7 @@ import 'package:destin/Resume.dart';
 import 'package:flutter/material.dart';
 
 import 'Interview.dart';
-import 'constants.dart';
+import "constants.dart";
 import "firebasefunctions.dart";
 import "main.dart";
 double screenWidth=0;
@@ -43,7 +43,8 @@ class _HomeState extends State<Home> {
     ];
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Kbackgroundcolor,
+      
+      backgroundColor: Kmainboard,
       bottomNavigationBar:BottomNavigationBar(
         type:BottomNavigationBarType.fixed,
         backgroundColor: Kbackgroundcolor,
@@ -92,333 +93,102 @@ class _HomeState extends State<Home> {
         },
        
        ) ,
-      body:Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          children: [
 
-            
-           Expanded(
-            flex:1,
-            child: Side()
-           ),
-           Expanded(
-            flex:4,
-            child: Container(
-                height:double.infinity,
-                decoration: BoxDecoration(color:Kmainboard,
-                borderRadius: KMyborder),
-                child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
+       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            Image.asset("assets/logos/Mobile_LoginPageLogo.png",height:45),
+            Image.asset("assets/logos/Mobile_firstPgeText.png",height:15),
+          ],
+        ),
+       ),
+
+      
+     body:SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      physics:BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.only(right:20,left:20),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
+        
+          //HEADER HEADER HEADER
           children: [
-
-            //FIRST LINE OF THE WINDOW (NAME OF THE WINDOWS PROFILE BUTTON)
+        
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("Dashboard",style: TextStyle(color: Kblacktextcolor,
-                fontFamily: "Inter",fontSize: 30,fontWeight: FontWeight.w600),),
-              
-              
-              /* Container(
-                  height: 50,
-                  width:150,
-                  decoration: BoxDecoration(
-                    color: Kgreycolor_dark,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child:Padding(
-                    padding: const EdgeInsets.all(5.0),
-
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 20,
-                            
-                          ),
-                        ),
-                      Container(
-                        
-                        child: Text(
-                      "sdgdfdfagfdfgffga",
-                      maxLines: 1, // Set the maximum number of lines
-                      overflow: TextOverflow.ellipsis,),
-                                ),
-                                          
-                        
-                      ],
-                    ),
-                  )
-                )
-              */],
-            ),
-            Divider(
-            indent: 0,
-            endIndent: 0,
-            color: Kgreylinecolor,
-            ),
-            
-            Expanded(
-              child: Container(
-                height:double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children:[
+                Expanded(
+                  flex:3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Features",style:Kcommontextstyle),
-                      
-                        SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        controller: _scrollController,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                             
-                            
-                              FeaturesButton(startcolor: Color.fromARGB(255, 242, 229, 95),
-                                endcolor:Color.fromARGB(255, 244, 141, 190) ,
-                                subtext: "Find Your",
-                                maintext: "Reports",
-                                imagepath:"assets/icon_assets/report.png",
-                                operation: (){
-                                    //NAVIGATOR
-                                    _showBottomAlertDialog(context);
-                                }
-                              ),
-                              FeaturesButton(startcolor: Color.fromARGB(255, 138, 86, 249),
-                                endcolor:Color.fromARGB(255, 89, 86, 253) ,
-                                subtext: "Find Your",
-                                maintext: "Jobs",
-                                imagepath:"assets/icon_assets/job_user.png",
-                                operation: (){
-                                  //NAVIGATOR
-                                  _showBottomAlertDialog(context);
-                                }
-                              ),
-                              FeaturesButton(startcolor: Color.fromARGB(255, 249, 19, 19),
-                                endcolor:Color.fromARGB(255, 249, 70, 167) ,
-                                subtext: "Trending \u{1F525}",
-                                maintext: "Jobs News",
-                                imagepath:"assets/icon_assets/News.png",
-                                operation: (){
-                                  //NAVIGATOR
-                                  _showBottomAlertDialog(context);
-                                }
-                              ),
-                              FeaturesButton(startcolor: Color.fromARGB(255, 138, 86, 249),
-                                endcolor:Color.fromARGB(255, 89, 86, 253) ,
-                                subtext: "Find Your",
-                                maintext: "Jobs",
-                                imagepath:"assets/icon_assets/job_user.png",
-                                operation: (){
-                                  //NAVIGATOR
-                                  _showBottomAlertDialog(context);
-                                }
-                              ),
-                              FeaturesButton(startcolor: Color.fromARGB(255, 242, 229, 95),
-                                endcolor:Color.fromARGB(255, 244, 141, 190) ,
-                                subtext: "Find Your",
-                                maintext: "Reports",
-                                imagepath:"assets/icon_assets/report.png",
-                                operation: (){
-                                    //NAVIGATOR
-                                    _showBottomAlertDialog(context);
-                                }
-                              ),
-                          ],
-                        ),
-                                      
-                                            ),
-                      SizedBox(
-                        height:5
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                        GestureDetector(
-                      onLongPress: (){
-                         _scrollController.animateTo(
-                          _scrollController.offset - 200.0,
-                          curve: Curves.linear,
-                          duration: Duration(milliseconds: 500),
-                        );
-                      },
-                      onTap: () {
-                        // Scroll to the left
-                        _scrollController.animateTo(
-                          _scrollController.offset - 200.0,
-                          curve: Curves.linear,
-                          duration: Duration(milliseconds: 500),
-                        );
-                      },
-                      child: 
-                       Container(
-                        height:30,
-                        decoration: BoxDecoration(color:  Color.fromARGB(204, 0, 0, 0),borderRadius: BorderRadius.only(topLeft: Radius.circular(0),bottomLeft: Radius.circular(20))
-                        ),
-                         child: Padding(
-                           padding: const EdgeInsets.only(left: 10),
-                           child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Kgreytextcolor,
-                                               ),
-                         ),
-                       ),
-                    ),
-
-
-
-                    GestureDetector(
-                      onLongPress: (){
-                         _scrollController.animateTo(
-                          _scrollController.offset + 200.0,
-                          curve: Curves.linear,
-                          duration: Duration(milliseconds: 500),
-                        );
-                      },
-                      onTap: () {
-                        // Scroll to the left
-                        _scrollController.animateTo(
-                          _scrollController.offset + 200.0,
-                          curve: Curves.linear,
-                          duration: Duration(milliseconds: 500),
-                        );
-                      },
-                      child: 
-                       Container(
-                        height: 30,
-                        decoration: BoxDecoration(color: Color.fromARGB(204, 0, 0, 0),borderRadius: BorderRadius.only(topRight: Radius.circular(0),bottomRight: Radius.circular(20))
-                        ),
-                         child: Padding(
-                           padding: const EdgeInsets.only(right:10),
-                           child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Kgreytextcolor,
-                                               ),
-                         ),
-                       ),
-                    ),
-                        ],
-                      ),
-                      
-                      Padding(
-                        padding: const EdgeInsets.only(top:10,bottom:10),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children:[ 
-                                      Text("Practice",style:Kcommontextstyle),
-                                      GestureDetector(
-                                        onTap:(){
-                                          Navigator.pop(context);
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
-                                          child: Container(
-                                            
-                                            width: 800,
-                                            height: 250,
-                                            decoration: BoxDecoration(
-                                              
-                                              gradient: LinearGradient(colors: [Color.fromARGB(255, 249, 19, 19), Color.fromARGB(255, 249, 70, 167)],
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            stops: [0.0, 1.0],
-                                            tileMode: TileMode.clamp,),
-                                            borderRadius: KMyborder,
-                                                          
-                                            
-                                            ),
-                                      
-                                            //content inside the container
-                                            child:screenWidth > 600 ?  Padding(
-                                              //giving padding to the whole row to maintain the text properly
-                                              padding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text("Start Your",style:TextStyle(fontFamily:"Inter" ,fontSize:30,fontWeight: FontWeight.w400,color: Colors.black)),
-                                                      Text("Interview",style:TextStyle(fontFamily:"Inter",fontSize:50,fontWeight: FontWeight.w800,color: const Color.fromARGB(255, 255, 255, 255))),
-                                                    ],
-                                                  ),
-                                                  Expanded(
-                                                    child: Container(
-                                                  
-                                                    ),
-                                                  ),
-                                                  //container image 
-                                                  Image.asset("assets/icon_assets/tie.png"),
-                                                ],
-                                              ),
-                                            ):Image.asset("assets/icon_assets/tie.png"),
-                                                    
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text("Your Progress",style:Kcommontextstyle),
-                                      Container(
-                                        decoration: BoxDecoration(color: Kgreycolor_light,borderRadius: KMyborder,
-                                        image: DecorationImage(image: AssetImage("assets/image_assets/error404.png"))),
-                                        
-                                        height:400,
-                                        width:800,
-                                      ),
-                                      
-                                      ]
-                                  ),
-                                ),
-                               
-                            
-                            ],
-                          ),
-                        ),
-                      ),
-                      
-                      
+                       
+                        
+                        Text("Hello...\u{1F44B}",style:Kcommontextstyle),
+                        Text(UserName,style: Ktitletextstyle,)
+                          
                     ],
                   ),
                 ),
-              ),
-            )
-           
-          ],
-        ),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: const Color.fromARGB(255, 218, 218, 218),
+                    
                   ),
-                  
-                ),
+                )
+              ]
+        
+        
+        
             ),
-            ],
+           
+          SizedBox(
+            height:30
           ),
-        )
-      );
-    }
-  }
+          //FEATURES FEATURES FEATURES
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ImageFeaturesButton(imagepath: "assets/Page_assets/Reports_Button.png", operation: (){
+                  print("pressing the find your reports");
+                }),
+
+                ImageFeaturesButton(imagepath: "assets/Page_assets/Jobs_Button.png", operation: (){
+                  print("pressing the find your reports");
+                }),
+
+                ImageFeaturesButton(imagepath: "assets/Page_assets/Job_News.png", operation: (){
+                  print("pressing the find your reports");
+                }),
+
+              ],
+            ),
+          ),
+          
+          ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Button.png", operation: (){}),
+          ]
+        
+         
+          
+        ),
+      ),
+     
+     )
+     
+    );
+}
+}
 
 
 
@@ -527,4 +297,24 @@ void _showBottomAlertDialog(BuildContext context) {
         ),
       );
 },);
+}
+
+class ImageFeaturesButton extends StatelessWidget {
+  
+  late String imagepath;
+  late Function() operation;
+  ImageFeaturesButton({
+   
+   required this.imagepath,
+   required this.operation,
+   
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:operation,
+      child: Image.asset(imagepath,height:145)
+    );
+  }
 }

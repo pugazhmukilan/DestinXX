@@ -11,7 +11,7 @@ import  "Start_interview.dart";
 
 
 double screenWidth = 0;
-late String UserName ;
+late String UserName="" ;
 late String UserID;
 String projectName  = "ProjectX";
 Color Kquizlinecolor = Color.fromARGB(255, 219, 219, 219);
