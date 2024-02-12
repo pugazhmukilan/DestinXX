@@ -177,6 +177,20 @@ class _HomeState extends State<Home> {
           ),
           
           ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Button.png", operation: (){}),
+          
+          
+          
+          //BOTTOM BOTTOM BOTTOM
+          Text("Made with\nCare!",style:TextStyle(fontFamily: "inter",fontWeight: FontWeight.bold,fontSize: 30,color: Color.fromARGB(255, 163, 74, 246))),
+          SizedBox(height:10),
+          Text("Coded with love by\nus for you!",style:TextStyle(fontFamily: "jetBrainsMono",fontWeight: FontWeight.bold,fontSize: 15,color: Color.fromARGB(255, 123, 123, 123))),
+          Row(
+            children: [
+                NameFeaturesButton(imagepath: "assets/Page_assets/pugazh.png", operation: (){}),
+                NameFeaturesButton(imagepath: "assets/Page_assets/Hemanthkumar.png", operation: (){}),
+            ],
+          )
+          
           ]
         
          
@@ -315,6 +329,25 @@ class ImageFeaturesButton extends StatelessWidget {
     return GestureDetector(
       onTap:operation,
       child: Image.asset(imagepath,height:145)
+    );
+  }
+}
+class NameFeaturesButton extends StatelessWidget {
+  
+  late String imagepath;
+  late Function() operation;
+  NameFeaturesButton({
+   
+   required this.imagepath,
+   required this.operation,
+   
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:operation,
+      child: Image.asset(imagepath,height:10)
     );
   }
 }
