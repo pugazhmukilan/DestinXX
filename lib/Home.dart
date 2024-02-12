@@ -17,10 +17,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
    ScrollController _scrollController = ScrollController();
+   int currentIndex = 0;
    @override
    void initState(){
     super.initState();
     setdetails();
+    print("===============================${UserName}");
+
 
    }
 
@@ -187,9 +190,17 @@ class _HomeState extends State<Home> {
           Row(
             children: [
                 NameFeaturesButton(imagepath: "assets/Page_assets/pugazh.png", operation: (){}),
+
                 NameFeaturesButton(imagepath: "assets/Page_assets/Hemanthkumar.png", operation: (){}),
             ],
-          )
+          ),
+          Row(
+            children: [
+                NameFeaturesButton(imagepath: "assets/Page_assets/Tarun.png", operation: (){}),
+
+                NameFeaturesButton(imagepath: "assets/Page_assets/Karthik sagar.png", operation: (){}),
+            ],
+          ),
           
           ]
         
@@ -345,9 +356,12 @@ class NameFeaturesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap:operation,
-      child: Image.asset(imagepath,height:10)
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: GestureDetector(
+        onTap:operation,
+        child: Image.asset(imagepath,height:35)
+      ),
     );
   }
 }

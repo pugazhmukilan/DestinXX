@@ -1,14 +1,19 @@
+import 'package:destin/HR_page.dart';
+import 'package:destin/designPage.dart';
+import 'package:destin/managementPage.dart';
+import 'package:destin/techinterviewPage.dart';
 import 'package:flutter/material.dart';
 
-import "HR_page.dart";
+import 'Home.dart';
+import 'Resume.dart';
 import 'constants.dart';
-import 'designPage.dart';
-import 'managementPage.dart';
-import 'techinterviewPage.dart';
 double screenWidth=0;
+int currentIndex = 1;
+FocusNode _focusNode = FocusNode();
+TextEditingController searchcontroller = TextEditingController();
 class Interview extends StatefulWidget {
   
-
+//TODO: implement search function for this page text file is ready 
   @override
   State<Interview> createState() => _InterviewState();
 }
@@ -18,135 +23,125 @@ class _InterviewState extends State<Interview> {
  
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 1;
+
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Kbackgroundcolor,
-      body:Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          children: [
+      backgroundColor: Kmainboard,
+       bottomNavigationBar:BottomNavigationBar(
+        type:BottomNavigationBarType.fixed,
+        backgroundColor: Kbackgroundcolor,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
+        selectedFontSize: 12,
+        unselectedFontSize: 10,
+        selectedIconTheme: IconThemeData(size:22),
 
-            
-           Expanded(
-            flex:1,
-            child: Side(),
-           ),
-           Expanded(
-            flex:4,
-            child: Container(
-                height:double.infinity,
-                decoration: BoxDecoration(color:Kmainboard,
-                borderRadius: KMyborder),
-                child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Interview",style:Ktitletextstyle),
-
-          Divider(
-           indent: 0,
-           endIndent: 0,
-           color: Kgreylinecolor,
-          ),
-
-          Expanded(
-            child: Container(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                physics:BouncingScrollPhysics() ,
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                     SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            
-                              FeaturesButton(startcolor: Color.fromARGB(255, 242, 229, 95),
-                                endcolor:Color.fromARGB(255, 244, 141, 190) ,
-                                subtext: "Start your Interview",
-                                maintext: "Technology",
-                                imagepath:"assets/icon_assets/technology.png",
-                                operation: (){
-                                    //NAVIGATOR
-                                    
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>techinterviewPage()));
-                                }
-                              ),
-                              FeaturesButton(startcolor: Color.fromARGB(255, 138, 86, 249),
-                                endcolor:Color.fromARGB(255, 89, 86, 253) ,
-                                subtext: "Start your Interview",
-                                maintext: "Management",
-                                imagepath:"assets/icon_assets/managment.png",
-                                operation: (){
-                                  //NAVIGATOR
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>managementPage()));
-                                }
-                              ),
-                              FeaturesButton(startcolor: Color.fromARGB(255, 249, 19, 19),
-                                endcolor:Color.fromARGB(255, 249, 70, 167) ,
-                                subtext: "Start your Interview",
-                                maintext: "Design",
-                                imagepath:"assets/icon_assets/design.png",
-                                operation: (){
-                                  //NAVIGATOR
-                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>designPage()));
-                                }
-                              ),
-                              
-                          ],
-                        ),
-                     
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            
-                              FeaturesButton(startcolor: Color.fromARGB(255, 249, 19, 19),
-                                endcolor:Color.fromARGB(255, 249, 70, 167) ,
-                                subtext: "Start your Interview",
-                                maintext: "HR interview",
-                                imagepath:"assets/icon_assets/technology.png",
-                                operation: (){
-                                    //NAVIGATOR
-                                    
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HRPage()));
-                                }
-                              ),
-                              
-                              
-                          ],
-                        ),
-                
-                      ),
-                   
-                    
-                 
-                  ],
-                )
-              ),
-            ),
-          )
-        ],
-      ),
-                ),
-                
-              ),
-           ),
+        items:[
+            BottomNavigationBarItem(icon: Icon(Icons.home),label:"Home",),
+            BottomNavigationBarItem(icon: Icon(Icons.meeting_room_outlined),label:"Interview"),
+            BottomNavigationBarItem(icon: Icon(Icons.file_copy_outlined),label:"Resume"),
+            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined),label:"Accounts"),
           ],
+        currentIndex: currentIndex,
+        onTap: (int newIndex){
+          setState(() {
+            currentIndex=newIndex;
+            print("index is equal to+++++++ ${currentIndex}");
+            if (currentIndex ==0){
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+
+            }
+            else if ( currentIndex ==1 ){
+
+              
+            }
+            else if (currentIndex == 2){
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Resume()));
+
+            }
+            else if (currentIndex == 3){
+              //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
+              _showBottomAlertDialog(context);
+            }
+
+          },);
+
+
+           shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
+      );
+
+          
+
+        },
+       
+       ) ,
+       appBar: AppBar(
+        backgroundColor: Kmainboard,
+        
+        
+        
+        automaticallyImplyLeading: false,
+        title:Text("Interview",style:Ktitletextstyle),
+        bottom: PreferredSize(
+        preferredSize: Size.fromHeight(48.0), // Adjust the height as needed
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextField(
+            controller: searchcontroller,
+            focusNode: _focusNode,
+            decoration: InputDecoration(
+              hintText: 'Search here...',
+              border: OutlineInputBorder(
+                
+                borderRadius: BorderRadius.all(Radius.circular(20))
+              ),
+              focusedBorder: OutlineInputBorder( 
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                borderSide:BorderSide(color:Color.fromARGB(255, 29, 29, 29))),
+              
+
+            ),
+             
+          ),
         ),
+      ),
+       ),
+      body:SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            //TODO: apply the operations for the button
+            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Technology.png", operation: (){
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>techinterviewPage()));}),
+
+
+            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Management.png", operation: (){
+
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>managementPage()));
+            }),
+            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Design.png", operation: (){
+
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>designPage()));
+            }),
+            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_HR.png", operation: (){
+
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>HRPage()));
+            }),
+          ]
+        ),
+
       )
-    );
+              
+                    );
+                 
+                  
+               
+               
   }
 }
 
@@ -220,6 +215,64 @@ class FeaturesButton extends StatelessWidget {
                   
         ),
       ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+void _showBottomAlertDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(7.0),
+        child: Container(
+          
+          child: AlertDialog(
+            elevation: 40,
+            
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            buttonPadding: EdgeInsets.all(5),
+            backgroundColor: Colors.black.withOpacity(0.6),
+            alignment: Alignment.bottomCenter,
+            title: Text(
+              'This page is under construction',
+              style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromARGB(255, 255, 205, 23)),
+            ),
+          ),
+        ),
+      );
+},);
+}
+
+
+class ImageFeaturesButton extends StatelessWidget {
+  
+  late String imagepath;
+  late Function() operation;
+  ImageFeaturesButton({
+   
+   required this.imagepath,
+   required this.operation,
+   
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:operation,
+      child: Image.asset(imagepath,height:145)
     );
   }
 }
