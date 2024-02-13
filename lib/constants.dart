@@ -652,7 +652,7 @@ List<List<dynamic>> nestedList(BuildContext context){
               maintext:"HR Interview",
               imagepath:"assets/image_assets/HR_interview.png",
               context_text:"Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));}),
-               'hr interview'],
+               'hrinterview'],
     
   ];}
 class ImageFeaturesButton extends StatelessWidget {

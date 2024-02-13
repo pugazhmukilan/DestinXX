@@ -28,13 +28,23 @@ class _InterviewState extends State<Interview> {
    List<List<dynamic>> filteredList=[
     
    ];
-   void filterList(String query) {
+   //TODO: DESIGN PAGE IS COMING EXTRA SEEE TO IT THATS ALL FOR THE SEARCH FUNCTIONS
+   void filterList() {
+    filteredList.clear();
       for (int i=0;i<nestedList(context).length-1;i++){
-        if (nestedList(context)[i][1].contains(query.toLowerCase())){
-          filteredList.add(nestedList(context)[i]);
+        if (searchcontroller.text.isEmpty){
+          mainlist.clear();
+          filteredList.clear();
+            filteredList=nestedList(context);
         }
+        if (nestedList(context)[i][1].contains(searchcontroller.text.toLowerCase())){
+          filteredList.add(nestedList(context)[i]);
+          print(filteredList);
+        }
+        
       }
     setState(() {
+      mainlist=filteredList;
 
      
     });
@@ -110,24 +120,36 @@ class _InterviewState extends State<Interview> {
         preferredSize: Size.fromHeight(48.0), // Adjust the height as needed
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.0),
-          child: TextField(
-           
-            controller: searchcontroller,
-            focusNode: _focusNode,
-            decoration: InputDecoration(
-              hintText: 'Search here...',
-              border: OutlineInputBorder(
-                
-                borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
-              focusedBorder: OutlineInputBorder( 
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                borderSide:BorderSide(color:Color.fromARGB(255, 29, 29, 29))),
-              
-
-            ),
-             
+                child: TextField(
+        onChanged: (qurey){
+          filterList();
+        },
+        controller: searchcontroller,
+        focusNode: _focusNode,
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            onPressed: () {
+              filterList();
+            },
+            icon: Icon(Icons.search_outlined),
           ),
+          suffixIconConstraints: BoxConstraints(
+            minWidth: 32, // Adjust according to your preference
+            minHeight: 32, // Adjust according to your preference
+          ),
+          hintText: 'Search here...',
+          hintStyle: TextStyle(fontFamily: "jetBrainsMono", fontSize: 15),
+          contentPadding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 14),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20))
+          ),
+          focusedBorder: OutlineInputBorder( 
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 29, 29, 29))
+          ),
+        ),
+      ),
+
         ),
       ),
        ),
