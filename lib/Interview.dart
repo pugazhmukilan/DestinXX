@@ -1,7 +1,4 @@
-import 'package:destin/HR_page.dart';
-import 'package:destin/designPage.dart';
-import 'package:destin/managementPage.dart';
-import 'package:destin/techinterviewPage.dart';
+
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
@@ -10,6 +7,7 @@ import 'constants.dart';
 double screenWidth=0;
 int currentIndex = 1;
 FocusNode _focusNode = FocusNode();
+List<List<dynamic>> mainlist=[];
 TextEditingController searchcontroller = TextEditingController();
 class Interview extends StatefulWidget {
   
@@ -20,9 +18,31 @@ class Interview extends StatefulWidget {
 
 class _InterviewState extends State<Interview> {
   @override
+  void initState(){
+    super.initState();
+     mainlist  = nestedList(context);
+     print("=====================================");
+     print(mainlist);
+  }
+ 
+   List<List<dynamic>> filteredList=[
+    
+   ];
+   void filterList(String query) {
+      for (int i=0;i<nestedList(context).length-1;i++){
+        if (nestedList(context)[i][1].contains(query.toLowerCase())){
+          filteredList.add(nestedList(context)[i]);
+        }
+      }
+    setState(() {
+
+     
+    });
+  }
  
   @override
   Widget build(BuildContext context) {
+    
     int currentIndex = 1;
 
     screenWidth = MediaQuery.of(context).size.width;
@@ -91,6 +111,7 @@ class _InterviewState extends State<Interview> {
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: TextField(
+           
             controller: searchcontroller,
             focusNode: _focusNode,
             decoration: InputDecoration(
@@ -110,32 +131,19 @@ class _InterviewState extends State<Interview> {
         ),
       ),
        ),
-      body:SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            //TODO: apply the operations for the button
-            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Technology.png", operation: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>techinterviewPage()));}),
-
-
-            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Management.png", operation: (){
-
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>managementPage()));
-            }),
-            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Design.png", operation: (){
-
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>designPage()));
-            }),
-            ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_HR.png", operation: (){
-
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>HRPage()));
-            }),
-          ]
-        ),
-
-      )
+      body:CustomScrollView(
+  slivers: <Widget>[
+    SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          // Use mainlist[index][0] to build each item in the list
+          return mainlist[index][0];
+        },
+        childCount: mainlist.length,
+      ),
+    ),
+  ],
+)
               
                     );
                  
@@ -276,3 +284,6 @@ class ImageFeaturesButton extends StatelessWidget {
     );
   }
 }
+
+
+

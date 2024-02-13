@@ -2,14 +2,25 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 //'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.',
-class techinterviewPage extends StatefulWidget {
-  const techinterviewPage({super.key});
+class Interview_details_Page extends StatefulWidget {
+  final int catid;
+  final String maintext;
+  final String context_text;
+  final String imagepath;
+
+ Interview_details_Page({required this.catid,required this.context_text,required this.maintext,required this.imagepath});
 
   @override
-  State<techinterviewPage> createState() => _techinterviewPageState();
+  State<Interview_details_Page> createState() => _Interview_details_PageState(catid:catid,context_text:context_text,maintext:maintext,imagepath:imagepath);
 }
 
-class _techinterviewPageState extends State<techinterviewPage> {
+class _Interview_details_PageState extends State<Interview_details_Page> {
+  final int catid;
+  final String maintext;
+  final String context_text;
+  final String imagepath;
+
+ _Interview_details_PageState({required this.catid,required this.context_text,required this.maintext,required this.imagepath});
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -21,15 +32,19 @@ class _techinterviewPageState extends State<techinterviewPage> {
         
         
         //automaticallyImplyLeading: false,
-        title:Text("Tech Interview",style:Ktitletextstyle),
+        title:Text(maintext,style:Ktitletextstyle),
         
        ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child:Column(
             children:[
-              Image.asset("assets/image_assets/techpgimage.png",),
-              Text("Overview",style:Ktitletextstyle)
+              Image.asset(imagepath,),
+              Text("Overview",style:Ktitletextstyle),
+              SizedBox(
+                height:10,
+              ),
+              Text(context_text,style:Kcommontextstyle),
 
             ]
           )

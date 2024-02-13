@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import "Home.dart" ;
 import "Interview.dart";
+import "Interview_details_Page.dart";
 import  "Start_interview.dart";
 
 
@@ -617,3 +618,61 @@ void showConfirmationDialog(BuildContext context) {
     },
   );
 }
+
+
+
+
+
+List<List<dynamic>> nestedList(BuildContext context){
+  return[
+    [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Technology.png", operation: (){
+              
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(catid:1,
+              maintext:"TechInterview",
+              imagepath:"assets/image_assets/interview.png",
+              context_text:'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.')));}),
+               'technology'],
+    [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Management.png", operation: (){
+              
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(catid:1,
+              maintext:"Management",
+              imagepath:"assets/image_assets/management.png",
+              context_text:'Transform your management role interviews with our state-of-the-art AI interview app! Effortlessly integrate a mix of general inquiries,fundamental projects, and strategic questions to holistically evaluate candidates capabilities. Redefine your hiring approach for a leadership-driven tomorrow')));}),
+               'management'],
+    [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Design.png", operation: (){
+              
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(catid:1,
+              maintext:"Design",
+              imagepath:"assets/image_assets/Design-vector.png",
+              context_text:"Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));}),
+               'design'],
+    [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_HR.png", operation: (){
+              
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(catid:1,
+              maintext:"HR Interview",
+              imagepath:"assets/image_assets/HR_interview.png",
+              context_text:"Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));}),
+               'hr interview'],
+    
+  ];}
+class ImageFeaturesButton extends StatelessWidget {
+  
+  late String imagepath;
+  late Function() operation;
+  ImageFeaturesButton({
+   
+   required this.imagepath,
+   required this.operation,
+   
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:operation,
+      child: Image.asset(imagepath,height:145)
+    );
+  }
+}
+
+
