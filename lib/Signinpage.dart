@@ -377,6 +377,7 @@ class _SigninpageState extends State<Signinpage> {
                             UserID = emailcontroller.text;
                             //getthe username
                             UserName = await getUserName(UserID);
+                            
                             Navigator.pop(context);
                             Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
                             
