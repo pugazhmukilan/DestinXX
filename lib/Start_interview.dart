@@ -101,9 +101,10 @@ class _StartinterviewState extends State<Startinterview> {
     catch(e){
       print("no camera is found in the computer, ${e}");
     }
-    
+    initSpeech();
     
     }
+//TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
 
    void initSpeech() async {
   print("Speech initialized");
@@ -170,6 +171,14 @@ class _StartinterviewState extends State<Startinterview> {
     }
     if (Interview_questions.isEmpty){
       return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              
+            });
+            
+          },
+          child: Icon(Icons.shopping_cart),),
         body: Center(
           child: Container(
             width:double.infinity,
@@ -218,8 +227,13 @@ class _StartinterviewState extends State<Startinterview> {
     }
     
     return Scaffold(
+      
       backgroundColor: Kbackgroundcolor,
       appBar:AppBar(
+        actions: [Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(Icons.mic),
+        )],
         
         title:Text("${type} INTERVIEW")),
       body:
@@ -256,6 +270,14 @@ class _StartinterviewState extends State<Startinterview> {
                                    
                                    else{
                                     setState(() {
+                                      if (_speechEnabled ==true){
+                                        _stopListening();
+                                        _wordSpoken="";
+                                        _startListening();
+                                        print("on state");
+                                        print(_wordSpoken);
+                                                                              
+                                                                              }
                                       question_increment++;
                                       if (question_increment == 9){
                                         next_button_live = false;
@@ -304,6 +326,31 @@ class _StartinterviewState extends State<Startinterview> {
                           child:Padding(
                             padding: const EdgeInsets.all(13.0),
                             child: Center(child: Text("${Interview_questions[question_increment]}",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
+                          ),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(144, 0, 0, 0)),
+                        ),
+                      )
+                    ),
+                  ),
+
+
+
+
+                  
+                  Positioned(
+                    bottom: 600, // Adjust the position as needed
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20,left:20),
+                        child: Container(
+                          height:100,
+                          width:300,
+                          
+                          child:Padding(
+                            padding: const EdgeInsets.all(13.0),
+                            child: Center(child: Text("$_wordSpoken",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
                           ),
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(144, 0, 0, 0)),
                         ),
@@ -425,3 +472,168 @@ class _StartinterviewState extends State<Startinterview> {
                 ),
               ),
               Text("This is the word spoken by you $_wordSpoken"),*/
+
+
+
+/*class BottomSheetContent extends StatefulWidget {
+  final List<Map<String, dynamic>> cartfooditem;
+
+  BottomSheetContent({required this.cartfooditem});
+
+  @override
+  _BottomSheetContentState createState() => _BottomSheetContentState();
+}
+
+class _BottomSheetContentState extends State<BottomSheetContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(5, 25, 5, 20),
+        child: Container(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                
+                
+                for (int index = 0; index < widget.cartfooditem.length; index++)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                      color: Knavycolor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child:
+                                    Text("${widget.cartfooditem[index]["itemName"]}",style: TextStyle(color:Colors.white),),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.cartfooditem[index]["quantity"] =
+                                      widget.cartfooditem[index]["quantity"] - 1;
+                                  sum = sum-widget.cartfooditem[index]["Price"];
+                                  if (widget.cartfooditem[index]["quantity"] == 0) {
+                                    widget.cartfooditem.removeAt(index);
+                                  }
+                                });
+                              },
+                              icon: Icon(Icons.remove,color: Knavytextcolor),
+                            ),
+                            Text("${widget.cartfooditem[index]["quantity"]}",style: TextStyle(color:Colors.white),),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.cartfooditem[index]["quantity"] =
+                                      widget.cartfooditem[index]["quantity"] + 1;
+                                  sum = sum+widget.cartfooditem[index]["Price"];
+                                });
+                              },
+                              icon: Icon(Icons.add,color: Knavytextcolor),
+                            ),
+                            SizedBox(width: 25),
+                            Text("Rs.${cartfooditem[index]["Price"]*cartfooditem[index]["quantity"]}",style: TextStyle(color:Colors.white),)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  for (int i=0;i<alreadyordereditem.length;i++)
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                      color: Knavycolor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                
+                                child:
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(2, 15, 2, 15),
+                                      child: Text("${alreadyordereditem[i]["itemName"]}",style: TextStyle(color:Colors.white),),
+                                    ),
+                              ),
+                            ),
+                           
+                            Text("${alreadyordereditem[i]["quantity"]}",style: TextStyle(color:Colors.white),),
+
+                            SizedBox(width: 25),
+                            Text("Rs.${alreadyordereditem[i]["price"]*alreadyordereditem[i]["quantity"]}",style: TextStyle(color:Colors.white),)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 16),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Center(child: Text("TOTAL",style:TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w600,fontSize: 20)))),
+                      Expanded(
+                        flex:3,
+                        child: Center(child: Text("Rs.${sum}",style:TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w600,fontSize: 20)))),
+                    
+                    ],
+                  )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        sum=orderedsum;
+                        widget.cartfooditem.clear();
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                      child: Text('CLEAR', style: TextStyle(fontFamily: "inter", fontSize: 15, color: Colors.white)),
+                    ),
+                    SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add your logic for processing the bill
+                      },
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                      child: Text("BILL", style: TextStyle(fontFamily: "inter", fontSize: 15, color: Colors.white)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+void _showBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return BottomSheetContent(cartfooditem: cartfooditem);
+    },
+  );
+}*/
