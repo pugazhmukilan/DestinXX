@@ -75,7 +75,7 @@ class _StartinterviewState extends State<Startinterview> {
     
     super.initState();
     try{
-      cameraController = CameraController(cameras[0], ResolutionPreset.ultraHigh);
+      cameraController = CameraController(cameras[1], ResolutionPreset.ultraHigh);
       cameraController.initialize().then((_){
       if (!mounted){
         return;
@@ -219,133 +219,106 @@ class _StartinterviewState extends State<Startinterview> {
     
     return Scaffold(
       backgroundColor: Kbackgroundcolor,
-      body:Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Expanded(
-              
-              child: Container(
-                height: double.infinity,
-                
-                decoration: BoxDecoration(color: Kmainboard,borderRadius: KMyborder),
-
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                
-                    children: [
-                      Row(children: [
-                        IconButton(onPressed: (){
-                          
-                          showConfirmationDialog(context);
-                         
-
-                        }, icon: Icon(Icons.arrow_back_ios_new_outlined,size: 40,),),
-                        SizedBox(width: 20,),
-                        Text("Interview",style: Ktitletextstyle,),
-
-                      
-                      
-                      ]),
-                      Divider(
-                        indent: 0,
-                        endIndent: 0,
+      appBar:AppBar(
+        
+        title:Text("${type} INTERVIEW")),
+      body:
+                Stack(
+                children: [
+                  if (cameraController.value.isInitialized)
+                    Positioned.fill(
+                      child: AspectRatio(
+                        aspectRatio: cameraController.value.aspectRatio,
+                        child: CameraPreview(cameraController),
                       ),
-                      Text(type),
-
-                      //video container
-                      if (!cameraController.value.isInitialized)
-                      
-                      Expanded(
-                        child: Container(
-                          width:double.infinity,
-                          height:double.infinity,
-                          color: Colors.transparent,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CircularProgressIndicator(),
-
-                              Padding(
-                                padding: const EdgeInsets.only(top:10),
-                                child: Text("If it take time try restarting the app",style: Kcommontextstyle,),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Text("This is the word spoken by you $_wordSpoken"),
-                      if (cameraController.value.isInitialized)
-                      Expanded(
-                        child: Center(
-                          child: Container(
-                            child:CameraPreview(cameraController),
-                          ),
-                        )),
-
-
-                      SizedBox(
-                        height:20
-                      ),
-                     Center(child: Text("${question_increment+1}) ${Interview_questions[question_increment]}",style:Kcommontextstyle))    ,                 
-
-                      
-                      SizedBox(
-                        height:30
-                      ),            //HERE THE VIDEO CONTAINER SHOUL BE THERE
-                      Center(
-                        child: ElevatedButton(
-                                    
-                                    style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
-                                    minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),)
-                                    : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
-                                    minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
-                                    onPressed: (){
-                                      if (next_button_live == false){
-                                     Navigator.pop(context);
-                                     
-                                     Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
-                                     setState(() {
-                                       next_button_live = true;
-                                       question_increment =0;
-                                     });
-                                     
-                                     }
-                                     
-                                     else{
-                                      setState(() {
-                                        question_increment++;
-                                        if (question_increment == 9){
-                                          next_button_live = false;
-                                        }
-                                      });
-                                     }
-                                    
-
+                    ),
+                  Positioned(
+                    bottom: 20, // Adjust the position as needed
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: ElevatedButton(
+                        style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
+                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),)
+                                  : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
+                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
+                        onPressed: () {
+                           if (next_button_live == false){
+                                   Navigator.pop(context);
                                    
-
-                                    
-                                
-                                
-                                  },
-                                  
-                                child:next_button_live ==false? Text("Finish",style: TextStyle(fontFamily: "Inter",
-                                  fontSize: 20,fontWeight: FontWeight.w600,
-                                  color:Colors.white),):
-                                   Text("Next Question",style: TextStyle(fontFamily: "Inter",
-                                  fontSize: 20,fontWeight: FontWeight.w600,
-                                  color:Colors.white),)),
+                                   Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
+                                   setState(() {
+                                     next_button_live = true;
+                                     question_increment =0;
+                                   });
+                                   
+                                   }
+                                   
+                                   else{
+                                    setState(() {
+                                      question_increment++;
+                                      if (question_increment == 9){
+                                        next_button_live = false;
+                                      }
+                                    });
+                        }
+                        },
+                        child: next_button_live == false
+                            ? Text(
+                                "Finish",
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Text(
+                                "Next Question",
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
-                              
-                    ],
+                    ),
                   ),
-                ),
-                
+
+
+
+
+
+                  Positioned(
+                    bottom: 120, // Adjust the position as needed
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20,left:20),
+                        child: Container(
+                          height:100,
+                          width:300,
+                          
+                          child:Padding(
+                            padding: const EdgeInsets.all(13.0),
+                            child: Center(child: Text("${Interview_questions[question_increment]}",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
+                          ),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(144, 0, 0, 0)),
+                        ),
+                      )
+                    ),
+                  ),
+                ],
               ),
-            )));
-  }
+    );
+            
+            
+            
+           
+
+  } 
 }
 
 
@@ -371,3 +344,84 @@ class _StartinterviewState extends State<Startinterview> {
       },
     );
   }
+
+
+
+     /*SizedBox(
+                      height:20
+                    ),
+                   Center(child: Text("${question_increment+1}) ${Interview_questions[question_increment]}",style:Kcommontextstyle))    ,                 
+      
+                    
+                    SizedBox(
+                      height:30
+                    ),            //HERE THE VIDEO CONTAINER SHOUL BE THERE
+                    Center(
+                      child: ElevatedButton(
+                                  
+                                  style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
+                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),)
+                                  : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
+                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
+                                  onPressed: (){
+                                    if (next_button_live == false){
+                                   Navigator.pop(context);
+                                   
+                                   Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
+                                   setState(() {
+                                     next_button_live = true;
+                                     question_increment =0;
+                                   });
+                                   
+                                   }
+                                   
+                                   else{
+                                    setState(() {
+                                      question_increment++;
+                                      if (question_increment == 9){
+                                        next_button_live = false;
+                                      }
+                                    });
+                                   }
+                                  
+      
+                                 
+      
+                                  
+                              
+                              
+                                },
+                                
+                              child:next_button_live ==false? Text("Finish",style: TextStyle(fontFamily: "Inter",
+                                fontSize: 20,fontWeight: FontWeight.w600,
+                                color:Colors.white),):
+                                 Text("Next Question",style: TextStyle(fontFamily: "Inter",
+                                fontSize: 20,fontWeight: FontWeight.w600,
+                                color:Colors.white),)),
+                    ),*/
+                            
+
+
+
+                            /*if (!cameraController.value.isInitialized)
+              
+              Expanded(
+                child: Container(
+                  width:double.infinity,
+                  height:double.infinity,
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+            
+                      Padding(
+                        padding: const EdgeInsets.only(top:10),
+                        child: Text("If it take time try restarting the app",style: Kcommontextstyle,),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Text("This is the word spoken by you $_wordSpoken"),*/
