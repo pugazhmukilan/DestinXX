@@ -7,6 +7,12 @@ import "firebasefunctions.dart";
 import "main.dart";
 double screenWidth=0;
 int currentIndex = 0;
+
+Future<void> setdetails()async{
+    UserID = prefs!.getString("email").toString();
+                            //getthe username
+    UserName = await getUserName(UserID);
+   }
 class Home extends StatefulWidget {
   
 
@@ -27,11 +33,6 @@ class _HomeState extends State<Home> {
 
    }
 
-   Future<void> setdetails()async{
-    UserID = prefs!.getString("email").toString();
-                            //getthe username
-    UserName = await getUserName(UserID);
-   }
    
 
 
@@ -98,6 +99,7 @@ class _HomeState extends State<Home> {
        ) ,
 
        appBar: AppBar(
+        flexibleSpace: Image.asset("assets/Page_assets/appbar_main.png",height:100),
         automaticallyImplyLeading: false,
         title: Row(
           children: [

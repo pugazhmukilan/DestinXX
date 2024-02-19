@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
-import 'Resume.dart';
 import 'constants.dart';
+import 'loadingscreen.dart';
 double screenWidth=0;
 int currentIndex = 1;
 FocusNode _focusNode = FocusNode();
@@ -80,6 +80,7 @@ class _InterviewState extends State<Interview> {
             print("index is equal to+++++++ ${currentIndex}");
             if (currentIndex ==0){
               Navigator.pop(context);
+              setdetails();
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
 
             }
@@ -89,7 +90,7 @@ class _InterviewState extends State<Interview> {
             }
             else if (currentIndex == 2){
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Resume()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoadingPage()));
 
             }
             else if (currentIndex == 3){
@@ -153,19 +154,22 @@ class _InterviewState extends State<Interview> {
         ),
       ),
        ),
-      body:CustomScrollView(
-  slivers: <Widget>[
-    SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          // Use mainlist[index][0] to build each item in the list
-          return mainlist[index][0];
-        },
-        childCount: mainlist.length,
-      ),
-    ),
-  ],
-)
+      body:Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            // Use mainlist[index][0] to build each item in the list
+            return mainlist[index][0];
+          },
+          childCount: mainlist.length,
+        ),
+            ),
+          ],
+        ),
+      )
               
                     );
                  

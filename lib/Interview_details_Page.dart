@@ -10,11 +10,12 @@ class Interview_details_Page extends StatefulWidget {
   final String maintext;
   final String context_text;
   final String imagepath;
+  final String appbarimage;
 
- Interview_details_Page({required this.catid,required this.context_text,required this.maintext,required this.imagepath,required this.type});
+ Interview_details_Page({required this.catid,required this.context_text,required this.maintext,required this.imagepath,required this.type, required this.appbarimage});
 
   @override
-  State<Interview_details_Page> createState() => _Interview_details_PageState(catid:catid,context_text:context_text,maintext:maintext,imagepath:imagepath,type:type);
+  State<Interview_details_Page> createState() => _Interview_details_PageState(catid:catid,context_text:context_text,maintext:maintext,imagepath:imagepath,type:type,appbarimage:appbarimage);
 }
 
 class _Interview_details_PageState extends State<Interview_details_Page> {
@@ -23,9 +24,10 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
   final String maintext;
   final String context_text;
   final String imagepath;
+  final String appbarimage;
 
  // ignore: non_constant_identifier_names
- _Interview_details_PageState({required this.type,required this.catid,required this.context_text,required this.maintext,required this.imagepath});
+ _Interview_details_PageState({required this.type,required this.catid,required this.context_text,required this.maintext,required this.imagepath,required this.appbarimage});
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -33,6 +35,7 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
         backgroundColor: Kmainboard,
         appBar: AppBar(
         backgroundColor: Kmainboard,
+        flexibleSpace: Image.asset(appbarimage,height:200),
         
         
         
