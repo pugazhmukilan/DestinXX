@@ -80,6 +80,7 @@ class _InterviewState extends State<Interview> {
             print("index is equal to+++++++ ${currentIndex}");
             if (currentIndex ==0){
               Navigator.pop(context);
+              Navigator.pop(context);
               setdetails();
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
 

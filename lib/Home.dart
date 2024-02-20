@@ -144,7 +144,7 @@ class _HomeState extends State<Home> {
                 Expanded(
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundColor: const Color.fromARGB(255, 218, 218, 218),
+                    backgroundColor: Color.fromARGB(255, 234, 234, 234),
                     
                   ),
                 )
@@ -155,8 +155,10 @@ class _HomeState extends State<Home> {
             ),
            
           SizedBox(
-            height:30
+            height:20
           ),
+          Text("Features",style: Kcommontextstyle,),
+          Divider(color: Kgreycolor_light,),
           //FEATURES FEATURES FEATURES
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -166,14 +168,28 @@ class _HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ImageFeaturesButton(imagepath: "assets/Page_assets/Reports_Button.png", operation: (){
+                  _showBottomAlertDialog(context);
                   print("pressing the find your reports");
                 }),
 
                 ImageFeaturesButton(imagepath: "assets/Page_assets/Jobs_Button.png", operation: (){
+                  _showBottomAlertDialog(context);
+                  print("pressing the find your reports");
+                }),
+
+                ImageFeaturesButton(imagepath: "assets/Page_assets/Internship Button.png", operation: (){
+                  _showBottomAlertDialog(context);
+                  print("pressing the find your reports");
+                }),
+
+
+                ImageFeaturesButton(imagepath: "assets/Page_assets/Hackathons button.png", operation: (){
+                  _showBottomAlertDialog(context);
                   print("pressing the find your reports");
                 }),
 
                 ImageFeaturesButton(imagepath: "assets/Page_assets/Job_News.png", operation: (){
+                  _showBottomAlertDialog(context);
                   print("pressing the find your reports");
                 }),
 
@@ -181,7 +197,25 @@ class _HomeState extends State<Home> {
             ),
           ),
           
-          ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Button.png", operation: (){}),
+          ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Button.png", operation: (){
+            
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => Interview())));
+            
+          }),
+          Row(
+            children: [
+              Image.asset("assets/Page_assets/faangtextimage.png",height:18),
+              SizedBox(width:10),
+              Text("Interview",style: Kcommontextstyle,),
+            ],
+          ),
+          Divider(color: Kgreycolor_light,),
+
+          ImageFeaturesButton(imagepath: "assets/Page_assets/FAANG Button.png", operation: (){
+            
+             _showBottomAlertDialog(context);
+            
+          }),
           
           
           
