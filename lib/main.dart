@@ -22,7 +22,7 @@ Future<void> main() async {
   await SharedPreferences.getInstance();
   bool isloggedin = await checkLoginStatus();
 
-  prefs = await SharedPreferences.getInstance();  
+  prefs = await SharedPreferences.getInstance();
   try {
     cameras = await availableCameras();
   } on Exception catch (_, e) {

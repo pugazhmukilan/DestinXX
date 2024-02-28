@@ -14,7 +14,8 @@ class Interview_details_Page extends StatefulWidget {
   final String appbarimage;
 
   const Interview_details_Page(
-      {super.key, required this.catid,
+      {super.key,
+      required this.catid,
       required this.context_text,
       required this.maintext,
       required this.imagepath,

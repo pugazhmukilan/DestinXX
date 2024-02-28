@@ -9,9 +9,6 @@ import 'package:flutter/material.dart';
 import "constants.dart";
 import "main.dart";
 
-final FirebaseStorage _storage = FirebaseStorage.instance;
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
 Future<String> getCurrentUserEmail() async {
   try {
     // Get the current user from FirebaseAuth
@@ -177,14 +174,60 @@ Future<String> getFieldFromUserDocument(String fieldName) async {
     }
   } catch (error) {
     print('Error getting field from user document: $error');
-    return null!;
+    return "";
   }
 }
 
+Future<String> getUrlFromUserDocument(String fieldName) async {
+  print("=============================================$UserID");
+  try {
+    // Get the Firestore instance
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Reference to the "Users" collection
+    CollectionReference usersCollection = firestore.collection("Users");
+
+    // Reference to the specific user document
+    DocumentReference userDocument = usersCollection.doc(UserID);
+
+    // Get the snapshot of the user document
+    DocumentSnapshot documentSnapshot = await userDocument.get();
+
+    // Check if the document exists and contains the specified field
+    if (documentSnapshot.exists && documentSnapshot.data() != null) {
+      Map<String, dynamic> userData =
+          documentSnapshot.data() as Map<String, dynamic>;
+
+      // Check if the field exists in the document
+      if (userData.containsKey(fieldName)) {
+        dynamic fieldValue = userData[fieldName];
+
+        print(
+            'Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
+        return fieldValue.toString(); // Assuming the field value is a String
+      } else {
+        print(
+            'Field $fieldName does not exist in user document with ID $UserID');
+        return null!;
+      }
+    } else {
+      print('User document with ID $UserID does not exist');
+      return null!;
+    }
+  } catch (error) {
+    print('Error getting field from user document: $error');
+    return "https://p7.hiclipart.com/preview/722/101/213/computer-icons-user-profile-circle-abstract.jpg";
+  }
+}
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final FirebaseStorage _storage = FirebaseStorage.instance;
+
 Future<String> uploadImageToStorage(String childName, Uint8List file) async {
-  Reference ref = _storage.ref().child(childName);
+  Reference ref = _storage.ref().child(childName).child(_auth.currentUser!.uid);
   UploadTask uploadTask = ref.putData(file);
   TaskSnapshot snapshot = await uploadTask;
+
   String downloadUrl = await snapshot.ref.getDownloadURL();
   print('Download url ----------------------');
   return downloadUrl;
@@ -193,7 +236,7 @@ Future<String> uploadImageToStorage(String childName, Uint8List file) async {
 Future<String> saveData({required Uint8List file}) async {
   String resp = "Some error Occured";
   try {
-    String imageUrl = await uploadImageToStorage('profileImage', file);
+    String imageUrl = await uploadImageToStorage('ProfilePic', file);
 
     await addFieldToUserDocument('ProfilePic', imageUrl);
   } catch (err) {

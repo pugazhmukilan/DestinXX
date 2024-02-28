@@ -22,8 +22,6 @@ final List<String> feedback = [
 ];
 
 class Report extends StatefulWidget {
-  const Report({super.key});
-
   @override
   State<Report> createState() => _ReportState();
 }
@@ -57,20 +55,18 @@ class _ReportState extends State<Report> {
                           Row(children: [
                             IconButton(
                               onPressed: () {
-                                if (mounted) {
+                                if (mounted)
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Interview()));
-                                }
+                                          builder: (context) => Interview()));
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.arrow_back_ios_new_outlined,
                                 size: 40,
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 20,
                             ),
                             Text(
@@ -78,7 +74,7 @@ class _ReportState extends State<Report> {
                               style: Ktitletextstyle,
                             ),
                           ]),
-                          const Divider(
+                          Divider(
                             indent: 0,
                             endIndent: 0,
                           ),
@@ -90,7 +86,7 @@ class _ReportState extends State<Report> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   if (screenWidth > 850)
-                                    const Row(
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
@@ -104,10 +100,10 @@ class _ReportState extends State<Report> {
                                         SizedBox(width: 50),
                                         Expanded(
                                           flex: 2,
-                                          child: SizedBox(
+                                          child: Container(
                                             width: 500,
                                             child: Padding(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   right: 40,
                                                   left: 40,
                                                   top: 10,
@@ -126,7 +122,7 @@ class _ReportState extends State<Report> {
                                         )
                                       ],
                                     ),
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 30,
                                   ),
                                   if (screenWidth > 850)
@@ -145,8 +141,8 @@ class _ReportState extends State<Report> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Padding(
-                                          padding: EdgeInsets.fromLTRB(
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
                                               130, 10, 15, 10),
                                           child: percentage_indicator(
                                               percentage: 0.4,
@@ -169,8 +165,7 @@ class _ReportState extends State<Report> {
                                         ),
                                       ],
                                     ),
-                                  if (screenWidth > 850)
-                                    const SizedBox(height: 30),
+                                  if (screenWidth > 850) SizedBox(height: 30),
                                   if (screenWidth > 850)
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -197,7 +192,7 @@ class _ReportState extends State<Report> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  const percentage_indicator(
+                                                  percentage_indicator(
                                                       percentage: 0.8,
                                                       color: Colors.orange,
                                                       text: "8/10"),
@@ -227,10 +222,14 @@ class _ReportState extends State<Report> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  const percentage_indicator(
+                                                  percentage_indicator(
                                                       percentage: 0.4,
-                                                      color: Color.fromARGB(
-                                                          255, 218, 92, 241),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              218,
+                                                              92,
+                                                              241),
                                                       text: "4/10"),
                                                   Padding(
                                                     padding:
@@ -258,10 +257,14 @@ class _ReportState extends State<Report> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  const percentage_indicator(
+                                                  percentage_indicator(
                                                       percentage: 0.6,
-                                                      color: Color.fromARGB(
-                                                          255, 255, 216, 59),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              255,
+                                                              216,
+                                                              59),
                                                       text: "6/10"),
                                                   Padding(
                                                     padding:
@@ -312,15 +315,15 @@ class _ReportState extends State<Report> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const SizedBox(height: 30),
-                                        const Image(
+                                        SizedBox(height: 30),
+                                        Image(
                                             image: AssetImage(
                                                 "assets/image_assets/reportpage_image.png")),
 
-                                        const SizedBox(
+                                        Container(
                                           height: 250,
                                           child: Padding(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 top: 10,
                                                 bottom: 10,
                                                 left: 22,
@@ -342,8 +345,9 @@ class _ReportState extends State<Report> {
                                           style: Ktitletextstyle,
                                         ),
 
-                                        const Padding(
-                                          padding: EdgeInsets.only(top: 30),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 30),
                                           child: percentage_indicator(
                                               percentage: 0.4,
                                               color: Colors.green,
@@ -358,49 +362,49 @@ class _ReportState extends State<Report> {
                                           ),
                                         ),
                                         //CONFIDENCE
-                                        const SizedBox(height: 30),
+                                        SizedBox(height: 30),
                                         Center(
                                             child: Text(
                                           "Details",
                                           style: Ktitletextstyle,
                                         )),
-                                        const SizedBox(height: 15),
-                                        const Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                        SizedBox(height: 15),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 10, 5, 10),
                                           child: percentage_indicator(
                                               percentage: 0.8,
                                               color: Colors.orange,
                                               text: "8/10"),
                                         ),
-                                        const SizedBox(height: 10),
+                                        SizedBox(height: 10),
                                         Text("Confidence",
                                             style: Kcommontextstyle),
 
                                         //TBD
-                                        const Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 10, 5, 10),
                                           child: percentage_indicator(
                                               percentage: 0.4,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 218, 92, 241),
                                               text: "4/10"),
                                         ),
-                                        const SizedBox(height: 10),
+                                        SizedBox(height: 10),
                                         Text("TBD", style: Kcommontextstyle),
 
                                         //FLUENCY
-                                        const Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(5, 10, 5, 10),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 10, 5, 10),
                                           child: percentage_indicator(
                                               percentage: 0.6,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 255, 216, 59),
                                               text: "6/10"),
                                         ),
-                                        const SizedBox(height: 10),
+                                        SizedBox(height: 10),
                                         Text("Fluency",
                                             style: Kcommontextstyle),
                                       ],
@@ -448,22 +452,22 @@ class _ReportState extends State<Report> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(question[i],
-                                                style: const TextStyle(
-                                                    fontFamily: "Inter",
-                                                    fontSize: 25,
-                                                    fontWeight:
-                                                        FontWeight.w600)),
-                                            const SizedBox(height: 10),
-                                            Text(answer[i],
-                                                style: Kcommontextstyle),
-                                            const SizedBox(height: 20),
-                                            const Text("FEEDBACK",
                                                 style: TextStyle(
                                                     fontFamily: "Inter",
                                                     fontSize: 25,
                                                     fontWeight:
                                                         FontWeight.w600)),
-                                            const SizedBox(height: 10),
+                                            SizedBox(height: 10),
+                                            Text(answer[i],
+                                                style: Kcommontextstyle),
+                                            SizedBox(height: 20),
+                                            Text("FEEDBACK",
+                                                style: TextStyle(
+                                                    fontFamily: "Inter",
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                            SizedBox(height: 10),
                                             Text(feedback[i],
                                                 style: Kcommontextstyle),
                                           ],
@@ -504,7 +508,7 @@ class percentage_indicator extends StatelessWidget {
       radius: 100.0,
       lineWidth: 25.0,
       percent: percentage, //parameter should be adde in the class call
-      center: Text(
+      center: new Text(
         text,
         style: Kprogressbarnumber,
       ),
@@ -527,7 +531,6 @@ class FeaturesButton extends StatelessWidget {
   late String imagepath;
   late Function() operation;
   FeaturesButton({
-    super.key,
     required this.startcolor,
     required this.endcolor,
     required this.subtext,
@@ -550,7 +553,7 @@ class FeaturesButton extends StatelessWidget {
               colors: [startcolor, endcolor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.0, 1.0],
+              stops: [0.0, 1.0],
               tileMode: TileMode.clamp,
             ),
             borderRadius: BorderRadius.circular(20),
@@ -568,15 +571,15 @@ class FeaturesButton extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(subtext,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w400,
                             color: Colors.black)),
                     Text(maintext,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
-                            color: Color.fromARGB(255, 255, 255, 255))),
+                            color: const Color.fromARGB(255, 255, 255, 255))),
                   ],
                 ),
                 Expanded(

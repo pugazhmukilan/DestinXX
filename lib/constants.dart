@@ -26,7 +26,7 @@ TextStyle Kcommontextstyle = const TextStyle(
     fontFamily: "Inter", fontSize: 20, fontWeight: FontWeight.w500);
 TextStyle Kresumetextstyle = const TextStyle(
     fontFamily: "Inter",
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: FontWeight.w800,
     color: Color.fromARGB(255, 104, 103, 103));
 TextStyle Kprogressbarnumber = const TextStyle(

@@ -1,5 +1,3 @@
-import 'dart:core';
-
 import 'package:camera/camera.dart';
 import "package:flutter/material.dart";
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -10,8 +8,7 @@ import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
 
-late bool _speechEnabled;
-
+bool _speechEnabled = true;
 bool ispressed = false;
 late List<String> Interview_questions;
 List<String> answers = [];
@@ -54,8 +51,7 @@ class _StartinterviewState extends State<Startinterview> {
 
   @override
   void initState() {
-    _initSpeech();
-
+    //initSpeech();
     if (type == "HR") {
       Interview_questions = randomElementsList(HR_question);
       print(Interview_questions);
@@ -169,13 +165,13 @@ class _StartinterviewState extends State<Startinterview> {
   }
 
   //speech to text part
+
   @override
   Widget build(BuildContext context) {
     if (cameras.isEmpty) {
       return const Nocamera();
     }
     if (Interview_questions.isEmpty) {
-      //This part is for the empty questions section
       return Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -290,7 +286,7 @@ class _StartinterviewState extends State<Startinterview> {
                     Navigator.pop(context);
 
                     Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => const Report())));
+                        MaterialPageRoute(builder: ((context) => Report())));
                     setState(() {
                       next_button_live = true;
                       question_increment = 0;

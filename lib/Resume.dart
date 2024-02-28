@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:destin/Home.dart';
 import 'package:destin/Interview.dart';
 import 'package:destin/Signuppage.dart';
 import 'package:destin/firebasefunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'constants.dart';
 
 int currentIndex = 2;
@@ -63,7 +67,7 @@ class _ResumeState extends State<Resume> {
     });
   }
 
-/* Uint8List? _image1;
+  Uint8List? _image1;
 
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
@@ -77,19 +81,23 @@ class _ResumeState extends State<Resume> {
   }
 
   void selectImage() async {
-    Uint8List img = await chooseImages(ImageSource.gallery);
+    //have to set the bug for this  if I select the chood=seImage and come out without choosing the image
+    try {
+      Uint8List img = await chooseImages(ImageSource.gallery);
 
-    setState(() {
-      _image1 = img; //this will make tghe fn not null and galary will be opened
-      saveProfile();
-    });
+      setState(() {
+        _image1 =
+            img; //this will make tghe fn not null and galary will be opened
+        saveProfile();
+      });
+    } catch (err) {}
   }
 
   void saveProfile() async {
     String resp = await saveData(file: _image1!);
     //addFieldToUserDocument('profilePic', resp); //Adding the image url into the profilepic field
     //print(resp);
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,12 +153,14 @@ class _ResumeState extends State<Resume> {
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
                   Navigator.pop(context);
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const Home()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Home()));
                 } else if (currentIndex == 1) {
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Interview()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Interview()));
                 } else if (currentIndex == 2) {
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
@@ -210,16 +220,28 @@ class _ResumeState extends State<Resume> {
                                               MainAxisAlignment.center,
                                           children: [
                                             CircleAvatar(
-                                              /* backgroundImage: _image1 == null
-                                                  ? NetworkImage(pic)
-                                                  : const AssetImage(
-                                                          "assets/image_assets/user_background.png")
-                                                      as ImageProvider,*/
+                                              backgroundImage: (() {
+                                                try {
+                                                  if (_image1 != null) {
+                                                    return MemoryImage(_image1!)
+                                                        as ImageProvider;
+                                                  } else {
+                                                    // Display the default asset image when _image1 is null
+                                                    return NetworkImage(pic);
+                                                  }
+                                                } catch (e) {
+                                                  print(
+                                                      "Error loading image: $e");
+                                                  // Display the default asset image in case of an error
+                                                  return AssetImage(
+                                                      'assets/image_assets/user_background.png');
+                                                }
+                                              })(),
                                               backgroundColor: Kgreycolor_light,
                                               radius: 45,
                                             ),
                                             const SizedBox(height: 10),
-                                            /* ElevatedButton(
+                                            ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor:
                                                       Kgreycolor_light,
@@ -238,7 +260,7 @@ class _ResumeState extends State<Resume> {
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       color: Colors.purple),
-                                                )),*/
+                                                )),
                                             /* ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor:
@@ -876,7 +898,7 @@ Future<void> getResumeDetails() async {
   Language = await getFieldFromUserDocument("DBlanguage");
   Experience = await getFieldFromUserDocument("DBexperience");
   Education = await getFieldFromUserDocument("DBeducation");
-  //pic = await getFieldFromUserDocument("ProfilePic");
+  pic = await getUrlFromUserDocument("ProfilePic");
   //print(pic);
   //print(Phone);
   //print(Skills);

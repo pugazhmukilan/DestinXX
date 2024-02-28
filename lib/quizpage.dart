@@ -11,7 +11,8 @@ class LoadingAndQuizPage extends StatefulWidget {
   final String category;
   final String subcategory;
 
-  const LoadingAndQuizPage({super.key, required this.category, required this.subcategory});
+  const LoadingAndQuizPage(
+      {super.key, required this.category, required this.subcategory});
 
   @override
   _LoadingAndQuizPageState createState() => _LoadingAndQuizPageState();
@@ -71,7 +72,8 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
   }
 
   void checkAnswer(int selectedOptionIndex) {
-    if (selectedOptionIndex == questions[currentQuestionIndex]['correctIndex']) {
+    if (selectedOptionIndex ==
+        questions[currentQuestionIndex]['correctIndex']) {
       setState(() {
         score++;
       });
@@ -116,60 +118,64 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
       },
     );
   }*/
-  void showresults(BuildContext context,) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text(
-          "QuizCompleted",
-          style: TextStyle(color: Colors.red),
-        ),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "'Your Score: $score / ${questions.length}'",
-              style: const TextStyle(color: Colors.black),
+  void showresults(
+    BuildContext context,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "QuizCompleted",
+            style: TextStyle(color: Colors.red),
+          ),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "'Your Score: $score / ${questions.length}'",
+                style: const TextStyle(color: Colors.black),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                resetQuiz();
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+              ),
+              child: const Text('Play Again'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Quiztypes())); // Close the dialog
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red,
+              ),
+              child: const Text('Quit'),
             ),
           ],
-        ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-                    Navigator.of(context).pop();
-                    resetQuiz();
-                  },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white, backgroundColor: Colors.blue,
-            ),
-            child: const Text('Play Again'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
           ),
-          ElevatedButton(
-            onPressed: () {
-              
-                            
-                        
-              Navigator.of(context).pop();
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Quiztypes())); // Close the dialog
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white, backgroundColor: Colors.red,
-            ),
-            child: const Text('Quit'),
-          ),
-        ],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 5.0,
-      );
-    },
-  );
-}
+          backgroundColor: Colors.white,
+          elevation: 5.0,
+        );
+      },
+    );
+  }
 
   void resetQuiz() {
     setState(() {
@@ -185,10 +191,10 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-          width:double.infinity,
-          height:double.infinity,
-          
-          decoration: BoxDecoration(color:Kmainboard,borderRadius: BorderRadius.circular(20)),
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              color: Kmainboard, borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(25.0),
             child: SingleChildScrollView(
@@ -200,26 +206,27 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      IconButton(onPressed: (){
-                          
+                      IconButton(
+                        onPressed: () {
                           showConfirmationDialog(context);
-                         
-
-                        }, icon: const Icon(Icons.arrow_back_ios_new_outlined,size: 40,),),
-
-                        Expanded(child: Text("Quiz",style:Ktitletextstyle)),
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new_outlined,
+                          size: 40,
+                        ),
+                      ),
+                      Expanded(child: Text("Quiz", style: Ktitletextstyle)),
                     ],
                   ),
                   const Divider(
                     indent: 5,
                     endIndent: 5,
                   ),
-                  const SizedBox(
-                    height:30
-                  ),
-                  Image.asset("assets/image_assets/quizimage.png",height:200,width:200),
+                  const SizedBox(height: 30),
+                  Image.asset("assets/image_assets/quizimage.png",
+                      height: 200, width: 200),
                   Text(
-                   "${currentQuestionIndex+1}) ${questions[currentQuestionIndex]['question']}",
+                    "${currentQuestionIndex + 1}) ${questions[currentQuestionIndex]['question']}",
                     style: Kcommontextstyle,
                   ),
                   const SizedBox(height: 20),
@@ -229,21 +236,35 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                     children: List.generate(
                       questions[currentQuestionIndex]['options'].length,
                       (index) => Padding(
-                        padding: const EdgeInsets.only(top:5,bottom:5,left:3,right:3),
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 5, left: 3, right: 3),
                         child: SizedBox(
-                          height:80,
-                          width:400,
+                          height: 80,
+                          width: 400,
                           child: ElevatedButton(
                             onPressed: () {
                               checkAnswer(index);
                             },
-                            style: ElevatedButton.styleFrom(foregroundColor: Colors.green, backgroundColor: Colors.green,
-                            shadowColor: Colors.transparent, disabledForegroundColor: Colors.green.withOpacity(0.38), disabledBackgroundColor: Colors.green.withOpacity(0.12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            textStyle: const TextStyle(fontFamily: "Inter",fontSize: 15,fontWeight:FontWeight.w500,color:Colors.black),
-                            
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.green,
+                              backgroundColor: Colors.green,
+                              shadowColor: Colors.transparent,
+                              disabledForegroundColor:
+                                  Colors.green.withOpacity(0.38),
+                              disabledBackgroundColor:
+                                  Colors.green.withOpacity(0.12),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              textStyle: const TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
                             ),
-                            child: Text(questions[currentQuestionIndex]['options'][index],textAlign: TextAlign.center,),
+                            child: Text(
+                              questions[currentQuestionIndex]['options'][index],
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                       ),
@@ -256,13 +277,13 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
         ),
       ),
     );
-    }
+  }
 }
 
-
-
 //this dialogue box is shown when the ppl exit the interview in the middle of the interview
-void showConfirmationDialog(BuildContext context,) {
+void showConfirmationDialog(
+  BuildContext context,
+) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -287,21 +308,23 @@ void showConfirmationDialog(BuildContext context,) {
               Navigator.of(context).pop(); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white, backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.blue,
             ),
             child: const Text('No'),
           ),
           ElevatedButton(
             onPressed: () {
-              
-                            
-                        
               Navigator.of(context).pop();
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Quiztypes())); // Close the dialog
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white, backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.red,
             ),
             child: const Text('Quit'),
           ),
@@ -315,4 +338,3 @@ void showConfirmationDialog(BuildContext context,) {
     },
   );
 }
-

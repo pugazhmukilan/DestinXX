@@ -1,15 +1,18 @@
 //import 'package:destin/Resume.dart';
-import "dart:convert";
-import "dart:typed_data";
+import 'dart:typed_data';
 
+import 'package:destin/Resume.dart';
+import 'package:destin/Signinpage.dart';
 import 'package:destin/loadingscreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'Interview.dart';
 import "constants.dart";
 import "firebasefunctions.dart";
 import "main.dart";
 
-String pic = '';
 double screenWidth = 0;
 int currentIndex = 0;
 
@@ -17,6 +20,7 @@ Future<void> setdetails() async {
   UserID = prefs!.getString("email").toString();
   //getthe username
   UserName = await getUserName(UserID);
+  pic = await getUrlFromUserDocument("ProfilePic");
 }
 
 class Home extends StatefulWidget {
@@ -28,13 +32,51 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final ScrollController _scrollController = ScrollController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   int currentIndex = 0;
   @override
   void initState() {
+    pic = '';
     super.initState();
-    getImageurl();
+
     setdetails();
     print("===============================$UserName");
+  }
+
+  Uint8List? _image1;
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
+  chooseImages(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
+    if (image != null) {
+      return await image.readAsBytes();
+    } else {
+      return _showBottomAlertDialog(context);
+    }
+  }
+
+  void selectImage() async {
+    //have to set the bug for this  if I select the chood=seImage and come out without choosing the image
+    try {
+      Uint8List img = await chooseImages(ImageSource.gallery);
+
+      setState(() {
+        _image1 =
+            img; //this will make tghe fn not null and galary will be opened
+      });
+    } catch (err) {}
+  }
+
+  Future<void> _signOut() async {
+    try {
+      await _auth.signOut();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Signinpage()));
+      print("User signed out");
+    } catch (e) {
+      print("Error signing out: $e");
+    }
   }
 
   @override
@@ -75,11 +117,15 @@ class _HomeState extends State<Home> {
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
                 } else if (currentIndex == 1) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Interview()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Interview()));
                 } else if (currentIndex == 2) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const LoadingPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoadingPage()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
@@ -101,6 +147,15 @@ class _HomeState extends State<Home> {
             children: [
               Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 45),
               Image.asset("assets/logos/Mobile_firstPgeText.png", height: 15),
+              SizedBox(
+                width: 10,
+              ),
+              IconButton(
+                onPressed: () {
+                  _signOut();
+                },
+                icon: Icon(Icons.logout),
+              ),
             ],
           ),
         ),
@@ -137,8 +192,13 @@ class _HomeState extends State<Home> {
                         const SizedBox(
                           width: 20,
                         ),
-                        const Expanded(
+                        Expanded(
                           child: CircleAvatar(
+                            backgroundImage: _image1 == null
+                                ? NetworkImage(pic)
+                                : const AssetImage(
+                                        "assets/image_assets/user_background.png")
+                                    as ImageProvider,
                             radius: 50,
                             backgroundColor: Color.fromARGB(255, 234, 234, 234),
                           ),
@@ -355,7 +415,7 @@ void _showBottomAlertDialog(BuildContext context) {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             buttonPadding: const EdgeInsets.all(5),
-            backgroundColor: Colors.black.withOpacity(0.8),
+            backgroundColor: Colors.black.withOpacity(0.6),
             alignment: Alignment.bottomCenter,
             title: const Text(
               'This page is under construction',
@@ -405,18 +465,4 @@ class NameFeaturesButton extends StatelessWidget {
           onTap: operation, child: Image.asset(imagepath, height: 35)),
     );
   }
-}
-
-Uint8List stringToUint8List(String inputString) {
-  // Convert the string to UTF-8 bytes
-  List<int> utf8Bytes = utf8.encode(inputString);
-
-  // Create a Uint8List from the UTF-8 bytes
-  Uint8List uint8List = Uint8List.fromList(utf8Bytes);
-
-  return uint8List;
-}
-
-Future<void> getImageurl() async {
-  pic = await getFieldFromUserDocument('ProfilePic');
 }

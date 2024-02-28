@@ -89,8 +89,10 @@ class _TextinterviewState extends State<Textinterview> {
                   onPressed: () {
                     // Add your button onPressed logic here
                     Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Interview()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Interview()));
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -252,7 +254,7 @@ class _TextinterviewState extends State<Textinterview> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) => const Report())));
+                                            builder: ((context) => Report())));
                                   },
                                   child: const Text(
                                     "Submit answers",
@@ -260,8 +262,8 @@ class _TextinterviewState extends State<Textinterview> {
                                         fontFamily: "Inter",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
-                                        color: Color.fromARGB(
-                                            255, 255, 255, 255)),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255)),
                                   )),
                             ),
                           ],
@@ -282,7 +284,8 @@ class QuestionWidget extends StatefulWidget {
   final String question; // Question text
   final TextEditingController controller; // Controller for user input
 
-  const QuestionWidget({super.key, 
+  const QuestionWidget({
+    super.key,
     required this.index,
     required this.question,
     required this.controller,
@@ -323,7 +326,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 }
 
 class typingfield extends StatelessWidget {
-  typingfield({super.key, 
+  typingfield({
+    super.key,
     required this.editor,
     required this.h,
     required this.hinttext,
