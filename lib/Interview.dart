@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
-import 'Resume.dart';
 import 'constants.dart';
+import 'loadingscreen.dart';
 
 double screenWidth = 0;
 int currentIndex = 1;
@@ -83,13 +83,15 @@ class _InterviewState extends State<Interview> {
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  Navigator.pop(context);
+                  setdetails();
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 } else if (currentIndex == 1) {
                 } else if (currentIndex == 2) {
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Resume()));
+                      MaterialPageRoute(builder: (context) => const LoadingPage()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
@@ -108,8 +110,7 @@ class _InterviewState extends State<Interview> {
           automaticallyImplyLeading: false,
           title: Text("Interview", style: Ktitletextstyle),
           bottom: PreferredSize(
-            preferredSize:
-                const Size.fromHeight(48.0), // Adjust the height as needed
+            preferredSize: const Size.fromHeight(48.0), // Adjust the height as needed
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               child: TextField(
@@ -130,10 +131,10 @@ class _InterviewState extends State<Interview> {
                     minHeight: 32, // Adjust according to your preference
                   ),
                   hintText: 'Search here...',
-                  hintStyle: const TextStyle(
-                      fontFamily: "jetBrainsMono", fontSize: 15),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 14),
+                  hintStyle:
+                      const TextStyle(fontFamily: "jetBrainsMono", fontSize: 15),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14),
                   border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   focusedBorder: const OutlineInputBorder(
@@ -145,18 +146,21 @@ class _InterviewState extends State<Interview> {
             ),
           ),
         ),
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  // Use mainlist[index][0] to build each item in the list
-                  return mainlist[index][0];
-                },
-                childCount: mainlist.length,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    // Use mainlist[index][0] to build each item in the list
+                    return mainlist[index][0];
+                  },
+                  childCount: mainlist.length,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

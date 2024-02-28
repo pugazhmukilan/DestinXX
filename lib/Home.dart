@@ -1,24 +1,23 @@
-import 'dart:convert';
-import 'dart:typed_data';
+//import 'package:destin/Resume.dart';
+import "dart:convert";
+import "dart:typed_data";
 
-import 'package:destin/Loginpage.dart';
-import 'package:destin/Resume.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:destin/loadingscreen.dart';
 import 'package:flutter/material.dart';
 import 'Interview.dart';
 import "constants.dart";
 import "firebasefunctions.dart";
 import "main.dart";
-import "package:image_picker/image_picker.dart";
 
 String pic = '';
 double screenWidth = 0;
 int currentIndex = 0;
-String userEmail = '';
-Uint8List? _image1;
 
-Reference? imageRef;
+Future<void> setdetails() async {
+  UserID = prefs!.getString("email").toString();
+  //getthe username
+  UserName = await getUserName(UserID);
+}
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -37,35 +36,6 @@ class _HomeState extends State<Home> {
     setdetails();
     print("===============================$UserName");
   }
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  // Function to handle the logout
-  Future<void> _logout(BuildContext context) async {
-    try {
-      // Sign out the user from Firebase Authentication
-      await _auth.signOut();
-
-      // Clear any local data or preferences associated with the user session
-      // Example: LocalStorage.clearUserData();
-
-      // Navigate to the login screen (you may replace this with your login route)
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Loginpage()));
-    } catch (e) {
-      print("Error during logout: $e");
-    }
-  }
-
-  Future<void> setdetails() async {
-    UserID = prefs!.getString("email").toString();
-    //To get the image from the firebase
-
-    //getthe username
-    UserName = await getUserName(UserID);
-  }
-
-  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +75,11 @@ class _HomeState extends State<Home> {
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
                 } else if (currentIndex == 1) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Interview()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Interview()));
                 } else if (currentIndex == 2) {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Resume()));
+                      MaterialPageRoute(builder: (context) => const LoadingPage()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
@@ -126,22 +94,13 @@ class _HomeState extends State<Home> {
           },
         ),
         appBar: AppBar(
+          flexibleSpace:
+              Image.asset("assets/Page_assets/appbar_main.png", height: 100),
           automaticallyImplyLeading: false,
           title: Row(
             children: [
               Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 45),
               Image.asset("assets/logos/Mobile_firstPgeText.png", height: 15),
-              const SizedBox(
-                width: 100,
-              ),
-              IconButton(
-                  onPressed: () {
-                    _logout(context);
-                  },
-                  icon: const Icon(
-                    Icons.logout,
-                    size: 20,
-                  ))
             ],
           ),
         ),
@@ -178,20 +137,22 @@ class _HomeState extends State<Home> {
                         const SizedBox(
                           width: 20,
                         ),
-                        Expanded(
+                        const Expanded(
                           child: CircleAvatar(
-                            backgroundImage: _image1 == null
-                                ? NetworkImage(pic)
-                                : const Image(
-                                    image: AssetImage(
-                                        'assets/image_assets/user_background.png'),
-                                  ) as ImageProvider,
                             radius: 50,
+                            backgroundColor: Color.fromARGB(255, 234, 234, 234),
                           ),
                         )
                       ]),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Features",
+                    style: Kcommontextstyle,
+                  ),
+                  Divider(
+                    color: Kgreycolor_light,
+                  ),
                   //FEATURES FEATURES FEATURES
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -203,16 +164,33 @@ class _HomeState extends State<Home> {
                         ImageFeaturesButton(
                             imagepath: "assets/Page_assets/Reports_Button.png",
                             operation: () {
+                              _showBottomAlertDialog(context);
                               print("pressing the find your reports");
                             }),
                         ImageFeaturesButton(
                             imagepath: "assets/Page_assets/Jobs_Button.png",
                             operation: () {
+                              _showBottomAlertDialog(context);
+                              print("pressing the find your reports");
+                            }),
+                        ImageFeaturesButton(
+                            imagepath:
+                                "assets/Page_assets/Internship Button.png",
+                            operation: () {
+                              _showBottomAlertDialog(context);
+                              print("pressing the find your reports");
+                            }),
+                        ImageFeaturesButton(
+                            imagepath:
+                                "assets/Page_assets/Hackathons button.png",
+                            operation: () {
+                              _showBottomAlertDialog(context);
                               print("pressing the find your reports");
                             }),
                         ImageFeaturesButton(
                             imagepath: "assets/Page_assets/Job_News.png",
                             operation: () {
+                              _showBottomAlertDialog(context);
                               print("pressing the find your reports");
                             }),
                       ],
@@ -222,7 +200,32 @@ class _HomeState extends State<Home> {
                   ImageFeaturesButton(
                       imagepath:
                           "assets/Page_assets/Start_Interview_Button.png",
-                      operation: () {}),
+                      operation: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => const Interview())));
+                      }),
+                  Row(
+                    children: [
+                      Image.asset("assets/Page_assets/faangtextimage.png",
+                          height: 18),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Interview",
+                        style: Kcommontextstyle,
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Kgreycolor_light,
+                  ),
+
+                  ImageFeaturesButton(
+                      imagepath: "assets/Page_assets/FAANG Button.png",
+                      operation: () {
+                        _showBottomAlertDialog(context);
+                      }),
 
                   //BOTTOM BOTTOM BOTTOM
                   const Text("Made with\nCare!",

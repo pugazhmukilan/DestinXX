@@ -57,7 +57,7 @@ Future<void> addDocument(
       'DBskills': null,
       'DBimage': null,
       'DBlanguage': null,
-      'profilePic': null,
+      'ProfilePic': null
     };
 
     // Add the document with specified fields and user-defined document name

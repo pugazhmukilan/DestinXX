@@ -1,11 +1,7 @@
 import 'dart:math';
 
-import "package:destin/firebasefunctions.dart";
-import "package:destin/loadingscreen.dart";
-import "package:destin/quiztypes.dart";
 import 'package:flutter/material.dart';
 
-import "Home.dart";
 import "Interview.dart";
 import "Interview_details_Page.dart";
 import "Start_interview.dart";
@@ -280,212 +276,6 @@ List<String> randomElementsList(List<String> inputList) {
   return uniqueElements.toList(); // Convert the set back to a list
 }
 
-class Side_bar_element extends StatelessWidget {
-  late String name;
-  late String imagelink;
-
-  late Function() operation;
-  Side_bar_element(
-      {super.key,
-      required this.name,
-      required this.imagelink,
-      required this.operation});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: GestureDetector(
-        onTap: operation,
-        child: Container(
-          color: Colors.transparent,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                  width: 30,
-                  height: 30,
-                  color: Colors.transparent,
-                  child: Center(child: Image(image: AssetImage(imagelink)))),
-              const SizedBox(
-                width: 50,
-              ),
-              Text(name,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: Kgreytextcolor,
-                      fontFamily: "Inter"))
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Side extends StatefulWidget {
-  const Side({super.key});
-
-  @override
-  State<Side> createState() => _SideState();
-}
-
-class _SideState extends State<Side> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: Ksidebarcolor,
-        borderRadius: KMyborder,
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //Text(projectName,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Kgreytextcolor),),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 10, top: 15, bottom: 15),
-              child: Image.asset("assets/logos/Desktop_logoNtext.png"),
-            ),
-
-            const SizedBox(
-              height: 20,
-            ),
-            CircleAvatar(
-              backgroundColor: Kgreytextcolor,
-              radius: 40,
-              backgroundImage: const AssetImage(
-                "assets/icon_assets/UserDefaultIcon.png",
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(UserName,
-                style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Kgreytextcolor)),
-            Text("Free plan",
-                style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 10,
-                    fontWeight: FontWeight.w300,
-                    color: Kgreytextcolor)),
-
-            const SizedBox(
-              height: 40,
-            ),
-
-            Container(
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Side_bar_element(
-                          name: "Dashboard",
-                          imagelink: "assets/icon_assets/home_icon.png",
-                          operation: () {
-                            print("Interview");
-                            Navigator.pop(
-                                context); //POPPING THE CURRENT PAGE AND NAVIGATING TO NEEW
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Home()));
-                          }),
-                      Side_bar_element(
-                          name: "Quizs",
-                          imagelink: "assets/icon_assets/dev_icon.png",
-                          operation: () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => const Quiztypes())));
-                          }),
-                      Side_bar_element(
-                          name: "Interview",
-                          imagelink: "assets/icon_assets/tie_side_icon.png",
-                          operation: () {
-                            print("INterview");
-                            setState(() {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Interview()));
-                            });
-                          }),
-                      Side_bar_element(
-                          name: "Resume",
-                          imagelink: "assets/icon_assets/resume_icon.png",
-                          operation: () {
-                            print("Resume");
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoadingPage()));
-                          }),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 350,
-            ),
-
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    signOut(context);
-                  },
-                  child: Center(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(right: 10),
-                            child: Text("Sign out",
-                                style: TextStyle(
-                                    fontFamily: "Inter",
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromARGB(255, 93, 93, 93))),
-                          ),
-                          Image.asset("assets/icon_assets/signout.png"),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ErrorDialog extends StatelessWidget {
   final String title;
   final String content;
@@ -658,7 +448,9 @@ List<List<dynamic>> nestedList(BuildContext context) {
                         type: "Technology",
                         catid: 1,
                         maintext: "TechInterview",
-                        imagepath: "assets/image_assets/interview.png",
+                        imagepath:
+                            "assets/Page_assets/technology_page_main.png",
+                        appbarimage: "assets/Page_assets/appbar_tech.png",
                         context_text:
                             'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.')));
           }),
@@ -675,7 +467,9 @@ List<List<dynamic>> nestedList(BuildContext context) {
                         type: "Management",
                         catid: 1,
                         maintext: "Management",
-                        imagepath: "assets/image_assets/management.png",
+                        imagepath:
+                            "assets/Page_assets/management_page_main.png",
+                        appbarimage: "assets/Page_assets/appbar_management.png",
                         context_text:
                             'Transform your management role interviews with our state-of-the-art AI interview app! Effortlessly integrate a mix of general inquiries,fundamental projects, and strategic questions to holistically evaluate candidates capabilities. Redefine your hiring approach for a leadership-driven tomorrow')));
           }),
@@ -692,7 +486,8 @@ List<List<dynamic>> nestedList(BuildContext context) {
                         type: "Design",
                         catid: 1,
                         maintext: "Design",
-                        imagepath: "assets/image_assets/Design-vector.png",
+                        imagepath: "assets/Page_assets/design_page_main.png",
+                        appbarimage: "assets/Page_assets/appbar_design.png",
                         context_text:
                             "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));
           }),
@@ -709,7 +504,8 @@ List<List<dynamic>> nestedList(BuildContext context) {
                         type: "HR",
                         catid: 1,
                         maintext: "HR Interview",
-                        imagepath: "assets/image_assets/HR_interview.png",
+                        imagepath: "assets/Page_assets/hr_page_main.png",
+                        appbarimage: "assets/Page_assets/appbar_hr.png",
                         context_text:
                             "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));
           }),

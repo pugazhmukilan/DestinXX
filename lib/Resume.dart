@@ -1,12 +1,8 @@
-import 'dart:io';
-import 'dart:typed_data';
-
+import 'package:destin/Home.dart';
 import 'package:destin/Interview.dart';
 import 'package:destin/Signuppage.dart';
 import 'package:destin/firebasefunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:destin/Home.dart';
-import 'package:image_picker/image_picker.dart';
 import 'constants.dart';
 
 int currentIndex = 2;
@@ -67,10 +63,10 @@ class _ResumeState extends State<Resume> {
     });
   }
 
-  Uint8List? _image1;
+/* Uint8List? _image1;
 
   final ImagePicker _picker = ImagePicker();
-  File? _image;
+  XFile? _image;
   chooseImages(ImageSource source) async {
     final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
@@ -93,7 +89,7 @@ class _ResumeState extends State<Resume> {
     String resp = await saveData(file: _image1!);
     //addFieldToUserDocument('profilePic', resp); //Adding the image url into the profilepic field
     //print(resp);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -149,14 +145,12 @@ class _ResumeState extends State<Resume> {
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const Home()));
                 } else if (currentIndex == 1) {
                   Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Interview()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Interview()));
                 } else if (currentIndex == 2) {
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
@@ -216,16 +210,16 @@ class _ResumeState extends State<Resume> {
                                               MainAxisAlignment.center,
                                           children: [
                                             CircleAvatar(
-                                              backgroundImage: _image1 == null
+                                              /* backgroundImage: _image1 == null
                                                   ? NetworkImage(pic)
                                                   : const AssetImage(
                                                           "assets/image_assets/user_background.png")
-                                                      as ImageProvider,
+                                                      as ImageProvider,*/
                                               backgroundColor: Kgreycolor_light,
                                               radius: 45,
                                             ),
                                             const SizedBox(height: 10),
-                                            ElevatedButton(
+                                            /* ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor:
                                                       Kgreycolor_light,
@@ -244,8 +238,8 @@ class _ResumeState extends State<Resume> {
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       color: Colors.purple),
-                                                )),
-                                            ElevatedButton(
+                                                )),*/
+                                            /* ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor:
                                                       Kgreycolor_light,
@@ -264,7 +258,7 @@ class _ResumeState extends State<Resume> {
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       color: Colors.purple),
-                                                )),
+                                                )),*/
                                           ]),
                                     ),
                                     Column(
@@ -300,6 +294,9 @@ class _ResumeState extends State<Resume> {
                                                 left: 15, bottom: 5),
                                             child: TextField(
                                               controller: Nametexteditor,
+                                              onChanged: (value) {
+                                                SavedName = value;
+                                              },
                                               maxLines:
                                                   1, // Allow unlimited lines in the text field
                                               decoration: const InputDecoration(
@@ -401,6 +398,9 @@ class _ResumeState extends State<Resume> {
                                               const EdgeInsets.only(left: 15),
                                           child: TextField(
                                             controller: emailcontroller,
+                                            onChanged: (value) {
+                                              Email = value;
+                                            },
                                             maxLines: 1,
                                             decoration: const InputDecoration(
                                                 border: InputBorder.none,
@@ -430,6 +430,9 @@ class _ResumeState extends State<Resume> {
                                               const EdgeInsets.only(left: 15),
                                           child: TextField(
                                             controller: Phonetexteditor,
+                                            onChanged: (value) {
+                                              Phone = value;
+                                            },
                                             maxLines: 1,
                                             decoration: const InputDecoration(
                                                 border: InputBorder.none,
@@ -452,12 +455,33 @@ class _ResumeState extends State<Resume> {
                                     ),
                                     //TEXTEDITOR
                                     const SizedBox(height: 10),
-                                    typingfield(
-                                        editor: Introtexteditor,
-                                        h: 150,
-                                        hinttext: "Here...",
-                                        len: 500),
 
+                                    Container(
+                                      height: 200,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: KMyborder,
+                                        color: Kgreycolor_light,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, bottom: 5),
+                                        child: TextField(
+                                          controller: Introtexteditor,
+                                          onChanged: (value) {
+                                            Intro = value;
+                                          },
+                                          maxLength: 500,
+                                          maxLines: null,
+                                          // Allow unlimited lines in the text field
+                                          decoration: const InputDecoration(
+                                            border: InputBorder
+                                                .none, // Remove default border
+                                            hintText: 'Here...',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     //EDUCATION
                                     //EDUCATION
                                     //EDUCATION
@@ -468,11 +492,32 @@ class _ResumeState extends State<Resume> {
                                     ),
                                     //TEXTEDITOR
                                     const SizedBox(height: 10),
-                                    typingfield(
-                                        editor: Edutexteditor,
-                                        h: 300,
-                                        hinttext: "Here...",
-                                        len: 600),
+                                    Container(
+                                      height: 300,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: KMyborder,
+                                        color: Kgreycolor_light,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, bottom: 5),
+                                        child: TextField(
+                                          controller: Edutexteditor,
+                                          onChanged: (value) {
+                                            Education = value;
+                                          },
+                                          maxLength: 600,
+                                          maxLines: null,
+                                          // Allow unlimited lines in the text field
+                                          decoration: const InputDecoration(
+                                            border: InputBorder
+                                                .none, // Remove default border
+                                            hintText: 'Here...',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -505,16 +550,40 @@ class _ResumeState extends State<Resume> {
                                             ),
                                             //TEXTEDITOR
                                             const SizedBox(height: 10),
-                                            typingfield(
-                                                editor: Skilltexteditor,
-                                                h: 200,
-                                                hinttext: "Here...",
-                                                len: 500),
+                                            Container(
+                                              height: 200,
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                borderRadius: KMyborder,
+                                                color: Kgreycolor_light,
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, bottom: 5),
+                                                child: TextField(
+                                                  controller: Skilltexteditor,
+                                                  onChanged: (value) {
+                                                    Skills = value;
+                                                  },
+                                                  maxLength: 500,
+                                                  maxLines: null,
+                                                  // Allow unlimited lines in the text field
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    border: InputBorder
+                                                        .none, // Remove default border
+                                                    hintText: 'Here...',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
-
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
                                     //LANGUAGE
                                     //LANGUAGE
                                     //LANGUAGE
@@ -535,11 +604,33 @@ class _ResumeState extends State<Resume> {
                                             ),
                                             //TEXTEDITOR
                                             const SizedBox(height: 10),
-                                            typingfield(
-                                                editor: Langtexteditor,
-                                                h: 200,
-                                                hinttext: "Here...",
-                                                len: 500),
+                                            Container(
+                                              height: 200,
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                borderRadius: KMyborder,
+                                                color: Kgreycolor_light,
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, bottom: 5),
+                                                child: TextField(
+                                                  controller: Langtexteditor,
+                                                  onChanged: (value) {
+                                                    Language = value;
+                                                  },
+                                                  maxLength: 500,
+                                                  maxLines: null,
+                                                  // Allow unlimited lines in the text field
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    border: InputBorder
+                                                        .none, // Remove default border
+                                                    hintText: 'Here...',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -560,11 +651,32 @@ class _ResumeState extends State<Resume> {
                               ),
                               //TEXTEDITOR
                               const SizedBox(height: 10),
-                              typingfield(
-                                  editor: Exptexteditor,
-                                  h: 200,
-                                  hinttext: "here...",
-                                  len: 800),
+                              Container(
+                                height: 200,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: KMyborder,
+                                  color: Kgreycolor_light,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, bottom: 5),
+                                  child: TextField(
+                                    controller: Exptexteditor,
+                                    onChanged: (value) {
+                                      Experience = value;
+                                    },
+                                    maxLength: 800,
+                                    maxLines: null,
+                                    // Allow unlimited lines in the text field
+                                    decoration: const InputDecoration(
+                                      border: InputBorder
+                                          .none, // Remove default border
+                                      hintText: 'Here...',
+                                    ),
+                                  ),
+                                ),
+                              ),
 
                               //SAVE BUTTON
                               //SAVE BUTTON
@@ -607,8 +719,8 @@ class _ResumeState extends State<Resume> {
                                           addFieldToUserDocument(
                                               "DBskills", Skilltexteditor.text);
                                           addFieldToUserDocument("DBdob", Dob);
-                                          addFieldToUserDocument(
-                                              "profilePic", _image1.toString());
+                                          /*addFieldToUserDocument(
+                                              "profilePic", _image1.toString());*/
                                         },
                                         child: const Text(
                                           "Save",
@@ -764,10 +876,10 @@ Future<void> getResumeDetails() async {
   Language = await getFieldFromUserDocument("DBlanguage");
   Experience = await getFieldFromUserDocument("DBexperience");
   Education = await getFieldFromUserDocument("DBeducation");
-  pic = await getFieldFromUserDocument("ProfilePic");
-  print(pic);
-  print(Phone);
-  print(Skills);
+  //pic = await getFieldFromUserDocument("ProfilePic");
+  //print(pic);
+  //print(Phone);
+  //print(Skills);
 }
 
 void _showBottomAlertDialog(BuildContext context) {

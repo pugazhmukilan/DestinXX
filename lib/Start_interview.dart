@@ -1,19 +1,25 @@
+import 'dart:core';
+
 import 'package:camera/camera.dart';
 import "package:flutter/material.dart";
+import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'Interview.dart';
 import "Report.dart";
 import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
-import 'package:speech_to_text/speech_recognition_result.dart';
 
 late bool _speechEnabled;
+
 bool ispressed = false;
 late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
+
+List<String> uniqueSentences = [];
+TextEditingController _textController = TextEditingController();
 
 late CameraController cameraController;
 
@@ -71,7 +77,7 @@ class _StartinterviewState extends State<Startinterview> {
     super.initState();
     try {
       cameraController =
-          CameraController(cameras[0], ResolutionPreset.ultraHigh);
+          CameraController(cameras[1], ResolutionPreset.ultraHigh);
       cameraController.initialize().then((_) {
         if (!mounted) {
           return;
@@ -97,6 +103,7 @@ class _StartinterviewState extends State<Startinterview> {
     }
   }
 
+//TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
     setState(() {
@@ -131,6 +138,8 @@ class _StartinterviewState extends State<Startinterview> {
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _lastWords = result.recognizedWords;
+      print(
+          "**************************************************************  $_lastWords");
       List_text.add(result.recognizedWords);
       if (result.finalResult) {
         String recognizedWords = result.recognizedWords;
@@ -153,6 +162,12 @@ class _StartinterviewState extends State<Startinterview> {
     });
   }
 
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
+  }
+
   //speech to text part
   @override
   Widget build(BuildContext context) {
@@ -162,241 +177,211 @@ class _StartinterviewState extends State<Startinterview> {
     if (Interview_questions.isEmpty) {
       //This part is for the empty questions section
       return Scaffold(
-          body: Center(
-        child: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset("assets/image_assets/Empty_noquestions.png",
-                    height: 400, width: 400),
-                const SizedBox(
-                  height: 30,
-                ),
-                const Text(
-                  "No Question found!",
-                  style: TextStyle(
-                      fontFamily: "Inter1",
-                      fontWeight: FontWeight.w500,
-                      color: Colors.red,
-                      fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "No questions have been created for this interview yet wait untill next update",
-                  style: Kcommontextstyle,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Add your button onPressed logic here
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Interview()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.black, // text color
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(15.0), // rounded corners
-                    ),
-                  ),
-                  child: const SizedBox(
-                      height: 50,
-                      width: 200,
-                      child: Center(child: Text('Back'))),
-                ),
-              ],
-            ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              setState(() {});
+            },
+            child: const Icon(Icons.shopping_cart),
           ),
-        ),
-      ));
+          body: Center(
+            child: SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/image_assets/Empty_noquestions.png",
+                        height: 400, width: 400),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Text(
+                      "No Question found!",
+                      style: TextStyle(
+                          fontFamily: "Inter1",
+                          fontWeight: FontWeight.w500,
+                          color: Colors.red,
+                          fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "No questions have been created for this interview yet wait untill next update",
+                      style: Kcommontextstyle,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add your button onPressed logic here
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Interview()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black, // text color
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(15.0), // rounded corners
+                        ),
+                      ),
+                      child: const SizedBox(
+                          height: 50,
+                          width: 200,
+                          child: Center(child: Text('Back'))),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ));
     }
 
     return Scaffold(
-        backgroundColor: Kbackgroundcolor,
-        body: Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: Expanded(
-              child: Container(
-                height: double.infinity,
-                decoration:
-                    BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+      backgroundColor: Kbackgroundcolor,
+      appBar: AppBar(actions: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Icon(Icons.mic),
+        )
+      ], title: Text("$type INTERVIEW")),
+      body: Stack(
+        children: [
+          if (cameraController.value.isInitialized)
+            Positioned.fill(
+              child: AspectRatio(
+                aspectRatio: cameraController.value.aspectRatio,
+                child: CameraPreview(cameraController),
+              ),
+            ),
+          Positioned(
+            bottom: 20, // Adjust the position as needed
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ElevatedButton(
+                style: next_button_live == false
+                    ? ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 50, 213, 6),
+                        minimumSize: const Size(150, 80),
+                        disabledForegroundColor:
+                            Colors.yellow.withOpacity(0.38),
+                        disabledBackgroundColor:
+                            Colors.yellow.withOpacity(0.12),
+                      )
+                    : ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 17, 17, 17),
+                        minimumSize: const Size(150, 80),
+                        disabledForegroundColor:
+                            Colors.yellow.withOpacity(0.38),
+                        disabledBackgroundColor:
+                            Colors.yellow.withOpacity(0.12),
+                      ),
+                onPressed: () {
+                  if (next_button_live == false) {
+                    Navigator.pop(context);
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => const Report())));
+                    setState(() {
+                      next_button_live = true;
+                      question_increment = 0;
+                    });
+                  } else {
+                    setState(() {
+                      if (_speechEnabled == true) {}
+                      question_increment++;
+                      if (question_increment == 9) {
+                        next_button_live = false;
+                      }
+                    });
+                  }
+                },
+                child: next_button_live == false
+                    ? const Text(
+                        "Finish",
+                        style: TextStyle(
+                          fontFamily: "Inter",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text(
+                        "Next Question",
+                        style: TextStyle(
+                          fontFamily: "Inter",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 120, // Adjust the position as needed
+            left: 0,
+            right: 0,
+            child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(children: [
-                        IconButton(
-                          onPressed: () {
-                            showConfirmationDialog(context);
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back_ios_new_outlined,
-                            size: 40,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          "Interview",
-                          style: Ktitletextstyle,
-                        ),
-                      ]),
-                      const Divider(
-                        indent: 0,
-                        endIndent: 0,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          type,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20),
-                        ),
-                      ),
-
-                      //video container
-                      if (!cameraController.value.isInitialized)
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            color: Colors.transparent,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const CircularProgressIndicator(),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "If it take time try restarting the app",
-                                    style: Kcommontextstyle,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      Center(
-                          child: Text(
-                              "${question_increment + 1}) ${Interview_questions[question_increment]}",
-                              style: Kcommontextstyle)),
-
-                      //Speech to be displayed ------------------------------------------------------------
-                      const SizedBox(height: 20),
-                      if (cameraController.value.isInitialized)
-                        Expanded(
-                            child: Center(
-                          child: Container(
-                            child: CameraPreview(cameraController),
-                          ),
-                        )),
-
-                      const SizedBox(height: 20),
-
-                      Center(
-                        child: Text(
-                          // If listening is active show the recognized words
-                          _speechToText.isListening
-                              ? _lastWords
-                              // If listening isn't active but could be tell the user
-                              // how to start it, otherwise indicate that speech
-                              // recognition is not yet ready or not supported on
-                              // the target device
-                              : _speechEnabled
-                                  ? 'Start speaking...'
-                                  : 'Speech not available',
-                          style: Kcommontextstyle,
-                        ),
-                      ),
-                      //Questions display area ---------------------------------------------------------------------
-                      const SizedBox(
-                          height: 30), //HERE THE VIDEO CONTAINER SHOUL BE THERE
-                      Center(
-                        child: ElevatedButton(
-                            style: next_button_live == false
-                                ? ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 50, 213, 6),
-                                    minimumSize: const Size(150, 80),
-                                    //maximumSize: ,
-                                    disabledForegroundColor:
-                                        Colors.yellow.withOpacity(0.38),
-                                    disabledBackgroundColor:
-                                        Colors.yellow.withOpacity(0.12),
-                                  )
-                                : ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 17, 17, 17),
-                                    minimumSize: const Size(150, 60),
-                                    maximumSize: const Size(200, 70),
-                                    disabledForegroundColor:
-                                        Colors.yellow.withOpacity(0.38),
-                                    disabledBackgroundColor:
-                                        Colors.yellow.withOpacity(0.12),
-                                  ),
-                            onPressed: () {
-                              if (next_button_live == false) {
-                                Navigator.pop(context);
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const Report())));
-                                setState(() {
-                                  next_button_live = true;
-                                  question_increment = 0;
-                                });
-                              } else {
-                                setState(() {
-                                  //ALSO HAVE TO SET THE STATE OF THE _uniquesentences TO SENT IT TO THE MODEL INTO THE RESPECTIVE M0DEL AND THEN REFRESH IT AS TO APPEND THE LIST FROM THE STARING.
-                                  question_increment++;
-                                  if (question_increment == 9) {
-                                    next_button_live = false;
-                                  }
-                                });
-                              }
-                            },
-                            child: next_button_live == false
-                                ? const Text(
-                                    "Finish",
-                                    style: TextStyle(
-                                        fontFamily: "Inter",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white),
-                                  )
-                                : const Text(
-                                    "Next Question",
-                                    style: TextStyle(
-                                        fontFamily: "Inter",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white),
-                                  )),
-                      ),
-                    ],
-                  ),
+              padding: const EdgeInsets.only(right: 20, left: 20),
+              child: Container(
+                height: 100,
+                width: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromARGB(144, 0, 0, 0)),
+                child: Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: Center(
+                      child: Text(
+                    Interview_questions[question_increment],
+                    style: const TextStyle(
+                        color: Colors.white, fontFamily: "JetBrainsMono"),
+                    textAlign: TextAlign.center,
+                  )),
                 ),
               ),
-            )));
+            )),
+          ),
+          Positioned(
+            bottom: 600, // Adjust the position as needed
+            left: 0,
+            right: 0,
+            child: Center(
+                child: Padding(
+              padding: const EdgeInsets.only(right: 20, left: 20),
+              child: Container(
+                height: 100,
+                width: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromARGB(144, 0, 0, 0)),
+                child: Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: Center(
+                      child: Text(
+                    _lastWords,
+                    style: const TextStyle(
+                        color: Colors.white, fontFamily: "JetBrainsMono"),
+                    textAlign: TextAlign.center,
+                  )),
+                ),
+              ),
+            )),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -420,3 +405,249 @@ void showErrorDialog(BuildContext context, String errorMessage) {
     },
   );
 }
+
+
+
+     /*SizedBox(
+                      height:20
+                    ),
+                   Center(child: Text("${question_increment+1}) ${Interview_questions[question_increment]}",style:Kcommontextstyle))    ,                 
+      
+                    
+                    SizedBox(
+                      height:30
+                    ),            //HERE THE VIDEO CONTAINER SHOUL BE THERE
+                    Center(
+                      child: ElevatedButton(
+                                  
+                                  style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
+                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),)
+                                  : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
+                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
+                                  onPressed: (){
+                                    if (next_button_live == false){
+                                   Navigator.pop(context);
+                                   
+                                   Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
+                                   setState(() {
+                                     next_button_live = true;
+                                     question_increment =0;
+                                   });
+                                   
+                                   }
+                                   
+                                   else{
+                                    setState(() {
+                                      question_increment++;
+                                      if (question_increment == 9){
+                                        next_button_live = false;
+                                      }
+                                    });
+                                   }
+                                  
+      
+                                 
+      
+                                  
+                              
+                              
+                                },
+                                
+                              child:next_button_live ==false? Text("Finish",style: TextStyle(fontFamily: "Inter",
+                                fontSize: 20,fontWeight: FontWeight.w600,
+                                color:Colors.white),):
+                                 Text("Next Question",style: TextStyle(fontFamily: "Inter",
+                                fontSize: 20,fontWeight: FontWeight.w600,
+                                color:Colors.white),)),
+                    ),*/
+                            
+
+
+
+                            /*if (!cameraController.value.isInitialized)
+              
+              Expanded(
+                child: Container(
+                  width:double.infinity,
+                  height:double.infinity,
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+            
+                      Padding(
+                        padding: const EdgeInsets.only(top:10),
+                        child: Text("If it take time try restarting the app",style: Kcommontextstyle,),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Text("This is the word spoken by you $_wordSpoken"),*/
+
+
+
+/*class BottomSheetContent extends StatefulWidget {
+  final List<Map<String, dynamic>> cartfooditem;
+
+  BottomSheetContent({required this.cartfooditem});
+
+  @override
+  _BottomSheetContentState createState() => _BottomSheetContentState();
+}
+
+class _BottomSheetContentState extends State<BottomSheetContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(5, 25, 5, 20),
+        child: Container(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                
+                
+                for (int index = 0; index < widget.cartfooditem.length; index++)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                      color: Knavycolor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child:
+                                    Text("${widget.cartfooditem[index]["itemName"]}",style: TextStyle(color:Colors.white),),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.cartfooditem[index]["quantity"] =
+                                      widget.cartfooditem[index]["quantity"] - 1;
+                                  sum = sum-widget.cartfooditem[index]["Price"];
+                                  if (widget.cartfooditem[index]["quantity"] == 0) {
+                                    widget.cartfooditem.removeAt(index);
+                                  }
+                                });
+                              },
+                              icon: Icon(Icons.remove,color: Knavytextcolor),
+                            ),
+                            Text("${widget.cartfooditem[index]["quantity"]}",style: TextStyle(color:Colors.white),),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.cartfooditem[index]["quantity"] =
+                                      widget.cartfooditem[index]["quantity"] + 1;
+                                  sum = sum+widget.cartfooditem[index]["Price"];
+                                });
+                              },
+                              icon: Icon(Icons.add,color: Knavytextcolor),
+                            ),
+                            SizedBox(width: 25),
+                            Text("Rs.${cartfooditem[index]["Price"]*cartfooditem[index]["quantity"]}",style: TextStyle(color:Colors.white),)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  for (int i=0;i<alreadyordereditem.length;i++)
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                      color: Knavycolor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                
+                                child:
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(2, 15, 2, 15),
+                                      child: Text("${alreadyordereditem[i]["itemName"]}",style: TextStyle(color:Colors.white),),
+                                    ),
+                              ),
+                            ),
+                           
+                            Text("${alreadyordereditem[i]["quantity"]}",style: TextStyle(color:Colors.white),),
+
+                            SizedBox(width: 25),
+                            Text("Rs.${alreadyordereditem[i]["price"]*alreadyordereditem[i]["quantity"]}",style: TextStyle(color:Colors.white),)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 16),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Center(child: Text("TOTAL",style:TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w600,fontSize: 20)))),
+                      Expanded(
+                        flex:3,
+                        child: Center(child: Text("Rs.${sum}",style:TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w600,fontSize: 20)))),
+                    
+                    ],
+                  )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        sum=orderedsum;
+                        widget.cartfooditem.clear();
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                      child: Text('CLEAR', style: TextStyle(fontFamily: "inter", fontSize: 15, color: Colors.white)),
+                    ),
+                    SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add your logic for processing the bill
+                      },
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                      child: Text("BILL", style: TextStyle(fontFamily: "inter", fontSize: 15, color: Colors.white)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+void _showBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return BottomSheetContent(cartfooditem: cartfooditem);
+    },
+  );
+}*/

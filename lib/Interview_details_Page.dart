@@ -11,14 +11,15 @@ class Interview_details_Page extends StatefulWidget {
   final String maintext;
   final String context_text;
   final String imagepath;
+  final String appbarimage;
 
   const Interview_details_Page(
-      {super.key,
-      required this.catid,
+      {super.key, required this.catid,
       required this.context_text,
       required this.maintext,
       required this.imagepath,
-      required this.type});
+      required this.type,
+      required this.appbarimage});
 
   @override
   State<Interview_details_Page> createState() => _Interview_details_PageState(
@@ -26,7 +27,8 @@ class Interview_details_Page extends StatefulWidget {
       context_text: context_text,
       maintext: maintext,
       imagepath: imagepath,
-      type: type);
+      type: type,
+      appbarimage: appbarimage);
 }
 
 class _Interview_details_PageState extends State<Interview_details_Page> {
@@ -35,6 +37,7 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
   final String maintext;
   final String context_text;
   final String imagepath;
+  final String appbarimage;
 
   // ignore: non_constant_identifier_names
   _Interview_details_PageState(
@@ -42,7 +45,8 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
       required this.catid,
       required this.context_text,
       required this.maintext,
-      required this.imagepath});
+      required this.imagepath,
+      required this.appbarimage});
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
@@ -50,6 +54,7 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
         backgroundColor: Kmainboard,
         appBar: AppBar(
           backgroundColor: Kmainboard,
+          flexibleSpace: Image.asset(appbarimage, height: 200),
 
           //automaticallyImplyLeading: false,
           title: Text(maintext, style: Ktitletextstyle),

@@ -1,7 +1,8 @@
+import 'package:destin/Resume.dart';
 import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
-import "Resume.dart";
+//import "Resume.dart";
 import 'firebasefunctions.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -80,6 +81,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
 Future<String> getResumeDetails() async {
   SavedName = await getFieldFromUserDocument("UserName");
+  print("new user name============================$SavedName");
   Dob = await getFieldFromUserDocument("DBdob");
   Phone = await getFieldFromUserDocument("DBphone");
   Email = await getFieldFromUserDocument("DBemail");
