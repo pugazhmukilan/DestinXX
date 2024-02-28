@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destin/Loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import "constants.dart";
@@ -48,6 +51,7 @@ Future<void> addDocument(String collectionName, String userID,String userName) a
       'DBskills': null,
       'DBimage': null,
       'DBlanguage': null,
+      'ProfilePic':null
     };
 
     // Add the document with specified fields and user-defined document name
@@ -173,4 +177,25 @@ Future<String> getFieldFromUserDocument(String fieldName) async {
 }
 
 
+final FirebaseStorage _storage = FirebaseStorage.instance;
 
+Future<String> uploadImageToStorage(String childName, Uint8List file) async {
+  Reference ref = _storage.ref().child(childName);
+  UploadTask uploadTask = ref.putData(file);
+  TaskSnapshot snapshot = await uploadTask;
+  String downloadUrl = await snapshot.ref.getDownloadURL();
+  print('Download url ----------------------');
+  return downloadUrl;
+}
+
+Future<String> saveData({required Uint8List file}) async {
+  String resp = "Some error Occured";
+  try {
+    String imageUrl = await uploadImageToStorage('profileImage', file);
+
+    await addFieldToUserDocument('ProfilePic', imageUrl);
+  } catch (err) {
+    resp = err.toString();
+  }
+  return resp;
+}

@@ -30,11 +30,7 @@ class _ReportState extends State<Report> {
         child: Row(
           children: [
 
-            
-           Expanded(
-            flex:1,
-            child:Side(),
-           ),
+           
            Expanded(
             flex:4,
             child: Container(

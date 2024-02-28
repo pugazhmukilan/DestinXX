@@ -24,10 +24,7 @@ class _QuiztypesState extends State<Quiztypes> {
           children: [
 
             
-           Expanded(
-            flex:1,
-            child: Side(),
-           ),
+           
            Expanded(
             flex:4,
             child: Container(

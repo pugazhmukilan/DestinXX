@@ -1,7 +1,8 @@
+import 'package:destin/Resume.dart';
 import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
-import "Resume.dart";
+//import "Resume.dart";
 import 'firebasefunctions.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _LoadingPageState extends State<LoadingPage> {
               return Text('Error: ${snapshot.error}');
             } else {
               // Data has been successfully retrieved, navigate to another page
-              Future.delayed(Duration.zero, () {
+             Future.delayed(Duration.zero, () {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

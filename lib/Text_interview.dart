@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'Interview.dart';
 import "Report.dart";
 import 'constants.dart';
+
 List<String> answers = [];
 late List<String> Interview_questions;
 final List<TextEditingController> controllers = [];
@@ -12,7 +13,6 @@ class Textinterview extends StatefulWidget {
 
   const Textinterview({required this.type, Key? key}) : super(key: key);
 
-
   @override
   State<Textinterview> createState() => _TextinterviewState(type: type);
 }
@@ -21,164 +21,203 @@ class _TextinterviewState extends State<Textinterview> {
   late String type;
   _TextinterviewState({required this.type});
 
-   // List of controllers for each question
+  // List of controllers for each question
 
   @override
   void initState() {
     super.initState();
     //ADDING QUESTION TO THE LIST BASED ON THE CONDITIONS
-    if (type =="HR"){
-        Interview_questions = randomElementsList(HR_question);
-        print(Interview_questions);}
-    else if(type == "Management"){
+    if (type == "HR") {
+      Interview_questions = randomElementsList(HR_question);
+      print(Interview_questions);
+    } else if (type == "Management") {
       Interview_questions = randomElementsList(Management_questions);
       print(Interview_questions);
-
-    }
-    else if(type == "Technology"){
+    } else if (type == "Technology") {
       Interview_questions = randomElementsList(Tech_questions);
       print(Interview_questions);
-
+    } else if (type == "Design") {
+      Interview_questions = randomElementsList(Design_questions);
+      print(Interview_questions);
     }
-
-    else if(type == "Design"){
-          Interview_questions = randomElementsList(Design_questions);
-          print(Interview_questions);
-
-        }
-
-    
 
     //ADDING THE CONTROLLERS FOR EACH ASNWERS FOR THE QUESTION
     for (int i = 0; i < Interview_questions.length; i++) {
-      controllers.add(TextEditingController()); // Initialize controllers for each question
+      controllers.add(
+          TextEditingController()); // Initialize controllers for each question
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    
-    if (Interview_questions.isEmpty){
+    if (Interview_questions.isEmpty) {
       return Scaffold(
-        body: Center(
-          child: Container(
-            width:double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/image_assets/Empty_noquestions.png",height: 400,width:400),
-                        SizedBox(
-                          height:30,
-                        ),
-                        Text("No Question found!",style:TextStyle(fontFamily: "Inter1",fontWeight: FontWeight.w500,color: Colors.red,fontSize: 30),textAlign: TextAlign.center,),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text("No questions have been created for this interview yet wait untill next update",style:Kcommontextstyle,textAlign: TextAlign.center,),
-                         SizedBox(
-                          height:40,
-                         ),
-                         
-                         ElevatedButton(
-                          onPressed: () {
-                            // Add your button onPressed logic here
-                           Navigator.pop(context);
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            
-                            foregroundColor: Colors.white, backgroundColor: Colors.black, // text color
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0), // rounded corners
-                            ),
-                          ),
-                          child: Container(
-                            height:50,
-                            width:200,
-                            child: Center(child: Text('Back'))),
-                        ),
-                      ],
+          body: Center(
+        child: Container(
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset("assets/image_assets/Empty_noquestions.png",
+                    height: 400, width: 400),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "No Question found!",
+                  style: TextStyle(
+                      fontFamily: "Inter1",
+                      fontWeight: FontWeight.w500,
+                      color: Colors.red,
+                      fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "No questions have been created for this interview yet wait untill next update",
+                  style: Kcommontextstyle,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your button onPressed logic here
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Interview()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.black, // text color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(15.0), // rounded corners
                     ),
+                  ),
+                  child: Container(
+                      height: 50,
+                      width: 200,
+                      child: Center(child: Text('Back'))),
+                ),
+              ],
             ),
           ),
-        )
-      );
+        ),
+      ));
     }
     return Scaffold(
-      
       backgroundColor: Kbackgroundcolor,
-      body:Padding(
-        padding: const EdgeInsets.all(25.0),
-        
+      body: Padding(
+        padding: const EdgeInsets.all(1.0),
         child: Container(
-          decoration: BoxDecoration(borderRadius: KMyborder,color: Kmainboard),
+          decoration: BoxDecoration(borderRadius: KMyborder, color: Kmainboard),
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[ 
-                 Row(
-                   children: [
-                    IconButton(onPressed: (){
-                     showConfirmationDialog(context);
-                    }, icon:Icon(Icons.arrow_back_ios) ),
-                     Expanded(child: Text("Text based Interview", style: Ktitletextstyle)),
-                   ],
-                 ),
-                 Divider(
-                            indent: 0,
-                            endIndent: 0,
-                            color: Kgreylinecolor,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            showConfirmationDialog(context);
+                          },
+                          icon: Icon(Icons.arrow_back_ios)),
+                      Expanded(
+                          child: Text("Text based Interview",
+                              style: Ktitletextstyle)),
+                    ],
                   ),
-      
+                  Divider(
+                    indent: 0,
+                    endIndent: 0,
+                    color: Kgreylinecolor,
+                  ),
                   Expanded(
                     child: Container(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                           
+                            Center(
+                              child: Image.asset(
+                                "assets/image_assets/instruction.png",
+                                height: 200,
+                                width: 200,
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text("Instructions",
+                                    style: TextStyle(
+                                        fontFamily: "Inter",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+                                  style: TextStyle(fontSize: 15),
+                                  textAlign: TextAlign.justify,
+                                )
+                              ],
+                            ),
                             Container(
-                              
-                              child: Row(
+                                /*child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                    Image.asset("assets/image_assets/instruction.png",height: 200,width:200,),
-                                    SizedBox(width: 30.0),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(right:100,left:100),
-                                        child: Container(
-                                          width:800,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Text("Instructions",style:TextStyle(fontFamily: "Inter",fontSize: 25,fontWeight: FontWeight.w600,color:Colors.black)),
-                                              SizedBox(height:10),
-                                              Text("Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
-                                              style: Kcommontextstyle,textAlign: TextAlign.justify,)
-                                            ],
-                                          ),
+                                  Image.asset(
+                                    "assets/image_assets/instruction.png",
+                                    height: 200,
+                                    width: 200,
+                                  ),
+                                  SizedBox(width: 30.0),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 100, left: 100),
+                                      child: Container(
+                                        width: 800,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text("Instructions",
+                                                style: TextStyle(
+                                                    fontFamily: "Inter",
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black)),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+                                              style: Kcommontextstyle,
+                                              textAlign: TextAlign.justify,
+                                            )
+                                          ],
                                         ),
                                       ),
                                     ),
+                                  ),
                                 ],
-                              ),
-                            ),
-
-
-                          
-
-
+                              ),*/
+                                ),
                             SizedBox(
-                              height:80,
+                              height: 80,
                             ),
                             for (int i = 0; i < Interview_questions.length; i++)
                               QuestionWidget(
@@ -191,44 +230,52 @@ class _TextinterviewState extends State<Textinterview> {
                             ),
                             Center(
                               child: ElevatedButton(
-                                                                        
-                                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green,
-                                          minimumSize: Size(120, 60),
-                                          ),
-                                          onPressed: ()async{
-                                       for (int i = 0; i < controllers.length; i++) {
-                                        print("====================================================================");
-                                            print("QUESTION ${i} =========== ${Interview_questions[i]}\n");
-                                            print(" =========== ${controllers[i].text}\n");
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    minimumSize: Size(120, 60),
+                                  ),
+                                  onPressed: () async {
+                                    for (int i = 0;
+                                        i < controllers.length;
+                                        i++) {
+                                      print(
+                                          "====================================================================");
+                                      print(
+                                          "QUESTION ${i} =========== ${Interview_questions[i]}\n");
+                                      print(
+                                          " =========== ${controllers[i].text}\n");
 
-                                            
-                                            answers.add(controllers[i].text); // Add user input to answers list
-                                           }
-                                                                    
-                                          Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));                          
-                                        },
-                                                                      
-                                      child: Text("Submit answers",style: TextStyle(fontFamily: "Inter",
-                                          fontSize: 15,fontWeight: FontWeight.w600,
-                                          color:const Color.fromARGB(255, 255, 255, 255)),)),
+                                      answers.add(controllers[i]
+                                          .text); // Add user input to answers list
+                                    }
+
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => Report())));
+                                  },
+                                  child: Text(
+                                    "Submit answers",
+                                    style: TextStyle(
+                                        fontFamily: "Inter",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255)),
+                                  )),
                             ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                
-                ]
-            ),
+                ]),
           ),
         ),
       ),
     );
   }
 }
-
-
-
 
 class QuestionWidget extends StatefulWidget {
   final int index; // Index of the question
@@ -247,7 +294,9 @@ class QuestionWidget extends StatefulWidget {
 
 class _QuestionWidgetState extends State<QuestionWidget> {
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,20 +306,24 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: Text("${widget.index+1})  ${widget.question}",style: TextStyle(fontFamily: "Inter",fontSize: 17,fontWeight: FontWeight.w500),),
+          child: Text(
+            "${widget.index + 1})  ${widget.question}",
+            style: TextStyle(
+                fontFamily: "Inter", fontSize: 17, fontWeight: FontWeight.w500),
+          ),
         ),
-        
-        typingfield(editor: controllers[widget.index], h: 200, hinttext: "answer....", len: 500),
-
+        typingfield(
+            editor: controllers[widget.index],
+            h: 200,
+            hinttext: "answer....",
+            len: 500),
       ],
     );
   }
 }
 
-
 class typingfield extends StatelessWidget {
   typingfield({
-    
     required this.editor,
     required this.h,
     required this.hinttext,
@@ -278,35 +331,38 @@ class typingfield extends StatelessWidget {
   });
 
   late TextEditingController editor;
-  late  double h;
+  late double h;
   late String hinttext;
   late int len;
-  
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:10,bottom:10,right:8,left:8),
+      padding: const EdgeInsets.only(top: 10, bottom: 10, right: 8, left: 8),
       child: Container(
-         height:h,
-         width: double.infinity,
-         decoration: BoxDecoration(borderRadius: KMyborder,color: Kgreycolor_light,),
-         
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15,bottom:5),
-            child: TextField(
-             controller: editor,
-             maxLength: len,
-             maxLines:null,
-              // Allow unlimited lines in the text field
-             decoration: InputDecoration(
-               border: InputBorder.none, // Remove default border
-               hintText: 'Here...',
-               hintStyle: TextStyle(fontFamily: "inter",fontSize: 10,color: const Color.fromARGB(255, 148, 148, 148))
-             ),
-               ),
-         ),
-       ),
+        height: h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: KMyborder,
+          color: Kgreycolor_light,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15, bottom: 5),
+          child: TextField(
+            controller: editor,
+            maxLength: len,
+            maxLines: null,
+            // Allow unlimited lines in the text field
+            decoration: InputDecoration(
+                border: InputBorder.none, // Remove default border
+                hintText: 'Here...',
+                hintStyle: TextStyle(
+                    fontFamily: "inter",
+                    fontSize: 10,
+                    color: const Color.fromARGB(255, 148, 148, 148))),
+          ),
+        ),
+      ),
     );
   }
 }

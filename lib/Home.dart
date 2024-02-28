@@ -1,4 +1,5 @@
-import 'package:destin/Resume.dart';
+//import 'package:destin/Resume.dart';
+import 'package:destin/loadingscreen.dart';
 import 'package:flutter/material.dart';
 
 import 'Interview.dart';
@@ -77,7 +78,7 @@ class _HomeState extends State<Home> {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
             }
             else if (currentIndex == 2){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Resume()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoadingPage()));
 
             }
             else if (currentIndex == 3){

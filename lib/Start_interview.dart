@@ -1,6 +1,7 @@
 
 import 'package:camera/camera.dart';
 import  "package:flutter/material.dart";
+import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 import 'Interview.dart';
@@ -8,15 +9,16 @@ import "Report.dart";
 import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
-late bool _speechEnabled ;
+late bool _speechEnabled = true;
 bool ispressed = false;
 late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
-
-
-
+ 
+List<String> uniqueSentences = [];
+  TextEditingController _textController =
+      TextEditingController();
 
 late CameraController cameraController;
 class Startinterview extends StatefulWidget {
@@ -31,10 +33,20 @@ class Startinterview extends StatefulWidget {
 
 class _StartinterviewState extends State<Startinterview> {
   final SpeechToText _speechToText = SpeechToText();
-  
-  String _wordSpoken = "";
-  double _confidenceLevel = 0;
-  
+  List<String> uniqueSentences = [];
+  String lastRecognizedWords = '';
+  String works_text = '';
+  final TextEditingController _textController =
+      TextEditingController(); //creating object for the class
+
+  List<String> List_text = [];
+
+  bool _speechEnabled = false;
+  String _lastWords = '';
+  bool _isListening = false;
+
+  String wordSpoken = "";
+  final double _confidenceLevel = 0;
   late String type;
   _StartinterviewState({required this.type});
   
@@ -101,50 +113,67 @@ class _StartinterviewState extends State<Startinterview> {
     catch(e){
       print("no camera is found in the computer, ${e}");
     }
-    initSpeech();
+   
     
     }
 //TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
-
-   void initSpeech() async {
-  print("Speech initialized");
-
+void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
     setState(() {
       _startListening();
     });
-
-}
-
-  void _startListening() async {
-    print("going to print the speech");
-   
-    await _speechToText.listen(onResult: _onspeechResult,listenMode: ListenMode.confirmation,pauseFor: Duration(minutes: 2),partialResults: true);
-    setState(() {
-      
-    });
-    
-  
-    
   }
 
-  void _onspeechResult(result) {
+  void _startListening() async {
+    if (_isListening) {
+      _isListening = true;
+      while (_isListening) {
+        await _speechToText.listen(
+          onResult: _onSpeechResult,
+          localeId: 'en-UK',
+        );
+      }
+    }
     setState(() {
-      _wordSpoken = "${result.recognizedWords}";
-      print(_wordSpoken);
-      print("islistening ${_speechToText.isListening}");
-      
-      
+      _isListening = true;
+      _startListening();
     });
   }
 
   void _stopListening() async {
-    print("stopping");
-    await _speechToText.stop();
-    setState(() {});
+    if (_isListening) {
+      _isListening = false;
+      await _speechToText.stop();
+      setState(() {});
+    }
   }
 
-  
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    setState(() {
+      _lastWords = result.recognizedWords;
+      print("**************************************************************  ${_lastWords}");
+      List_text.add(result.recognizedWords);
+      if (result.finalResult) {
+        String recognizedWords = result.recognizedWords;
+
+        if (recognizedWords != lastRecognizedWords) {
+          if (!uniqueSentences.contains(recognizedWords)) {
+            setState(() {
+              uniqueSentences.add(recognizedWords);
+            });
+          }
+          lastRecognizedWords = recognizedWords;
+        }
+      }
+      _textController.text = uniqueSentences.join(' ');
+      /* _textController.text =
+          LinkedHashSet<String>.from(List_text).toList().join(" ");
+      _textController.selection = TextSelection.fromPosition(
+          TextPosition(offset: _textController.text.length));*/
+      _isListening = true;
+    });
+  }
+
 
 
 
@@ -271,12 +300,8 @@ class _StartinterviewState extends State<Startinterview> {
                                    else{
                                     setState(() {
                                       if (_speechEnabled ==true){
-                                        _stopListening();
-                                        _wordSpoken="";
-                                        _startListening();
-                                        print("on state");
-                                        print(_wordSpoken);
-                                                                              
+                                        
+                                        
                                                                               }
                                       question_increment++;
                                       if (question_increment == 9){
@@ -350,7 +375,7 @@ class _StartinterviewState extends State<Startinterview> {
                           
                           child:Padding(
                             padding: const EdgeInsets.all(13.0),
-                            child: Center(child: Text("$_wordSpoken",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
+                            child: Center(child: Text("${_lastWords}",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
                           ),
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(144, 0, 0, 0)),
                         ),
