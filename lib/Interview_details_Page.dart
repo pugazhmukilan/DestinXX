@@ -12,7 +12,7 @@ class Interview_details_Page extends StatefulWidget {
   final String imagepath;
   final String appbarimage;
 
- Interview_details_Page({required this.catid,required this.context_text,required this.maintext,required this.imagepath,required this.type, required this.appbarimage});
+ const Interview_details_Page({super.key, required this.catid,required this.context_text,required this.maintext,required this.imagepath,required this.type, required this.appbarimage});
 
   @override
   State<Interview_details_Page> createState() => _Interview_details_PageState(catid:catid,context_text:context_text,maintext:maintext,imagepath:imagepath,type:type,appbarimage:appbarimage);
@@ -48,16 +48,16 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
           child:Column(
             children:[
               Image.asset(imagepath,height: 250,),
-              Text("Overview",style:TextStyle(fontSize: 23,fontFamily: "inter",fontWeight: FontWeight.w600),textAlign: TextAlign.justify,),
-              SizedBox(
+              const Text("Overview",style:TextStyle(fontSize: 23,fontFamily: "inter",fontWeight: FontWeight.w600),textAlign: TextAlign.justify,),
+              const SizedBox(
                 height:10,
               ),
               Padding(
                 padding: const EdgeInsets.only(right:25,left:25),
-                child: Text(context_text,style:TextStyle(fontSize: 14,fontFamily: "inter",fontWeight: FontWeight.w300),textAlign: TextAlign.justify,),
+                child: Text(context_text,style:const TextStyle(fontSize: 14,fontFamily: "inter",fontWeight: FontWeight.w300),textAlign: TextAlign.justify,),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               GestureDetector(
@@ -66,7 +66,7 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
                 },
                 child: Image.asset("assets/Page_assets/Textbased_interview.png",height:100),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               GestureDetector(

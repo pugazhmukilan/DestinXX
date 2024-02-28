@@ -99,11 +99,11 @@ class _LoginpageState extends State<Loginpage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                         SizedBox(
+                         const SizedBox(
                           height:50
                          ),
-                           Padding(
-                             padding: const EdgeInsets.only(left:60,right:60,bottom:50),
+                           const Padding(
+                             padding: EdgeInsets.only(left:60,right:60,bottom:50),
                              child: Hero(
                               transitionOnUserGestures: true,
                               tag:"destinxlogo",
@@ -116,7 +116,7 @@ class _LoginpageState extends State<Loginpage> {
                                  
                                   child: Column(
                                     children: [
-                                       SingleChildScrollView(
+                                       const SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                          child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +138,7 @@ class _LoginpageState extends State<Loginpage> {
                                               ),
                                             ]),
                                        ),
-                                       SizedBox(
+                                       const SizedBox(
                                         height: 20,
                                       ),
                                       ElevatedButton(
@@ -233,7 +233,7 @@ class _LoginpageState extends State<Loginpage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                 Signuppage()));
+                                                 const Signuppage()));
                                   },
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor:

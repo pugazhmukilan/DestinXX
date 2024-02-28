@@ -8,25 +8,25 @@ import  "Start_interview.dart";
 
 
 double screenWidth = 0;
-late String UserName="" ;
+String UserName="" ;
 late String UserID;
 String projectName  = "ProjectX";
-Color Kquizlinecolor = Color.fromARGB(255, 219, 219, 219);
+Color Kquizlinecolor = const Color.fromARGB(255, 219, 219, 219);
 Color  Kbackgroundcolor = const Color.fromARGB(255, 29, 29, 29);
 Color  Ksidebarcolor =  const Color.fromARGB(255, 29, 29, 29);
-Color  Kmainboard = Color.fromARGB(255, 255, 255, 255);
+Color  Kmainboard = const Color.fromARGB(255, 255, 255, 255);
 Color Kblacktextcolor = const Color.fromARGB(255, 29, 29, 29);
-Color Kgreycolor_dark = Color.fromARGB(255, 161, 161, 161);
+Color Kgreycolor_dark = const Color.fromARGB(255, 161, 161, 161);
 Color Kgreycolor_light = const Color.fromARGB(255, 242, 246, 249);
 Color Kgreylinecolor = const Color.fromARGB(255, 194, 194, 194);
 Color Kgreytextcolor = const Color.fromARGB(255, 186, 171, 171);
-Color Kprogressbarbackgroundcolor = Color.fromARGB(255, 230, 230, 230);
+Color Kprogressbarbackgroundcolor = const Color.fromARGB(255, 230, 230, 230);
 TextStyle Ktitletextstyle = const TextStyle(fontFamily: "Inter",fontSize: 30,fontWeight: FontWeight.bold);
 TextStyle Kcommontextstyle = const TextStyle(fontFamily: "Inter",fontSize: 20,fontWeight:FontWeight.w500);
 TextStyle Kresumetextstyle = const TextStyle(fontFamily: "Inter",fontSize: 20,fontWeight:FontWeight.w800,color: Color.fromARGB(255, 104, 103, 103));
 TextStyle Kprogressbarnumber = const TextStyle(fontFamily: "Inter",fontSize: 20,fontWeight: FontWeight.w800,color: Colors.black);
 TextStyle Kreporttextstyle = const  TextStyle(fontFamily: "Inter",fontWeight: FontWeight.w400,color: Colors.black,fontSize: 23);
-TextStyle Kquizcattext = TextStyle(fontFamily: "Inter",fontSize: 25,fontWeight: FontWeight.w600,color: const Color.fromARGB(255, 92, 92, 92));
+TextStyle Kquizcattext = const TextStyle(fontFamily: "Inter",fontSize: 25,fontWeight: FontWeight.w600,color: Color.fromARGB(255, 92, 92, 92));
 //profile image for the user 
 //picking the image from the file using the some modules
 
@@ -294,7 +294,7 @@ class ErrorDialog extends StatelessWidget {
       content: Text(content),
       actions: [
         ElevatedButton(
-          child: Text('OK'),
+          child: const Text('OK'),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -311,7 +311,7 @@ void showErrorDialog(BuildContext context, String errorMessage,String title) {
       return AlertDialog(
         title: Text(
           title,
-          style: TextStyle(color: Colors.red),
+          style: const TextStyle(color: Colors.red),
         ),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,7 +319,7 @@ void showErrorDialog(BuildContext context, String errorMessage,String title) {
           children: [
             Text(
               errorMessage,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ],
         ),
@@ -331,7 +331,7 @@ void showErrorDialog(BuildContext context, String errorMessage,String title) {
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
         shape: RoundedRectangleBorder(
@@ -357,10 +357,10 @@ void _showBottomAlertDialog(BuildContext context) {
             elevation: 12,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            buttonPadding: EdgeInsets.all(5),
+            buttonPadding: const EdgeInsets.all(5),
             backgroundColor: Colors.black.withOpacity(0.8),
             alignment: Alignment.bottomCenter,
-            title: Text(
+            title: const Text(
               'This page is under construction',
               style: TextStyle(
                   fontSize: 16,
@@ -381,11 +381,11 @@ void showConfirmationDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(
+        title: const Text(
           "On going interview",
           style: TextStyle(color: Colors.red),
         ),
-        content: Column(
+        content: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -403,7 +403,7 @@ void showConfirmationDialog(BuildContext context) {
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
-            child: Text('No'),
+            child: const Text('No'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -413,12 +413,12 @@ void showConfirmationDialog(BuildContext context) {
                         
               Navigator.of(context).pop();
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview())); // Close the dialog
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Interview())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.blue,
             ),
-            child: Text('Yes'),
+            child: const Text('Yes'),
           ),
         ],
         shape: RoundedRectangleBorder(
@@ -439,7 +439,7 @@ List<List<dynamic>> nestedList(BuildContext context){
   return[
     [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Technology.png", operation: (){
               
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(type:"Technology", catid:1,
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>const Interview_details_Page(type:"Technology", catid:1,
               maintext:"TechInterview",
               imagepath:"assets/Page_assets/technology_page_main.png",
               appbarimage: "assets/Page_assets/appbar_tech.png",
@@ -447,7 +447,7 @@ List<List<dynamic>> nestedList(BuildContext context){
                'technology'],
     [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Management.png", operation: (){
               
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(type:"Management",catid:1,
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>const Interview_details_Page(type:"Management",catid:1,
               maintext:"Management",
               imagepath:"assets/Page_assets/management_page_main.png",
               appbarimage: "assets/Page_assets/appbar_management.png",
@@ -455,7 +455,7 @@ List<List<dynamic>> nestedList(BuildContext context){
                'management'],
     [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_Design.png", operation: (){
               
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(type:"Design",catid:1,
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>const Interview_details_Page(type:"Design",catid:1,
               maintext:"Design",
               imagepath:"assets/Page_assets/design_page_main.png",
               appbarimage: "assets/Page_assets/appbar_design.png",
@@ -463,7 +463,7 @@ List<List<dynamic>> nestedList(BuildContext context){
                'design'],
     [ImageFeaturesButton(imagepath: "assets/Page_assets/Start_Interview_HR.png", operation: (){
               
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>Interview_details_Page(type:"HR",catid:1,
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>const Interview_details_Page(type:"HR",catid:1,
               maintext:"HR Interview",
               imagepath:"assets/Page_assets/hr_page_main.png",
               appbarimage: "assets/Page_assets/appbar_hr.png",
@@ -475,7 +475,7 @@ class ImageFeaturesButton extends StatelessWidget {
   
   late String imagepath;
   late Function() operation;
-  ImageFeaturesButton({
+  ImageFeaturesButton({super.key, 
    
    required this.imagepath,
    required this.operation,

@@ -1,6 +1,5 @@
-
 import 'package:camera/camera.dart';
-import  "package:flutter/material.dart";
+import "package:flutter/material.dart";
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -9,26 +8,26 @@ import "Report.dart";
 import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
-late bool _speechEnabled = true;
+
+bool _speechEnabled = true;
 bool ispressed = false;
 late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
- 
+
 List<String> uniqueSentences = [];
-  TextEditingController _textController =
-      TextEditingController();
+TextEditingController _textController = TextEditingController();
 
 late CameraController cameraController;
+
 class Startinterview extends StatefulWidget {
   final String type; // Add this line
 
   const Startinterview({required this.type, Key? key}) : super(key: key);
-  
 
   @override
-  State<Startinterview> createState() => _StartinterviewState(type:type);
+  State<Startinterview> createState() => _StartinterviewState(type: type);
 }
 
 class _StartinterviewState extends State<Startinterview> {
@@ -49,75 +48,59 @@ class _StartinterviewState extends State<Startinterview> {
   final double _confidenceLevel = 0;
   late String type;
   _StartinterviewState({required this.type});
-  
-  
-  
+
   @override
-  void initState(){
+  void initState() {
     //initSpeech();
-    if (type =="HR"){
-        Interview_questions = randomElementsList(HR_question);
-        print(Interview_questions);}
-    else if(type == "Management"){
+    if (type == "HR") {
+      Interview_questions = randomElementsList(HR_question);
+      print(Interview_questions);
+    } else if (type == "Management") {
       Interview_questions = randomElementsList(Management_questions);
       print(Interview_questions);
-
-    }
-    else if(type == "Technology"){
+    } else if (type == "Technology") {
       Interview_questions = randomElementsList(Tech_questions);
       print(Interview_questions);
-
+    } else if (type == "Design") {
+      Interview_questions = randomElementsList(Design_questions);
+      print(Interview_questions);
     }
 
-    else if(type == "Design"){
-          Interview_questions = randomElementsList(Design_questions);
-          print(Interview_questions);
-
-        }
-
-   
-    
-    try{
+    try {
       dispose();
+    } catch (e) {}
 
-    }catch(e){
-
-    }
-    
-    
     super.initState();
-    try{
-      cameraController = CameraController(cameras[1], ResolutionPreset.ultraHigh);
-      cameraController.initialize().then((_){
-      if (!mounted){
-        return;
-      }
-      setState(() {
-        
-      });
-    }).catchError((Object e){
-      if(e is CameraException){
-        switch(e.code){
-          case "CameraAccessDenied":
-          print("User denied camera access.");
-          showErrorDialog(context, "User denied camera access.");
-          break;
-          default:
-          print("handle other errors.");
-          showErrorDialog(context, "An error occurred: ${e.code}\nTry restrating the app");
-          break;
+    try {
+      cameraController =
+          CameraController(cameras[1], ResolutionPreset.ultraHigh);
+      cameraController.initialize().then((_) {
+        if (!mounted) {
+          return;
         }
-      }
-    });
+        setState(() {});
+      }).catchError((Object e) {
+        if (e is CameraException) {
+          switch (e.code) {
+            case "CameraAccessDenied":
+              print("User denied camera access.");
+              showErrorDialog(context, "User denied camera access.");
+              break;
+            default:
+              print("handle other errors.");
+              showErrorDialog(context,
+                  "An error occurred: ${e.code}\nTry restrating the app");
+              break;
+          }
+        }
+      });
+    } catch (e) {
+      print("no camera is found in the computer, $e");
     }
-    catch(e){
-      print("no camera is found in the computer, ${e}");
-    }
-   
-    
-    }
+  }
+
 //TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
-void _initSpeech() async {
+  void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
     setState(() {
       _startListening();
@@ -151,7 +134,8 @@ void _initSpeech() async {
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _lastWords = result.recognizedWords;
-      print("**************************************************************  ${_lastWords}");
+      print(
+          "**************************************************************  $_lastWords");
       List_text.add(result.recognizedWords);
       if (result.finalResult) {
         String recognizedWords = result.recognizedWords;
@@ -174,248 +158,249 @@ void _initSpeech() async {
     });
   }
 
-
-
-
-     @override
+  @override
   void dispose() {
     cameraController.dispose();
     super.dispose();
   }
 
   //speech to text part
-   
 
-
-    
-
-
-  
-  
   @override
   Widget build(BuildContext context) {
-    if (cameras.isEmpty){
-      
-      return Nocamera();
+    if (cameras.isEmpty) {
+      return const Nocamera();
     }
-    if (Interview_questions.isEmpty){
+    if (Interview_questions.isEmpty) {
       return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              
-            });
-            
-          },
-          child: Icon(Icons.shopping_cart),),
-        body: Center(
-          child: Container(
-            width:double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/image_assets/Empty_noquestions.png",height: 400,width:400),
-                        SizedBox(
-                          height:30,
-                        ),
-                        Text("No Question found!",style:TextStyle(fontFamily: "Inter1",fontWeight: FontWeight.w500,color: Colors.red,fontSize: 30),textAlign: TextAlign.center,),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text("No questions have been created for this interview yet wait untill next update",style:Kcommontextstyle,textAlign: TextAlign.center,),
-                         SizedBox(
-                          height:40,
-                         ),
-                         
-                         ElevatedButton(
-                          onPressed: () {
-                            // Add your button onPressed logic here
-                           Navigator.pop(context);
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            
-                            foregroundColor: Colors.white, backgroundColor: Colors.black, // text color
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0), // rounded corners
-                            ),
-                          ),
-                          child: Container(
-                            height:50,
-                            width:200,
-                            child: Center(child: Text('Back'))),
-                        ),
-                      ],
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              setState(() {});
+            },
+            child: const Icon(Icons.shopping_cart),
+          ),
+          body: Center(
+            child: SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/image_assets/Empty_noquestions.png",
+                        height: 400, width: 400),
+                    const SizedBox(
+                      height: 30,
                     ),
+                    const Text(
+                      "No Question found!",
+                      style: TextStyle(
+                          fontFamily: "Inter1",
+                          fontWeight: FontWeight.w500,
+                          color: Colors.red,
+                          fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "No questions have been created for this interview yet wait untill next update",
+                      style: Kcommontextstyle,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add your button onPressed logic here
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Interview()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black, // text color
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(15.0), // rounded corners
+                        ),
+                      ),
+                      child: const SizedBox(
+                          height: 50,
+                          width: 200,
+                          child: Center(child: Text('Back'))),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ));
+    }
+
+    return Scaffold(
+      backgroundColor: Kbackgroundcolor,
+      appBar: AppBar(actions: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Icon(Icons.mic),
+        )
+      ], title: Text("$type INTERVIEW")),
+      body: Stack(
+        children: [
+          if (cameraController.value.isInitialized)
+            Positioned.fill(
+              child: AspectRatio(
+                aspectRatio: cameraController.value.aspectRatio,
+                child: CameraPreview(cameraController),
+              ),
+            ),
+          Positioned(
+            bottom: 20, // Adjust the position as needed
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ElevatedButton(
+                style: next_button_live == false
+                    ? ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 50, 213, 6),
+                        minimumSize: const Size(150, 80),
+                        disabledForegroundColor:
+                            Colors.yellow.withOpacity(0.38),
+                        disabledBackgroundColor:
+                            Colors.yellow.withOpacity(0.12),
+                      )
+                    : ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 17, 17, 17),
+                        minimumSize: const Size(150, 80),
+                        disabledForegroundColor:
+                            Colors.yellow.withOpacity(0.38),
+                        disabledBackgroundColor:
+                            Colors.yellow.withOpacity(0.12),
+                      ),
+                onPressed: () {
+                  if (next_button_live == false) {
+                    Navigator.pop(context);
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => Report())));
+                    setState(() {
+                      next_button_live = true;
+                      question_increment = 0;
+                    });
+                  } else {
+                    setState(() {
+                      if (_speechEnabled == true) {}
+                      question_increment++;
+                      if (question_increment == 9) {
+                        next_button_live = false;
+                      }
+                    });
+                  }
+                },
+                child: next_button_live == false
+                    ? const Text(
+                        "Finish",
+                        style: TextStyle(
+                          fontFamily: "Inter",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text(
+                        "Next Question",
+                        style: TextStyle(
+                          fontFamily: "Inter",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+              ),
             ),
           ),
-        )
-      );
-    }
-    
-    return Scaffold(
-      
-      backgroundColor: Kbackgroundcolor,
-      appBar:AppBar(
-        actions: [Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(Icons.mic),
-        )],
-        
-        title:Text("${type} INTERVIEW")),
-      body:
-                Stack(
-                children: [
-                  if (cameraController.value.isInitialized)
-                    Positioned.fill(
-                      child: AspectRatio(
-                        aspectRatio: cameraController.value.aspectRatio,
-                        child: CameraPreview(cameraController),
-                      ),
-                    ),
-                  Positioned(
-                    bottom: 20, // Adjust the position as needed
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: ElevatedButton(
-                        style:next_button_live == false ?ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 213, 6),
-                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),)
-                                  : ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 17, 17, 17),
-                                  minimumSize: Size(150, 80), disabledForegroundColor: Colors.yellow.withOpacity(0.38), disabledBackgroundColor: Colors.yellow.withOpacity(0.12),),
-                        onPressed: () {
-                           if (next_button_live == false){
-                                   Navigator.pop(context);
-                                   
-                                   Navigator.push(context, MaterialPageRoute(builder: ((context) => Report())));
-                                   setState(() {
-                                     next_button_live = true;
-                                     question_increment =0;
-                                   });
-                                   
-                                   }
-                                   
-                                   else{
-                                    setState(() {
-                                      if (_speechEnabled ==true){
-                                        
-                                        
-                                                                              }
-                                      question_increment++;
-                                      if (question_increment == 9){
-                                        next_button_live = false;
-                                      }
-                                    });
-                        }
-                        },
-                        child: next_button_live == false
-                            ? Text(
-                                "Finish",
-                                style: TextStyle(
-                                  fontFamily: "Inter",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : Text(
-                                "Next Question",
-                                style: TextStyle(
-                                  fontFamily: "Inter",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                      ),
-                    ),
-                  ),
-
-
-
-
-
-                  Positioned(
-                    bottom: 120, // Adjust the position as needed
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20,left:20),
-                        child: Container(
-                          height:100,
-                          width:300,
-                          
-                          child:Padding(
-                            padding: const EdgeInsets.all(13.0),
-                            child: Center(child: Text("${Interview_questions[question_increment]}",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
-                          ),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(144, 0, 0, 0)),
-                        ),
-                      )
-                    ),
-                  ),
-
-
-
-
-                  
-                  Positioned(
-                    bottom: 600, // Adjust the position as needed
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20,left:20),
-                        child: Container(
-                          height:100,
-                          width:300,
-                          
-                          child:Padding(
-                            padding: const EdgeInsets.all(13.0),
-                            child: Center(child: Text("${_lastWords}",style:TextStyle(color:Colors.white,fontFamily: "JetBrainsMono"),textAlign: TextAlign.center,)),
-                          ),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(144, 0, 0, 0)),
-                        ),
-                      )
-                    ),
-                  ),
-                ],
+          Positioned(
+            bottom: 120, // Adjust the position as needed
+            left: 0,
+            right: 0,
+            child: Center(
+                child: Padding(
+              padding: const EdgeInsets.only(right: 20, left: 20),
+              child: Container(
+                height: 100,
+                width: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromARGB(144, 0, 0, 0)),
+                child: Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: Center(
+                      child: Text(
+                    Interview_questions[question_increment],
+                    style: const TextStyle(
+                        color: Colors.white, fontFamily: "JetBrainsMono"),
+                    textAlign: TextAlign.center,
+                  )),
+                ),
               ),
-    );
-            
-            
-            
-           
-
-  } 
-}
-
-
-
-
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Error"),
-          content: Text(errorMessage),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-              child: Text("OK"),
-            ),
-          ],
-        );
-      },
+            )),
+          ),
+          Positioned(
+            bottom: 600, // Adjust the position as needed
+            left: 0,
+            right: 0,
+            child: Center(
+                child: Padding(
+              padding: const EdgeInsets.only(right: 20, left: 20),
+              child: Container(
+                height: 100,
+                width: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromARGB(144, 0, 0, 0)),
+                child: Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: Center(
+                      child: Text(
+                    _lastWords,
+                    style: const TextStyle(
+                        color: Colors.white, fontFamily: "JetBrainsMono"),
+                    textAlign: TextAlign.center,
+                  )),
+                ),
+              ),
+            )),
+          ),
+        ],
+      ),
     );
   }
+}
+
+void showErrorDialog(BuildContext context, String errorMessage) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Error"),
+        content: Text(errorMessage),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            child: const Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 
 

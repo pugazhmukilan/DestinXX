@@ -53,7 +53,7 @@ class _TextinterviewState extends State<Textinterview> {
     if (Interview_questions.isEmpty) {
       return Scaffold(
           body: Center(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(
             child: Column(
@@ -62,10 +62,10 @@ class _TextinterviewState extends State<Textinterview> {
               children: [
                 Image.asset("assets/image_assets/Empty_noquestions.png",
                     height: 400, width: 400),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Text(
+                const Text(
                   "No Question found!",
                   style: TextStyle(
                       fontFamily: "Inter1",
@@ -74,7 +74,7 @@ class _TextinterviewState extends State<Textinterview> {
                       fontSize: 30),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -82,15 +82,17 @@ class _TextinterviewState extends State<Textinterview> {
                   style: Kcommontextstyle,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Add your button onPressed logic here
                     Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Interview()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Interview()));
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -100,7 +102,7 @@ class _TextinterviewState extends State<Textinterview> {
                           BorderRadius.circular(15.0), // rounded corners
                     ),
                   ),
-                  child: Container(
+                  child: const SizedBox(
                       height: 50,
                       width: 200,
                       child: Center(child: Text('Back'))),
@@ -129,7 +131,7 @@ class _TextinterviewState extends State<Textinterview> {
                           onPressed: () {
                             showConfirmationDialog(context);
                           },
-                          icon: Icon(Icons.arrow_back_ios)),
+                          icon: const Icon(Icons.arrow_back_ios)),
                       Expanded(
                           child: Text("Text based Interview",
                               style: Ktitletextstyle)),
@@ -155,7 +157,7 @@ class _TextinterviewState extends State<Textinterview> {
                                 width: 200,
                               ),
                             ),
-                            Column(
+                            const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -216,7 +218,7 @@ class _TextinterviewState extends State<Textinterview> {
                                 ],
                               ),*/
                                 ),
-                            SizedBox(
+                            const SizedBox(
                               height: 80,
                             ),
                             for (int i = 0; i < Interview_questions.length; i++)
@@ -225,14 +227,14 @@ class _TextinterviewState extends State<Textinterview> {
                                 question: Interview_questions[i],
                                 controller: controllers[i],
                               ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             Center(
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
-                                    minimumSize: Size(120, 60),
+                                    minimumSize: const Size(120, 60),
                                   ),
                                   onPressed: () async {
                                     for (int i = 0;
@@ -241,7 +243,7 @@ class _TextinterviewState extends State<Textinterview> {
                                       print(
                                           "====================================================================");
                                       print(
-                                          "QUESTION ${i} =========== ${Interview_questions[i]}\n");
+                                          "QUESTION $i =========== ${Interview_questions[i]}\n");
                                       print(
                                           " =========== ${controllers[i].text}\n");
 
@@ -254,14 +256,14 @@ class _TextinterviewState extends State<Textinterview> {
                                         MaterialPageRoute(
                                             builder: ((context) => Report())));
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Submit answers",
                                     style: TextStyle(
                                         fontFamily: "Inter",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255)),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255)),
                                   )),
                             ),
                           ],
@@ -283,6 +285,7 @@ class QuestionWidget extends StatefulWidget {
   final TextEditingController controller; // Controller for user input
 
   const QuestionWidget({
+    super.key,
     required this.index,
     required this.question,
     required this.controller,
@@ -301,14 +304,14 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Text(
             "${widget.index + 1})  ${widget.question}",
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: "Inter", fontSize: 17, fontWeight: FontWeight.w500),
           ),
         ),
@@ -324,6 +327,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
 class typingfield extends StatelessWidget {
   typingfield({
+    super.key,
     required this.editor,
     required this.h,
     required this.hinttext,
@@ -353,13 +357,13 @@ class typingfield extends StatelessWidget {
             maxLength: len,
             maxLines: null,
             // Allow unlimited lines in the text field
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: InputBorder.none, // Remove default border
                 hintText: 'Here...',
                 hintStyle: TextStyle(
                     fontFamily: "inter",
                     fontSize: 10,
-                    color: const Color.fromARGB(255, 148, 148, 148))),
+                    color: Color.fromARGB(255, 148, 148, 148))),
           ),
         ),
       ),

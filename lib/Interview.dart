@@ -10,6 +10,8 @@ FocusNode _focusNode = FocusNode();
 List<List<dynamic>> mainlist=[];
 TextEditingController searchcontroller = TextEditingController();
 class Interview extends StatefulWidget {
+  const Interview({super.key});
+
   
 //TODO: implement search function for this page text file is ready 
   @override
@@ -65,9 +67,9 @@ class _InterviewState extends State<Interview> {
         selectedItemColor: Colors.white,
         selectedFontSize: 12,
         unselectedFontSize: 10,
-        selectedIconTheme: IconThemeData(size:22),
+        selectedIconTheme: const IconThemeData(size:22),
 
-        items:[
+        items:const [
             BottomNavigationBarItem(icon: Icon(Icons.home),label:"Home",),
             BottomNavigationBarItem(icon: Icon(Icons.meeting_room_outlined),label:"Interview"),
             BottomNavigationBarItem(icon: Icon(Icons.file_copy_outlined),label:"Resume"),
@@ -77,12 +79,12 @@ class _InterviewState extends State<Interview> {
         onTap: (int newIndex){
           setState(() {
             currentIndex=newIndex;
-            print("index is equal to+++++++ ${currentIndex}");
+            print("index is equal to+++++++ $currentIndex");
             if (currentIndex ==0){
               Navigator.pop(context);
               Navigator.pop(context);
               setdetails();
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
 
             }
             else if ( currentIndex ==1 ){
@@ -91,7 +93,7 @@ class _InterviewState extends State<Interview> {
             }
             else if (currentIndex == 2){
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoadingPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoadingPage()));
 
             }
             else if (currentIndex == 3){
@@ -102,7 +104,7 @@ class _InterviewState extends State<Interview> {
           },);
 
 
-           shape: RoundedRectangleBorder(
+           shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
       );
 
@@ -119,9 +121,9 @@ class _InterviewState extends State<Interview> {
         automaticallyImplyLeading: false,
         title:Text("Interview",style:Ktitletextstyle),
         bottom: PreferredSize(
-        preferredSize: Size.fromHeight(48.0), // Adjust the height as needed
+        preferredSize: const Size.fromHeight(48.0), // Adjust the height as needed
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          margin: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: TextField(
         onChanged: (qurey){
           filterList();
@@ -133,19 +135,19 @@ class _InterviewState extends State<Interview> {
             onPressed: () {
               filterList();
             },
-            icon: Icon(Icons.search_outlined),
+            icon: const Icon(Icons.search_outlined),
           ),
-          suffixIconConstraints: BoxConstraints(
+          suffixIconConstraints: const BoxConstraints(
             minWidth: 32, // Adjust according to your preference
             minHeight: 32, // Adjust according to your preference
           ),
           hintText: 'Search here...',
-          hintStyle: TextStyle(fontFamily: "jetBrainsMono", fontSize: 15),
-          contentPadding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 14),
-          border: OutlineInputBorder(
+          hintStyle: const TextStyle(fontFamily: "jetBrainsMono", fontSize: 15),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 14),
+          border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(20))
           ),
-          focusedBorder: OutlineInputBorder( 
+          focusedBorder: const OutlineInputBorder( 
             borderRadius: BorderRadius.all(Radius.circular(20)),
             borderSide: BorderSide(color: Color.fromARGB(255, 29, 29, 29))
           ),
@@ -190,7 +192,7 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({
+  FeaturesButton({super.key, 
    required this.startcolor,
    required this.endcolor,
    required this.subtext,
@@ -215,7 +217,7 @@ class FeaturesButton extends StatelessWidget {
             gradient: LinearGradient(colors: [startcolor, endcolor],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          stops: [0.0, 1.0],
+          stops: const [0.0, 1.0],
           tileMode: TileMode.clamp,),
           borderRadius: BorderRadius.circular(20),
 
@@ -233,8 +235,8 @@ class FeaturesButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(subtext,style:TextStyle(fontSize:18,fontWeight: FontWeight.w400,color: Colors.black)),
-                    Text(maintext,style:TextStyle(fontSize:32,fontWeight: FontWeight.w800,color: const Color.fromARGB(255, 255, 255, 255))),
+                    Text(subtext,style:const TextStyle(fontSize:18,fontWeight: FontWeight.w400,color: Colors.black)),
+                    Text(maintext,style:const TextStyle(fontSize:32,fontWeight: FontWeight.w800,color: Color.fromARGB(255, 255, 255, 255))),
                   ],
                 ),
                 Expanded(
@@ -274,10 +276,10 @@ void _showBottomAlertDialog(BuildContext context) {
             
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            buttonPadding: EdgeInsets.all(5),
+            buttonPadding: const EdgeInsets.all(5),
             backgroundColor: Colors.black.withOpacity(0.6),
             alignment: Alignment.bottomCenter,
-            title: Text(
+            title: const Text(
               'This page is under construction',
               style: TextStyle(
                   fontSize: 14,
@@ -296,7 +298,7 @@ class ImageFeaturesButton extends StatelessWidget {
   
   late String imagepath;
   late Function() operation;
-  ImageFeaturesButton({
+  ImageFeaturesButton({super.key, 
    
    required this.imagepath,
    required this.operation,
