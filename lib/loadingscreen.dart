@@ -5,6 +5,8 @@ import "Resume.dart";
 import 'firebasefunctions.dart';
 
 class LoadingPage extends StatefulWidget {
+  const LoadingPage({super.key});
+
   @override
   _LoadingPageState createState() => _LoadingPageState();
 }
@@ -18,7 +20,6 @@ class _LoadingPageState extends State<LoadingPage> {
     fetchDataFuture = getResumeDetails();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,24 +31,25 @@ class _LoadingPageState extends State<LoadingPage> {
               // Return a loading indicator while waiting for the data
               //return CircularProgressIndicator();
               return Padding(
-                padding: const EdgeInsets.only(top:30,bottom:30,left:100,right:100),
+                padding: const EdgeInsets.only(
+                    top: 30, bottom: 30, left: 100, right: 100),
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset("assets/image_assets/loading_for_fetching.png",height: 200,width: 200,),
-                      SizedBox(
-                        height:10
+                      Image.asset(
+                        "assets/image_assets/loading_for_fetching.png",
+                        height: 200,
+                        width: 200,
                       ),
-                      CircularProgressIndicator(),
-                      SizedBox(
-                        height:10
+                      const SizedBox(height: 10),
+                      const CircularProgressIndicator(),
+                      const SizedBox(height: 10),
+                      Text(
+                        "Fetching your Resume data!",
+                        style: Kcommontextstyle,
                       ),
-                      Text("Fetching your Resume data!",style: Kcommontextstyle,),
-                       
-                      
-              
                     ],
                   ),
                 ),
@@ -61,11 +63,10 @@ class _LoadingPageState extends State<LoadingPage> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Resume(),
+                    builder: (context) => const Resume(),
                   ),
                 );
               });
-              
 
               // Return an empty container while navigating to another page
               return Container();
@@ -77,18 +78,17 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 }
 
-
-
-Future<String> getResumeDetails()async{
-  SavedName =  await getFieldFromUserDocument("UserName");
-  Dob =  await getFieldFromUserDocument("DBdob");
+Future<String> getResumeDetails() async {
+  SavedName = await getFieldFromUserDocument("UserName");
+  Dob = await getFieldFromUserDocument("DBdob");
   Phone = await getFieldFromUserDocument("DBphone");
   Email = await getFieldFromUserDocument("DBemail");
-  
-  Intro =  await getFieldFromUserDocument("DBintro");
-  Skills =  await getFieldFromUserDocument("DBskills");
-  Language =  await getFieldFromUserDocument("DBlanguage");
-  Experience =  await getFieldFromUserDocument("DBexperience");
-  Education =  await getFieldFromUserDocument("DBeducation");
+
+  Intro = await getFieldFromUserDocument("DBintro");
+  Skills = await getFieldFromUserDocument("DBskills");
+  Language = await getFieldFromUserDocument("DBlanguage");
+  Experience = await getFieldFromUserDocument("DBexperience");
+  Education = await getFieldFromUserDocument("DBeducation");
+  pic = await getFieldFromUserDocument("Profilepic");
   return Education;
 }

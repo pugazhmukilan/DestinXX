@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0-52.0.dev <4.0.0'
+  sdk: '>=3.3.0-52.0.dev <4.0.0'
 
 dependencies:
   camera: ^0.10.5+7
@@ -12,10 +12,13 @@ dependencies:
   cloud_firestore: ^4.13.6
   firebase_auth: ^4.15.3
   firebase_core: ^2.24.2
+  firebase_storage: ^11.6.0
   flutter:
     sdk: flutter
   google_sign_in: ^6.2.1
+  image_picker: ^1.0.7
   percent_indicator: ^4.2.3
+  provider: ^6.1.1
   shared_preferences: ^2.2.2
   speech_to_text: ^6.5.1
 

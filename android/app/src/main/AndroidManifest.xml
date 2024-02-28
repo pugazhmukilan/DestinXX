@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.access_fine_location" />
     <application
         android:label="destin"
         android:name="${applicationName}"

@@ -9,41 +9,35 @@ import "autologgergetdetails.dart";
 import 'constants.dart';
 import 'firebase_options.dart';
 
-
-
-
-
 SharedPreferences? prefs;
 
 late List<CameraDescription> cameras;
-Future<void> main()async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
-  
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await SharedPreferences.getInstance();
   bool isloggedin = await checkLoginStatus();
 
-  prefs = await SharedPreferences.getInstance();
-  try{
-  cameras = await availableCameras();
-  }
-  on Exception catch (_, e){
+  prefs = await SharedPreferences.getInstance();  
+  try {
+    cameras = await availableCameras();
+  } on Exception catch (_, e) {
     print("error in getting cameras");
     print(e.toString());
     return;
   }
- 
 
-  runApp( MainApp(isloggedin));
+  runApp(MainApp(isloggedin));
   //runApp( MainApp());
 }
 
 class MainApp extends StatelessWidget {
   final bool isloggedin;
-  MainApp(this.isloggedin);
+  const MainApp(this.isloggedin, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +45,12 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: Kbackgroundcolor,
       home: Scaffold(
-        body:isloggedin? GetdetailsLoader():Loginpage(),
-         //body:Loginpage(),
+        body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
+        //body:Loginpage(),
       ),
     );
   }
 }
-
 
 Future<bool> checkLoginStatus() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -11,7 +11,7 @@ class LoadingAndQuizPage extends StatefulWidget {
   final String category;
   final String subcategory;
 
-  LoadingAndQuizPage({required this.category, required this.subcategory});
+  const LoadingAndQuizPage({super.key, required this.category, required this.subcategory});
 
   @override
   _LoadingAndQuizPageState createState() => _LoadingAndQuizPageState();
@@ -45,7 +45,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
             if (subcategory['name'] == widget.subcategory) {
               List<Map<String, dynamic>> allQuestions =
                   List<Map<String, dynamic>>.from(subcategory['questions']);
-              Set<int> selectedIndices = Set<int>();
+              Set<int> selectedIndices = <int>{};
 
               // Generate 10 unique random indices
               while (selectedIndices.length < 10) {
@@ -121,7 +121,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(
+        title: const Text(
           "QuizCompleted",
           style: TextStyle(color: Colors.red),
         ),
@@ -131,7 +131,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
           children: [
             Text(
               "'Your Score: $score / ${questions.length}'",
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ],
         ),
@@ -144,7 +144,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.blue,
             ),
-            child: Text('Play Again'),
+            child: const Text('Play Again'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -153,12 +153,12 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                         
               Navigator.of(context).pop();
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Quiztypes())); // Close the dialog
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
-            child: Text('Quit'),
+            child: const Text('Quit'),
           ),
         ],
         shape: RoundedRectangleBorder(
@@ -180,11 +180,6 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (questions == null) {
-      return Container(
-        child: Text("error"),
-      );
-    }
     return Scaffold(
       backgroundColor: Kbackgroundcolor,
       body: Padding(
@@ -210,16 +205,16 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                           showConfirmationDialog(context);
                          
 
-                        }, icon: Icon(Icons.arrow_back_ios_new_outlined,size: 40,),),
+                        }, icon: const Icon(Icons.arrow_back_ios_new_outlined,size: 40,),),
 
                         Expanded(child: Text("Quiz",style:Ktitletextstyle)),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     indent: 5,
                     endIndent: 5,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height:30
                   ),
                   Image.asset("assets/image_assets/quizimage.png",height:200,width:200),
@@ -227,7 +222,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                    "${currentQuestionIndex+1}) ${questions[currentQuestionIndex]['question']}",
                     style: Kcommontextstyle,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -235,7 +230,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                       questions[currentQuestionIndex]['options'].length,
                       (index) => Padding(
                         padding: const EdgeInsets.only(top:5,bottom:5,left:3,right:3),
-                        child: Container(
+                        child: SizedBox(
                           height:80,
                           width:400,
                           child: ElevatedButton(
@@ -245,7 +240,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                             style: ElevatedButton.styleFrom(foregroundColor: Colors.green, backgroundColor: Colors.green,
                             shadowColor: Colors.transparent, disabledForegroundColor: Colors.green.withOpacity(0.38), disabledBackgroundColor: Colors.green.withOpacity(0.12),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            textStyle: TextStyle(fontFamily: "Inter",fontSize: 15,fontWeight:FontWeight.w500,color:Colors.black),
+                            textStyle: const TextStyle(fontFamily: "Inter",fontSize: 15,fontWeight:FontWeight.w500,color:Colors.black),
                             
                             ),
                             child: Text(questions[currentQuestionIndex]['options'][index],textAlign: TextAlign.center,),
@@ -272,11 +267,11 @@ void showConfirmationDialog(BuildContext context,) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(
+        title: const Text(
           "On going Quiz",
           style: TextStyle(color: Colors.red),
         ),
-        content: Column(
+        content: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -294,7 +289,7 @@ void showConfirmationDialog(BuildContext context,) {
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.blue,
             ),
-            child: Text('No'),
+            child: const Text('No'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -303,12 +298,12 @@ void showConfirmationDialog(BuildContext context,) {
                         
               Navigator.of(context).pop();
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Quiztypes())); // Close the dialog
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
-            child: Text('Quit'),
+            child: const Text('Quit'),
           ),
         ],
         shape: RoundedRectangleBorder(

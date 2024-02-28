@@ -4,6 +4,8 @@ import 'Quizpage.dart';
 import 'constants.dart';
 double screenWidth=0;
 class Quiztypes extends StatefulWidget {
+  const Quiztypes({super.key});
+
   
 
   @override
@@ -24,7 +26,7 @@ class _QuiztypesState extends State<Quiztypes> {
           children: [
 
             
-           Expanded(
+           const Expanded(
             flex:1,
             child: Side(),
            ),
@@ -52,7 +54,7 @@ class _QuiztypesState extends State<Quiztypes> {
             child: Container(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                physics:AlwaysScrollableScrollPhysics() ,
+                physics:const AlwaysScrollableScrollPhysics() ,
                 child:Column(
                   children: [
                     Column(
@@ -67,7 +69,7 @@ class _QuiztypesState extends State<Quiztypes> {
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          physics: AlwaysScrollableScrollPhysics(),
+                          physics: const AlwaysScrollableScrollPhysics(),
                           
                           child: Container(
                             child: Column(
@@ -78,7 +80,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                   qtype(operation:() {
                                     Navigator.pop(context);
                                    //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Technical", subcategory: "Java"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const LoadingAndQuizPage(category: "Technical", subcategory: "Java"))));
                                   
                                   },
                                   
@@ -88,7 +90,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                   qtype(operation:() {
                                     Navigator.pop(context);
                                     //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "C++"))));
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Technical", subcategory: "C++"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const LoadingAndQuizPage(category: "Technical", subcategory: "C++"))));
                                   
                                   },
                                   
@@ -97,7 +99,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                   qtype(operation:() {
                                     Navigator.pop(context);
                                    // Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Technical", subcategory: "Python"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const LoadingAndQuizPage(category: "Technical", subcategory: "Python"))));
                                   
                                   },
                                   
@@ -136,7 +138,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                   qtype(operation:() {
                                     Navigator.pop(context);
                                    //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Design", subcategory: "Graphic Design"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const LoadingAndQuizPage(category: "Design", subcategory: "Graphic Design"))));
                                   
                                   },
                                   
@@ -146,7 +148,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                   qtype(operation:() {
                                     Navigator.pop(context);
                                     //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "C++"))));
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Design", subcategory: "UI/UX Design"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const LoadingAndQuizPage(category: "Design", subcategory: "UI/UX Design"))));
                                   
                                   },
                                   
@@ -155,7 +157,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                   qtype(operation:() {
                                     Navigator.pop(context);
                                    // Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingAndQuizPage(category: "Design", subcategory: "Product Design"))));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const LoadingAndQuizPage(category: "Design", subcategory: "Product Design"))));
                                   
                                   },
                                   
@@ -215,9 +217,9 @@ class qtype extends StatelessWidget {
         child: Container(
           width:150,
           height:50,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color:Color.fromARGB(255, 227, 232, 255)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color:const Color.fromARGB(255, 227, 232, 255)),
           
-          child:  Center(child: Text(name,style: TextStyle(fontFamily: "jetBrainsMono",fontSize: 15,fontWeight: FontWeight.w300),))),
+          child:  Center(child: Text(name,style: const TextStyle(fontFamily: "jetBrainsMono",fontSize: 15,fontWeight: FontWeight.w300),))),
       ),
     );
   }
@@ -233,7 +235,7 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({
+  FeaturesButton({super.key, 
    required this.startcolor,
    required this.endcolor,
    required this.subtext,
@@ -258,7 +260,7 @@ class FeaturesButton extends StatelessWidget {
             gradient: LinearGradient(colors: [startcolor, endcolor],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          stops: [0.0, 1.0],
+          stops: const [0.0, 1.0],
           tileMode: TileMode.clamp,),
           borderRadius: BorderRadius.circular(20),
 
@@ -276,8 +278,8 @@ class FeaturesButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(subtext,style:TextStyle(fontSize:18,fontWeight: FontWeight.w400,color: Colors.black)),
-                    Text(maintext,style:TextStyle(fontSize:32,fontWeight: FontWeight.w800,color: const Color.fromARGB(255, 255, 255, 255))),
+                    Text(subtext,style:const TextStyle(fontSize:18,fontWeight: FontWeight.w400,color: Colors.black)),
+                    Text(maintext,style:const TextStyle(fontSize:32,fontWeight: FontWeight.w800,color: Color.fromARGB(255, 255, 255, 255))),
                   ],
                 ),
                 Expanded(

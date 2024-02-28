@@ -333,7 +333,7 @@ class _SignuppageState extends State<Signuppage> {
                         context: context,
                         barrierDismissible: false,
                         builder: (BuildContext context) {
-                          return AlertDialog(
+                          return const AlertDialog(
                             backgroundColor: Color.fromARGB(104, 250, 101, 91),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -389,13 +389,13 @@ class _SignuppageState extends State<Signuppage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text("Already have an account ?"),
+                                  const Text("Already have an account ?"),
                                  GestureDetector(
                                   onTap: () {
                                     Navigator.pop(context);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Signinpage()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const Signinpage()));
                                   },
-                                  child: Text("Click here",style: TextStyle(color: Colors.red),)),
+                                  child: const Text("Click here",style: TextStyle(color: Colors.red),)),
                                 ],
                               ),
                             ),
@@ -422,26 +422,21 @@ Future<void> createaccount(BuildContext context, String email, String password) 
     final newUser = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
-    if (newUser != null) {
-      print("Registered correctly");
-      addemail(emailcontroller.text);
-      addpassword(passwordcontroller.text);
-                          
-                           
-      Navigator.pop(context);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Home()));
-          showErrorDialog(context, "Successfully SignedUp", "Success");
-      //TODO : implement the document creation method 
-      UserName = usernamecontroller.text;//first username is set intot he variable
-      UserID = await getCurrentUserEmail();//second UserID is set into the variable
-      await addDocument("Users",UserID,UserName);//adddoc is called to create a document
-    }
-    else{
-      showErrorDialog1(context,"Signup Failed","Failed to signUp.");
-    }
-  } catch (e) {
-    showErrorDialog1(context, "${e}", "SignUp Error");
+    print("Registered correctly");
+    addemail(emailcontroller.text);
+    addpassword(passwordcontroller.text);
+                        
+                         
+    Navigator.pop(context);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const Home()));
+        showErrorDialog(context, "Successfully SignedUp", "Success");
+    //TODO : implement the document creation method 
+    UserName = usernamecontroller.text;//first username is set intot he variable
+    UserID = await getCurrentUserEmail();//second UserID is set into the variable
+    await addDocument("Users",UserID,UserName);//adddoc is called to create a document
+    } catch (e) {
+    showErrorDialog1(context, "$e", "SignUp Error");
     
   }
 }
@@ -463,7 +458,7 @@ class ErrorDialog1 extends StatelessWidget {
       content: Text(content),
       actions: [
         ElevatedButton(
-          child: Text('OK'),
+          child: const Text('OK'),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -480,7 +475,7 @@ void showErrorDialog1(BuildContext context, String errorMessage,String title) {
       return AlertDialog(
         title: Text(
           title,
-          style: TextStyle(color: Colors.red),
+          style: const TextStyle(color: Colors.red),
         ),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -488,7 +483,7 @@ void showErrorDialog1(BuildContext context, String errorMessage,String title) {
           children: [
             Text(
               errorMessage,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ],
         ),
@@ -498,12 +493,12 @@ void showErrorDialog1(BuildContext context, String errorMessage,String title) {
               Navigator.of(context).pop();
               Navigator.pop(context);
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Signuppage())); // Close the dialog
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Signuppage())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: Colors.red,
             ),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
         shape: RoundedRectangleBorder(

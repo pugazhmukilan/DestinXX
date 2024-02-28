@@ -21,7 +21,7 @@ class _NocameraState extends State<Nocamera> {
           IconButton(onPressed: (){
             Navigator.pop(context);
 
-          }, icon: Icon(Icons.arrow_back_ios)),
+          }, icon: const Icon(Icons.arrow_back_ios)),
         ],),
       ),
 
@@ -29,8 +29,8 @@ class _NocameraState extends State<Nocamera> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image(image: AssetImage("assets/image_assets/general_error.png"),height: 400,width:400),
-          SizedBox(
+          const Image(image: AssetImage("assets/image_assets/general_error.png"),height: 400,width:400),
+          const SizedBox(
             height: 40,
           ),
           Text("Error occured",style: Ktitletextstyle,),
