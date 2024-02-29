@@ -8,15 +8,12 @@ import "constants.dart";
 import "main.dart";
 import "nocamera.dart";
 
-bool _speechEnabled = true;
+late bool _speechEnabled;
 bool ispressed = false;
 late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
-
-List<String> uniqueSentences = [];
-TextEditingController _textController = TextEditingController();
 
 late CameraController cameraController;
 
@@ -51,7 +48,7 @@ class _StartinterviewState extends State<Startinterview> {
 
   @override
   void initState() {
-    //initSpeech();
+    _initSpeech();
     if (type == "HR") {
       Interview_questions = randomElementsList(HR_question);
       print(Interview_questions);
@@ -134,8 +131,6 @@ class _StartinterviewState extends State<Startinterview> {
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _lastWords = result.recognizedWords;
-      print(
-          "**************************************************************  $_lastWords");
       List_text.add(result.recognizedWords);
       if (result.finalResult) {
         String recognizedWords = result.recognizedWords;
@@ -157,13 +152,6 @@ class _StartinterviewState extends State<Startinterview> {
       _isListening = true;
     });
   }
-
-  @override
-  void dispose() {
-    cameraController.dispose();
-    super.dispose();
-  }
-
   //speech to text part
 
   @override
@@ -331,8 +319,8 @@ class _StartinterviewState extends State<Startinterview> {
                 child: Padding(
               padding: const EdgeInsets.only(right: 20, left: 20),
               child: Container(
-                height: 100,
-                width: 300,
+                height: 80,
+                width: 260,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: const Color.fromARGB(144, 0, 0, 0)),
@@ -340,7 +328,16 @@ class _StartinterviewState extends State<Startinterview> {
                   padding: const EdgeInsets.all(13.0),
                   child: Center(
                       child: Text(
-                    Interview_questions[question_increment],
+                    // If listening is active show the recognized words
+                    _speechToText.isListening
+                        ? _lastWords
+                        // If listening isn't active but could be tell the user
+                        // how to start it, otherwise indicate that speech
+                        // recognition is not yet ready or not supported on
+                        // the target device
+                        : _speechEnabled
+                            ? 'Start speaking...'
+                            : 'Speech not available',
                     style: const TextStyle(
                         color: Colors.white, fontFamily: "JetBrainsMono"),
                     textAlign: TextAlign.center,
@@ -366,7 +363,7 @@ class _StartinterviewState extends State<Startinterview> {
                   padding: const EdgeInsets.all(13.0),
                   child: Center(
                       child: Text(
-                    _lastWords,
+                    Interview_questions[question_increment],
                     style: const TextStyle(
                         color: Colors.white, fontFamily: "JetBrainsMono"),
                     textAlign: TextAlign.center,

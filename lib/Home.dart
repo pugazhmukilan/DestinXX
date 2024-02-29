@@ -35,7 +35,6 @@ class _HomeState extends State<Home> {
   int currentIndex = 0;
   @override
   void initState() {
-    
     super.initState();
 
     setdetails();
@@ -115,9 +114,7 @@ class _HomeState extends State<Home> {
                 currentIndex = newIndex;
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
-                  setState(() {
-                    
-                  });
+                  setState(() {});
                 } else if (currentIndex == 1) {
                   Navigator.push(
                       context,
