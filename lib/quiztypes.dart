@@ -11,7 +11,7 @@ class Quiztypes extends StatefulWidget {
 }
 
 class _QuiztypesState extends State<Quiztypes> {
-  @override
+ 
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
