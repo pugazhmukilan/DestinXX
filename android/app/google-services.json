@@ -8,12 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807718658302:android:3fd382eb72d21c3f9a05af",
+        "mobilesdk_app_id": "1:807718658302:android:8e2fe958d6825fcc9a05af",
         "android_client_info": {
-          "package_name": "com.example.destin"
+          "package_name": "com.awesomeprj"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "807718658302-su76hllhr6f49cmvqpnqb8soljitguv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDNk4Jr1en1XrriNK-5RuJ91R1LTBtbzPg"
@@ -21,7 +26,91 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807718658302-su76hllhr6f49cmvqpnqb8soljitguv0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807718658302-75ih3btb4gt8ln1vusr3mvjii80n0fbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.destin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807718658302:android:3fd382eb72d21c3f9a05af",
+        "android_client_info": {
+          "package_name": "com.example.destin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807718658302-su76hllhr6f49cmvqpnqb8soljitguv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNk4Jr1en1XrriNK-5RuJ91R1LTBtbzPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807718658302-su76hllhr6f49cmvqpnqb8soljitguv0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807718658302-75ih3btb4gt8ln1vusr3mvjii80n0fbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.destin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807718658302:android:beca541f533a888e9a05af",
+        "android_client_info": {
+          "package_name": "com.testreactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807718658302-su76hllhr6f49cmvqpnqb8soljitguv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNk4Jr1en1XrriNK-5RuJ91R1LTBtbzPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807718658302-su76hllhr6f49cmvqpnqb8soljitguv0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807718658302-75ih3btb4gt8ln1vusr3mvjii80n0fbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.destin"
+              }
+            }
+          ]
         }
       }
     }

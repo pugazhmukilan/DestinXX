@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
   void initState() {
     
     super.initState();
+
     setdetails();
     print("===============================$UserName");
   }
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
 
   Future<void> _signOut() async {
     try {
-      await _auth.signOut();
+      signOut(context);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Signinpage()));
       print("User signed out");

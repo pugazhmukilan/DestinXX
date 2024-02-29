@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import "package:flutter/material.dart";
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-
 import 'Interview.dart';
 import "Report.dart";
 import "constants.dart";
@@ -46,6 +45,7 @@ class _StartinterviewState extends State<Startinterview> {
 
   String wordSpoken = "";
   final double _confidenceLevel = 0;
+
   late String type;
   _StartinterviewState({required this.type});
 

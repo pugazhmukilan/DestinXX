@@ -101,6 +101,9 @@ void signOut(BuildContext context) async {
     // Sign out from Firebase
     prefs!.remove('email');
     prefs!.remove('password');
+    UserID="";
+    UserName = "";
+    pic = "";
     await FirebaseAuth.instance.signOut();
     print("User signed out");
 
