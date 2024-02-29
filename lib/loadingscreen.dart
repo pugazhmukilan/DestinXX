@@ -91,6 +91,7 @@ Future<String> getResumeDetails() async {
   Language = await getFieldFromUserDocument("DBlanguage");
   Experience = await getFieldFromUserDocument("DBexperience");
   Education = await getFieldFromUserDocument("DBeducation");
-  pic = await getFieldFromUserDocument("ProfilePic");
-  return Education;
+  pic = await getUrlFromUserDocument("ProfilePic");
+  pic = pic;
+  return pic;
 }

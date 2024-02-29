@@ -1,7 +1,6 @@
 //import 'package:destin/Resume.dart';
 import 'dart:typed_data';
 
-import 'package:destin/Resume.dart';
 import 'package:destin/Signinpage.dart';
 import 'package:destin/loadingscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,7 +35,7 @@ class _HomeState extends State<Home> {
   int currentIndex = 0;
   @override
   void initState() {
-    pic = '';
+    
     super.initState();
     setdetails();
     print("===============================$UserName");
@@ -115,6 +114,9 @@ class _HomeState extends State<Home> {
                 currentIndex = newIndex;
                 print("index is equal to+++++++ $currentIndex");
                 if (currentIndex == 0) {
+                  setState(() {
+                    
+                  });
                 } else if (currentIndex == 1) {
                   Navigator.push(
                       context,

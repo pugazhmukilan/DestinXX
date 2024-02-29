@@ -21,7 +21,7 @@ String Experience = '';
 String Education = '';
 String Phone = '';
 String Email = '';
-String pic = '';
+
 
 class Resume extends StatefulWidget {
   const Resume({super.key});
@@ -95,6 +95,7 @@ class _ResumeState extends State<Resume> {
 
   void saveProfile() async {
     String resp = await saveData(file: _image1!);
+    
     //addFieldToUserDocument('profilePic', resp); //Adding the image url into the profilepic field
     //print(resp);
   }
@@ -155,6 +156,9 @@ class _ResumeState extends State<Resume> {
                   Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Home()));
+                      setState(() {
+                        
+                      });
                 } else if (currentIndex == 1) {
                   Navigator.pop(context);
                   Navigator.push(
@@ -741,6 +745,8 @@ class _ResumeState extends State<Resume> {
                                           addFieldToUserDocument(
                                               "DBskills", Skilltexteditor.text);
                                           addFieldToUserDocument("DBdob", Dob);
+
+                                          pic = await getUrlFromUserDocument("ProfilePic");
                                           /*addFieldToUserDocument(
                                               "profilePic", _image1.toString());*/
                                         },
