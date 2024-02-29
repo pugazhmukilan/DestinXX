@@ -142,9 +142,11 @@ class _HomeState extends State<Home> {
           },
         ),
         appBar: AppBar(
+          
           flexibleSpace:
-              Image.asset("assets/Page_assets/appbar_main.png", height: 100),
+              Image.asset("assets/Page_assets/appbar_main.png", height: 300),
           automaticallyImplyLeading: false,
+          backgroundColor: Color.fromARGB(255, 255, 254, 254),
           title: Row(
             children: [
               Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 45),

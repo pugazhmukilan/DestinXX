@@ -39,7 +39,7 @@ TextStyle Kreporttextstyle = const TextStyle(
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
     color: Colors.black,
-    fontSize: 23);
+    fontSize: 15);
 TextStyle Kquizcattext = const TextStyle(
     fontFamily: "Inter",
     fontSize: 25,
