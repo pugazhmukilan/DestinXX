@@ -7,6 +7,10 @@ import 'constants.dart';
 
 double screenWidth = 0;
 int currentIndex = 0;
+//final List<String> question = [];
+//final List<String> answer = [];
+//create a map of string and string
+//Map<dynamic, dynamic> dataMap = {};
 final List<String> question = [
   "tell me about yourself",
   "something",
@@ -24,17 +28,35 @@ final List<String> feedback = [
 ];
 
 class Report extends StatefulWidget {
+  //late  Map<dynamic, dynamic> dataMap;
+  List<String>que;
+  List<String>ans;
+  Report({required this.que,required this.ans});
   @override
-  State<Report> createState() => _ReportState();
+  State<Report> createState() => _ReportState(que:que,ans:ans);
+
+ 
 }
 
 class _ReportState extends State<Report> {
+   void initState(){
+    super.initState();
+    print(ans);
+    print(que);
+
+
+  }
+  //late  Map<dynamic, dynamic> dataMap;
+  List<String>ans;
+  List<String>que;
+  _ReportState({required this.ans,required this.que});
   @override
   Widget build(BuildContext context) {
+    
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
     
-
+    
      floatingActionButton:   FloatingActionButton(
             onPressed: () {
               // Add your onPressed logic here
@@ -323,71 +345,69 @@ class _ReportState extends State<Report> {
                   ),
                 ),    
               
-                  for (int i = 0; i < question.length; i++)
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 15, top: 15),
-                                        child: ClipRect(
-                                          child: BackdropFilter(
-                                            filter: ImageFilter.blur(sigmaX: 4, sigmaY:4 ),
-                                            child: Container(
-                                              width: double.infinity,
-                                              //color: Kgreycolor_light,
-                                              decoration: BoxDecoration(
-                                                color:Color.fromRGBO(255, 238, 227, 0.24),
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        border: Border.all(
-                                                          width:2,
-                                                          color: Color.fromARGB(255, 255, 97, 24),
-                                                        )
-                                            
-                                              ),
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(question[i],
-                                                      style: TextStyle(
-                                                          fontFamily: "Inter",
-                                                          fontSize: 17,
-                                                          fontWeight:
-                                                              FontWeight.w600,),
-                                                              textAlign: TextAlign.justify,),
-                                                  SizedBox(height: 10),
-                                                  Text(answer[i],
-                                                      style: TextStyle(
-                                                          fontFamily: "Inter",
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w300),
-                                                              textAlign: TextAlign.justify,),
-                                                      
-                                                  Divider(
-                                                    color: Color.fromARGB(255, 255, 189, 159),
-                                                  ),
-                                                  SizedBox(height: 6),
-                                                  Text("FEEDBACK",
-                                                      style: TextStyle(
-                                                          fontFamily: "Inter",
-                                                          fontSize: 17,
-                                                          fontWeight:
-                                                              FontWeight.w600)),
-                                                  SizedBox(height: 10),
-                                                  Text(feedback[i],
-                                                      style: TextStyle(
-                                                          fontFamily: "Inter",
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w300),
-                                                              textAlign: TextAlign.justify,),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-              
+                  for (int i = 0; i < que.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15, top: 15),
+                      child: ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(255, 238, 227, 0.24),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 255, 97, 24),
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(question[i],
+                                  style: TextStyle(
+                                    fontFamily: "Inter",
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                                SizedBox(height: 10),
+                                Text(answer[i],
+                                  style: TextStyle(
+                                    fontFamily: "Inter",
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                                Divider(
+                                  color: Color.fromARGB(255, 255, 189, 159),
+                                ),
+                                SizedBox(height: 6),
+                                Text("FEEDBACK",
+                                  style: TextStyle(
+                                    fontFamily: "Inter",
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(feedback[i],
+                                  style: TextStyle(
+                                    fontFamily: "Inter",
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     
                   
                                               ],
@@ -505,45 +525,7 @@ class FeaturesButton extends StatelessWidget {
     );
   }
 }
-/*return Padding(
-                                         padding: const EdgeInsets.only(bottom: 15, top: 15),
-                                         child: Container(
-                                           color: Kgreycolor_light,
-                                           padding: const EdgeInsets.all(10.0),
-                                           child: Column(
-                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                             children: [
-                                               Text(
-                                                 question[index],
-                                                 style: TextStyle(
-                                                   fontFamily: "Inter",
-                                                   fontSize: 25,
-                                                   fontWeight: FontWeight.w600,
-                                                 ),
-                                               ),
-                                               SizedBox(height: 10),
-                                               Text(
-                                                 answer[index],
-                                                 style: Kcommontextstyle,
-                                               ),
-                                               SizedBox(height: 20),
-                                               Text(
-                                                 "FEEDBACK",
-                                                 style: TextStyle(
-                                                   fontFamily: "Inter",
-                                                   fontSize: 25,
-                                                   fontWeight: FontWeight.w600,
-                                                 ),
-                                               ),
-                                               SizedBox(height: 10),
-                                               Text(
-                                                 feedback[index],
-                                                 style: Kcommontextstyle,
-                                               ),
-                                             ],
-                                           ),
-                                         ),
-                                       );*/
+
 
 void _showBottomAlertDialog(BuildContext context) {
   showDialog(

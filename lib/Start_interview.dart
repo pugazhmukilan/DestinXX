@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import "package:flutter/material.dart";
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+
 import 'Interview.dart';
 import "Report.dart";
 import "constants.dart";
@@ -27,7 +28,7 @@ class Startinterview extends StatefulWidget {
 }
 
 class _StartinterviewState extends State<Startinterview> {
-  Map<int, String> dictionary = {};
+  Map<dynamic, dynamic> dictionary = {};
   int labelCount = 1;
   final SpeechToText _speechToText = SpeechToText();
   List<String> uniqueSentences = [];
@@ -283,14 +284,15 @@ class _StartinterviewState extends State<Startinterview> {
                     Navigator.pop(context);
 
                     Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Report())));
+                        MaterialPageRoute(builder: ((context) => Report(ans:answer,que:Interview_questions))));
                     setState(() {
                       next_button_live = true;
                       question_increment = 0;
                     });
                   } else {
                     setState(() {
-                      addToDictionary('$uniqueSentences');
+                      answers.add(uniqueSentences.toString());
+                      addToDictionary('${uniqueSentences.toString()}');
                       print(uniqueSentences);
                       uniqueSentences.clear();
                       print(uniqueSentences);
