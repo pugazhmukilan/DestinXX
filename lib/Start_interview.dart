@@ -27,6 +27,8 @@ class Startinterview extends StatefulWidget {
 }
 
 class _StartinterviewState extends State<Startinterview> {
+  Map<int, String> dictionary = {};
+  int labelCount = 1;
   final SpeechToText _speechToText = SpeechToText();
   List<String> uniqueSentences = [];
   String lastRecognizedWords = '';
@@ -94,6 +96,13 @@ class _StartinterviewState extends State<Startinterview> {
     } catch (e) {
       print("no camera is found in the computer, $e");
     }
+  }
+
+  void addToDictionary(String text) {
+    setState(() {
+      dictionary[labelCount] = text;
+      labelCount++;
+    });
   }
 
 //TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
@@ -281,9 +290,15 @@ class _StartinterviewState extends State<Startinterview> {
                     });
                   } else {
                     setState(() {
+                      addToDictionary('$uniqueSentences');
+                      print(uniqueSentences);
+                      uniqueSentences.clear();
+                      print(uniqueSentences);
+                      //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
                       if (_speechEnabled == true) {}
                       question_increment++;
                       if (question_increment == 9) {
+                        print(dictionary);
                         next_button_live = false;
                       }
                     });
