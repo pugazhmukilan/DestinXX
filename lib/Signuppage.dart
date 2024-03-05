@@ -373,7 +373,7 @@ class _SignuppageState extends State<Signuppage> {
                             width: 100,
                             child: Center(
                               child: Text(
-                                'Login',
+                                'Signup',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: 20,
