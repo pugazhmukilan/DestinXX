@@ -29,7 +29,7 @@ TextStyle Kresumetextstyle = const TextStyle(
     fontFamily: "Inter",
     fontSize: 20,
     fontWeight: FontWeight.w800,
-    color: Color.fromARGB(255, 104, 103, 103));
+    color: Color.fromARGB(255, 68, 68, 68));
 TextStyle Kprogressbarnumber = const TextStyle(
     fontFamily: "Inter",
     fontSize: 20,

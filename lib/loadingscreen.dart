@@ -85,7 +85,6 @@ Future<String> getResumeDetails() async {
   Dob = await getFieldFromUserDocument("DBdob");
   Phone = await getFieldFromUserDocument("DBphone");
   Email = await getFieldFromUserDocument("DBemail");
-
   Intro = await getFieldFromUserDocument("DBintro");
   Skills = await getFieldFromUserDocument("DBskills");
   Language = await getFieldFromUserDocument("DBlanguage");

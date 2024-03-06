@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:destin/Signinpage.dart';
 import 'package:destin/loadingscreen.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,11 +16,13 @@ import "main.dart";
 double screenWidth = 0;
 int currentIndex = 0;
 
-Future<void> setdetails() async {
+Future<String> setdetails() async {
   UserID = prefs!.getString("email").toString();
   //getthe username
   UserName = await getUserName(UserID);
   pic = await getUrlFromUserDocument("ProfilePic");
+
+  return pic;
 }
 
 class Home extends StatefulWidget {
@@ -36,8 +39,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
     setdetails();
+
     print("===============================$UserName");
   }
 
@@ -139,7 +142,6 @@ class _HomeState extends State<Home> {
           },
         ),
         appBar: AppBar(
-          
           flexibleSpace:
               Image.asset("assets/Page_assets/appbar_main.png", height: 300),
           automaticallyImplyLeading: false,

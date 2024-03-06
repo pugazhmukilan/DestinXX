@@ -5,6 +5,7 @@ import 'package:destin/Loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 import "constants.dart";
 import "main.dart";
@@ -101,7 +102,7 @@ void signOut(BuildContext context) async {
     // Sign out from Firebase
     prefs!.remove('email');
     prefs!.remove('password');
-    UserID="";
+    UserID = "";
     UserName = "";
     pic = "";
     await FirebaseAuth.instance.signOut();

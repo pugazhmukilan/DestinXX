@@ -290,7 +290,7 @@ class _StartinterviewState extends State<Startinterview> {
                     });
                   } else {
                     setState(() {
-                      addToDictionary('$uniqueSentences');
+                      addToDictionary('$uniqueSentences+');
                       print(uniqueSentences);
                       uniqueSentences.clear();
                       print(uniqueSentences);
