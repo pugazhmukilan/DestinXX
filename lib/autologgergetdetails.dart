@@ -1,4 +1,4 @@
-import "package:destin/home.dart";
+import "package:destin/Home.dart";
 import 'package:flutter/material.dart';
 
 import "constants.dart";
@@ -25,7 +25,7 @@ class _GetdetailsLoaderState extends State<GetdetailsLoader> {
                             //getthe username
     UserName = await getUserName(UserID);
     Navigator.pop(context);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
     
   }
 

@@ -72,7 +72,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                               children: [
                                                 Row(
                                                   children: [
-                                                    qtype(
+                                                    Qtype(
                                                       operation: () {
                                                         Navigator.pop(context);
                                                         //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
@@ -87,7 +87,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                       },
                                                       name: "Java",
                                                     ),
-                                                    qtype(
+                                                    Qtype(
                                                       operation: () {
                                                         Navigator.pop(context);
                                                         //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "C++"))));
@@ -102,7 +102,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                       },
                                                       name: "C++",
                                                     ),
-                                                    qtype(
+                                                    Qtype(
                                                         operation: () {
                                                           Navigator.pop(
                                                               context);
@@ -150,7 +150,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                               children: [
                                                 Row(
                                                   children: [
-                                                    qtype(
+                                                    Qtype(
                                                       operation: () {
                                                         Navigator.pop(context);
                                                         //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "Java"))));
@@ -165,7 +165,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                       },
                                                       name: "Graphic Design",
                                                     ),
-                                                    qtype(
+                                                    Qtype(
                                                       operation: () {
                                                         Navigator.pop(context);
                                                         //Navigator.push(context, MaterialPageRoute(builder: ((context) => LoadingPage1(category: "Technical", subcategory: "C++"))));
@@ -180,7 +180,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                       },
                                                       name: "UI/UX Design",
                                                     ),
-                                                    qtype(
+                                                    Qtype(
                                                         operation: () {
                                                           Navigator.pop(
                                                               context);
@@ -226,10 +226,11 @@ class _QuiztypesState extends State<Quiztypes> {
   }
 }
 
-class qtype extends StatelessWidget {
+// ignore: must_be_immutable
+class Qtype extends StatelessWidget {
   late String name;
   late Function() operation;
-  qtype({
+  Qtype({
     super.key,
     required this.name,
     required this.operation,

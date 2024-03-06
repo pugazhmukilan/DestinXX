@@ -21,7 +21,7 @@ Future<String> setdetails() async {
   //getthe username
   UserName = await getUserName(UserID);
   pic = await getUrlFromUserDocument("ProfilePic");
-
+  pic = pic.replaceAll('////', '//');
   return pic;
 }
 

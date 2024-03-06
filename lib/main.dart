@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Loginpage.dart';
-import "autologgergetdetails.dart";
 import 'constants.dart';
 import 'firebase_options.dart';
 
@@ -20,7 +19,7 @@ Future<void> main() async {
   );
 
   await SharedPreferences.getInstance();
-  bool isloggedin = await checkLoginStatus();
+  //bool isloggedin = await checkLoginStatus();
 
   prefs = await SharedPreferences.getInstance();
   try {
@@ -31,13 +30,13 @@ Future<void> main() async {
     return;
   }
 
-  runApp(MainApp(isloggedin));
-  //runApp( MainApp());
+  //runApp(MainApp(isloggedin));
+  runApp( MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  final bool isloggedin;
-  const MainApp(this.isloggedin, {super.key});
+  //final bool isloggedin;
+  //const MainApp(this.isloggedin, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +44,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: Kbackgroundcolor,
       home: Scaffold(
-        body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
-        //body:Loginpage(),
+        //body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
+        body:Loginpage(),
       ),
     );
   }

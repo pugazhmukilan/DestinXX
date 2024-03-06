@@ -12,6 +12,7 @@ String pic = '';
 late String UserID;
 String projectName = "ProjectX";
 Color Kquizlinecolor = const Color.fromARGB(255, 219, 219, 219);
+Color Kdestinxorange = const Color.fromARGB(255, 255, 97, 24);
 Color Kbackgroundcolor = const Color.fromARGB(255, 29, 29, 29);
 Color Ksidebarcolor = const Color.fromARGB(255, 29, 29, 29);
 Color Kmainboard = const Color.fromARGB(255, 255, 255, 255);

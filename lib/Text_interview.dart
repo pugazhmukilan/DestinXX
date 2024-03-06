@@ -5,6 +5,7 @@ import "Report.dart";
 import 'constants.dart';
 
 List<String> answers = [];
+Map<dynamic, dynamic> dictionary = {};
 late List<String> Interview_questions;
 final List<TextEditingController> controllers = [];
 
@@ -254,7 +255,7 @@ class _TextinterviewState extends State<Textinterview> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) => Report())));
+                                            builder: ((context) =>  Report(ans:answer,que:Interview_questions))));
                                   },
                                   child: const Text(
                                     "Submit answers",

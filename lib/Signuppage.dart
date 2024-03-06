@@ -417,13 +417,16 @@ Future<void> createaccount(
   try {
     addemail(email);
     addpassword(password);
-    final newUser = await _auth.createUserWithEmailAndPassword(
+    await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
-    print("Registered correctly");
     addemail(emailcontroller.text);
     addpassword(passwordcontroller.text);
 
+    emailcontroller.clear();
+    passwordcontroller.clear();
+
+    Navigator.pop(context);
     Navigator.pop(context);
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Home()));
