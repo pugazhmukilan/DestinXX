@@ -5,7 +5,6 @@ import 'package:destin/Loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 import "constants.dart";
 import "main.dart";
@@ -287,7 +286,7 @@ Future<void> deleteAccountAndSignOut(String documentId, BuildContext context) as
                                 Navigator.pop(context);
                                 // Navigate to the sign-in page or perform any other action
                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => Loginpage()));
+                                    context, MaterialPageRoute(builder: (context) => const Loginpage()));
   } catch (e) {
     print('Error deleting document or user account: $e');
     // Handle the error appropriately, e.g., show an error message to the user

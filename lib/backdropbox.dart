@@ -4,9 +4,7 @@ import 'package:destin/firebasefunctions.dart';
 
 import 'constants.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 int currentIndex = 2;
 TextEditingController Nametexteditor =
@@ -112,14 +110,14 @@ class _backdropfieldState extends State<backdropfield> {
         filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
         child: Container(
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+              color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
               //color:const Color.fromARGB(7, 0, 0, 0),
               //color: Color.fromARGB(255, 239, 254, 239),
               //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 width: 2,
-                color: Color.fromARGB(255, 5, 5, 5),
+                color: const Color.fromARGB(255, 68, 68, 68),
               )),
           child: SizedBox(
             child: Padding(
@@ -130,7 +128,7 @@ class _backdropfieldState extends State<backdropfield> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "$Title",
+                    Title,
                     style: Kresumetextstyle,
                   ),
                   //TEXTEDITOR

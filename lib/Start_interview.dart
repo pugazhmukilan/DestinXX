@@ -295,7 +295,7 @@ class _StartinterviewState extends State<Startinterview> {
                   } else {
                     setState(() {
                       answers.add(uniqueSentences.toString());
-                      addToDictionary('${uniqueSentences.toString()}');
+                      addToDictionary(uniqueSentences.toString());
                       print(uniqueSentences);
                       uniqueSentences.clear();
                       print(uniqueSentences);

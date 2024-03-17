@@ -6,9 +6,7 @@ import 'package:destin/Interview.dart';
 import 'package:destin/Signuppage.dart';
 import 'package:destin/backdropbox.dart';
 import 'package:destin/firebasefunctions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'constants.dart';
@@ -187,7 +185,7 @@ class _ResumeState extends State<Resume> {
             child: Container(
               height: double.infinity,
               decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image: const DecorationImage(
                       image: AssetImage("assets/Page_assets/Report_page.png")),
                   color: Colors.white,
                   borderRadius:
@@ -255,7 +253,7 @@ class _ResumeState extends State<Resume> {
                                                   })(),
                                                   backgroundColor:
                                                       Kgreycolor_light,
-                                                  radius: 60,
+                                                  radius: 50,
                                                 ),
                                                 Positioned(
                                                     bottom: 0,
@@ -265,7 +263,7 @@ class _ResumeState extends State<Resume> {
                                                         selectImage();
                                                         //setting the profile pic
                                                       },
-                                                      icon: Icon(
+                                                      icon: const Icon(
                                                         Icons
                                                             .add_a_photo_rounded,
                                                         size: 25,
@@ -291,7 +289,7 @@ class _ResumeState extends State<Resume> {
                                           max_lines: 1,
                                           max_length: 0,
                                           height: 80,
-                                          width: 200,
+                                          width: 180,
                                         ),
                                         //TEXTEDITOR
                                         const SizedBox(height: 10),

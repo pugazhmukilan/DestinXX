@@ -386,6 +386,9 @@ class _SignuppageState extends State<Signuppage> {
                             const Text("Already have an account ?"),
                             GestureDetector(
                                 onTap: () {
+                                  emailcontroller.clear();
+                                  passwordcontroller.clear();
+                                  usernamecontroller.clear();
                                   Navigator.pop(context);
                                   Navigator.push(
                                       context,
@@ -496,6 +499,7 @@ void showErrorDialog1(BuildContext context, String errorMessage, String title) {
               Navigator.of(context).pop();
               Navigator.pop(context);
               Navigator.pop(context);
+
               Navigator.push(
                   context,
                   MaterialPageRoute(

@@ -1,13 +1,8 @@
-import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:destin/Home.dart';
-import 'package:destin/Resume.dart';
-import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
 //import "Resume.dart";
-import 'firebasefunctions.dart';
 
 class homepic_loader extends StatefulWidget {
   const homepic_loader({super.key});
@@ -31,7 +26,7 @@ class _homepic_loaderState extends State<homepic_loader> {
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // While data is loading
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           // If there is an error
           return Text('Error: ${snapshot.error}');
@@ -41,10 +36,10 @@ class _homepic_loaderState extends State<homepic_loader> {
 
           return CircleAvatar(
             backgroundImage: profilePicUrl == null
-                ? AssetImage("assets/image_assets/user_background.png")
+                ? const AssetImage("assets/image_assets/user_background.png")
                 : NetworkImage(profilePicUrl) as ImageProvider,
             radius: 50,
-            backgroundColor: Color.fromARGB(255, 234, 234, 234),
+            backgroundColor: const Color.fromARGB(255, 234, 234, 234),
           );
         }
       },
