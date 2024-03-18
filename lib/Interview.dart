@@ -170,7 +170,7 @@ class _InterviewState extends State<Interview> {
 
 // ignore: must_be_immutable
 
-class FeaturesButton extends StatelessWidget {
+/*class FeaturesButton extends StatelessWidget {
   late Color startcolor;
   late Color endcolor;
   late String subtext;
@@ -242,7 +242,7 @@ class FeaturesButton extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 void _showBottomAlertDialog(BuildContext context) {
   showDialog(
@@ -273,6 +273,7 @@ void _showBottomAlertDialog(BuildContext context) {
   );
 }
 
+// ignore: must_be_immutable
 class ImageFeaturesButton extends StatelessWidget {
   late String imagepath;
   late Function() operation;
@@ -285,6 +286,6 @@ class ImageFeaturesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: operation, child: Image.asset(imagepath, height: 145));
+        onTap: operation, child: Image.asset(imagepath, fit:BoxFit.contain));
   }
 }

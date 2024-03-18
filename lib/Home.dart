@@ -715,7 +715,7 @@ class ImageFeaturesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: operation, child: Image.asset(imagepath, height: 145));
+        onTap: operation, child: Image.asset(imagepath, fit: BoxFit.contain,));
   }
 }
 
