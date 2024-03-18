@@ -158,7 +158,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Quiztypes())); // Close the dialog
+                        builder: (context) => const Quiztypes())); // Close the dialog
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -320,7 +320,7 @@ void showConfirmationDialog(
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Quiztypes())); // Close the dialog
+                      builder: (context) => const Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

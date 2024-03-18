@@ -6,6 +6,8 @@ import 'constants.dart';
 double screenWidth = 0;
 
 class Quiztypes extends StatefulWidget {
+  const Quiztypes({super.key});
+
   @override
   State<Quiztypes> createState() => _QuiztypesState();
 }
@@ -43,7 +45,7 @@ class _QuiztypesState extends State<Quiztypes> {
                           child: Container(
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
-                              physics: AlwaysScrollableScrollPhysics(),
+                              physics: const AlwaysScrollableScrollPhysics(),
                               child: Column(
                                 children: [
                                   Column(
@@ -62,7 +64,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                       SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
                                           physics:
-                                              AlwaysScrollableScrollPhysics(),
+                                              const AlwaysScrollableScrollPhysics(),
                                           child: Container(
                                             child: Column(
                                               mainAxisAlignment:
@@ -79,7 +81,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: ((context) => LoadingAndQuizPage(
+                                                                builder: ((context) => const LoadingAndQuizPage(
                                                                     category:
                                                                         "Technical",
                                                                     subcategory:
@@ -94,7 +96,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: ((context) => LoadingAndQuizPage(
+                                                                builder: ((context) => const LoadingAndQuizPage(
                                                                     category:
                                                                         "Technical",
                                                                     subcategory:
@@ -110,7 +112,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: ((context) => LoadingAndQuizPage(
+                                                                  builder: ((context) => const LoadingAndQuizPage(
                                                                       category:
                                                                           "Technical",
                                                                       subcategory:
@@ -157,7 +159,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: ((context) => LoadingAndQuizPage(
+                                                                builder: ((context) => const LoadingAndQuizPage(
                                                                     category:
                                                                         "Design",
                                                                     subcategory:
@@ -172,7 +174,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: ((context) => LoadingAndQuizPage(
+                                                                builder: ((context) => const LoadingAndQuizPage(
                                                                     category:
                                                                         "Design",
                                                                     subcategory:
@@ -188,7 +190,7 @@ class _QuiztypesState extends State<Quiztypes> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: ((context) => LoadingAndQuizPage(
+                                                                  builder: ((context) => const LoadingAndQuizPage(
                                                                       category:
                                                                           "Design",
                                                                       subcategory:
@@ -247,11 +249,11 @@ class Qtype extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color.fromARGB(255, 227, 232, 255)),
+                color: const Color.fromARGB(255, 227, 232, 255)),
             child: Center(
                 child: Text(
               name,
-              style: TextStyle(
+              style: const TextStyle(
                   fontFamily: "jetBrainsMono",
                   fontSize: 15,
                   fontWeight: FontWeight.w300),
@@ -270,7 +272,7 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({
+  FeaturesButton({super.key, 
     required this.startcolor,
     required this.endcolor,
     required this.subtext,
@@ -293,7 +295,7 @@ class FeaturesButton extends StatelessWidget {
               colors: [startcolor, endcolor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: [0.0, 1.0],
+              stops: const [0.0, 1.0],
               tileMode: TileMode.clamp,
             ),
             borderRadius: BorderRadius.circular(20),
@@ -311,15 +313,15 @@ class FeaturesButton extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(subtext,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w400,
                             color: Colors.black)),
                     Text(maintext,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
-                            color: const Color.fromARGB(255, 255, 255, 255))),
+                            color: Color.fromARGB(255, 255, 255, 255))),
                   ],
                 ),
                 Expanded(

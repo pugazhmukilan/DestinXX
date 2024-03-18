@@ -31,10 +31,12 @@ Future<void> main() async {
   }
 
   //runApp(MainApp(isloggedin));
-  runApp( MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
   //final bool isloggedin;
   //const MainApp(this.isloggedin, {super.key});
 
@@ -43,9 +45,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: Kbackgroundcolor,
-      home: Scaffold(
+      home: const Scaffold(
         //body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
-        body:Loginpage(),
+        body: Loginpage(),
       ),
     );
   }

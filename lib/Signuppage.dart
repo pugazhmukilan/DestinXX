@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import "Home.dart";
 import "Signinpage.dart";
 import 'constants.dart';
-final _auth= FirebaseAuth.instance;
-TextEditingController emailcontroller=TextEditingController();
-  TextEditingController passwordcontroller=TextEditingController();
-  TextEditingController usernamecontroller=TextEditingController();
 
+final _auth = FirebaseAuth.instance;
+TextEditingController emailcontroller = TextEditingController();
+TextEditingController passwordcontroller = TextEditingController();
+TextEditingController usernamecontroller = TextEditingController();
 
 class Signuppage extends StatefulWidget {
   const Signuppage({super.key});
@@ -19,24 +19,22 @@ class Signuppage extends StatefulWidget {
 }
 
 class _SignuppageState extends State<Signuppage> {
-  late String email=emailcontroller.text;
-  late String password=passwordcontroller.text;
-  late String name=usernamecontroller.text;
+  late String email = emailcontroller.text;
+  late String password = passwordcontroller.text;
+  late String name = usernamecontroller.text;
   bool _obscureText = true;
-  
 
   @override
   Widget build(BuildContext context) {
     //double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      
-        backgroundColor: Kbackgroundcolor,
-        body: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: Row(
-            children: [
-              //if (screenwidth >900)
-             /* Expanded(
+      backgroundColor: Kbackgroundcolor,
+      body: Padding(
+        padding: const EdgeInsets.all(0.0),
+        child: Row(
+          children: [
+            //if (screenwidth >900)
+            /* Expanded(
                 //container for the left side of the page
                 flex: 2,
                 child: Container(
@@ -373,7 +371,7 @@ class _SignuppageState extends State<Signuppage> {
                             width: 100,
                             child: Center(
                               child: Text(
-                                'Signup',
+                                'Login',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: 20,
@@ -412,37 +410,37 @@ class _SignuppageState extends State<Signuppage> {
   }
 }
 
-
-
-
-Future<void> createaccount(BuildContext context, String email, String password) async {
+Future<void> createaccount(
+    BuildContext context, String email, String password) async {
   try {
     addemail(email);
     addpassword(password);
     await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
-   
     addemail(emailcontroller.text);
     addpassword(passwordcontroller.text);
 
     emailcontroller.clear();
-    passwordcontroller.clear();                    
-                         
+    passwordcontroller.clear();
+
     Navigator.pop(context);
     Navigator.pop(context);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const Home()));
-        showErrorDialog(context, "Successfully SignedUp", "Success");
-    //TODO : implement the document creation method 
-    UserName = usernamecontroller.text;//first username is set intot he variable
-    UserID = await getCurrentUserEmail();//second UserID is set into the variable
-    await addDocument("Users",UserID,UserName);//adddoc is called to create a document
-    } catch (e) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Home()));
+    showErrorDialog(context, "Successfully SignedUp", "Success");
+    //TODO : implement the document creation method
+    UserName =
+        usernamecontroller.text; //first username is set intot he variable
+    UserID =
+        await getCurrentUserEmail(); //second UserID is set into the variable
+    await addDocument(
+        "Users", UserID, UserName); //adddoc is called to create a document
+  } catch (e) {
     showErrorDialog1(context, "$e", "SignUp Error");
-    
   }
 }
+
 class ErrorDialog1 extends StatelessWidget {
   final String title;
   final String content;
@@ -471,7 +469,7 @@ class ErrorDialog1 extends StatelessWidget {
   }
 }
 
-void showErrorDialog1(BuildContext context, String errorMessage,String title) {
+void showErrorDialog1(BuildContext context, String errorMessage, String title) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -496,10 +494,16 @@ void showErrorDialog1(BuildContext context, String errorMessage,String title) {
               Navigator.of(context).pop();
               Navigator.pop(context);
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Signuppage())); // Close the dialog
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const Signuppage())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white, backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.red,
             ),
             child: const Text('OK'),
           ),

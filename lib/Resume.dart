@@ -1,8 +1,10 @@
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:destin/Home.dart';
 import 'package:destin/Interview.dart';
 import 'package:destin/Signuppage.dart';
+import 'package:destin/backdropbox.dart';
 import 'package:destin/firebasefunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,7 +23,6 @@ String Experience = '';
 String Education = '';
 String Phone = '';
 String Email = '';
-
 
 class Resume extends StatefulWidget {
   const Resume({super.key});
@@ -62,6 +63,7 @@ class _ResumeState extends State<Resume> {
           // Create a new DateTime instance without the time part
           _dateTime = DateTime(value.year, value.month, value.day);
           Dob = _dateTime.toString();
+          addFieldToUserDocument("DBdob", Dob);
         });
       }
     });
@@ -95,7 +97,7 @@ class _ResumeState extends State<Resume> {
 
   void saveProfile() async {
     String resp = await saveData(file: _image1!);
-    
+
     //addFieldToUserDocument('profilePic', resp); //Adding the image url into the profilepic field
     //print(resp);
   }
@@ -156,9 +158,7 @@ class _ResumeState extends State<Resume> {
                   Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Home()));
-                      setState(() {
-                        
-                      });
+                  setState(() {});
                 } else if (currentIndex == 1) {
                   Navigator.pop(context);
                   Navigator.push(
@@ -184,8 +184,12 @@ class _ResumeState extends State<Resume> {
           Expanded(
             child: Container(
               height: double.infinity,
-              decoration:
-                  BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+              decoration: BoxDecoration(
+                  image: const DecorationImage(
+                      image: AssetImage("assets/Page_assets/Report_page.png")),
+                  color: Colors.white,
+                  borderRadius:
+                      KMyborder), // THIS IS THE BOX DECORATION OF THE BACKGROUND OF THE RESUME
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 25, 10, 15),
                 child: Column(
@@ -223,68 +227,51 @@ class _ResumeState extends State<Resume> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            CircleAvatar(
-                                              backgroundImage: (() {
-                                                try {
-                                                  if (_image1 != null) {
-                                                    return MemoryImage(_image1!)
-                                                        as ImageProvider;
-                                                  } else {
-                                                    // Display the default asset image when _image1 is null
-                                                    return NetworkImage(pic);
-                                                  }
-                                                } catch (e) {
-                                                  print(
-                                                      "Error loading image: $e");
-                                                  // Display the default asset image in case of an error
-                                                  return AssetImage(
-                                                      'assets/image_assets/user_background.png');
-                                                }
-                                              })(),
-                                              backgroundColor: Kgreycolor_light,
-                                              radius: 45,
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Stack(children: [
+                                                CircleAvatar(
+                                                  backgroundImage: (() {
+                                                    try {
+                                                      if (_image1 != null) {
+                                                        return MemoryImage(
+                                                                _image1!)
+                                                            as ImageProvider;
+                                                      } else {
+                                                        // Display the default asset image when _image1 is null
+                                                        return NetworkImage(
+                                                            pic);
+                                                      }
+                                                    } catch (e) {
+                                                      print(
+                                                          "Error loading image: $e");
+                                                      // Display the default asset image in case of an error
+                                                      return const AssetImage(
+                                                          'assets/image_assets/user_background.png');
+                                                    }
+                                                  })(),
+                                                  backgroundColor:
+                                                      Kgreycolor_light,
+                                                  radius: 50,
+                                                ),
+                                                Positioned(
+                                                    bottom: 0,
+                                                    right: 0,
+                                                    child: IconButton(
+                                                      onPressed: () async {
+                                                        selectImage();
+                                                        //setting the profile pic
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons
+                                                            .add_a_photo_rounded,
+                                                        size: 25,
+                                                      ),
+                                                    ))
+                                              ]),
                                             ),
                                             const SizedBox(height: 10),
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Kgreycolor_light,
-                                                  minimumSize:
-                                                      const Size(30, 30),
-                                                ),
-                                                onPressed: () async {
-                                                  selectImage();
-                                                  //setting the profile pic
-                                                },
-                                                child: const Text(
-                                                  "Change image",
-                                                  style: TextStyle(
-                                                      fontFamily: "Inter",
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.purple),
-                                                )),
-                                            /* ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Kgreycolor_light,
-                                                  minimumSize:
-                                                      const Size(30, 30),
-                                                ),
-                                                onPressed: () async {
-                                                  saveProfile();
-                                                  //setting the profile pic
-                                                },
-                                                child: const Text(
-                                                  "Upload image",
-                                                  style: TextStyle(
-                                                      fontFamily: "Inter",
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.purple),
-                                                )),*/
                                           ]),
                                     ),
                                     Column(
@@ -293,13 +280,16 @@ class _ResumeState extends State<Resume> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 50),
-                                          child: Text(
-                                            "Name",
-                                            style: Kresumetextstyle,
-                                          ),
+                                        const SizedBox(height: 50),
+                                        backdropfield(
+                                          editor: "Name",
+                                          Title: "Name",
+                                          textcontroller: Nametexteditor,
+                                          hint_text: "Type your name..",
+                                          max_lines: 1,
+                                          max_length: 0,
+                                          height: 80,
+                                          width: 180,
                                         ),
                                         //TEXTEDITOR
                                         const SizedBox(height: 10),
@@ -308,55 +298,48 @@ class _ResumeState extends State<Resume> {
                                         //NAME
                                         //NAME
                                         //NAME
-                                        Container(
-                                          height: 40,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                            borderRadius: KMyborder,
-                                            color: Kgreycolor_light,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 15, bottom: 5),
-                                            child: TextField(
-                                              controller: Nametexteditor,
-                                              onChanged: (value) {
-                                                SavedName = value;
-                                              },
-                                              maxLines:
-                                                  1, // Allow unlimited lines in the text field
-                                              decoration: const InputDecoration(
-                                                border: InputBorder
-                                                    .none, // Remove default border
-                                                hintText: 'Type your Name...',
+
+                                        const SizedBox(height: 20),
+
+                                        ClipRect(
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 2, sigmaY: 2),
+                                            child: Container(
+                                              height: 80,
+                                              width: 200,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black,
+                                                      width: 2),
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    //HAVE TO CHECK
+                                                    "Date of Birth",
+                                                    style: Kresumetextstyle,
+                                                  ),
+                                                  Text(
+                                                    Dob,
+                                                    style: const TextStyle(
+                                                        fontFamily: "Inter",
+                                                        fontSize: 13,
+                                                        color: Color.fromARGB(
+                                                            255, 121, 121, 121),
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 20),
-
-                                        Text(
-                                          "Date of Birth",
-                                          style: Kresumetextstyle,
-                                        ),
-
-                                        Container(
-                                          height: 40,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                              color: Kgreycolor_light,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Center(
-                                              child: Text(
-                                            Dob,
-                                            style: const TextStyle(
-                                                fontFamily: "Inter",
-                                                fontSize: 13,
-                                                color: Color.fromARGB(
-                                                    255, 121, 121, 121),
-                                                fontWeight: FontWeight.w600),
-                                          )),
                                         ),
                                         const SizedBox(height: 12),
                                         ElevatedButton(
@@ -405,68 +388,27 @@ class _ResumeState extends State<Resume> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Email",
-                                      style: Kresumetextstyle,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: KMyborder,
-                                          color: Kgreycolor_light,
-                                        ),
-                                        height: 40,
-                                        width: 240,
-                                        child: Center(
-                                            child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: TextField(
-                                            controller: emailcontroller,
-                                            onChanged: (value) {
-                                              Email = value;
-                                            },
-                                            maxLines: 1,
-                                            decoration: const InputDecoration(
-                                                border: InputBorder.none,
-                                                hintText: "Email..."),
-                                          ),
-                                        )),
-                                      ),
-                                    ),
+                                    backdropfield(
+                                        editor: "Email",
+                                        Title: "Email",
+                                        textcontroller: emailcontroller,
+                                        hint_text: "Email..",
+                                        max_lines: 1,
+                                        max_length: 0,
+                                        height: 80,
+                                        width: 240),
 
                                     const SizedBox(height: 20),
-                                    Text(
-                                      "Phone",
-                                      style: Kresumetextstyle,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: KMyborder,
-                                          color: Kgreycolor_light,
-                                        ),
-                                        height: 40,
-                                        width: 240,
-                                        child: Center(
-                                            child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: TextField(
-                                            controller: Phonetexteditor,
-                                            onChanged: (value) {
-                                              Phone = value;
-                                            },
-                                            maxLines: 1,
-                                            decoration: const InputDecoration(
-                                                border: InputBorder.none,
-                                                hintText: "Phone number..."),
-                                          ),
-                                        )),
-                                      ),
-                                    ),
+                                    backdropfield(
+                                        editor: "Phone",
+                                        Title: "Phone",
+                                        textcontroller: Phonetexteditor,
+                                        hint_text: "Phone number...",
+                                        max_lines: 1,
+                                        max_length: 0,
+                                        height: 80,
+                                        width: 240),
+
                                     const SizedBox(
                                       height: 30,
                                     ),
@@ -474,76 +416,31 @@ class _ResumeState extends State<Resume> {
                                     //INTRODUCTION
                                     //INTRODUCTION
                                     //INTRODUCTION
+                                    backdropfield(
+                                        editor: "Introduction",
+                                        Title: "Introduction",
+                                        textcontroller: Introtexteditor,
+                                        hint_text: "Here...",
+                                        max_lines: 0,
+                                        max_length: 500,
+                                        height: 240,
+                                        width: 400),
 
-                                    Text(
-                                      "Introduction",
-                                      style: Kresumetextstyle,
-                                    ),
-                                    //TEXTEDITOR
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 20),
 
-                                    Container(
-                                      height: 200,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        borderRadius: KMyborder,
-                                        color: Kgreycolor_light,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 15, bottom: 5),
-                                        child: TextField(
-                                          controller: Introtexteditor,
-                                          onChanged: (value) {
-                                            Intro = value;
-                                          },
-                                          maxLength: 500,
-                                          maxLines: null,
-                                          // Allow unlimited lines in the text field
-                                          decoration: const InputDecoration(
-                                            border: InputBorder
-                                                .none, // Remove default border
-                                            hintText: 'Here...',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                     //EDUCATION
                                     //EDUCATION
                                     //EDUCATION
                                     //EDUCATION
-                                    Text(
-                                      "Education",
-                                      style: Kresumetextstyle,
-                                    ),
-                                    //TEXTEDITOR
-                                    const SizedBox(height: 10),
-                                    Container(
-                                      height: 300,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        borderRadius: KMyborder,
-                                        color: Kgreycolor_light,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 15, bottom: 5),
-                                        child: TextField(
-                                          controller: Edutexteditor,
-                                          onChanged: (value) {
-                                            Education = value;
-                                          },
-                                          maxLength: 600,
-                                          maxLines: null,
-                                          // Allow unlimited lines in the text field
-                                          decoration: const InputDecoration(
-                                            border: InputBorder
-                                                .none, // Remove default border
-                                            hintText: 'Here...',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    backdropfield(
+                                        editor: "Education",
+                                        Title: "Education",
+                                        textcontroller: Edutexteditor,
+                                        hint_text: "Here",
+                                        max_lines: 0,
+                                        max_length: 600,
+                                        height: 340,
+                                        width: 400),
                                   ],
                                 ),
                               ),
@@ -561,106 +458,35 @@ class _ResumeState extends State<Resume> {
                                     //SKILLS
 
                                     Expanded(
-                                      flex: 1,
-                                      child: SizedBox(
-                                        width: 100,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Skills",
-                                              style: Kresumetextstyle,
-                                            ),
-                                            //TEXTEDITOR
-                                            const SizedBox(height: 10),
-                                            Container(
-                                              height: 200,
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                borderRadius: KMyborder,
-                                                color: Kgreycolor_light,
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 15, bottom: 5),
-                                                child: TextField(
-                                                  controller: Skilltexteditor,
-                                                  onChanged: (value) {
-                                                    Skills = value;
-                                                  },
-                                                  maxLength: 500,
-                                                  maxLines: null,
-                                                  // Allow unlimited lines in the text field
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    border: InputBorder
-                                                        .none, // Remove default border
-                                                    hintText: 'Here...',
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                        flex: 1,
+                                        child: backdropfield(
+                                            editor: "Skills",
+                                            Title: "Skills",
+                                            textcontroller: Skilltexteditor,
+                                            hint_text: "Here...",
+                                            max_lines: 0,
+                                            max_length: 500,
+                                            height: 240,
+                                            width: 100)),
                                     const SizedBox(
                                       width: 15,
                                     ),
                                     //LANGUAGE
                                     //LANGUAGE
                                     //LANGUAGE
-                                    //LANGUAGE
+                                    //LANGUAGE\
+
                                     Expanded(
-                                      flex: 1,
-                                      child: SizedBox(
-                                        width: 100,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Language",
-                                              style: Kresumetextstyle,
-                                            ),
-                                            //TEXTEDITOR
-                                            const SizedBox(height: 10),
-                                            Container(
-                                              height: 200,
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                borderRadius: KMyborder,
-                                                color: Kgreycolor_light,
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 15, bottom: 5),
-                                                child: TextField(
-                                                  controller: Langtexteditor,
-                                                  onChanged: (value) {
-                                                    Language = value;
-                                                  },
-                                                  maxLength: 500,
-                                                  maxLines: null,
-                                                  // Allow unlimited lines in the text field
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    border: InputBorder
-                                                        .none, // Remove default border
-                                                    hintText: 'Here...',
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                        flex: 1,
+                                        child: backdropfield(
+                                            editor: "Language",
+                                            Title: "Language",
+                                            textcontroller: Langtexteditor,
+                                            hint_text: "Here...",
+                                            max_lines: 0,
+                                            max_length: 500,
+                                            height: 240,
+                                            width: 100)),
                                   ],
                                 ),
                               ),
@@ -671,98 +497,29 @@ class _ResumeState extends State<Resume> {
                               //EXPERIENCE
 
                               const SizedBox(height: 10),
-                              Text(
-                                "Experience",
-                                style: Kresumetextstyle,
-                              ),
-                              //TEXTEDITOR
-                              const SizedBox(height: 10),
-                              Container(
-                                height: 200,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: KMyborder,
-                                  color: Kgreycolor_light,
-                                ),
+                              backdropfield(
+                                  editor: "Experience",
+                                  Title: "Experience",
+                                  textcontroller: Exptexteditor,
+                                  hint_text: "Here...",
+                                  max_lines: 0,
+                                  max_length: 800,
+                                  height: 240,
+                                  width: 400),
+
+                              //SAVE BUTTON
+                              //SAVE BUTTON
+                              //SAVE BUTTON
+                              //SAVE BUTTON
+                              Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, bottom: 5),
-                                  child: TextField(
-                                    controller: Exptexteditor,
-                                    onChanged: (value) {
-                                      Experience = value;
-                                    },
-                                    maxLength: 800,
-                                    maxLines: null,
-                                    // Allow unlimited lines in the text field
-                                    decoration: const InputDecoration(
-                                      border: InputBorder
-                                          .none, // Remove default border
-                                      hintText: 'Here...',
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              //SAVE BUTTON
-                              //SAVE BUTTON
-                              //SAVE BUTTON
-                              //SAVE BUTTON
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 3, 205, 10),
-                                          minimumSize: const Size(125, 40),
-                                          disabledForegroundColor:
-                                              Colors.yellow.withOpacity(0.38),
-                                          disabledBackgroundColor:
-                                              Colors.yellow.withOpacity(0.12),
-                                        ),
-                                        onPressed: () async {
-                                          //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
-                                          //STORING THE USERNAME
-
-                                          addFieldToUserDocument(
-                                              "UserName", Nametexteditor.text);
-                                          addFieldToUserDocument("DBeducation",
-                                              Edutexteditor.text);
-                                          addFieldToUserDocument("DBexperience",
-                                              Exptexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBemail", Emailtexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBphone", Phonetexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBintro", Introtexteditor.text);
-                                          addFieldToUserDocument("DBlanguage",
-                                              Langtexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBskills", Skilltexteditor.text);
-                                          addFieldToUserDocument("DBdob", Dob);
-
-                                          pic = await getUrlFromUserDocument("ProfilePic");
-                                          /*addFieldToUserDocument(
-                                              "profilePic", _image1.toString());*/
-                                        },
-                                        child: const Text(
-                                          "Save",
-                                          style: TextStyle(
-                                              fontFamily: "Inter",
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        )),
-                                  ),
-                                  ElevatedButton(
-                                      onPressed: () {},
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                      onPressed:
+                                          () {}, //HAVE TO ADD THE FILE SVAER AND THE LOCATION OF THE FILE SAVING IN THE PHYSICAL DEVICE
                                       style: ElevatedButton.styleFrom(
-                                        minimumSize: const Size(135, 40),
+                                        minimumSize: const Size(60, 40),
+                                        maximumSize: const Size(220, 40),
                                         backgroundColor: const Color.fromARGB(
                                             255, 13, 12, 12),
                                       ),
@@ -786,8 +543,68 @@ class _ResumeState extends State<Resume> {
                                             color: Colors.white,
                                           ),
                                         ],
-                                      ))
-                                ],
+                                      )),
+
+                                  /* Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Center(
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      255, 3, 205, 10),
+                                              minimumSize: const Size(125, 40),
+                                              disabledForegroundColor:
+                                                  Colors.yellow.withOpacity(0.38),
+                                              disabledBackgroundColor:
+                                                  Colors.yellow.withOpacity(0.12),
+                                            ),
+                                            onPressed: () async {
+                                              //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
+                                              //STORING THE USERNAME
+                                
+                                              addFieldToUserDocument("UserName",
+                                                  Nametexteditor.text);
+                                              addFieldToUserDocument(
+                                                  "DBeducation",
+                                                  Edutexteditor.text);
+                                              addFieldToUserDocument(
+                                                  "DBexperience",
+                                                  Exptexteditor.text);
+                                              addFieldToUserDocument("DBemail",
+                                                  Emailtexteditor.text);
+                                              addFieldToUserDocument("DBphone",
+                                                  Phonetexteditor.text);
+                                              addFieldToUserDocument("DBintro",
+                                                  Introtexteditor.text);
+                                              addFieldToUserDocument("DBlanguage",
+                                                  Langtexteditor.text);
+                                              addFieldToUserDocument("DBskills",
+                                                  Skilltexteditor.text);
+                                              addFieldToUserDocument(
+                                                  "DBdob", Dob);
+                                
+                                              pic = await getUrlFromUserDocument(
+                                                  "ProfilePic");
+                                              /*addFieldToUserDocument(
+                                                  "profilePic", _image1.toString());*/
+                                            },
+                                            child: const Text(
+                                              "Save",
+                                              style: TextStyle(
+                                                  fontFamily: "Inter",
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                      
+                                    ],
+                                  ),*/
+                                ),
                               ),
                             ],
                           ),
@@ -892,22 +709,6 @@ class Date_element extends StatelessWidget {
       ),
     );
   }
-}
-
-Future<void> getResumeDetails() async {
-  SavedName = await getFieldFromUserDocument("UserName");
-  Dob = await getFieldFromUserDocument("DBdob");
-  Email = await getFieldFromUserDocument("DBemail");
-  Phone = await getFieldFromUserDocument("DBphone");
-  Intro = await getFieldFromUserDocument("DBintro");
-  Skills = await getFieldFromUserDocument("DBskills");
-  Language = await getFieldFromUserDocument("DBlanguage");
-  Experience = await getFieldFromUserDocument("DBexperience");
-  Education = await getFieldFromUserDocument("DBeducation");
-  pic = await getUrlFromUserDocument("ProfilePic");
-  //print(pic);
-  //print(Phone);
-  //print(Skills);
 }
 
 void _showBottomAlertDialog(BuildContext context) {

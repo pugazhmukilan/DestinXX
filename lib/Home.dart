@@ -16,7 +16,7 @@ import "main.dart";
 double screenWidth = 0;
 int currentIndex = 0;
 final GlobalKey<SliderDrawerState> _sliderDrawerkey =
-      GlobalKey<SliderDrawerState>();
+    GlobalKey<SliderDrawerState>();
 Future<void> setdetails() async {
   UserID = prefs!.getString("email").toString();
   //getthe username
@@ -24,15 +24,18 @@ Future<void> setdetails() async {
   pic = await getUrlFromUserDocument("ProfilePic");
 }
 
-
+Future<String> loadImage() async {
+  pic = await getUrlFromUserDocument("ProfilePic");
+  return pic;
+}
 
 class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
-  
- /* static void signOut(BuildContext context) {
+
+  /* static void signOut(BuildContext context) {
 
     try {
       signOut(context);
@@ -60,54 +63,38 @@ class _HomeState extends State<Home> {
   }*/
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-         body: SliderDrawer(
-          
-           key: _sliderDrawerkey,
-           appBar: SliderAppBar(
-            drawerIcon:null,
-            //trailing: Image.asset('assets/Page_assets/appbar_main.png',height: 50,),
-            appBarHeight: 100,
-            appBarColor: Colors.white,
-           /* flexibleSpace:
+        body: SliderDrawer(
+      key: _sliderDrawerkey,
+      appBar: SliderAppBar(
+        drawerIcon: null,
+        //trailing: Image.asset('assets/Page_assets/appbar_main.png',height: 50,),
+        appBarHeight: 100,
+        appBarColor: Colors.white,
+        /* flexibleSpace:
               Image.asset("assets/Page_assets/appbar_main.png", height: 300),*/
-          
-          //backgroundColor: Color.fromARGB(255, 255, 254, 254),
-          title: Row(
-            children: [
-              Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 46),
-              Image.asset("assets/logos/Mobile_firstPgeText.png", height: 20),
-              SizedBox(
-                width: 10,
-              ),
-              
-            ],
 
-          ),
-          trailing: null,
-        
-           ),
-           slider: MenuWidget(),
-           child: HomeMain(),
-         ));
+        //backgroundColor: Color.fromARGB(255, 255, 254, 254),
+        title: Row(
+          children: [
+            Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 46),
+            Image.asset("assets/logos/Mobile_firstPgeText.png", height: 20),
+            const SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+        trailing: null,
+      ),
+      slider: const MenuWidget(),
+      child: const HomeMain(),
+    ));
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 class MenuWidget extends StatefulWidget {
+  const MenuWidget({super.key});
+
   @override
   _MenuWidgetState createState() => _MenuWidgetState();
 }
@@ -116,8 +103,8 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 255, 255, 255),
         image: DecorationImage(
           image: AssetImage('assets/Page_assets/slider_drawer_bg.png'),
         ),
@@ -141,20 +128,32 @@ class _MenuWidgetState extends State<MenuWidget> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            setState(() {
-                              
-                            });
+                            setState(() {});
                           },
-                          child: CircleAvatar(
-                            radius: 48,
-                            backgroundImage: NetworkImage(pic, scale: 5.0),
+                          child: FutureBuilder<String>(
+                            future:
+                                loadImage(), // Replace 'loadImage()' with your function that fetches the image URL
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator(); // Display a loading indicator while fetching the image
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: NetworkImage(snapshot
+                                      .data!), // Display the image using NetworkImage
+                                );
+                              }
+                            },
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 12),
                           child: Text(
                             UserName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontFamily: "JetBrainsMono",
                             ),
@@ -168,8 +167,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                             color: Kdestinxorange,
                           ),
                         ),
-                        Divider(),
-                        SizedBox(width: 10),
+                        const Divider(),
+                        const SizedBox(width: 10),
                       ],
                     ),
                   ),
@@ -183,8 +182,7 @@ class _MenuWidgetState extends State<MenuWidget> {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             child: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
@@ -206,7 +204,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                               onTap: () {
                                 signOut(context);
                               },
-                              child: Text(
+                              child: const Text(
                                 'Sign Out',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -215,8 +213,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.logout_outlined,
                               color: Colors.black,
@@ -225,7 +223,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         indent: 20,
                         endIndent: 20,
                         color: Colors.black,
@@ -236,12 +234,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                         children: [
                           Center(
                             child: GestureDetector(
-                              onTap:(){
-                                  showConfirmationDialog(context);
-                                 
-                                  
-                                                          },
-                                child: Text(
+                              onTap: () {
+                                showConfirmationDialog(context);
+                              },
+                              child: const Text(
                                 'Delete Account',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -250,8 +246,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.delete_forever_outlined,
                               color: Colors.black,
@@ -272,25 +268,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class HomeMain extends StatefulWidget {
   const HomeMain({super.key});
 
@@ -302,7 +279,7 @@ class _HomeMainState extends State<HomeMain> {
   final ScrollController _scrollController = ScrollController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   int currentIndex = 0;
-  
+
   @override
   void initState() {
     super.initState();
@@ -335,8 +312,6 @@ class _HomeMainState extends State<HomeMain> {
       });
     } catch (err) {}
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -389,15 +364,14 @@ class _HomeMainState extends State<HomeMain> {
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   setState(() {
-            currentIndex = newIndex;
-            if (currentIndex == 3) {
-              
-              
-                _sliderDrawerkey.currentState!.openSlider(); // Open slider drawer when "Accounts" is pressed
-            } else {
-              // Handle other taps
-            }
-          });
+                    currentIndex = newIndex;
+                    if (currentIndex == 3) {
+                      _sliderDrawerkey.currentState!
+                          .openSlider(); // Open slider drawer when "Accounts" is pressed
+                    } else {
+                      // Handle other taps
+                    }
+                  });
                 }
               },
             );
@@ -408,7 +382,7 @@ class _HomeMainState extends State<HomeMain> {
             );
           },
         ),
-       /* appBar: AppBar(
+        /* appBar: AppBar(
           
           flexibleSpace:
               Image.asset("assets/Page_assets/appbar_main.png", height: 300),
@@ -464,14 +438,23 @@ class _HomeMainState extends State<HomeMain> {
                           width: 20,
                         ),
                         Expanded(
-                          child: CircleAvatar(
-                            backgroundImage: _image1 == null
-                                ? NetworkImage(pic)
-                                : const AssetImage(
-                                        "assets/image_assets/user_background.png")
-                                    as ImageProvider,
-                            radius: 50,
-                            backgroundColor: Color.fromARGB(255, 234, 234, 234),
+                          child: FutureBuilder<String>(
+                            future:
+                                loadImage(), // Replace 'loadImage()' with your function that fetches the image URL
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircleAvatar(child: Center(child:CircularProgressIndicator(color: Kdestinxorange,)),); // Display a loading indicator while fetching the image
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: NetworkImage(snapshot
+                                      .data!), // Display the image using NetworkImage
+                                );
+                              }
+                            },
                           ),
                         )
                       ]),
@@ -738,8 +721,6 @@ class NameFeaturesButton extends StatelessWidget {
   }
 }
 
-
-
 void showConfirmationDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -772,8 +753,7 @@ void showConfirmationDialog(BuildContext context) {
           ),
           ElevatedButton(
             onPressed: () {
-             deleteAccountAndSignOut(UserID, context);
-              
+              deleteAccountAndSignOut(UserID, context);
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

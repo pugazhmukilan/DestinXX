@@ -101,7 +101,7 @@ void signOut(BuildContext context) async {
     // Sign out from Firebase
     prefs!.remove('email');
     prefs!.remove('password');
-    UserID="";
+    UserID = "";
     UserName = "";
     pic = "";
     await FirebaseAuth.instance.signOut();
@@ -286,7 +286,7 @@ Future<void> deleteAccountAndSignOut(String documentId, BuildContext context) as
                                 Navigator.pop(context);
                                 // Navigate to the sign-in page or perform any other action
                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => Loginpage()));
+                                    context, MaterialPageRoute(builder: (context) => const Loginpage()));
   } catch (e) {
     print('Error deleting document or user account: $e');
     // Handle the error appropriately, e.g., show an error message to the user

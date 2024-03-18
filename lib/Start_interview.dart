@@ -283,8 +283,11 @@ class _StartinterviewState extends State<Startinterview> {
                   if (next_button_live == false) {
                     Navigator.pop(context);
 
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Report(ans:answer,que:Interview_questions))));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => Report(
+                                ans: answer, que: Interview_questions))));
                     setState(() {
                       next_button_live = true;
                       question_increment = 0;
@@ -292,7 +295,7 @@ class _StartinterviewState extends State<Startinterview> {
                   } else {
                     setState(() {
                       answers.add(uniqueSentences.toString());
-                      addToDictionary('${uniqueSentences.toString()}');
+                      addToDictionary(uniqueSentences.toString());
                       print(uniqueSentences);
                       uniqueSentences.clear();
                       print(uniqueSentences);
