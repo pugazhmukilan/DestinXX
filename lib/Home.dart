@@ -2,7 +2,7 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:destin/loadingscreen.dart';
+import 'package:destin/Resume.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -12,7 +12,7 @@ import 'Interview.dart';
 import "constants.dart";
 import "firebasefunctions.dart";
 import "main.dart";
-
+bool Resume_detail_collecting = false;
 double screenWidth = 0;
 int currentIndex = 0;
 final GlobalKey<SliderDrawerState> _sliderDrawerkey =
@@ -276,6 +276,29 @@ class HomeMain extends StatefulWidget {
 }
 
 class _HomeMainState extends State<HomeMain> {
+  Future<String> getResumeDetails( BuildContext context) async {
+  
+  
+  SavedName = await getFieldFromUserDocument("UserName");
+  print("new user name============================$SavedName");
+  Dob = await getFieldFromUserDocument("DBdob");
+  Phone = await getFieldFromUserDocument("DBphone");
+  Email = await getFieldFromUserDocument("DBemail");
+  Intro = await getFieldFromUserDocument("DBintro");
+  Skills = await getFieldFromUserDocument("DBskills");
+  Language = await getFieldFromUserDocument("DBlanguage");
+  Experience = await getFieldFromUserDocument("DBexperience");
+  Education = await getFieldFromUserDocument("DBeducation");
+  pic = await getUrlFromUserDocument("ProfilePic");
+  pic = pic;
+  setState(() {
+    Resume_detail_collecting=false;
+    
+  });
+  return pic;
+}
+
+
   final ScrollController _scrollController = ScrollController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   int currentIndex = 0;
@@ -331,7 +354,7 @@ class _HomeMainState extends State<HomeMain> {
           selectedFontSize: 12,
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
-          items: const [
+          items:  [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
@@ -341,7 +364,7 @@ class _HomeMainState extends State<HomeMain> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.file_copy_outlined), label: "Resume"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
+                icon:  Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,
           onTap: (int newIndex) {
@@ -357,10 +380,19 @@ class _HomeMainState extends State<HomeMain> {
                       MaterialPageRoute(
                           builder: (context) => const Interview()));
                 } else if (currentIndex == 2) {
-                  Navigator.push(
+                  /*Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoadingPage()));
+                          builder: (context) => const LoadingPage()));*/
+                          getResumeDetails(context);
+                          print("after the function call ${Resume_detail_collecting}");
+                          if (Resume_detail_collecting){
+
+                          }else{
+                            print("before calling the resume page ${Resume_detail_collecting}");
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume()));
+                          }
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   setState(() {
