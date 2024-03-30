@@ -52,9 +52,9 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Kmainboard,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Kmainboard,
+          backgroundColor: Colors.white,
           flexibleSpace: Image.asset(appbarimage, height: 200),
 
           //automaticallyImplyLeading: false,

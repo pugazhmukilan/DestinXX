@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Constants/Questions.dart';
 import 'Interview.dart';
 import "Report.dart";
 import 'constants.dart';
@@ -119,7 +120,7 @@ class _TextinterviewState extends State<Textinterview> {
       body: Padding(
         padding: const EdgeInsets.all(1.0),
         child: Container(
-          decoration: BoxDecoration(borderRadius: KMyborder, color: Kmainboard),
+          decoration: BoxDecoration(borderRadius: KMyborder, color: Kdestinxwhite),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(

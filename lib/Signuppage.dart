@@ -1,4 +1,4 @@
-import 'package:destin/firebasefunctions.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -134,7 +134,7 @@ class _SignuppageState extends State<Signuppage> {
                 child: Container(
                   height: double.infinity,
                   decoration:
-                      BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+                      BoxDecoration(color: Kdestinxwhite, borderRadius: KMyborder),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -454,7 +454,7 @@ class ErrorDialog1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Kmainboard,
+      backgroundColor: Kdestinxwhite,
       title: Text(title),
       content: Text(content),
       actions: [

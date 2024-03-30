@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:destin/constants.dart';
 import 'package:destin/quiztypes.dart';
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
 import "quiz.dart";
 
 class LoadingAndQuizPage extends StatefulWidget {
@@ -93,31 +93,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
     });
   }
 
-  /*void showResults() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Quiz Completed'),
-          content: Container(
-            height:800,
-            child: Column(
-              children: [
-                Text('Your Score: $score / ${questions.length}'),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    resetQuiz();
-                  },
-                  child: Text('Play Again'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }*/
+  
   void showresults(
     BuildContext context,
   ) {
@@ -194,7 +170,7 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-              color: Kmainboard, borderRadius: BorderRadius.circular(20)),
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(25.0),
             child: SingleChildScrollView(

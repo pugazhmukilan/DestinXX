@@ -5,7 +5,7 @@ import 'package:destin/Home.dart';
 import 'package:destin/Interview.dart';
 import 'package:destin/Signuppage.dart';
 import 'package:destin/backdropbox.dart';
-import 'package:destin/firebasefunctions.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

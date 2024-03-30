@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'Interview.dart';
 import 'constants.dart';
-import "firebasefunctions.dart";
+import "Constants/firebasefunctions.dart";
 import "main.dart";
 bool Resume_detail_collecting = false;
 double screenWidth = 0;
@@ -343,7 +343,7 @@ class _HomeMainState extends State<HomeMain> {
     
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Kmainboard,
+        backgroundColor: Kdestinxwhite,
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Kbackgroundcolor,

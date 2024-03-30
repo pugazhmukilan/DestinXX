@@ -1,5 +1,5 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 //import "Resume.dart";
@@ -46,3 +46,4 @@ class _homepic_loaderState extends State<homepic_loader> {
     );
   }
 }
+*/

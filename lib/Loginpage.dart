@@ -91,7 +91,7 @@ class _LoginpageState extends State<Loginpage> {
                 //flex: 5,
                 child: Container(
                   height:double.infinity,
-                 decoration: BoxDecoration(color: Kmainboard,borderRadius: KMyborder),
+                 decoration: BoxDecoration(color: Kdestinxwhite,borderRadius: KMyborder),
 
                  child:SingleChildScrollView(
                   scrollDirection: Axis.vertical,

@@ -1,12 +1,13 @@
 import 'package:camera/camera.dart';
+import 'package:destin/autologgergetdetails.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Constants/firebase_options.dart';
 import 'Loginpage.dart';
 import 'constants.dart';
-import 'firebase_options.dart';
 
 SharedPreferences? prefs;
 
@@ -19,7 +20,7 @@ Future<void> main() async {
   );
 
   await SharedPreferences.getInstance();
-  //bool isloggedin = await checkLoginStatus();
+  bool isloggedin = await checkLoginStatus();
 
   prefs = await SharedPreferences.getInstance();
   try {
@@ -30,24 +31,23 @@ Future<void> main() async {
     return;
   }
 
-  //runApp(MainApp(isloggedin));
-  runApp(const MainApp());
+  runApp(MainApp(isloggedin));
+  //runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  //final bool isloggedin;
-  //const MainApp(this.isloggedin, {super.key});
+  //const MainApp({super.key});
+  final bool isloggedin;
+  const MainApp(this.isloggedin, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: Kbackgroundcolor,
-      home: const Scaffold(
-        //body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
-        body: Loginpage(),
+      home:  Scaffold(
+        body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
+        //body: Loginpage(),
       ),
     );
   }

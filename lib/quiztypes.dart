@@ -28,7 +28,7 @@ class _QuiztypesState extends State<Quiztypes> {
                 child: Container(
                   height: double.infinity,
                   decoration:
-                      BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+                      BoxDecoration(color: Kdestinxwhite, borderRadius: KMyborder),
                   child: Padding(
                     padding: const EdgeInsets.all(25.0),
                     child: Column(

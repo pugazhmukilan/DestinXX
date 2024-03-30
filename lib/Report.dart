@@ -206,7 +206,7 @@ class _ReportState extends State<Report> {
           },
         ),*/
 
-      backgroundColor: Kmainboard,
+      backgroundColor: Kdestinxwhite,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(

@@ -55,7 +55,7 @@ class _InterviewState extends State<Interview> {
 
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Kmainboard,
+        backgroundColor: Kdestinxwhite,
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Kbackgroundcolor,
@@ -105,7 +105,7 @@ class _InterviewState extends State<Interview> {
           },
         ),
         appBar: AppBar(
-          backgroundColor: Kmainboard,
+          backgroundColor: Kdestinxwhite,
           automaticallyImplyLeading: false,
           title: Text("Interview", style: Ktitletextstyle),
           bottom: PreferredSize(
