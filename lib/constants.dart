@@ -12,6 +12,7 @@ String pic = '';
 late String UserID;
 String projectName = "ProjectX";
 Color Kquizlinecolor = const Color.fromARGB(255, 219, 219, 219);
+Color Kdestinxblack =  const Color.fromARGB(255, 29, 29, 29);
 Color Kdestinxorange = const Color.fromARGB(255, 255, 97, 24);
 Color Kbackgroundcolor = const Color.fromARGB(255, 29, 29, 29);
 Color Ksidebarcolor = const Color.fromARGB(255, 29, 29, 29);
@@ -268,13 +269,13 @@ List<String> randomElementsList(List<String> inputList) {
 
   // Add elements to the set until it has 10 unique elements or the list is exhausted
   for (var element in shuffledList) {
-    if (uniqueElements.length < 10) {
+    if (uniqueElements.length < 8) {
       uniqueElements.add(element);
     } else {
       break; // No need to continue if we already have 10 unique elements
     }
   }
-
+  print(uniqueElements.toList());
   return uniqueElements.toList(); // Convert the set back to a list
 }
 

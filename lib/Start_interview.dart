@@ -162,6 +162,7 @@ class _StartinterviewState extends State<Startinterview> {
       _isListening = true;
     });
   }
+  
   //speech to text part
 
   @override
@@ -287,7 +288,7 @@ class _StartinterviewState extends State<Startinterview> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) => Report(
-                                ans: answer, que: Interview_questions))));
+                                ans: answers, que: Interview_questions))));
                     setState(() {
                       next_button_live = true;
                       question_increment = 0;
@@ -302,7 +303,7 @@ class _StartinterviewState extends State<Startinterview> {
                       //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
                       if (_speechEnabled == true) {}
                       question_increment++;
-                      if (question_increment == 9) {
+                      if (question_increment ==6) {
                         print(dictionary);
                         next_button_live = false;
                       }

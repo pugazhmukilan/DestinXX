@@ -3,13 +3,14 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:destin/Resume.dart';
+import 'package:destin/Widgets/github_insta_creator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'Interview.dart';
-import "constants.dart";
+import 'constants.dart';
 import "firebasefunctions.dart";
 import "main.dart";
 bool Resume_detail_collecting = false;
@@ -103,11 +104,11 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
-        image: DecorationImage(
+      decoration:  BoxDecoration(
+        color: Kdestinxblack,
+       /* image: DecorationImage(
           image: AssetImage('assets/Page_assets/slider_drawer_bg.png'),
-        ),
+        ),*/
       ),
       child: ListView(
         children: [
@@ -156,6 +157,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                             style: const TextStyle(
                               fontSize: 16,
                               fontFamily: "JetBrainsMono",
+                              color:Colors.white,
                             ),
                           ),
                         ),
@@ -164,7 +166,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: "JetBrainsMono",
-                            color: Kdestinxorange,
+                            color: Colors.white,
                           ),
                         ),
                         const Divider(),
@@ -183,82 +185,79 @@ class _MenuWidgetState extends State<MenuWidget> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.black, width: 2),
-                  ),
-                  child: Column(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: Colors.white, width: 2),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {
-                                signOut(context);
-                              },
-                              child: const Text(
-                                'Sign Out',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                ),
-                              ),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            signOut(context);
+                          },
+                          child: const Text(
+                            'Sign Out',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              color:Colors.white,
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.logout_outlined,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                      const Divider(
-                        indent: 20,
-                        endIndent: 20,
-                        color: Colors.black,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {
-                                showConfirmationDialog(context);
-                              },
-                              child: const Text(
-                                'Delete Account',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.delete_forever_outlined,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                          ),
-                        ],
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.logout_outlined,
+                          color:Colors.white,
+                          size: 30,
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  const Divider(
+                    indent: 20,
+                    endIndent: 20,
+                    color:Colors.white,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            showConfirmationDialog(context);
+                          },
+                          child: const Text(
+                            'Delete Account',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              color:Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.delete_forever_outlined,
+                          color:Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
@@ -277,7 +276,10 @@ class HomeMain extends StatefulWidget {
 
 class _HomeMainState extends State<HomeMain> {
   Future<String> getResumeDetails( BuildContext context) async {
-  
+  setState(() {
+    Resume_detail_collecting=true;
+    
+  });
   
   SavedName = await getFieldFromUserDocument("UserName");
   print("new user name============================$SavedName");
@@ -338,11 +340,7 @@ class _HomeMainState extends State<HomeMain> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> body = const [
-      Icon(Icons.home),
-      Icon(Icons.menu),
-      Icon(Icons.person),
-    ];
+    
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Kmainboard,
@@ -362,9 +360,9 @@ class _HomeMainState extends State<HomeMain> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.file_copy_outlined), label: "Resume"),
+                icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
             BottomNavigationBarItem(
-                icon:  Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.account_circle_outlined), label: "Accounts"),
+                icon:  Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,
           onTap: (int newIndex) {
@@ -384,15 +382,8 @@ class _HomeMainState extends State<HomeMain> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoadingPage()));*/
-                          getResumeDetails(context);
-                          print("after the function call ${Resume_detail_collecting}");
-                          if (Resume_detail_collecting){
-
-                          }else{
-                            print("before calling the resume page ${Resume_detail_collecting}");
-
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume()));
-                          }
+                          getResumeDetails(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
+                          
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   setState(() {
@@ -591,20 +582,70 @@ class _HomeMainState extends State<HomeMain> {
                     children: [
                       NameFeaturesButton(
                           imagepath: "assets/Page_assets/pugazh.png",
-                          operation: () {}),
+                          operation: () {
+                            print("this is worlin");
+                             showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/pugazhmukilan',
+                                  instagram: 'https://www.instagram.com/mukil_arena/',
+                                  linkedin:'https://www.linkedin.com/in/pugazh-mukilan-922206251/',
+                                  name: 'Pugazh Mukilan',
+                                );
+                              },
+                            );
+  
+                          }),
                       NameFeaturesButton(
                           imagepath: "assets/Page_assets/Hemanthkumar.png",
-                          operation: () {}),
+                          operation: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/Hemanth-Kumar-04',
+                                  instagram: 'https://www.instagram.com/h_e_m_a_n_t_h04/',
+                                  linkedin:'https://www.linkedin.com/in/hemanth-kumar-4b8471275/',
+                                  name: 'Hemanth Kumar',
+                                );
+                              },
+                            );
+                          }),
                     ],
                   ),
                   Row(
                     children: [
                       NameFeaturesButton(
                           imagepath: "assets/Page_assets/Tarun.png",
-                          operation: () {}),
+                          operation: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/tarun-sakthivel',
+                                  instagram: 'https://www.instagram.com/',
+                                  linkedin:'https://www.linkedin.com/in/tarun-sakthivel-0b904a254/',
+                                  name: 'Tarun',
+                                );
+                              },
+                            );
+                          }),
                       NameFeaturesButton(
                           imagepath: "assets/Page_assets/Karthik sagar.png",
-                          operation: () {}),
+                          operation: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/karthiksagarN',
+                                  instagram: 'https://www.instagram.com/karthik.sagarn/',
+                                  linkedin:'https://www.linkedin.com/in/karthik-sagar-nallagula-3b1983285/',
+                                  name: 'Karthik sagar',
+                                );
+                              },
+                            );
+                          }),
                     ],
                   ),
                 ]),

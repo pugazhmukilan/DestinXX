@@ -255,7 +255,7 @@ class _TextinterviewState extends State<Textinterview> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) =>  Report(ans:answer,que:Interview_questions))));
+                                            builder: ((context) =>  Report(ans:answers,que:Interview_questions))));
                                   },
                                   child: const Text(
                                     "Submit answers",

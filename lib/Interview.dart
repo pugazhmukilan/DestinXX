@@ -1,8 +1,9 @@
+import 'package:destin/backdropbox.dart';
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
+import 'Resume.dart';
 import 'constants.dart';
-import 'loadingscreen.dart';
 
 double screenWidth = 0;
 int currentIndex = 1;
@@ -89,11 +90,7 @@ class _InterviewState extends State<Interview> {
                       MaterialPageRoute(builder: (context) => const Home()));
                 } else if (currentIndex == 1) {
                 } else if (currentIndex == 2) {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoadingPage()));
+                  getResumeDetails().then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
