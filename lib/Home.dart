@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:destin/loadingscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -366,8 +367,9 @@ class _HomeMainState extends State<HomeMain> {
                   setState(() {
                     currentIndex = newIndex;
                     if (currentIndex == 3) {
-                      _sliderDrawerkey.currentState!
-                          .openSlider(); // Open slider drawer when "Accounts" is pressed
+                      /*_sliderDrawerkey.currentState!
+                          .openSlider(); */ // Open slider drawer when "Accounts" is pressed
+                      _showBottomAlertDialog(context);
                     } else {
                       // Handle other taps
                     }
@@ -444,9 +446,15 @@ class _HomeMainState extends State<HomeMain> {
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
-                                return const CircularProgressIndicator(); // Display a loading indicator while fetching the image
+                                return const CircleAvatar(
+                                    radius: 50,
+                                    child:
+                                        CircularProgressIndicator()); // Display a loading indicator while fetching the image
                               } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
+                                print(Text('Error: ${snapshot.error}'));
+                                return Image(
+                                    image: AssetImage(
+                                        'assets/image_assets/user_background.png'));
                               } else {
                                 return CircleAvatar(
                                   radius: 50,

@@ -128,6 +128,11 @@ class _ResumeState extends State<Resume> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: Center(child: Text("Resume", style: Ktitletextstyle)),
+        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Kbackgroundcolor,
@@ -185,19 +190,17 @@ class _ResumeState extends State<Resume> {
             child: Container(
               height: double.infinity,
               decoration: BoxDecoration(
-                  image: const DecorationImage(
-                      image: AssetImage("assets/Page_assets/Report_page.png")),
-                  color: Colors.white,
-                  borderRadius:
-                      KMyborder), // THIS IS THE BOX DECORATION OF THE BACKGROUND OF THE RESUME
+                image: const DecorationImage(
+                    image: AssetImage("assets/Page_assets/Report_page.png")),
+                color: Colors.white,
+              ), // THIS IS THE BOX DECORATION OF THE BACKGROUND OF THE RESUME
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 25, 10, 15),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min, // Set mainAxisSize to min
                   children: [
-                    Center(child: Text("Resume", style: Ktitletextstyle)),
                     Divider(
                       indent: 0,
                       endIndent: 0,
@@ -258,15 +261,25 @@ class _ResumeState extends State<Resume> {
                                                 Positioned(
                                                     bottom: 0,
                                                     right: 0,
-                                                    child: IconButton(
-                                                      onPressed: () async {
-                                                        selectImage();
-                                                        //setting the profile pic
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons
-                                                            .add_a_photo_rounded,
-                                                        size: 25,
+                                                    child: Container(
+                                                      height: 35,
+                                                      width: 35,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      65)),
+                                                      child: IconButton(
+                                                        onPressed: () async {
+                                                          selectImage();
+                                                          //setting the profile pic
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons
+                                                              .add_a_photo_rounded,
+                                                          size: 20,
+                                                        ),
                                                       ),
                                                     ))
                                               ]),

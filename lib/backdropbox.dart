@@ -154,22 +154,6 @@ class _backdropfieldState extends State<backdropfield> {
                           hintText: hint_text,
                         ),
                       ),
-
-                      /*TextField(
-                        controller: textcontroller,
-                        onChanged: (value) {
-                          Education = value;
-                        },
-                        maxLength: max_length,
-                        maxLines:
-                            max_lines, // Use 1 as a default if max_lines is null
-
-                        // Allow unlimited lines in the text field
-                        decoration: InputDecoration(
-                          border: InputBorder.none, // Remove default border
-                          hintText: hint_text,
-                        ),
-                      ),*/
                     ),
                   ),
                 ],
