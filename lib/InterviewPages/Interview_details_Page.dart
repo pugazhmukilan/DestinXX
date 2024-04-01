@@ -1,8 +1,8 @@
-import 'package:destin/Start_interview.dart';
-import 'package:destin/Text_interview.dart';
+import 'package:destin/InterviewPages/Start_interview.dart';
+import 'package:destin/InterviewPages/Text_interview.dart';
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 
 //'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.',
 class Interview_details_Page extends StatefulWidget {

@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import "Interview.dart";
-import "Interview_details_Page.dart";
-import "Start_interview.dart";
+import "InterviewPages/Interview.dart";
+import "InterviewPages/Interview_details_Page.dart";
+import "InterviewPages/Start_interview.dart";
 
 String UserName = "";
 String pic = '';

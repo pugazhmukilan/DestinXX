@@ -1,7 +1,8 @@
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'Quizpage.dart';
-import 'constants.dart';
+
 
 double screenWidth = 0;
 

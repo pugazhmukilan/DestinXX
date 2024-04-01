@@ -1,9 +1,9 @@
 import "package:destin/Home.dart";
 import 'package:flutter/material.dart';
 
-import "constants.dart";
-import "Constants/firebasefunctions.dart";
-import "main.dart";
+import "../Constants/firebasefunctions.dart";
+import "../constants.dart";
+import "../main.dart";
 class GetdetailsLoader extends StatefulWidget {
   const GetdetailsLoader({super.key});
 
