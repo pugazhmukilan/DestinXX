@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:destin/firebasefunctions.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
 
 import 'constants.dart';
 

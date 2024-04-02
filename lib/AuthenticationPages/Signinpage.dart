@@ -1,12 +1,12 @@
-import 'package:destin/firebasefunctions.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
+import 'package:destin/Home.dart';
+import 'package:destin/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import "Home.dart";
 import 'Signuppage.dart';
-import 'constants.dart';
 
 final _auth = FirebaseAuth.instance;
 
@@ -149,8 +149,8 @@ class _SigninpageState extends State<Signinpage> {
               child: Container(
                 //The container for the whole workspace
                 height: double.infinity,
-                decoration:
-                    BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+                decoration: BoxDecoration(
+                    color: Kdestinxwhite, borderRadius: KMyborder),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

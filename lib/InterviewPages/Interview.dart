@@ -1,8 +1,8 @@
+import 'package:destin/FeaturesPage/Resume.dart';
+import 'package:destin/Home.dart';
+import 'package:destin/backdropbox.dart';
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
-
-import 'Home.dart';
-import 'constants.dart';
-import 'loadingscreen.dart';
 
 double screenWidth = 0;
 int currentIndex = 1;
@@ -54,7 +54,7 @@ class _InterviewState extends State<Interview> {
 
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Kmainboard,
+        backgroundColor: Kdestinxwhite,
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Kbackgroundcolor,
@@ -89,11 +89,8 @@ class _InterviewState extends State<Interview> {
                       MaterialPageRoute(builder: (context) => const Home()));
                 } else if (currentIndex == 1) {
                 } else if (currentIndex == 2) {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoadingPage()));
+                  getResumeDetails().then((value) => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Resume())));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
@@ -108,7 +105,7 @@ class _InterviewState extends State<Interview> {
           },
         ),
         appBar: AppBar(
-          backgroundColor: Kmainboard,
+          backgroundColor: Kdestinxwhite,
           automaticallyImplyLeading: false,
           title: Text("Interview", style: Ktitletextstyle),
           bottom: PreferredSize(
@@ -170,7 +167,7 @@ class _InterviewState extends State<Interview> {
 
 // ignore: must_be_immutable
 
-class FeaturesButton extends StatelessWidget {
+/*class FeaturesButton extends StatelessWidget {
   late Color startcolor;
   late Color endcolor;
   late String subtext;
@@ -242,7 +239,7 @@ class FeaturesButton extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 void _showBottomAlertDialog(BuildContext context) {
   showDialog(
@@ -273,6 +270,7 @@ void _showBottomAlertDialog(BuildContext context) {
   );
 }
 
+// ignore: must_be_immutable
 class ImageFeaturesButton extends StatelessWidget {
   late String imagepath;
   late Function() operation;
@@ -285,6 +283,6 @@ class ImageFeaturesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: operation, child: Image.asset(imagepath, height: 145));
+        onTap: operation, child: Image.asset(imagepath, fit: BoxFit.contain));
   }
 }

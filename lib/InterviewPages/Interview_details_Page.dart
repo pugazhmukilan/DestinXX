@@ -1,8 +1,7 @@
-import 'package:destin/Start_interview.dart';
-import 'package:destin/Text_interview.dart';
+import 'package:destin/InterviewPages/Start_interview.dart';
+import 'package:destin/InterviewPages/Text_interview.dart';
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
-
-import 'constants.dart';
 
 //'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.',
 class Interview_details_Page extends StatefulWidget {
@@ -52,9 +51,9 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Kmainboard,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Kmainboard,
+          backgroundColor: Colors.white,
           flexibleSpace: Image.asset(appbarimage, height: 200),
 
           //automaticallyImplyLeading: false,

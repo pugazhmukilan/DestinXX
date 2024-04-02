@@ -1,13 +1,14 @@
 import 'package:camera/camera.dart';
+import 'package:destin/Constants/Questions.dart';
+import 'package:destin/ErrorPages/nocamera.dart';
+import 'package:destin/FeaturesPage/Report.dart';
+import 'package:destin/constants.dart';
+import 'package:destin/main.dart';
 import "package:flutter/material.dart";
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 import 'Interview.dart';
-import "Report.dart";
-import "constants.dart";
-import "main.dart";
-import "nocamera.dart";
 
 late bool _speechEnabled;
 bool ispressed = false;
@@ -162,6 +163,7 @@ class _StartinterviewState extends State<Startinterview> {
       _isListening = true;
     });
   }
+
   //speech to text part
 
   @override
@@ -287,7 +289,7 @@ class _StartinterviewState extends State<Startinterview> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) => Report(
-                                ans: answer, que: Interview_questions))));
+                                ans: answers, que: Interview_questions))));
                     setState(() {
                       next_button_live = true;
                       question_increment = 0;
@@ -302,7 +304,7 @@ class _StartinterviewState extends State<Startinterview> {
                       //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
                       if (_speechEnabled == true) {}
                       question_increment++;
-                      if (question_increment == 9) {
+                      if (question_increment == 6) {
                         print(dictionary);
                         next_button_live = false;
                       }

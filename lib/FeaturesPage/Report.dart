@@ -1,17 +1,18 @@
 import 'dart:ui';
 
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:percent_indicator/percent_indicator.dart';
-
-import 'constants.dart';
 
 double screenWidth = 0;
 int currentIndex = 0;
+var response;
 //final List<String> question = [];
 //final List<String> answer = [];
 //create a map of string and string
 //Map<dynamic, dynamic> dataMap = {};
-final List<String> question = [
+/*final List<String> question = [
   "tell me about yourself",
   "something",
   "something question"
@@ -50,7 +51,7 @@ final List<String> feedback = [
       "feedback2"
       "feedback2"
       "feedback2"
-];
+];*/
 
 class Report extends StatefulWidget {
   //late  Map<dynamic, dynamic> dataMap;
@@ -65,8 +66,81 @@ class _ReportState extends State<Report> {
   @override
   void initState() {
     super.initState();
+    fetchData();
     print(ans);
     print(que);
+  }
+
+  Future<void> fetchData() async {
+    try {
+      print("getting in tot the function");
+      // Make POST request
+      final Uri uri =
+          Uri.parse('https://firstdeploy-cfxhxnpgwq-uc.a.run.app/submit');
+      final http.Response httpResponse = await http.post(
+        uri,
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: {
+          "Question1": "How does the Observer pattern work?",
+          "Answer1":
+              "The Observer pattern defines a one-to-many dependency between objects, so that when one object changes state, all its dependents are notified and updated automatically. It is commonly used in event handling systems.",
+          "Question2":
+              "Explain the concept of Continuous Integration (CI) and Continuous Deployment (CD).",
+          "Answer2":
+              "CI is the practice of regularly integrating code changes into a shared repository, followed by automated tests to detect integration issues. CD extends CI by automatically deploying the code to production if all tests pass.",
+          "Question3": "What is Object-Oriented Programming (OOP)?",
+          "Answer3":
+              "OOP is a programming paradigm that structures code into objects, enhancing modularity and reusability.",
+          "Question4":
+              "Explain the difference between abstract class and interface in Java.",
+          "Answer4":
+              "Abstract classes can have both abstract and concrete methods, while interfaces only have abstract methods. A class can implement multiple interfaces, but it can inherit from only one abstract class.",
+          "Question5": "Explain the concept of polymorphism.",
+          "Answer5":
+              "Polymorphism in object-oriented programming allows objects of different types to be treated as objects of a common type. It encompasses method overloading and method overriding. Method overloading involves defining multiple methods with the same name but different parameters in a class, while method overriding occurs when a subclass provides a specific implementation for a method defined in its superclass.",
+          "Question6":
+              "Explain the difference between GET and POST HTTP methods.",
+          "Answer6":
+              "GET is used to request data from a specified resource, while POST is used to submit data to be processed to a specified resource. POST is more secure and suitable for sensitive data.",
+          "Question7": "Explain the concept of Big O notation.",
+          "Answer7":
+              "Big O notation describes the upper bound on the time or space complexity of an algorithm in the worst-case scenario. It provides a way to analyze the efficiency of algorithms.",
+        },
+      );
+
+      // Check if request was successful
+      print(httpResponse.statusCode);
+      if (httpResponse.statusCode == 200) {
+        setState(() {
+          response = httpResponse.body;
+          print(
+              "===============================================================");
+          print(
+              "===============================================================");
+          print(
+              "===============================================================");
+          print(
+              "===============================================================");
+          print(response);
+          print(
+              "===============================================================");
+          print(
+              "===============================================================");
+          print(
+              "===============================================================");
+          print(
+              "===============================================================");
+        });
+      } else {
+        setState(() {
+          response = 'Failed to fetch data';
+        });
+      }
+    } catch (error) {
+      setState(() {
+        response = 'Error: $error';
+      });
+    }
   }
 
   //late  Map<dynamic, dynamic> dataMap;
@@ -148,7 +222,7 @@ class _ReportState extends State<Report> {
           },
         ),*/
 
-      backgroundColor: Kmainboard,
+      backgroundColor: Kdestinxwhite,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -266,8 +340,7 @@ class _ReportState extends State<Report> {
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                               child: percentage_indicator(
                                   percentage: 0.4,
-                                  color:
-                                      Color.fromARGB(255, 218, 92, 241),
+                                  color: Color.fromARGB(255, 218, 92, 241),
                                   text: "4/10"),
                             ),
                             const SizedBox(height: 10),
@@ -278,8 +351,7 @@ class _ReportState extends State<Report> {
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                               child: percentage_indicator(
                                   percentage: 0.6,
-                                  color:
-                                      Color.fromARGB(255, 255, 216, 59),
+                                  color: Color.fromARGB(255, 255, 216, 59),
                                   text: "6/10"),
                             ),
                             const SizedBox(height: 10),
@@ -320,7 +392,16 @@ class _ReportState extends State<Report> {
                     ),
                   ),
                 ),
-                for (int i = 0; i < 9; i++)
+                GestureDetector(
+                  onTap: () {
+                    fetchData();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.orange),
+                    child: Text("fetch the data"),
+                  ),
+                ),
+                for (int i = 0; i < 1; i++)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15, top: 15),
                     child: ClipRect(
@@ -341,7 +422,7 @@ class _ReportState extends State<Report> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                question[1],
+                                "question",
                                 style: const TextStyle(
                                   fontFamily: "Inter",
                                   fontSize: 17,
@@ -351,7 +432,7 @@ class _ReportState extends State<Report> {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                answer[1],
+                                "Answer",
                                 style: const TextStyle(
                                   fontFamily: "Inter",
                                   fontSize: 13,
@@ -373,7 +454,7 @@ class _ReportState extends State<Report> {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                feedback[1],
+                                "feedback",
                                 style: const TextStyle(
                                   fontFamily: "Inter",
                                   fontSize: 13,
@@ -436,7 +517,8 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({super.key, 
+  FeaturesButton({
+    super.key,
     required this.startcolor,
     required this.endcolor,
     required this.subtext,

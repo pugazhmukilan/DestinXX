@@ -1,7 +1,7 @@
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'Quizpage.dart';
-import 'constants.dart';
 
 double screenWidth = 0;
 
@@ -13,7 +13,6 @@ class Quiztypes extends StatefulWidget {
 }
 
 class _QuiztypesState extends State<Quiztypes> {
- 
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -27,8 +26,8 @@ class _QuiztypesState extends State<Quiztypes> {
                 flex: 4,
                 child: Container(
                   height: double.infinity,
-                  decoration:
-                      BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+                  decoration: BoxDecoration(
+                      color: Kdestinxwhite, borderRadius: KMyborder),
                   child: Padding(
                     padding: const EdgeInsets.all(25.0),
                     child: Column(
@@ -272,7 +271,8 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({super.key, 
+  FeaturesButton({
+    super.key,
     required this.startcolor,
     required this.endcolor,
     required this.subtext,

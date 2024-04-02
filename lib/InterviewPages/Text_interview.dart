@@ -1,8 +1,9 @@
+import 'package:destin/Constants/Questions.dart';
+import 'package:destin/FeaturesPage/Report.dart';
+import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'Interview.dart';
-import "Report.dart";
-import 'constants.dart';
 
 List<String> answers = [];
 Map<dynamic, dynamic> dictionary = {};
@@ -119,7 +120,8 @@ class _TextinterviewState extends State<Textinterview> {
       body: Padding(
         padding: const EdgeInsets.all(1.0),
         child: Container(
-          decoration: BoxDecoration(borderRadius: KMyborder, color: Kmainboard),
+          decoration:
+              BoxDecoration(borderRadius: KMyborder, color: Kdestinxwhite),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -255,7 +257,9 @@ class _TextinterviewState extends State<Textinterview> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) =>  Report(ans:answer,que:Interview_questions))));
+                                            builder: ((context) => Report(
+                                                ans: answers,
+                                                que: Interview_questions))));
                                   },
                                   child: const Text(
                                     "Submit answers",

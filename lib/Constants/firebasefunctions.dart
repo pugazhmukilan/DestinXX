@@ -1,13 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:destin/Loginpage.dart';
+import 'package:destin/AuthenticationPages/Loginpage.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
-import "constants.dart";
-import "main.dart";
+import "../constants.dart";
+import "../main.dart";
 
 Future<String> getCurrentUserEmail() async {
   try {
@@ -248,21 +249,18 @@ Future<String> saveData({required Uint8List file}) async {
   return resp;
 }
 
-
-
-
 ///DELETE THE DOCUMENT  FROM THE FIRESTORE FROM THE FIREBASE
-Future<void> deleteAccountAndSignOut(String documentId, BuildContext context) async {
+Future<void> deleteAccountAndSignOut(
+    String documentId, BuildContext context) async {
   try {
     prefs!.remove('email');
     prefs!.remove('password');
-    UserID="";
+    UserID = "";
     UserName = "";
     pic = "";
     // Get the reference to the document
-    DocumentReference documentReference = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(documentId);
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('Users').doc(documentId);
 
     // Delete the document
     await documentReference.delete();
@@ -283,10 +281,10 @@ Future<void> deleteAccountAndSignOut(String documentId, BuildContext context) as
     // Sign out after the document deletion and user account deletion are complete
     await FirebaseAuth.instance.signOut();
     Navigator.pop(context);
-                                Navigator.pop(context);
-                                // Navigate to the sign-in page or perform any other action
-                                Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => const Loginpage()));
+    Navigator.pop(context);
+    // Navigate to the sign-in page or perform any other action
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Loginpage()));
   } catch (e) {
     print('Error deleting document or user account: $e');
     // Handle the error appropriately, e.g., show an error message to the user

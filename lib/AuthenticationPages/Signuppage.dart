@@ -1,10 +1,10 @@
-import 'package:destin/firebasefunctions.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
+import 'package:destin/Home.dart';
+import 'package:destin/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import "Home.dart";
 import "Signinpage.dart";
-import 'constants.dart';
 
 final _auth = FirebaseAuth.instance;
 TextEditingController emailcontroller = TextEditingController();
@@ -133,8 +133,8 @@ class _SignuppageState extends State<Signuppage> {
               flex: 5,
               child: Container(
                 height: double.infinity,
-                decoration:
-                    BoxDecoration(color: Kmainboard, borderRadius: KMyborder),
+                decoration: BoxDecoration(
+                    color: Kdestinxwhite, borderRadius: KMyborder),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -386,9 +386,6 @@ class _SignuppageState extends State<Signuppage> {
                             const Text("Already have an account ?"),
                             GestureDetector(
                                 onTap: () {
-                                  emailcontroller.clear();
-                                  passwordcontroller.clear();
-                                  usernamecontroller.clear();
                                   Navigator.pop(context);
                                   Navigator.push(
                                       context,
@@ -459,7 +456,7 @@ class ErrorDialog1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Kmainboard,
+      backgroundColor: Kdestinxwhite,
       title: Text(title),
       content: Text(content),
       actions: [
