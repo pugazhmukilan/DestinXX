@@ -1,9 +1,11 @@
+
 import 'dart:ui';
 
-import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:percent_indicator/percent_indicator.dart';
+
+import '../constants.dart';
 
 double screenWidth = 0;
 int currentIndex = 0;
@@ -22,7 +24,7 @@ var response;
       "something question"
       "something question"
       "something question"
-      "something question"
+      "sog question"
       "something question"
 ];
 final List<String> answer = [
@@ -69,67 +71,90 @@ class _ReportState extends State<Report> {
     fetchData();
     print(ans);
     print(que);
-  }
 
+  }
   Future<void> fetchData() async {
+    print("hi");
+  var url = 'https://modeldeploy-prgrybkmta-el.a.run.app/submit';
+  var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
+  var body = {
+    'Question1': 'What is Object-Oriented Programming (OOP)?',
+    'Answer1':
+        'Object-Oriented Programming (OOP) is a programming paradigm based on the concept of objects, which can contain data in the form of fields and code in the form of procedures. It allows for the organization of code into reusable components and promotes concepts such as encapsulation, inheritance, and polymorphism.',
+    'Question2':
+        'Explain the difference between abstract class and interface in Java.',
+    'Answer2':
+        'An abstract class in Java is a class that cannot be instantiated and may contain abstract methods, concrete methods, or both. It can also have instance variables. An interface, on the other hand, is a reference type similar to a class but can only contain abstract methods, constants, and default methods. Classes can implement multiple interfaces but can only inherit from one abstract class.',
+    'Question3': 'What is the significance of the keyword "static" in Java?',
+    'Answer3':
+        'In Java, the "static" keyword is used to create variables and methods that belong to the class rather than instances of the class. Static variables are shared among all instances of the class, while static methods can be called without creating an instance of the class. Static methods cannot access non-static variables or methods directly.',
+    'Question4': 'How does exception handling work in Java?',
+    'Answer4':
+        'Exception handling in Java allows programmers to handle errors and unexpected situations gracefully. It involves using try, catch, and finally blocks to handle exceptions. When an exception occurs within the try block, it is caught by the corresponding catch block, where appropriate actions can be taken. The finally block is used to execute code that should always run, regardless of whether an exception occurred.',
+    'Question5': 'What is the difference between process and thread?',
+    'Answer5':
+        'In Java, a process is an independent unit of execution that has its own memory space and resources. It is managed by the operating system. On the other hand, a thread is a lightweight unit of execution within a process. Threads share the same memory space and resources as the process and can communicate with each other more efficiently than processes. Threads are managed by the Java Virtual Machine (JVM).',
+    'Question6': 'Explain the concept of a database transaction.',
+    'Answer6':
+        'A database transaction is a unit of work performed against a database management system (DBMS) that is treated as a single, indivisible operation. It consists of one or more SQL statements that are executed as a single unit. The transaction ensures the atomicity, consistency, isolation, and durability (ACID) properties of the database. Transactions are used to maintain data integrity and recoverability in databases.',
+    'Question7': 'What is RESTful web services?',
+    'Answer7':
+        'RESTful web services are a type of web service that adhere to the principles of Representational State Transfer (REST). They use standard HTTP methods such as GET, POST, PUT, DELETE to perform CRUD (Create, Read, Update, Delete) operations on resources. RESTful APIs are stateless, scalable, and platform-independent, making them ideal for building distributed systems and web applications.'
+  };
+
+  var response = await http.post(Uri.parse(url), headers: headers, body: body);
+
+  if (response.statusCode == 200) {
+    // Request successful, do something with the response.
+    print('Response: ${response.body}');
+  } else {
+    // Request failed, handle error.
+    print('Request failed with status: ${response.statusCode}');
+  }
+}
+
+
+ /* Future<void> fetchData() async {
     try {
       print("getting in tot the function");
       // Make POST request
-      final Uri uri =
-          Uri.parse('https://firstdeploy-cfxhxnpgwq-uc.a.run.app/submit');
+      final Uri uri = Uri.parse('https://modeldeploy-prgrybkmta-el.a.run.app');
+      print("uri converted");
       final http.Response httpResponse = await http.post(
         uri,
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        headers: {"Content-Type": "application/json"},
         body: {
           "Question1": "How does the Observer pattern work?",
-          "Answer1":
-              "The Observer pattern defines a one-to-many dependency between objects, so that when one object changes state, all its dependents are notified and updated automatically. It is commonly used in event handling systems.",
-          "Question2":
-              "Explain the concept of Continuous Integration (CI) and Continuous Deployment (CD).",
-          "Answer2":
-              "CI is the practice of regularly integrating code changes into a shared repository, followed by automated tests to detect integration issues. CD extends CI by automatically deploying the code to production if all tests pass.",
+          "Answer1": "The Observer pattern defines a one-to-many dependency between objects, so that when one object changes state, all its dependents are notified and updated automatically. It is commonly used in event handling systems.",
+          "Question2": "Explain the concept of Continuous Integration (CI) and Continuous Deployment (CD).",
+          "Answer2": "CI is the practice of regularly integrating code changes into a shared repository, followed by automated tests to detect integration issues. CD extends CI by automatically deploying the code to production if all tests pass.",
           "Question3": "What is Object-Oriented Programming (OOP)?",
-          "Answer3":
-              "OOP is a programming paradigm that structures code into objects, enhancing modularity and reusability.",
-          "Question4":
-              "Explain the difference between abstract class and interface in Java.",
-          "Answer4":
-              "Abstract classes can have both abstract and concrete methods, while interfaces only have abstract methods. A class can implement multiple interfaces, but it can inherit from only one abstract class.",
+          "Answer3": "OOP is a programming paradigm that structures code into objects, enhancing modularity and reusability.",
+          "Question4": "Explain the difference between abstract class and interface in Java.",
+          "Answer4": "Abstract classes can have both abstract and concrete methods, while interfaces only have abstract methods. A class can implement multiple interfaces, but it can inherit from only one abstract class.",
           "Question5": "Explain the concept of polymorphism.",
-          "Answer5":
-              "Polymorphism in object-oriented programming allows objects of different types to be treated as objects of a common type. It encompasses method overloading and method overriding. Method overloading involves defining multiple methods with the same name but different parameters in a class, while method overriding occurs when a subclass provides a specific implementation for a method defined in its superclass.",
-          "Question6":
-              "Explain the difference between GET and POST HTTP methods.",
-          "Answer6":
-              "GET is used to request data from a specified resource, while POST is used to submit data to be processed to a specified resource. POST is more secure and suitable for sensitive data.",
-          "Question7": "Explain the concept of Big O notation.",
-          "Answer7":
-              "Big O notation describes the upper bound on the time or space complexity of an algorithm in the worst-case scenario. It provides a way to analyze the efficiency of algorithms.",
+          "Answer5": "Polymorphism in object-oriented programming allows objects of different types to be treated as objects of a common type. It encompasses method overloading and method overriding. Method overloading involves defining multiple methods with the same name but different parameters in a class, while method overriding occurs when a subclass provides a specific implementation for a method defined in its superclass.",
+          "Question6":"Explain the difference between GET and POST HTTP methods.",
+          "Answer6":"GET is used to request data from a specified resource, while POST is used to submit data to be processed to a specified resource. POST is more secure and suitable for sensitive data.",
+          "Question7":"Explain the concept of Big O notation.",
+          "Answer7":"Big O notation describes the upper bound on the time or space complexity of an algorithm in the worst-case scenario. It provides a way to analyze the efficiency of algorithms.",
         },
       );
-
+      print("hi");
       // Check if request was successful
       print(httpResponse.statusCode);
       if (httpResponse.statusCode == 200) {
         setState(() {
           response = httpResponse.body;
-          print(
-              "===============================================================");
-          print(
-              "===============================================================");
-          print(
-              "===============================================================");
-          print(
-              "===============================================================");
+          print("===============================================================");
+          print("===============================================================");
+          print("===============================================================");
+          print("===============================================================");
           print(response);
-          print(
-              "===============================================================");
-          print(
-              "===============================================================");
-          print(
-              "===============================================================");
-          print(
-              "===============================================================");
+          print("===============================================================");
+          print("===============================================================");
+          print("===============================================================");
+          print("===============================================================");
         });
       } else {
         setState(() {
@@ -141,7 +166,7 @@ class _ReportState extends State<Report> {
         response = 'Error: $error';
       });
     }
-  }
+  }*/
 
   //late  Map<dynamic, dynamic> dataMap;
   List<String> ans;
@@ -174,53 +199,6 @@ class _ReportState extends State<Report> {
         backgroundColor: Colors.white,
       ),
 
-      /*bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Kbackgroundcolor,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.white,
-          selectedFontSize: 12,
-          unselectedFontSize: 10,
-          selectedIconTheme: const IconThemeData(size: 22),
-          items: const [
-           
-            BottomNavigationBarItem(
-                icon: Icon(Icons.meeting_room_outlined), label: "Download Report"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.file_copy_outlined), label: "Resume"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
-          ],
-          currentIndex: currentIndex,
-          onTap: (int newIndex) {
-            setState(
-              () {
-                currentIndex = newIndex;
-                print("index is equal to+++++++ $currentIndex");
-                if (currentIndex == 0) {
-                } else if (currentIndex == 1) {
-                 /* Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Interview()));*/
-                } else if (currentIndex == 2) {
-                 /* Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoadingPage()));*/
-                } else if (currentIndex == 3) {
-                  //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
-                  _showBottomAlertDialog(context);
-                }
-              },
-            );
-
-            shape:
-            const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
-            );
-          },
-        ),*/
 
       backgroundColor: Kdestinxwhite,
       body: Container(
@@ -266,9 +244,7 @@ class _ReportState extends State<Report> {
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 255, 255, 255)
                               .withOpacity(0.3),
-                          //color:const Color.fromARGB(7, 0, 0, 0),
-                          //color: Color.fromARGB(255, 239, 254, 239),
-                          //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
+                         
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             width: 2,
@@ -278,13 +254,13 @@ class _ReportState extends State<Report> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Overall analysis", style: Ktitletextstyle),
+                            Text("Overall analysis", style: Ktitletextstyle),//changeable
                             const Padding(
                               padding: EdgeInsets.only(top: 30),
                               child: percentage_indicator(
                                   percentage: 0.4,
                                   color: Colors.green,
-                                  text: "4/10"),
+                                  text: "4/10"),//changeable
                             ),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -340,7 +316,8 @@ class _ReportState extends State<Report> {
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                               child: percentage_indicator(
                                   percentage: 0.4,
-                                  color: Color.fromARGB(255, 218, 92, 241),
+                                  color:
+                                      Color.fromARGB(255, 218, 92, 241),
                                   text: "4/10"),
                             ),
                             const SizedBox(height: 10),
@@ -351,7 +328,8 @@ class _ReportState extends State<Report> {
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                               child: percentage_indicator(
                                   percentage: 0.6,
-                                  color: Color.fromARGB(255, 255, 216, 59),
+                                  color:
+                                      Color.fromARGB(255, 255, 216, 59),
                                   text: "6/10"),
                             ),
                             const SizedBox(height: 10),
@@ -392,16 +370,18 @@ class _ReportState extends State<Report> {
                     ),
                   ),
                 ),
+
                 GestureDetector(
-                  onTap: () {
+                  onTap: (){
                     fetchData();
+
                   },
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.orange),
-                    child: Text("fetch the data"),
+                  child:Container(
+                    decoration: BoxDecoration(color:Colors.orange),
+                    child:Text("fetch the data"),
                   ),
                 ),
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 3; i++)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15, top: 15),
                     child: ClipRect(
@@ -517,8 +497,7 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({
-    super.key,
+  FeaturesButton({super.key, 
     required this.startcolor,
     required this.endcolor,
     required this.subtext,

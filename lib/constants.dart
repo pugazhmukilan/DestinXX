@@ -5,6 +5,10 @@ import 'package:destin/InterviewPages/Interview_details_Page.dart';
 import 'package:destin/InterviewPages/Start_interview.dart';
 import 'package:flutter/material.dart';
 
+import "InterviewPages/Interview.dart";
+import "InterviewPages/Interview_details_Page.dart";
+import "InterviewPages/Start_interview.dart";
+
 String UserName = "";
 String pic = '';
 late String UserID;

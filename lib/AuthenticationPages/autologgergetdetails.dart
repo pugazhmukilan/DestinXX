@@ -4,6 +4,10 @@ import 'package:destin/constants.dart';
 import 'package:destin/main.dart';
 import 'package:flutter/material.dart';
 
+import "../Constants/firebasefunctions.dart";
+import "../constants.dart";
+import "../main.dart";
+
 class GetdetailsLoader extends StatefulWidget {
   const GetdetailsLoader({super.key});
 

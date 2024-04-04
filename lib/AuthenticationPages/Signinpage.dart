@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import "../Home.dart";
 import 'Signuppage.dart';
+import '../constants.dart';
 
 final _auth = FirebaseAuth.instance;
 

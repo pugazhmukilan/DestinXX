@@ -8,6 +8,11 @@ import "package:flutter/material.dart";
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import '../Constants/Questions.dart';
+import "../ErrorPages/nocamera.dart";
+import "../FeaturesPage/Report.dart";
+import "../constants.dart";
+import "../main.dart";
 import 'Interview.dart';
 
 late bool _speechEnabled;
@@ -165,6 +170,11 @@ class _StartinterviewState extends State<Startinterview> {
   }
 
   //speech to text part
+  @override
+  void dispose() {
+    super.dispose();
+    cameraController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

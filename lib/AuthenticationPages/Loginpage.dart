@@ -1,6 +1,7 @@
 import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import "Signinpage.dart";
 import "Signuppage.dart";
 

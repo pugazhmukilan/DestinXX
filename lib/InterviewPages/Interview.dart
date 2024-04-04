@@ -1,9 +1,14 @@
-import 'package:destin/FeaturesPage/Resume.dart';
-import 'package:destin/Home.dart';
+//import 'package:destin/backdropbox.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:destin/backdropbox.dart';
 import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../FeaturesPage/Resume.dart';
+import '../Home.dart';
+import '../constants.dart';
+
+bool Resume_detail_collecting = false;
 double screenWidth = 0;
 int currentIndex = 1;
 FocusNode _focusNode = FocusNode();
@@ -19,6 +24,30 @@ class Interview extends StatefulWidget {
 }
 
 class _InterviewState extends State<Interview> {
+  Future<String> getResumeDetails1(BuildContext context) async {
+    setState(() {
+      Resume_detail_collecting = true;
+    });
+
+    SavedName = await getFieldFromUserDocument("UserName");
+    print("new user name============================$SavedName");
+    Dob = await getFieldFromUserDocument("DBdob");
+    Phone = await getFieldFromUserDocument("DBphone");
+    Email = await getFieldFromUserDocument("DBemail");
+    Intro = await getFieldFromUserDocument("DBintro");
+    Skills = await getFieldFromUserDocument("DBskills");
+    Language = await getFieldFromUserDocument("DBlanguage");
+    Experience = await getFieldFromUserDocument("DBexperience");
+    Education = await getFieldFromUserDocument("DBeducation");
+    pic = await getUrlFromUserDocument("ProfilePic");
+    pic = pic;
+    print("=============================== retrived over");
+    setState(() {
+      Resume_detail_collecting = false;
+    });
+    return pic;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +92,7 @@ class _InterviewState extends State<Interview> {
           selectedFontSize: 12,
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
-          items: const [
+          items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
@@ -71,7 +100,10 @@ class _InterviewState extends State<Interview> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.file_copy_outlined), label: "Resume"),
+                icon: Resume_detail_collecting
+                    ? CircularProgressIndicator(color: Colors.grey)
+                    : Icon(Icons.file_copy_outlined),
+                label: "Resume"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
@@ -89,7 +121,9 @@ class _InterviewState extends State<Interview> {
                       MaterialPageRoute(builder: (context) => const Home()));
                 } else if (currentIndex == 1) {
                 } else if (currentIndex == 2) {
-                  getResumeDetails().then((value) => Navigator.push(context,
+                  print("pressed the 2 in the interview");
+                  getResumeDetails1(context).then((value) => Navigator.push(
+                      context,
                       MaterialPageRoute(builder: (context) => Resume())));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
@@ -164,82 +198,6 @@ class _InterviewState extends State<Interview> {
         ));
   }
 }
-
-// ignore: must_be_immutable
-
-/*class FeaturesButton extends StatelessWidget {
-  late Color startcolor;
-  late Color endcolor;
-  late String subtext;
-  late String maintext;
-  late String imagepath;
-  late Function() operation;
-  FeaturesButton({
-    super.key,
-    required this.startcolor,
-    required this.endcolor,
-    required this.subtext,
-    required this.maintext,
-    required this.imagepath,
-    required this.operation,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: operation,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
-        child: Container(
-          width: 400,
-          height: 150,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [startcolor, endcolor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-
-          //content inside the container
-          child: Padding(
-            //giving padding to the whole row to maintain the text properly
-            padding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(subtext,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black)),
-                    Text(maintext,
-                        style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w800,
-                            color: Color.fromARGB(255, 255, 255, 255))),
-                  ],
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                //container image
-                Image.asset(imagepath),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}*/
 
 void _showBottomAlertDialog(BuildContext context) {
   showDialog(

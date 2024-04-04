@@ -3,7 +3,10 @@ import 'package:destin/FeaturesPage/Report.dart';
 import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../Constants/Questions.dart';
 import 'Interview.dart';
+import "../FeaturesPage/Report.dart";
+import '../constants.dart';
 
 List<String> answers = [];
 Map<dynamic, dynamic> dictionary = {};

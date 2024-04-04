@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:destin/ApttitudeTestPage/quiz.dart';
 import 'package:destin/ApttitudeTestPage/quiztypes.dart';
-import 'package:destin/constants.dart';
 import 'package:flutter/material.dart';
 
-import "quiz.dart";
+import '../constants.dart';
 
 class LoadingAndQuizPage extends StatefulWidget {
   final String category;

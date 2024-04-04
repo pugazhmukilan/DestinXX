@@ -3,8 +3,6 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:destin/FeaturesPage/Resume.dart';
-import 'package:destin/InterviewPages/Interview.dart';
-
 import 'package:destin/Widgets/github_insta_creator.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'constants.dart';
 import "Constants/firebasefunctions.dart";
+import 'InterviewPages/Interview.dart';
+import 'backdropbox.dart';
+import 'constants.dart';
 import "main.dart";
 
 bool Resume_detail_collecting = false;
@@ -279,10 +279,14 @@ class HomeMain extends StatefulWidget {
 }
 
 class _HomeMainState extends State<HomeMain> {
+  final ScrollController _scrollController = ScrollController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  int currentIndex = 0;
   Future<String> getResumeDetails(BuildContext context) async {
     setState(() {
       Resume_detail_collecting = true;
     });
+
     SavedName = await getFieldFromUserDocument("UserName");
     print("new user name============================$SavedName");
     Dob = await getFieldFromUserDocument("DBdob");
@@ -295,16 +299,11 @@ class _HomeMainState extends State<HomeMain> {
     Education = await getFieldFromUserDocument("DBeducation");
     pic = await getUrlFromUserDocument("ProfilePic");
     pic = pic;
-
     setState(() {
       Resume_detail_collecting = false;
     });
     return pic;
   }
-
-  final ScrollController _scrollController = ScrollController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  int currentIndex = 0;
 
   @override
   void initState() {
