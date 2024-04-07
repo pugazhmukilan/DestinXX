@@ -1,15 +1,17 @@
+import 'package:destin/API/api_request.dart';
+import 'package:destin/FeaturesPage/Report.dart';
 import 'package:flutter/material.dart';
 
 import '../Constants/Questions.dart';
-import 'Interview.dart';
-import "../FeaturesPage/Report.dart";
 import '../constants.dart';
+import 'Interview.dart';
 
 List<String> answers = [];
 Map<dynamic, dynamic> dictionary = {};
 late List<String> Interview_questions;
 final List<TextEditingController> controllers = [];
-
+bool is_retriving = false;
+List<dynamic> result=[];
 class Textinterview extends StatefulWidget {
   final String type; // Add this line
 
@@ -116,165 +118,189 @@ class _TextinterviewState extends State<Textinterview> {
       ));
     }
     return Scaffold(
+      
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title:Text("Text Based Interview",style: Ktitletextstyle,
+        
+        ),
+        leading: IconButton(
+          onPressed: (){
+
+            Navigator.pop(context);
+          },
+          icon:Icon(Icons.arrow_back_ios)),),
       backgroundColor: Kbackgroundcolor,
-      body: Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: Container(
-          decoration: BoxDecoration(borderRadius: KMyborder, color: Kdestinxwhite),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            showConfirmationDialog(context);
-                          },
-                          icon: const Icon(Icons.arrow_back_ios)),
-                      Expanded(
-                          child: Text("Text based Interview",
-                              style: Ktitletextstyle)),
-                    ],
-                  ),
-                  Divider(
-                    indent: 0,
-                    endIndent: 0,
-                    color: Kgreylinecolor,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                "assets/image_assets/instruction.png",
-                                height: 200,
-                                width: 200,
-                              ),
+      
+      body: Container(
+        decoration: BoxDecoration( color: Kdestinxwhite),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+               /* Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          showConfirmationDialog(context);
+                          setState(() {
+                            is_retriving = false;
+                          });
+                          
+                        },
+                        icon: const Icon(Icons.arrow_back_ios)),
+                    Expanded(
+                        child: Text("Text based Interview",
+                            style: Ktitletextstyle)),
+                  ],
+                ),*/
+                
+                Expanded(
+                  child: Container(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Image.asset(
+                              "assets/image_assets/instruction.png",
+                              height: 200,
+                              width: 200,
                             ),
-                            const Column(
+                          ),
+                          const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("Instructions",
+                                  style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black)),
+                              SizedBox(height: 10),
+                              Text(
+                                "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+                                style: TextStyle(fontSize: 15),
+                                textAlign: TextAlign.justify,
+                              )
+                            ],
+                          ),
+                          Container(
+                              /*child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text("Instructions",
-                                    style: TextStyle(
-                                        fontFamily: "Inter",
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black)),
-                                SizedBox(height: 10),
-                                Text(
-                                  "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
-                                  style: TextStyle(fontSize: 15),
-                                  textAlign: TextAlign.justify,
-                                )
-                              ],
-                            ),
-                            Container(
-                                /*child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/image_assets/instruction.png",
-                                    height: 200,
-                                    width: 200,
-                                  ),
-                                  SizedBox(width: 30.0),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 100, left: 100),
-                                      child: Container(
-                                        width: 800,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text("Instructions",
-                                                style: TextStyle(
-                                                    fontFamily: "Inter",
-                                                    fontSize: 25,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black)),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
-                                              style: Kcommontextstyle,
-                                              textAlign: TextAlign.justify,
-                                            )
-                                          ],
-                                        ),
+                                Image.asset(
+                                  "assets/image_assets/instruction.png",
+                                  height: 200,
+                                  width: 200,
+                                ),
+                                SizedBox(width: 30.0),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 100, left: 100),
+                                    child: Container(
+                                      width: 800,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text("Instructions",
+                                              style: TextStyle(
+                                                  fontFamily: "Inter",
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.black)),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+                                            style: Kcommontextstyle,
+                                            textAlign: TextAlign.justify,
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),*/
                                 ),
-                            const SizedBox(
-                              height: 80,
-                            ),
-                            for (int i = 0; i < Interview_questions.length; i++)
-                              QuestionWidget(
-                                index: i,
-                                question: Interview_questions[i],
-                                controller: controllers[i],
+                              ],
+                            ),*/
                               ),
-                            const SizedBox(
-                              height: 30,
+                          const SizedBox(
+                            height: 80,
+                          ),
+                          for (int i = 0; i < Interview_questions.length-1; i++)
+                            QuestionWidget(
+                              index: i,
+                              question: Interview_questions[i],
+                              controller: controllers[i],
                             ),
-                            Center(
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
-                                    minimumSize: const Size(120, 60),
-                                  ),
-                                  onPressed: () async {
-                                    for (int i = 0;
-                                        i < controllers.length;
-                                        i++) {
-                                      print(
-                                          "====================================================================");
-                                      print(
-                                          "QUESTION $i =========== ${Interview_questions[i]}\n");
-                                      print(
-                                          " =========== ${controllers[i].text}\n");
-
-                                      answers.add(controllers[i]
-                                          .text); // Add user input to answers list
-                                    }
-
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: ((context) =>  Report(ans:answers,que:Interview_questions))));
-                                  },
-                                  child: const Text(
-                                    "Submit answers",
-                                    style: TextStyle(
-                                        fontFamily: "Inter",
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255)),
-                                  )),
-                            ),
-                          ],
-                        ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Center(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  minimumSize: const Size(120, 60),
+                                ),
+                                onPressed: () async {
+                                  for (int i = 0;
+                                      i < controllers.length-1;
+                                      i++) {
+                                    /*print(
+                                        "====================================================================");
+                                    print(
+                                        "QUESTION $i =========== ${Interview_questions[i]}\n");
+                                    print(
+                                        " =========== ${controllers[i].text}\n");*/
+      
+                                    answers.add(controllers[i]
+                                        .text); // Add user input to answers list
+                                  }
+                                  setState(() {
+                                    
+                                    is_retriving = true;
+                                  });
+                                  Callapi callapi = Callapi();
+                                  result = await callapi.fetchData(Interview_questions, answers, (bool isLoading) {
+                                    setState(() {
+                                      is_retriving = isLoading;
+                                    });
+                                  });
+                                  double score = callapi.calculate_overallscore(result);
+                                  setState(() {
+                                    is_retriving = false;
+                                  });
+      
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>  Report(result:result,overallscore:score))));
+                                },
+                                child: is_retriving? CircularProgressIndicator(color: Colors.white,):Text(
+                                  "Submit answers",
+                                  style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                )),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ]),
-          ),
+                ),
+              ]),
         ),
       ),
     );
