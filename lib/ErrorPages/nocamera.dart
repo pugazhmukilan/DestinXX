@@ -1,6 +1,5 @@
 import "package:destin/constants.dart";
 import "package:flutter/material.dart";
-import "../constants.dart";
 
 class Nocamera extends StatefulWidget {
   const Nocamera({super.key});

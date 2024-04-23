@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -155,7 +154,7 @@ class _ResumeState extends State<Resume> {
           selectedFontSize: 12,
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
@@ -211,8 +210,8 @@ class _ResumeState extends State<Resume> {
           Expanded(
             child: Container(
               height: double.infinity,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
                     opacity: 0.8,
                     image: AssetImage("assets/Page_assets/Report_page.png")),
                 color: Colors.white,
@@ -527,10 +526,10 @@ class _ResumeState extends State<Resume> {
                                   is_downloading = false;
                                 });
                               },
-                              child: Text("download")),
+                              child: const Text("download")),
                           Center(
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
                                   onPressed: () {
                                     setState(() {
@@ -551,7 +550,7 @@ class _ResumeState extends State<Resume> {
                                       ? CircularProgressIndicator(
                                           color: Kdestinxwhite,
                                         )
-                                      : Row(
+                                      : const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           crossAxisAlignment:

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:destin/FeaturesPage/Resume.dart';
+import 'package:destin/FeaturesPage/job.dart';
 import 'package:destin/Widgets/github_insta_creator.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -167,7 +168,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         ),
                         Text(
                           UserID,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             fontFamily: "JetBrainsMono",
                             color: Colors.white,
@@ -352,18 +353,18 @@ class _HomeMainState extends State<HomeMain> {
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
                 icon: Resume_detail_collecting
-                    ? CircularProgressIndicator(color: Colors.grey)
-                    : Icon(Icons.file_copy_outlined),
+                    ? const CircularProgressIndicator(color: Colors.grey)
+                    : const Icon(Icons.file_copy_outlined),
                 label: "Resume"),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,
@@ -386,7 +387,7 @@ class _HomeMainState extends State<HomeMain> {
                           builder: (context) => const LoadingPage()));*/
                   getResumeDetails(context).then((value) => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Resume())));
+                      MaterialPageRoute(builder: (context) => const Resume())));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   setState(() {
@@ -479,7 +480,7 @@ class _HomeMainState extends State<HomeMain> {
                                 ); // Display a loading indicator while fetching the image
                               } else if (snapshot.hasError) {
                                 print(Text('Error: ${snapshot.error}'));
-                                return Image(
+                                return const Image(
                                     image: AssetImage(
                                         'assets/image_assets/user_background.png'));
                               } else {
@@ -519,7 +520,10 @@ class _HomeMainState extends State<HomeMain> {
                         ImageFeaturesButton(
                             imagepath: "assets/Page_assets/Jobs_Button.png",
                             operation: () {
-                              _showBottomAlertDialog(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => jobpage()));
                               print("pressing the find your reports");
                             }),
                         ImageFeaturesButton(

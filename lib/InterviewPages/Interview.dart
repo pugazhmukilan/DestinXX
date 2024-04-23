@@ -93,18 +93,18 @@ class _InterviewState extends State<Interview> {
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
                 icon: Resume_detail_collecting
-                    ? CircularProgressIndicator(color: Colors.grey)
-                    : Icon(Icons.file_copy_outlined),
+                    ? const CircularProgressIndicator(color: Colors.grey)
+                    : const Icon(Icons.file_copy_outlined),
                 label: "Resume"),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,
@@ -124,7 +124,7 @@ class _InterviewState extends State<Interview> {
                   print("pressed the 2 in the interview");
                   getResumeDetails1(context).then((value) => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Resume())));
+                      MaterialPageRoute(builder: (context) => const Resume())));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);

@@ -5,14 +5,10 @@ import 'package:destin/InterviewPages/Interview_details_Page.dart';
 import 'package:destin/InterviewPages/Start_interview.dart';
 import 'package:flutter/material.dart';
 
-import "InterviewPages/Interview.dart";
-import "InterviewPages/Interview_details_Page.dart";
-import "InterviewPages/Start_interview.dart";
-
 String UserName = "";
 String pic = '';
 late String UserID;
-
+Color kjobbackgroundcolor = Color.fromARGB(255, 222, 222, 222);
 Color Kquizlinecolor = const Color.fromARGB(255, 219, 219, 219);
 Color Kdestinxblack = const Color.fromARGB(255, 29, 29, 29);
 Color Kdestinxorange = const Color.fromARGB(255, 255, 97, 24);

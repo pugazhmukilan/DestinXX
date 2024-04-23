@@ -20,7 +20,7 @@ class Git_insta_direct_box extends StatelessWidget {
       child: AlertDialog(
         
         backgroundColor:Kdestinxblack,
-        content: Container(
+        content: SizedBox(
           height:230,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -36,11 +36,11 @@ class Git_insta_direct_box extends StatelessWidget {
                                     color:Colors.white,
                                   ),
                                 ),
-              Divider(
+              const Divider(
                 indent:10,
                 endIndent: 10,
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
                   
               Social_media_info(media_logo: 'assets/logos/GitHub logo.png',media_name:'GitHub' ,link:github),
               Social_media_info(media_logo: 'assets/logos/linkedin logo.png',media_name:'Linkedin' ,link:linkedin),
@@ -84,7 +84,7 @@ class Social_media_info extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(media_logo,height:30),
-                SizedBox(width:20),
+                const SizedBox(width:20),
                 Text(media_name,style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: "JetBrainsMono",
@@ -101,8 +101,8 @@ class Social_media_info extends StatelessWidget {
 
 // ignore: unused_element
 Future<void> _launchUrl(String link) async {
-  final Uri _url = Uri.parse(link);
-  if (!await launchUrl(_url)) {
-    throw Exception('Could not launch $_url');
+  final Uri url = Uri.parse(link);
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
   }
 }

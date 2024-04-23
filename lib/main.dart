@@ -1,5 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:destin/AuthenticationPages/autologgergetdetails.dart';
+import 'package:destin/FeaturesPage/job.dart';
+import 'package:destin/testingpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +49,7 @@ class MainApp extends StatelessWidget {
       color: Kbackgroundcolor,
       home: Scaffold(
         body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
-        //body: Loginpage(),
+        // body: jobpage(),
       ),
     );
   }

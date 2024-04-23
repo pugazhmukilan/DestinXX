@@ -9,6 +9,194 @@ import 'package:flutter/material.dart';
 import "../constants.dart";
 import "../main.dart";
 
+//This firebase function is to retrieve the fields of the job and the hackathons
+Future<String> getFieldFromJob(String fieldName, String Subcollectiona) async {
+  print("=============================================$UserID");
+  try {
+    // Get the Firestore instance
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    CollectionReference<Map<String, dynamic>> documentRef =
+        firestore.collection('Companynames').doc('$User').collection('job');
+
+    // Reference to the specific user document
+    DocumentReference userDocument = documentRef.doc(UserID);
+
+    // Get the snapshot of the user document
+    DocumentSnapshot documentSnapshot = await userDocument.get();
+
+    // Check if the document exists and contains the specified field
+    if (documentSnapshot.exists && documentSnapshot.data() != null) {
+      Map<String, dynamic> userData =
+          documentSnapshot.data() as Map<String, dynamic>;
+
+      // Check if the field exists in the document
+      if (userData.containsKey(fieldName)) {
+        dynamic fieldValue = userData[fieldName];
+
+        print(
+            'Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
+        return fieldValue.toString(); // Assuming the field value is a String
+      } else {
+        print(
+            'Field $fieldName does not exist in user document with ID $UserID');
+        return null!;
+      }
+    } else {
+      print('User document with ID $UserID does not exist');
+      return null!;
+    }
+  } catch (error) {
+    print('Error getting field from user document: $error');
+    return "";
+  }
+}
+
+//This function is to retrive the field details
+Future<String> getFieldFromCompany(String fieldName) async {
+  print("=============================================$UserID");
+  try {
+    // Get the Firestore instance
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Reference to the "Users" collection
+    CollectionReference usersCollection = firestore.collection("Companynames");
+
+    // Reference to the specific user document
+    DocumentReference userDocument = usersCollection.doc(UserID);
+
+    // Get the snapshot of the user document
+    DocumentSnapshot documentSnapshot = await userDocument.get();
+
+    // Check if the document exists and contains the specified field
+    if (documentSnapshot.exists && documentSnapshot.data() != null) {
+      Map<String, dynamic> userData =
+          documentSnapshot.data() as Map<String, dynamic>;
+
+      // Check if the field exists in the document
+      if (userData.containsKey(fieldName)) {
+        dynamic fieldValue = userData[fieldName];
+
+        print(
+            'Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
+        return fieldValue.toString(); // Assuming the field value is a String
+      } else {
+        print(
+            'Field $fieldName does not exist in user document with ID $UserID');
+        return null!;
+      }
+    } else {
+      print('User document with ID $UserID does not exist');
+      return null!;
+    }
+  } catch (error) {
+    print('Error getting field from user document: $error');
+    return "";
+  }
+}
+
+//this is the firebase function used for adding the details of the company created when initiated
+Future<void> addfieldscompany(
+    String collectionName, String userID, String userName) async {
+  try {
+    // Get the Firestore instance
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Reference to the collection
+    CollectionReference collectionReference =
+        firestore.collection(collectionName);
+
+    // Create a map with specified fields initialized to null
+    Map<String, dynamic> data = {
+      'Name': null,
+      'CompanyName': null,
+      'Email': null,
+      'Logo': null,
+      'Companyphno': null,
+      'Description': null,
+      'Socialmedialinnks': null,
+      'Companyemail': null,
+    };
+
+    // Add the document with specified fields and user-defined document name
+    await collectionReference.doc(userID).set(data);
+
+    print(
+        'Document added successfully to $collectionName with UserName: $userName');
+  } catch (error) {
+    print('Error adding document: $error');
+  }
+}
+//This is the firebase function used for the adding of the new Hackathon
+
+Future<void> createhackathon(String Companyemail, String Jobtype) async {
+  // Reference to the Firestore instance
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  try {
+    // Reference to the document where you want to create the collection
+    final CollectionReference<Map<String, dynamic>> documentRef = firestore
+        .collection('Companynames')
+        .doc('$Companyemail')
+        .collection('hackathon');
+
+    Map<String, dynamic> data = {
+      'UserName': null,
+      'DBdate': null,
+      'DBmonth': null,
+      'DByear': null,
+      'DBintro': null,
+      'DBexperience': null,
+      'DBeducation': null,
+      'DBskills': null,
+      'DBimage': null,
+      'DBlanguage': null,
+      'ProfilePic': null
+    };
+    //Here you have to check for adding the date and timnestamp
+
+    await documentRef.doc('$Jobtype').set(
+        data); //Here the set data is used for the setting of data to the documents
+
+    print('Collection created successfully!');
+  } catch (e) {
+    print('Error creating collection: $e');
+  }
+}
+
+//Firebase function used to add the new job
+Future<void> createjob(String Companyemail, String Jobtype) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  try {
+    // Reference to the document where you want to create the collection
+
+    CollectionReference<Map<String, dynamic>> documentRef = firestore
+        .collection('Companynames')
+        .doc('$Companyemail')
+        .collection('job');
+
+    Map<String, dynamic> data = {
+      'JobName': null,
+      'Email': null,
+      'JobLocationType': null,
+      'CTC': null,
+      'Skills': null,
+      'Experience': null,
+      'Location': null,
+      'Tags': null,
+      'Tools': null,
+      'JobRole': null,
+      'StartDate': null
+    };
+    await documentRef.doc('$Jobtype').set(data);
+
+    print('Collection created successfully!');
+  } catch (e) {
+    print('Error creating collection: $e');
+  }
+}
+
 Future<String> getCurrentUserEmail() async {
   try {
     // Get the current user from FirebaseAuth

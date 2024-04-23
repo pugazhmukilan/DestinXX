@@ -4,8 +4,6 @@ import 'package:destin/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import "../Home.dart";
-import '../constants.dart';
 import "Signinpage.dart";
 
 final _auth = FirebaseAuth.instance;
