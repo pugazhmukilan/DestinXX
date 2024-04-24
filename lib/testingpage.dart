@@ -21,7 +21,7 @@ class _testingpageState extends State<testingpage> {
                 child: ElevatedButton(
                     onPressed: () {
                       addfieldscompany(
-                          'Companynames', 'google@gmail.com', 'Sankar');
+                          'Companynames', 'something@gmail.com', 'Sankar');
                     },
                     child: const Text("Press")),
               ),
@@ -32,7 +32,7 @@ class _testingpageState extends State<testingpage> {
                   child: const Text("Press")),
               ElevatedButton(
                   onPressed: () {
-                    createjob('google@gmail.com', 'Designer');
+                    createjob('something@gmail.com', 'Designer');
                   },
                   child: const Text("Press")),
             ],

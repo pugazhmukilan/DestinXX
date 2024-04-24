@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:destin/FeaturesPage/Resume.dart';
 import 'package:destin/FeaturesPage/job.dart';
 import 'package:destin/Widgets/github_insta_creator.dart';
+import 'package:destin/testingpage.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -530,6 +531,10 @@ class _HomeMainState extends State<HomeMain> {
                             imagepath:
                                 "assets/Page_assets/Internship Button.png",
                             operation: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => testingpage()));
                               _showBottomAlertDialog(context);
                               print("pressing the find your reports");
                             }),

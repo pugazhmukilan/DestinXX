@@ -9,46 +9,86 @@ import 'package:flutter/material.dart';
 import "../constants.dart";
 import "../main.dart";
 
+fetchDocuments(String collectionname) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference<Map<String, dynamic>> collectionReference =
+      firestore.collection('$collectionname');
+  QuerySnapshot querySnapshot = await collectionReference.get();
+  List<String> documentNames = [];
+  querySnapshot.docs.forEach((doc) {
+    documentNames.add(doc.id);
+  });
+  print(documentNames.join(','));
+  return documentNames;
+}
+
 //This firebase function is to retrieve the fields of the job and the hackathons
-Future<String> getFieldFromJob(String fieldName, String Subcollectiona) async {
+Future<List<String>> getFieldFromJob(
+    String fieldName, String Subcollectiona) async {
   print("=============================================$UserID");
   try {
     // Get the Firestore instance
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+    //String DocumentsName = fetchDocuments('Companynames');
+    // print('$DocumentsName');
+    List<String> emailAddresses = [
+      'something@gmail.com',
+      'google@gmail.com',
+      'something@gmail.com',
+      'tcs@gmail.com'
+    ];
 
-    CollectionReference<Map<String, dynamic>> documentRef =
-        firestore.collection('Companynames').doc('$User').collection('job');
-
-    // Reference to the specific user document
-    DocumentReference userDocument = documentRef.doc(UserID);
-
-    // Get the snapshot of the user document
-    DocumentSnapshot documentSnapshot = await userDocument.get();
-
-    // Check if the document exists and contains the specified field
-    if (documentSnapshot.exists && documentSnapshot.data() != null) {
-      Map<String, dynamic> userData =
-          documentSnapshot.data() as Map<String, dynamic>;
-
-      // Check if the field exists in the document
-      if (userData.containsKey(fieldName)) {
-        dynamic fieldValue = userData[fieldName];
-
-        print(
-            'Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
-        return fieldValue.toString(); // Assuming the field value is a String
-      } else {
-        print(
-            'Field $fieldName does not exist in user document with ID $UserID');
-        return null!;
-      }
-    } else {
-      print('User document with ID $UserID does not exist');
-      return null!;
+    List<DocumentReference<Map<String, dynamic>>> documentRefs = [];
+    List<String> Fields = [];
+    for (int i = 0; i < emailAddresses.length; i++) {
+      DocumentReference<Map<String, dynamic>> documentRef1 =
+          firestore.collection('Companynames').doc(emailAddresses[i]);
+      documentRefs.add(documentRef1);
     }
+
+    for (int i = 0; i < documentRefs.length; i++) {
+      CollectionReference<Map<String, dynamic>> documentRef =
+          documentRefs[i].collection('$Subcollectiona');
+      DocumentReference userDocument = documentRef.doc('Designer');
+
+      // Get the snapshot of the user document
+      DocumentSnapshot documentSnapshot = await userDocument.get();
+
+      // Check if the document exists and contains the specified field
+      if (documentSnapshot.exists && documentSnapshot.data() != null) {
+        Map<String, dynamic> userData =
+            documentSnapshot.data() as Map<String, dynamic>;
+
+        // Check if the field exists in the document
+        if (userData.containsKey(fieldName)) {
+          dynamic fieldValue = userData[fieldName];
+
+          print(
+              'Field $fieldName retrieved from user document with ID $UserID: $fieldValue');
+
+          Fields.add(fieldValue.toString());
+          print(
+              "-------------------------------------------------------------------$Fields");
+
+          // Assuming the field value is a String
+        } else {
+          print(
+              'Field $fieldName does not exist in user document with ID $UserID');
+          print('####################################$Fields');
+          return Fields;
+        }
+      } else {
+        print('User document with ID $UserID does not exist');
+        print('######################################$Fields');
+        return Fields;
+      }
+    }
+
+    return Fields;
+// Now you have a list of DocumentReference objects
   } catch (error) {
     print('Error getting field from user document: $error');
-    return "";
+    return [];
   }
 }
 
@@ -177,17 +217,17 @@ Future<void> createjob(String Companyemail, String Jobtype) async {
         .collection('job');
 
     Map<String, dynamic> data = {
-      'JobName': null,
-      'Email': null,
-      'JobLocationType': null,
-      'CTC': null,
-      'Skills': null,
-      'Experience': null,
-      'Location': null,
-      'Tags': null,
-      'Tools': null,
-      'JobRole': null,
-      'StartDate': null
+      'JobName': "Flutter dev",
+      'Email': 'something@gmail.com',
+      'JobLocationType': 'Andaman',
+      'CTC': '80000',
+      'Skills': 'dart',
+      'Experience': 'no need',
+      'Location': 'mumbai',
+      'Tags': 'job',
+      'Tools': 'dart,vs code',
+      'JobRole': 'Flutter dev',
+      'StartDate': '25.07.2026'
     };
     await documentRef.doc('$Jobtype').set(data);
 
