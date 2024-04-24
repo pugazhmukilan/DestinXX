@@ -159,11 +159,11 @@ class _jobpageState extends State<jobpage> {
                           return Container(
                               height: 180,
                               decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 247, 243, 1),
+                                color: Color.fromRGBO(255, 255, 255, 1),
                                 border: Border.all(
-                                    width: 2,
-                                    color: Color.fromARGB(255, 176, 84,
-                                        19)), // Rectangular border
+                                    width: 3,
+                                    color: Color.fromARGB(
+                                        255, 29, 28, 25)), // Rectangular border
                                 borderRadius: BorderRadius.circular(
                                     8.0), // Border radius for rounded corners
                                 // Background color
@@ -188,7 +188,7 @@ class _jobpageState extends State<jobpage> {
                                           children: [
                                             CircleAvatar(
                                               radius:
-                                                  16.5, //Here we have to add the logo of the company
+                                                  11.5, //Here we have to add the logo of the company
                                             ),
                                             SizedBox(
                                               width: 9,
@@ -197,7 +197,7 @@ class _jobpageState extends State<jobpage> {
                                               items[index],
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   fontWeight: FontWeight
                                                       .w500), // Text color
                                             ),
@@ -211,7 +211,7 @@ class _jobpageState extends State<jobpage> {
                                                   color: Color.fromARGB(
                                                       255, 0, 0, 0),
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: 12),
+                                                  fontSize: 10),
                                             ),
                                           ),
                                           height: 20,
@@ -223,18 +223,18 @@ class _jobpageState extends State<jobpage> {
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                               color: Color.fromRGBO(
-                                                  255, 169, 119, 1)),
+                                                  255, 221, 0, 1)),
                                         )
                                       ],
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 1.0, left: 40, bottom: 2),
+                                          left: 40, bottom: 2),
                                       child: Text(CompanyName[index],
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
-                                              fontSize: 15)),
+                                              fontSize: 12)),
                                     ),
                                     Row(
                                       children: [
@@ -250,7 +250,7 @@ class _jobpageState extends State<jobpage> {
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w400,
-                                                  fontSize: 14)),
+                                                  fontSize: 10)),
                                         )
                                       ],
                                     ),
@@ -263,6 +263,7 @@ class _jobpageState extends State<jobpage> {
                                           Row(
                                             children: [
                                               Icon(
+                                                size: 18,
                                                 Icons.calendar_month_outlined,
                                                 color: const Color.fromARGB(
                                                     255, 107, 107, 107),
@@ -275,7 +276,7 @@ class _jobpageState extends State<jobpage> {
                                                         color: Colors.black,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        fontSize: 14)),
+                                                        fontSize: 10)),
                                               ),
                                             ],
                                           ),
@@ -283,9 +284,9 @@ class _jobpageState extends State<jobpage> {
                                             children: [
                                               Image.asset(
                                                 'assets/icon_assets/Cash.png',
-                                                height: 25,
+                                                height: 23,
                                                 color: Colors.black,
-                                                width: 40,
+                                                width: 28,
                                                 fit: BoxFit.cover,
                                               ),
                                               Text(CTC[index],
@@ -293,16 +294,16 @@ class _jobpageState extends State<jobpage> {
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontSize: 14)),
+                                                      fontSize: 10)),
                                             ],
                                           ),
                                           Row(
                                             children: [
                                               Image.asset(
                                                 'assets/icon_assets/Business.png',
-                                                height: 25,
+                                                height: 23,
                                                 color: Colors.black,
-                                                width: 40,
+                                                width: 30,
                                                 fit: BoxFit.contain,
                                               ),
                                               Text(Experience[index],
@@ -310,7 +311,7 @@ class _jobpageState extends State<jobpage> {
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontSize: 14)),
+                                                      fontSize: 10)),
                                             ],
                                           ),
                                         ],
@@ -325,10 +326,12 @@ class _jobpageState extends State<jobpage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            height: 30,
-                                            width: 120,
+                                            height: 25,
+                                            width: 80,
                                             child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
+                                                    maximumSize: Size(80, 30),
+                                                    minimumSize: Size(80, 25),
                                                     backgroundColor:
                                                         Color.fromARGB(
                                                             255, 86, 237, 59)),
@@ -337,7 +340,7 @@ class _jobpageState extends State<jobpage> {
                                                 child: Text(
                                                   'APPLY',
                                                   style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 10,
                                                       color: Colors.white),
                                                 )),
                                           ),
@@ -345,10 +348,12 @@ class _jobpageState extends State<jobpage> {
                                             width: 10,
                                           ),
                                           Container(
-                                            height: 30,
-                                            width: 120,
+                                            height: 25,
+                                            width: 110,
                                             child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
+                                                    maximumSize: Size(90, 30),
+                                                    minimumSize: Size(80, 25),
                                                     shape:
                                                         RoundedRectangleBorder(
                                                             borderRadius:
@@ -362,7 +367,7 @@ class _jobpageState extends State<jobpage> {
                                                 child: Text(
                                                   'View Details',
                                                   style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 10,
                                                       color: Colors.white),
                                                 )),
                                           )
