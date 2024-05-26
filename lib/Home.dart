@@ -69,24 +69,26 @@ class _HomeState extends State<Home> {
         body: SliderDrawer(
       key: _sliderDrawerkey,
       appBar: SliderAppBar(
-        drawerIcon: null,
+        drawerIconColor: Kdestinxwhite,
         //trailing: Image.asset('assets/Page_assets/appbar_main.png',height: 50,),
-        appBarHeight: 100,
-        appBarColor: Colors.white,
+        appBarHeight: 80,
+        appBarColor:Kdestinxblack,
         /* flexibleSpace:
               Image.asset("assets/Page_assets/appbar_main.png", height: 300),*/
 
         //backgroundColor: Color.fromARGB(255, 255, 254, 254),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 46),
-            Image.asset("assets/logos/Mobile_firstPgeText.png", height: 20),
+            Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 35),
+            Image.asset("assets/logos/DESTINX.png", height: 25),
             const SizedBox(
               width: 10,
             ),
           ],
         ),
-        trailing: null,
+        trailing: IconButton(onPressed: (){}, icon: Icon(Icons.logout_outlined)),
       ),
       slider: const MenuWidget(),
       child: const HomeMain(),
@@ -143,7 +145,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 return Text('Error: ${snapshot.error}');
                               } else {
                                 return CircleAvatar(
-                                  radius: 50,
+                                  radius: 60,
                                   backgroundImage: NetworkImage(snapshot
                                       .data!), // Display the image using NetworkImage
                                 );
@@ -156,8 +158,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                           child: Text(
                             UserName,
                             style: const TextStyle(
-                              fontSize: 16,
-                              fontFamily: "JetBrainsMono",
+                              fontSize: 20,
+                              fontFamily: "Inter",
                               color:Colors.white,
                             ),
                           ),
@@ -434,7 +436,7 @@ class _HomeMainState extends State<HomeMain> {
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20),
+            padding: const EdgeInsets.only(right: 20, left: 20,top: 20),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,10 +454,10 @@ class _HomeMainState extends State<HomeMain> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Hello...\u{1F44B}",
-                                  style: Kcommontextstyle),
+                                  style:TextStyle(fontSize: 20)),
                               Text(
                                 UserName,
-                                style: Ktitletextstyle,
+                                style:TextStyle(fontSize:25,fontWeight: FontWeight.w500),
                               )
                             ],
                           ),
@@ -475,7 +477,7 @@ class _HomeMainState extends State<HomeMain> {
                                 return Text('Error: ${snapshot.error}');
                               } else {
                                 return CircleAvatar(
-                                  radius: 50,
+                                  radius: 40,
                                   backgroundImage: NetworkImage(snapshot
                                       .data!), // Display the image using NetworkImage
                                 );
@@ -485,7 +487,7 @@ class _HomeMainState extends State<HomeMain> {
                         )
                       ]),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   Text(
                     "Features",
                     style: Kcommontextstyle,

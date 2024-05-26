@@ -17,7 +17,7 @@ late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
-List<dynamic> results=[];
+late Map<String,dynamic> result;
 
 late CameraController cameraController;
 
@@ -108,6 +108,7 @@ class _StartinterviewState extends State<Startinterview> {
       labelCount++;
     });
   }
+  
 
 //TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
   void _initSpeech() async {
@@ -296,12 +297,12 @@ class _StartinterviewState extends State<Startinterview> {
 
                     //FECTHING THE INFROMATIO USING THE API CALLS
                     Callapi callapi = Callapi();
-                    results = await callapi.fetchData(Interview_questions, answers, (bool isLoading) {
+                    result = await callapi.fetchData(Interview_questions, answers, (bool isLoading) {
                       setState(() {
                         is_retriving = isLoading;
                       });
                     });
-                     double score = callapi.calculate_overallscore(results);
+                     //double score = callapi.calculateOverallScore(results);
                     setState(() {
                       
                       is_retriving=false;
@@ -314,7 +315,7 @@ class _StartinterviewState extends State<Startinterview> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) => Report(
-                                result:results,overallscore:score))));
+                                result:result,overallscore:0.2))));
                     
                   } else {
                     setState(() {
@@ -326,7 +327,7 @@ class _StartinterviewState extends State<Startinterview> {
                       //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
                       if (_speechEnabled == true) {}
                       question_increment++;
-                      if (question_increment ==6) {
+                      if (question_increment ==7) {
                         //print(dictionary);
                         next_button_live = false;
                       }
