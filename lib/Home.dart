@@ -88,7 +88,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        trailing: IconButton(onPressed: (){}, icon: Icon(Icons.logout_outlined)),
+        trailing: IconButton(onPressed: (){signOut(context);}, icon: Icon(Icons.logout_outlined)),
       ),
       slider: const MenuWidget(),
       child: const HomeMain(),
@@ -312,6 +312,7 @@ class _HomeMainState extends State<HomeMain> {
   @override
   void initState() {
     super.initState();
+    getResumeDetails(context);
 
     setdetails();
     print("===============================$UserName");
@@ -364,7 +365,9 @@ class _HomeMainState extends State<HomeMain> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
-                icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                icon:Icon(Icons.file_copy_outlined), label: "Resume"),
+                
             BottomNavigationBarItem(
                 icon:  Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
@@ -386,8 +389,8 @@ class _HomeMainState extends State<HomeMain> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoadingPage()));*/
-                          getResumeDetails(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
-                          
+                          //getResumeDetails(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume()));
                           
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME

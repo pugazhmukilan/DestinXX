@@ -101,7 +101,9 @@ Future<String> getResumeDetails1( BuildContext context) async {
             BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
              BottomNavigationBarItem(
-                icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                icon:Icon(Icons.file_copy_outlined), label: "Resume"),
+                
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
@@ -120,8 +122,8 @@ Future<String> getResumeDetails1( BuildContext context) async {
                 } else if (currentIndex == 1) {
                 } else if (currentIndex == 2) {
                   print("pressed the 2 in the interview");
-                  getResumeDetails1(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
-              
+                  //getResumeDetails1(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
