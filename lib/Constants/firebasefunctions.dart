@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destin/AuthenticationPages/Loginpage.dart';
+import 'package:destin/backdropbox.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -88,10 +89,12 @@ Future<String> getUserName(String userID) async {
       return data['UserName'];
     } else {
       print('Document or UserName field not found for UserID: $userID');
+      // ignore: null_check_always_fails
       return null!;
     }
   } catch (error) {
     print('Error getting UserName: $error');
+    // ignore: null_check_always_fails
     return null!;
   }
 }
@@ -291,4 +294,45 @@ Future<void> deleteAccountAndSignOut(String documentId, BuildContext context) as
     print('Error deleting document or user account: $e');
     // Handle the error appropriately, e.g., show an error message to the user
   }
+}
+//    Future<String> getResumeDetails( BuildContext context) async {
+//     // setState(() {
+//     //   Resume_detail_collecting=true;
+      
+//     // });
+    
+//     SavedName = await getFieldFromUserDocument("UserName");
+//     print("new user name============================$SavedName");
+//     Dob = await getFieldFromUserDocument("DBdob");
+//     Phone = await getFieldFromUserDocument("DBphone");
+//     Email = await getFieldFromUserDocument("DBemail");
+//     Intro = await getFieldFromUserDocument("DBintro");
+//     Skills = await getFieldFromUserDocument("DBskills");
+//     Language = await getFieldFromUserDocument("DBlanguage");
+//     Experience = await getFieldFromUserDocument("DBexperience");
+//     Education = await getFieldFromUserDocument("DBeducation");
+//     pic = await getUrlFromUserDocument("ProfilePic");
+//     pic = pic;
+//     // setState(() {
+//     //   Resume_detail_collecting=false;
+      
+//     // });
+//     return pic;
+// }
+
+Future<String> getResumeDetails() async {
+  SavedName = await getFieldFromUserDocument("UserName");
+  Dob = await getFieldFromUserDocument("DBdob");
+  Email = await getFieldFromUserDocument("DBemail");
+  Phone = await getFieldFromUserDocument("DBphone");
+  Intro = await getFieldFromUserDocument("DBintro");
+  Skills = await getFieldFromUserDocument("DBskills");
+  Language = await getFieldFromUserDocument("DBlanguage");
+  Experience = await getFieldFromUserDocument("DBexperience");
+  Education = await getFieldFromUserDocument("DBeducation");
+  pic = await getUrlFromUserDocument("ProfilePic");
+  return pic;
+  //print(pic);
+  //print(Phone);
+  //print(Skills);
 }

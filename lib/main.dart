@@ -1,11 +1,11 @@
 import 'package:camera/camera.dart';
-import 'package:destin/AuthenticationPages/autologgergetdetails.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'AuthenticationPages/Loginpage.dart';
+import 'AuthenticationPages/autologgergetdetails.dart';
 import 'Constants/firebase_options.dart';
 import 'constants.dart';
 
@@ -33,7 +33,7 @@ Future<void> main() async {
   }
 
   runApp(MainApp(isloggedin));
-  //runApp(const MainApp());
+  // runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {

@@ -1,6 +1,4 @@
 //import 'package:destin/backdropbox.dart';
-import 'package:destin/Constants/firebasefunctions.dart';
-import 'package:destin/backdropbox.dart';
 import 'package:flutter/material.dart';
 
 import '../FeaturesPage/Resume.dart';
@@ -24,31 +22,6 @@ class Interview extends StatefulWidget {
 class _InterviewState extends State<Interview> {
 
 
-Future<String> getResumeDetails1( BuildContext context) async {
-  setState(() {
-    Resume_detail_collecting=true;
-    
-  });
-  
-  SavedName = await getFieldFromUserDocument("UserName");
-  print("new user name============================$SavedName");
-  Dob = await getFieldFromUserDocument("DBdob");
-  Phone = await getFieldFromUserDocument("DBphone");
-  Email = await getFieldFromUserDocument("DBemail");
-  Intro = await getFieldFromUserDocument("DBintro");
-  Skills = await getFieldFromUserDocument("DBskills");
-  Language = await getFieldFromUserDocument("DBlanguage");
-  Experience = await getFieldFromUserDocument("DBexperience");
-  Education = await getFieldFromUserDocument("DBeducation");
-  pic = await getUrlFromUserDocument("ProfilePic");
-  pic = pic;
-  print("=============================== retrived over");
-  setState(() {
-    Resume_detail_collecting=false;
-    
-  });
-  return pic;
-}
     @override
   void initState() {
     super.initState();
@@ -75,6 +48,8 @@ Future<String> getResumeDetails1( BuildContext context) async {
     }
     setState(() {
       mainlist = filteredList;
+      print("printing the main lsit");
+      print(mainlist);
     });
   }
 

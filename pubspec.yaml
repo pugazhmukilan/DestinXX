@@ -45,6 +45,8 @@ flutter:
     - assets/logos/Mobile_LoginPageLogo.png
     - assets/logos/
     - assets/Page_assets/
+    - assets/stack_image/
+    - assets/InterviewPage_stack_image/
   fonts:
     - family: Inter
       fonts:
