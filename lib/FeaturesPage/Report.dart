@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -8,8 +7,8 @@ import '../constants.dart';
 
 double screenWidth = 0;
 int currentIndex = 0;
-List <dynamic> results=[];
-double overallscore=0.0;
+late Map<String, dynamic> result;
+double overallscore = 0.0;
 //final List<String> question = [];
 //final List<String> answer = [];
 //create a map of string and string
@@ -57,29 +56,24 @@ final List<String> feedback = [
 
 class Report extends StatefulWidget {
   //late  Map<dynamic, dynamic> dataMap;
-  List<dynamic> result;
+  Map<String, dynamic> result;
   double overallscore;
-  Report({super.key, required this.result,required this.overallscore});
+  Report({super.key, required this.result, required this.overallscore});
   @override
-  State<Report> createState() => _ReportState(result:result,overallscore:overallscore);
+  State<Report> createState() =>
+      _ReportState(result: result, overallscore: overallscore);
 }
 
 class _ReportState extends State<Report> {
- 
   @override
   void initState() {
     super.initState();
     print(result);
-       
-    
- 
   }
-  
 
-
-  List<dynamic> result;
+  Map<String, dynamic> result;
   double overallscore;
-  _ReportState({required this.result,required this.overallscore});
+  _ReportState({required this.result, required this.overallscore});
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -106,8 +100,6 @@ class _ReportState extends State<Report> {
         ),
         backgroundColor: Colors.white,
       ),
-
-
       backgroundColor: Kdestinxwhite,
       body: Container(
         decoration: const BoxDecoration(
@@ -116,255 +108,226 @@ class _ReportState extends State<Report> {
           fit: BoxFit.cover,
         )),
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10, right: 8, left: 8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    const Image(
-                      image: AssetImage(
-                          "assets/image_assets/reportpage_image.png"),
-                      height: 150,
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: const Text(
-                          "Thank you for your participation in the interview.Your insights and enthusiasm for the position were greatly appreciated",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                            fontSize: 13,
-                          ),
-                          textAlign: TextAlign.justify,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  const Image(
+                    image:
+                        AssetImage("assets/image_assets/reportpage_image.png"),
+                    height: 150,
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: const Text(
+                        "Thank you for your participation in the interview.Your insights and enthusiasm for the position were greatly appreciated",
+                        style: TextStyle(
+                          fontFamily: "Inter",
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                          fontSize: 13,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
-                  ],
-                ),
-                ClipRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255)
-                              .withOpacity(0.3),
-                         
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            width: 2,
-                            color: const Color.fromARGB(255, 255, 97, 24),
-                          )),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text("Overall analysis", style: Ktitletextstyle),//changeable
-                             Padding(
-                              padding: const EdgeInsets.only(top: 30),
-                              child: percentage_indicator(
-                                  percentage: overallscore,
-                                  color: Colors.green,
-                                  text: "${overallscore*10}/10"),//changeable
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Expanded(
-                                child: Text(
-                                  "Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress.",
-                                  style: Kreporttextstyle,
-                                  textAlign: TextAlign.justify,
-                                ),
+                  ),
+                ],
+              ),
+              ClipRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 255, 255, 255)
+                            .withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          width: 2,
+                          color: const Color.fromARGB(255, 255, 97, 24),
+                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text("Overall analysis",
+                              style: Ktitletextstyle), //changeable
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30),
+                            child: percentage_indicator(
+                                percentage: overallscore,
+                                color: Colors.green,
+                                text: "${overallscore * 10}/10"), //changeable
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Expanded(
+                              child: Text(
+                                "Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress.",
+                                style: Kreporttextstyle,
+                                textAlign: TextAlign.justify,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
-                ClipRect(
+              ),
+              const SizedBox(height: 30),
+              ClipRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        //color: Color.fromARGB(255, 255, 240, 225),
+                        //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          width: 2,
+                          color: const Color.fromARGB(255, 255, 97, 24),
+                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Center(
+                              child: Text(
+                            "Details",
+                            style: Ktitletextstyle,
+                          )),
+                          const SizedBox(height: 15),
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                            child: percentage_indicator(
+                                percentage: 0.8,
+                                color: Colors.orange,
+                                text: "8/10"),
+                          ),
+                          const SizedBox(height: 10),
+                          Text("Confidence", style: Kcommontextstyle),
+
+                          //TBD
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                            child: percentage_indicator(
+                                percentage: 0.4,
+                                color: Color.fromARGB(255, 218, 92, 241),
+                                text: "4/10"),
+                          ),
+                          const SizedBox(height: 10),
+                          Text("TBD", style: Kcommontextstyle),
+
+                          //FLUENCY
+                          const Padding(
+                            padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                            child: percentage_indicator(
+                                percentage: 0.6,
+                                color: Color.fromARGB(255, 255, 216, 59),
+                                text: "6/10"),
+                          ),
+                          const SizedBox(height: 10),
+                          Text("Fluency", style: Kcommontextstyle),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                     child: Container(
                       decoration: BoxDecoration(
+                          image: const DecorationImage(
+                              image: AssetImage(
+                                  "assets/Page_assets/Question_analysis_bg.png")),
                           //color: Color.fromARGB(255, 255, 240, 225),
                           //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             width: 2,
-                            color: const Color.fromARGB(255, 255, 97, 24),
+                            color: const Color.fromARGB(0, 0, 0, 0),
                           )),
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 30),
+                        child: Center(
+                            child: Text(
+                          "Question analysis",
+                          style: Ktitletextstyle,
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              /*GestureDetector(
+                onTap: (){
+                 
+          
+                },
+                child:Container(
+                  decoration: BoxDecoration(color:Colors.orange),
+                  child:Text("fetch the data"),
+                ),
+              ),*/
+              for (int i = 0; i < result['data'].length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15, top: 15),
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(255, 238, 227, 0.24),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            width: 2,
+                            color: const Color.fromARGB(255, 255, 97, 24),
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(10.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Center(
-                                child: Text(
-                              "Details",
-                              style: Ktitletextstyle,
-                            )),
-                            const SizedBox(height: 15),
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-                              child: percentage_indicator(
-                                  percentage: 0.8,
-                                  color: Colors.orange,
-                                  text: "8/10"),
+                            Text(
+                              "question ${i + 1}",
+                              style: const TextStyle(
+                                fontFamily: "Inter",
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.justify,
                             ),
                             const SizedBox(height: 10),
-                            Text("Confidence", style: Kcommontextstyle),
-
-                            //TBD
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-                              child: percentage_indicator(
-                                  percentage: 0.4,
-                                  color:
-                                      Color.fromARGB(255, 218, 92, 241),
-                                  text: "4/10"),
+                            const Divider(
+                              color: Color.fromARGB(255, 255, 189, 159),
                             ),
-                            const SizedBox(height: 10),
-                            Text("TBD", style: Kcommontextstyle),
-
-                            //FLUENCY
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-                              child: percentage_indicator(
-                                  percentage: 0.6,
-                                  color:
-                                      Color.fromARGB(255, 255, 216, 59),
-                                  text: "6/10"),
+                            const SizedBox(height: 6),
+                            Text(
+                              result['data'][i] ?? 'Depth not available',
+                              style: const TextStyle(
+                                fontFamily: "Inter",
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.justify,
                             ),
-                            const SizedBox(height: 10),
-                            Text("Fluency", style: Kcommontextstyle),
+                            //
                           ],
                         ),
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage(
-                                    "assets/Page_assets/Question_analysis_bg.png")),
-                            //color: Color.fromARGB(255, 255, 240, 225),
-                            //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              width: 2,
-                              color: const Color.fromARGB(0, 0, 0, 0),
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 30),
-                          child: Center(
-                              child: Text(
-                            "Question analysis",
-                            style: Ktitletextstyle,
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                /*GestureDetector(
-                  onTap: (){
-                   
-
-                  },
-                  child:Container(
-                    decoration: BoxDecoration(color:Colors.orange),
-                    child:Text("fetch the data"),
-                  ),
-                ),*/
-                for (int i = 0; i < result.length; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15, top: 15),
-                    child: ClipRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(255, 238, 227, 0.24),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              width: 2,
-                              color: const Color.fromARGB(255, 255, 97, 24),
-                            ),
-                          ),
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "question",
-                                style: TextStyle(
-                                  fontFamily: "Inter",
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                textAlign: TextAlign.justify,
-                              ),
-                              const SizedBox(height: 10),
-                              
-                              const Divider(
-                                color: Color.fromARGB(255, 255, 189, 159),
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                "Your Score : ${(result[i]['Similarity']*10).toStringAsFixed(1)} / 10",
-                                style: const TextStyle(
-                                  fontFamily: "Inter",
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.justify,
-                              ),
-                              const Divider(
-                                color: Color.fromARGB(255, 255, 189, 159),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 3),
-                                child: Text(
-                                  "Feedback :",
-                                  style: TextStyle(
-                                    fontFamily: "Inter",
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ),
-                              Text(
-                                result[i]['Feedback'],
-                                style: const TextStyle(
-                                  fontFamily: "Inter",
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                                textAlign: TextAlign.justify,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+            ],
           ),
         ),
       ),
@@ -412,7 +375,8 @@ class FeaturesButton extends StatelessWidget {
   late String maintext;
   late String imagepath;
   late Function() operation;
-  FeaturesButton({super.key, 
+  FeaturesButton({
+    super.key,
     required this.startcolor,
     required this.endcolor,
     required this.subtext,

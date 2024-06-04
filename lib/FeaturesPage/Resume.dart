@@ -31,31 +31,6 @@ class _ResumeState extends State<Resume> {
     //getResumeDetails(context);
   }
 
-  /* Future<String> getResumeDetails( BuildContext context) async {
-  setState(() {
-    Resume_detail_collecting=true;
-    
-  });
-  
-  SavedName = await getFieldFromUserDocument("UserName");
-  print("new user name============================$SavedName");
-  Dob = await getFieldFromUserDocument("DBdob");
-  Phone = await getFieldFromUserDocument("DBphone");
-  Email = await getFieldFromUserDocument("DBemail");
-  Intro = await getFieldFromUserDocument("DBintro");
-  Skills = await getFieldFromUserDocument("DBskills");
-  Language = await getFieldFromUserDocument("DBlanguage");
-  Experience = await getFieldFromUserDocument("DBexperience");
-  Education = await getFieldFromUserDocument("DBeducation");
-  pic = await getUrlFromUserDocument("ProfilePic");
-  pic = pic;
-  setState(() {
-    Resume_detail_collecting=false;
-    
-  });
-  return pic;
-}*/
-
   void _showDatePicker() {
     showDatePicker(
       context: context,
@@ -213,7 +188,7 @@ class _ResumeState extends State<Resume> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                     opacity: 0.8,
-                    image: AssetImage("assets/Page_assets/Report_page.png")),
+                    image: AssetImage("assets/Page_assets/report_bg.png")),
                 color: Colors.white,
               ), // THIS IS THE BOX DECORATION OF THE BACKGROUND OF THE RESUME
               child: Padding(
@@ -269,14 +244,19 @@ class _ResumeState extends State<Resume> {
                                             Positioned(
                                                 bottom: 0,
                                                 right: 0,
-                                                child: IconButton(
-                                                  onPressed: () async {
-                                                    selectImage();
-                                                    //setting the profile pic
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.add_a_photo_rounded,
-                                                    size: 25,
+                                                child: CircleAvatar(
+                                                  radius: 16,
+                                                  backgroundColor: Colors.white,
+                                                  child: IconButton(
+                                                    onPressed: () async {
+                                                      selectImage();
+                                                      //setting the profile pic
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.add_a_photo_rounded,
+                                                      color: Colors.black,
+                                                      size: 21,
+                                                    ),
                                                   ),
                                                 ))
                                           ]),
@@ -290,15 +270,14 @@ class _ResumeState extends State<Resume> {
                                   children: [
                                     const SizedBox(height: 50),
                                     backdropfield(
-                                      editor: "Name",
-                                      Title: "Name",
-                                      textcontroller: Nametexteditor,
-                                      hint_text: "Type your name..",
-                                      max_lines: 1,
-                                      max_length: 0,
-                                      height: 40,
-                                      width: 180,
-                                    ),
+                                        editor: "Name",
+                                        Title: "Name",
+                                        textcontroller: Nametexteditor,
+                                        hint_text: "Type your name..",
+                                        max_lines: 1,
+                                        max_length: 0,
+                                        height: 52,
+                                        width: 180),
                                     //TEXTEDITOR
                                     const SizedBox(height: 10),
 
@@ -386,7 +365,7 @@ class _ResumeState extends State<Resume> {
                           //INTRODUCTION AND EDUCATION COLUMN
                           ////INTRODUCTION AND EDUCATION COLUMN
                           /////INTRODUCTION AND EDUCATION COLUMN
-
+                          /// EMAIL
                           Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Column(
@@ -396,7 +375,7 @@ class _ResumeState extends State<Resume> {
                                 backdropfield(
                                     editor: "Email",
                                     Title: "Email",
-                                    textcontroller: emailcontroller,
+                                    textcontroller: Emailtexteditor,
                                     hint_text: "Email..",
                                     max_lines: 1,
                                     max_length: 0,
@@ -516,17 +495,7 @@ class _ResumeState extends State<Resume> {
                           //SAVE BUTTON
                           //SAVE BUTTON
                           //SAVE BUTTON
-                          ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  is_downloading = true;
-                                });
 
-                                setState(() {
-                                  is_downloading = false;
-                                });
-                              },
-                              child: const Text("download")),
                           Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

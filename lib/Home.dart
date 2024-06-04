@@ -3,9 +3,8 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:destin/FeaturesPage/Resume.dart';
-import 'package:destin/FeaturesPage/job.dart';
+import 'package:destin/Widgets/Stack_widgets.dart';
 import 'package:destin/Widgets/github_insta_creator.dart';
-import 'package:destin/testingpage.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,83 +14,65 @@ import 'package:image_picker/image_picker.dart';
 
 import "Constants/firebasefunctions.dart";
 import 'InterviewPages/Interview.dart';
-import 'backdropbox.dart';
 import 'constants.dart';
-import "main.dart";
 
-bool Resume_detail_collecting = false;
-double screenWidth = 0;
-int currentIndex = 0;
 final GlobalKey<SliderDrawerState> _sliderDrawerkey =
     GlobalKey<SliderDrawerState>();
-Future<void> setdetails() async {
-  UserID = prefs!.getString("email").toString();
-  //getthe username
-  UserName = await getUserName(UserID);
-  pic = await getUrlFromUserDocument("ProfilePic");
-}
 
-Future<String> loadImage() async {
-  pic = await getUrlFromUserDocument("ProfilePic");
-  return pic;
-}
+// Future<String> loadImage() async {
+//   pic = await getUrlFromUserDocument("ProfilePic");
+//   return pic;
+// }
 
 class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
-
-  /* static void signOut(BuildContext context) {
-
-    try {
-      signOut(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Signinpage()));
-      print("User signed out");
-    } catch (e) {
-      print("Error signing out: $e");
-    }
-  }*/
 }
 
 class _HomeState extends State<Home> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getResumeDetails();
+  // }
   final GlobalKey<SliderDrawerState> _sliderDrawerkey =
       GlobalKey<SliderDrawerState>();
-  /*Future<void> _signOut() async {
-    try {
-      signOut(context);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Signinpage()));
-      print("User signed out");
-    } catch (e) {
-      print("Error signing out: $e");
-    }
-  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SliderDrawer(
       key: _sliderDrawerkey,
       appBar: SliderAppBar(
-        drawerIcon: null,
+        drawerIconColor: Kdestinxwhite,
         //trailing: Image.asset('assets/Page_assets/appbar_main.png',height: 50,),
-        appBarHeight: 100,
-        appBarColor: Colors.white,
+        appBarHeight: 80,
+        appBarColor: Kdestinxblack,
         /* flexibleSpace:
               Image.asset("assets/Page_assets/appbar_main.png", height: 300),*/
 
         //backgroundColor: Color.fromARGB(255, 255, 254, 254),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 46),
-            Image.asset("assets/logos/Mobile_firstPgeText.png", height: 20),
+            Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 35),
+            Image.asset("assets/logos/DESTINX.png", height: 25),
             const SizedBox(
               width: 10,
             ),
           ],
         ),
-        trailing: null,
+        trailing: IconButton(
+            onPressed: () {
+              signOut(context);
+            },
+            icon: const Icon(
+              Icons.logout_outlined,
+              color: Colors.white,
+            )),
       ),
       slider: const MenuWidget(),
       child: const HomeMain(),
@@ -107,6 +88,12 @@ class MenuWidget extends StatefulWidget {
 }
 
 class _MenuWidgetState extends State<MenuWidget> {
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   getResumeDetails();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,36 +120,42 @@ class _MenuWidgetState extends State<MenuWidget> {
                         top: 8, bottom: 8, right: 5, left: 5),
                     child: Column(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: FutureBuilder<String>(
-                            future:
-                                loadImage(), // Replace 'loadImage()' with your function that fetches the image URL
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator(); // Display a loading indicator while fetching the image
-                              } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              } else {
-                                return CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage: NetworkImage(snapshot
-                                      .data!), // Display the image using NetworkImage
-                                );
-                              }
-                            },
-                          ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     setState(() {});
+                        //   },
+                        //   child: FutureBuilder<String>(
+                        //     future:
+                        //         loadImage(), // Replace 'loadImage()' with your function that fetches the image URL
+                        //     builder: (context, snapshot) {
+                        //       if (snapshot.connectionState ==
+                        //           ConnectionState.waiting) {
+                        //         return const CircularProgressIndicator(); // Display a loading indicator while fetching the image
+                        //       } else if (snapshot.hasError) {
+                        //         return Text('Error: ${snapshot.error}');
+                        //       } else {
+                        //         return CircleAvatar(
+                        //           radius: 60,
+                        //           foregroundImage: NetworkImage(pic),
+                        //           // backgroundImage: NetworkImage(snapshot
+                        //           //     .data!), // Display the image using NetworkImage
+                        //         );
+                        //       }
+                        //     },
+                        //   ),
+                        // ),
+
+                        CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(pic),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 12),
                           child: Text(
                             UserName,
                             style: const TextStyle(
-                              fontSize: 16,
-                              fontFamily: "JetBrainsMono",
+                              fontSize: 20,
+                              fontFamily: "Inter",
                               color: Colors.white,
                             ),
                           ),
@@ -284,35 +277,14 @@ class _HomeMainState extends State<HomeMain> {
   final ScrollController _scrollController = ScrollController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   int currentIndex = 0;
-  Future<String> getResumeDetails(BuildContext context) async {
-    setState(() {
-      Resume_detail_collecting = true;
-    });
-
-    SavedName = await getFieldFromUserDocument("UserName");
-    print("new user name============================$SavedName");
-    Dob = await getFieldFromUserDocument("DBdob");
-    Phone = await getFieldFromUserDocument("DBphone");
-    Email = await getFieldFromUserDocument("DBemail");
-    Intro = await getFieldFromUserDocument("DBintro");
-    Skills = await getFieldFromUserDocument("DBskills");
-    Language = await getFieldFromUserDocument("DBlanguage");
-    Experience = await getFieldFromUserDocument("DBexperience");
-    Education = await getFieldFromUserDocument("DBeducation");
-    pic = await getUrlFromUserDocument("ProfilePic");
-    pic = pic;
-    setState(() {
-      Resume_detail_collecting = false;
-    });
-    return pic;
-  }
 
   @override
   void initState() {
     super.initState();
+    getResumeDetails();
 
-    setdetails();
-    print("===============================$UserName");
+    // setdetails();
+    // print("===============================$UserName");
   }
 
   Uint8List? _image1;
@@ -353,19 +325,18 @@ class _HomeMainState extends State<HomeMain> {
           selectedFontSize: 12,
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
-                icon: Resume_detail_collecting
-                    ? const CircularProgressIndicator(color: Colors.grey)
-                    : const Icon(Icons.file_copy_outlined),
+                //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                icon: Icon(Icons.file_copy_outlined),
                 label: "Resume"),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,
@@ -386,9 +357,9 @@ class _HomeMainState extends State<HomeMain> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoadingPage()));*/
-                  getResumeDetails(context).then((value) => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Resume())));
+                  //getResumeDetails(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Resume()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   setState(() {
@@ -437,7 +408,7 @@ class _HomeMainState extends State<HomeMain> {
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20),
+            padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -454,11 +425,12 @@ class _HomeMainState extends State<HomeMain> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Hello...\u{1F44B}",
-                                  style: Kcommontextstyle),
+                              const Text("Hello...\u{1F44B}",
+                                  style: TextStyle(fontSize: 20)),
                               Text(
                                 UserName,
-                                style: Ktitletextstyle,
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.w500),
                               )
                             ],
                           ),
@@ -467,36 +439,13 @@ class _HomeMainState extends State<HomeMain> {
                           width: 20,
                         ),
                         Expanded(
-                          child: FutureBuilder<String>(
-                            future:
-                                loadImage(), // Replace 'loadImage()' with your function that fetches the image URL
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return CircleAvatar(
-                                  child: Center(
-                                      child: CircularProgressIndicator(
-                                    color: Kdestinxorange,
-                                  )),
-                                ); // Display a loading indicator while fetching the image
-                              } else if (snapshot.hasError) {
-                                print(Text('Error: ${snapshot.error}'));
-                                return const Image(
-                                    image: AssetImage(
-                                        'assets/image_assets/user_background.png'));
-                              } else {
-                                return CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage: NetworkImage(snapshot
-                                      .data!), // Display the image using NetworkImage
-                                );
-                              }
-                            },
-                          ),
-                        )
+                            child: CircleAvatar(
+                          radius: 40,
+                          foregroundImage: NetworkImage(pic),
+                        ))
                       ]),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   Text(
                     "Features",
                     style: Kcommontextstyle,
@@ -512,58 +461,187 @@ class _HomeMainState extends State<HomeMain> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ImageFeaturesButton(
-                            imagepath: "assets/Page_assets/Reports_Button.png",
-                            operation: () {
-                              _showBottomAlertDialog(context);
-                              print("pressing the find your reports");
-                            }),
-                        ImageFeaturesButton(
-                            imagepath: "assets/Page_assets/Jobs_Button.png",
-                            operation: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => jobpage()));
-                              print("pressing the find your reports");
-                            }),
-                        ImageFeaturesButton(
-                            imagepath:
-                                "assets/Page_assets/Internship Button.png",
-                            operation: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => testingpage()));
-                              _showBottomAlertDialog(context);
-                              print("pressing the find your reports");
-                            }),
-                        ImageFeaturesButton(
-                            imagepath:
-                                "assets/Page_assets/Hackathons button.png",
-                            operation: () {
-                              _showBottomAlertDialog(context);
-                              print("pressing the find your reports");
-                            }),
-                        ImageFeaturesButton(
-                            imagepath: "assets/Page_assets/Job_News.png",
-                            operation: () {
-                              _showBottomAlertDialog(context);
-                              print("pressing the find your reports");
-                            }),
+                        StackWidgets(
+                          containerHeight: 113,
+                          containerWidth: 250,
+                          text1Style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter"),
+                          text2Style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          containerColor:
+                              const Color.fromARGB(255, 255, 241, 202),
+                          stackImage:
+                              "assets/stack_image/interview_stack_image.png",
+                          waterMarkImage:
+                              "assets/stack_image/interview_watermark.png",
+                          stackImageLeft: 65,
+                          stackImageSize: 4,
+                          stackImageTop: 0,
+                          watermarkLeft: 0,
+                          watermarkTop: 5,
+                          text1: "Find your",
+                          text2: "Interview",
+                          borderRadius: 10,
+                          text_left: 20,
+                          ontapp: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Interview()));
+                          },
+                        ),
+                        StackWidgets(
+                          containerHeight: 113,
+                          containerWidth: 250,
+                          text1Style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter"),
+                          text2Style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          containerColor:
+                              const Color.fromARGB(255, 223, 247, 229),
+                          stackImage:
+                              "assets/stack_image/reports_stack_image.png",
+                          waterMarkImage:
+                              "assets/stack_image/reports_watermark.png",
+                          stackImageLeft: 138,
+                          stackImageSize: 4,
+                          stackImageTop: 0,
+                          watermarkLeft: 0,
+                          watermarkTop: 5,
+                          text1: "Find your",
+                          text2: "Reports",
+                          borderRadius: 10,
+                          text_left: 20,
+                          ontapp: () {
+                            _showBottomAlertDialog(context);
+                          },
+                        ),
+                        StackWidgets(
+                          containerHeight: 113,
+                          containerWidth: 250,
+                          text1Style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter"),
+                          text2Style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          containerColor:
+                              const Color.fromARGB(255, 246, 191, 255),
+                          stackImage: "assets/stack_image/jobs_stack_image.png",
+                          waterMarkImage:
+                              "assets/stack_image/jobs_watermark.png",
+                          stackImageLeft: 115,
+                          stackImageSize: 4,
+                          stackImageTop: 0,
+                          watermarkLeft: 0,
+                          watermarkTop: 5,
+                          text1: "Find your",
+                          text2: "Jobs",
+                          borderRadius: 10,
+                          text_left: 20,
+                          ontapp: () {
+                            _showBottomAlertDialog(context);
+                          },
+                        ),
+                        StackWidgets(
+                          containerHeight: 113,
+                          containerWidth: 250,
+                          text1Style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter"),
+                          text2Style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          containerColor:
+                              const Color.fromARGB(255, 222, 255, 231),
+                          stackImage:
+                              "assets/stack_image/job_news_stack_image.png",
+                          waterMarkImage:
+                              "assets/stack_image/job_news_watermark.png",
+                          stackImageLeft: 120,
+                          stackImageSize: 4,
+                          stackImageTop: 0,
+                          watermarkLeft: 0,
+                          watermarkTop: 5,
+                          text1: "Find your",
+                          text2: "Job news",
+                          borderRadius: 10,
+                          text_left: 20,
+                          ontapp: () {
+                            _showBottomAlertDialog(context);
+                          },
+                        ),
+                        StackWidgets(
+                          containerHeight: 113,
+                          containerWidth: 250,
+                          text1Style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter"),
+                          text2Style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          containerColor:
+                              const Color.fromARGB(255, 253, 198, 185),
+                          stackImage: "assets/stack_image/quiz_stack_image.png",
+                          waterMarkImage:
+                              "assets/stack_image/quiz_watermark.png",
+                          stackImageLeft: 115,
+                          stackImageSize: 4,
+                          stackImageTop: 0,
+                          watermarkLeft: 0,
+                          watermarkTop: 5,
+                          text1: "Find your",
+                          text2: "Jobs",
+                          borderRadius: 10,
+                          text_left: 20,
+                          ontapp: () {
+                            _showBottomAlertDialog(context);
+                          },
+                        ),
                       ],
                     ),
                   ),
+                  StackWidgets(
+                    containerHeight: 130,
+                    containerWidth: double.infinity,
+                    text1Style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Inter"),
+                    text2Style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
+                    containerColor: const Color.fromARGB(255, 255, 234, 234),
+                    stackImage:
+                        "assets/stack_image/start_interview_stack_image.png",
+                    waterMarkImage:
+                        "assets/stack_image/start_interview_watermark.png",
+                    stackImageLeft: 140,
+                    stackImageSize: 4,
+                    stackImageTop: 5,
+                    watermarkLeft: 0,
+                    watermarkTop: 10,
+                    text1: "Start your",
+                    text2: "Interview",
+                    borderRadius: 10,
+                    text_left: 20,
+                    ontapp: () {
+                      _showBottomAlertDialog(context);
+                    },
+                  ),
 
-                  ImageFeaturesButton(
-                      imagepath:
-                          "assets/Page_assets/Start_Interview_Button.png",
-                      operation: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => const Interview())));
-                      }),
+                  // ImageFeaturesButton(
+                  //     imagepath:
+                  //         "assets/Page_assets/Start_Interview_Button.png",
+                  //     operation: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: ((context) => const Interview())));
+                  //     }),
                   Row(
                     children: [
                       Image.asset("assets/Page_assets/faangtextimage.png",
@@ -579,11 +657,93 @@ class _HomeMainState extends State<HomeMain> {
                     color: Kgreycolor_light,
                   ),
 
-                  ImageFeaturesButton(
-                      imagepath: "assets/Page_assets/FAANG Button.png",
-                      operation: () {
+                  // StackWidgets(
+                  //                     containerHeight: 130,
+                  //                     containerWidth: double.infinity,
+                  //                     text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  //                     text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  //                     containerColor: Color.fromARGB(255, 245, 245, 245),
+                  //                     stackImage: "assets/stack_image/faang_stack_image.png",
+                  //                     waterMarkImage: "assets/stack_image/faang_watermark.png",
+                  //                     stackImageLeft: 130/2,
+                  //                     stackImageSize:4,
+                  //                     stackImageTop: 30,
+                  //                     watermarkLeft: 0,
+
+                  //                     watermarkTop: 10,
+                  //                     text1: "Start your",
+                  //                     text2: "Interview",
+                  //                     borderRadius: 10,
+                  //                     text_left:20,
+                  //                     ontapp: (){
+                  //                       _showBottomAlertDialog(context);
+                  //                                                             },
+                  //                   ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      onTap: () {
                         _showBottomAlertDialog(context);
-                      }),
+                      },
+                      child: Container(
+                        height: 130,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: const Color.fromARGB(255, 245, 245, 245),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 98, 98, 98)
+                                  .withOpacity(0.3), // Shadow color
+                              spreadRadius:
+                                  0.7, // How wide the shadow should be
+                              blurRadius: 4, // How soft the shadow should be
+                              offset: const Offset(
+                                  1, 2.5), // Changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Positioned(
+                                child: Opacity(
+                                    opacity: 1,
+                                    child: Image.asset(
+                                        "assets/stack_image/faang_watermark.png",
+                                        scale: 3)),
+                              ),
+                            ),
+                            Center(
+                              child: Positioned(
+                                child: Image.asset(
+                                  "assets/stack_image/faang_stack_image.png",
+                                  scale: 3.5,
+                                ),
+                              ),
+                            ),
+                            const Positioned(
+                              top: 90,
+                              left: 110,
+                              child: Text(
+                                "Interview",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Inter"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // ImageFeaturesButton(
+                  //     imagepath: "assets/Page_assets/FAANG Button.png",
+                  //     operation: () {
+                  //       _showBottomAlertDialog(context);
+                  //     }),
 
                   //BOTTOM BOTTOM BOTTOM
                   const Text("Made with\nCare!",

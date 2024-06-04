@@ -1,7 +1,4 @@
 //import 'package:destin/backdropbox.dart';
-import 'package:destin/Constants/firebasefunctions.dart';
-import 'package:destin/backdropbox.dart';
-
 import 'package:flutter/material.dart';
 
 import '../FeaturesPage/Resume.dart';
@@ -24,30 +21,6 @@ class Interview extends StatefulWidget {
 }
 
 class _InterviewState extends State<Interview> {
-  Future<String> getResumeDetails1(BuildContext context) async {
-    setState(() {
-      Resume_detail_collecting = true;
-    });
-
-    SavedName = await getFieldFromUserDocument("UserName");
-    print("new user name============================$SavedName");
-    Dob = await getFieldFromUserDocument("DBdob");
-    Phone = await getFieldFromUserDocument("DBphone");
-    Email = await getFieldFromUserDocument("DBemail");
-    Intro = await getFieldFromUserDocument("DBintro");
-    Skills = await getFieldFromUserDocument("DBskills");
-    Language = await getFieldFromUserDocument("DBlanguage");
-    Experience = await getFieldFromUserDocument("DBexperience");
-    Education = await getFieldFromUserDocument("DBeducation");
-    pic = await getUrlFromUserDocument("ProfilePic");
-    pic = pic;
-    print("=============================== retrived over");
-    setState(() {
-      Resume_detail_collecting = false;
-    });
-    return pic;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -74,6 +47,8 @@ class _InterviewState extends State<Interview> {
     }
     setState(() {
       mainlist = filteredList;
+      print("printing the main lsit");
+      print(mainlist);
     });
   }
 
@@ -99,10 +74,9 @@ class _InterviewState extends State<Interview> {
             ),
             const BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
-            BottomNavigationBarItem(
-                icon: Resume_detail_collecting
-                    ? const CircularProgressIndicator(color: Colors.grey)
-                    : const Icon(Icons.file_copy_outlined),
+            const BottomNavigationBarItem(
+                //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                icon: Icon(Icons.file_copy_outlined),
                 label: "Resume"),
             const BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
@@ -122,9 +96,9 @@ class _InterviewState extends State<Interview> {
                 } else if (currentIndex == 1) {
                 } else if (currentIndex == 2) {
                   print("pressed the 2 in the interview");
-                  getResumeDetails1(context).then((value) => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Resume())));
+                  //getResumeDetails1(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Resume()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);

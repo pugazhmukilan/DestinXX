@@ -1,8 +1,8 @@
 import 'package:destin/API/api_request.dart';
-import 'package:destin/FeaturesPage/Report.dart';
 import 'package:flutter/material.dart';
 
 import '../Constants/Questions.dart';
+import '../FeaturesPage/Report.dart';
 import '../constants.dart';
 import 'Interview.dart';
 
@@ -11,7 +11,7 @@ Map<dynamic, dynamic> dictionary = {};
 late List<String> Interview_questions;
 final List<TextEditingController> controllers = [];
 bool is_retriving = false;
-List<dynamic> result = [];
+late Map<String, dynamic> result;
 
 class Textinterview extends StatefulWidget {
   final String type; // Add this line
@@ -129,7 +129,7 @@ class _TextinterviewState extends State<Textinterview> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios)),
+            icon: const Icon(Icons.arrow_back_ios)),
       ),
       backgroundColor: Kbackgroundcolor,
       body: Container(
@@ -278,24 +278,23 @@ class _TextinterviewState extends State<Textinterview> {
                                       is_retriving = isLoading;
                                     });
                                   });
-                                  double score =
-                                      callapi.calculate_overallscore(result);
+                                  //double score = callapi.calculateOverallScore(result);
                                   setState(() {
                                     is_retriving = false;
                                   });
-
+                                  //Navigator.push(context,MaterialPageRoute(builder: (context)=>dummy(data : result)));
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: ((context) => Report(
                                               result: result,
-                                              overallscore: score))));
+                                              overallscore: 0.2))));
                                 },
                                 child: is_retriving
-                                    ? CircularProgressIndicator(
+                                    ? const CircularProgressIndicator(
                                         color: Colors.white,
                                       )
-                                    : Text(
+                                    : const Text(
                                         "Submit answers",
                                         style: TextStyle(
                                             fontFamily: "Inter",

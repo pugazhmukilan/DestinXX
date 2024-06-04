@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destin/AuthenticationPages/Loginpage.dart';
+import 'package:destin/backdropbox.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,12 @@ import "../main.dart";
 fetchDocuments(String collectionname) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference<Map<String, dynamic>> collectionReference =
-      firestore.collection('$collectionname');
+      firestore.collection(collectionname);
   QuerySnapshot querySnapshot = await collectionReference.get();
   List<String> documentNames = [];
-  querySnapshot.docs.forEach((doc) {
+  for (var doc in querySnapshot.docs) {
     documentNames.add(doc.id);
-  });
+  }
   print(documentNames.join(','));
   return documentNames;
 }
@@ -48,7 +49,7 @@ Future<List<String>> getFieldFromJob(
 
     for (int i = 0; i < documentRefs.length; i++) {
       CollectionReference<Map<String, dynamic>> documentRef =
-          documentRefs[i].collection('$Subcollectiona');
+          documentRefs[i].collection(Subcollectiona);
       DocumentReference userDocument = documentRef.doc('Designer');
 
       // Get the snapshot of the user document
@@ -177,7 +178,7 @@ Future<void> createhackathon(String Companyemail, String Jobtype) async {
     // Reference to the document where you want to create the collection
     final CollectionReference<Map<String, dynamic>> documentRef = firestore
         .collection('Companynames')
-        .doc('$Companyemail')
+        .doc(Companyemail)
         .collection('hackathon');
 
     Map<String, dynamic> data = {
@@ -195,7 +196,7 @@ Future<void> createhackathon(String Companyemail, String Jobtype) async {
     };
     //Here you have to check for adding the date and timnestamp
 
-    await documentRef.doc('$Jobtype').set(
+    await documentRef.doc(Jobtype).set(
         data); //Here the set data is used for the setting of data to the documents
 
     print('Collection created successfully!');
@@ -213,7 +214,7 @@ Future<void> createjob(String Companyemail, String Jobtype) async {
 
     CollectionReference<Map<String, dynamic>> documentRef = firestore
         .collection('Companynames')
-        .doc('$Companyemail')
+        .doc(Companyemail)
         .collection('job');
 
     Map<String, dynamic> data = {
@@ -229,7 +230,7 @@ Future<void> createjob(String Companyemail, String Jobtype) async {
       'JobRole': 'Flutter dev',
       'StartDate': '25.07.2026'
     };
-    await documentRef.doc('$Jobtype').set(data);
+    await documentRef.doc(Jobtype).set(data);
 
     print('Collection created successfully!');
   } catch (e) {
@@ -316,10 +317,12 @@ Future<String> getUserName(String userID) async {
       return data['UserName'];
     } else {
       print('Document or UserName field not found for UserID: $userID');
+      // ignore: null_check_always_fails
       return null!;
     }
   } catch (error) {
     print('Error getting UserName: $error');
+    // ignore: null_check_always_fails
     return null!;
   }
 }
@@ -516,4 +519,45 @@ Future<void> deleteAccountAndSignOut(
     print('Error deleting document or user account: $e');
     // Handle the error appropriately, e.g., show an error message to the user
   }
+}
+//    Future<String> getResumeDetails( BuildContext context) async {
+//     // setState(() {
+//     //   Resume_detail_collecting=true;
+      
+//     // });
+    
+//     SavedName = await getFieldFromUserDocument("UserName");
+//     print("new user name============================$SavedName");
+//     Dob = await getFieldFromUserDocument("DBdob");
+//     Phone = await getFieldFromUserDocument("DBphone");
+//     Email = await getFieldFromUserDocument("DBemail");
+//     Intro = await getFieldFromUserDocument("DBintro");
+//     Skills = await getFieldFromUserDocument("DBskills");
+//     Language = await getFieldFromUserDocument("DBlanguage");
+//     Experience = await getFieldFromUserDocument("DBexperience");
+//     Education = await getFieldFromUserDocument("DBeducation");
+//     pic = await getUrlFromUserDocument("ProfilePic");
+//     pic = pic;
+//     // setState(() {
+//     //   Resume_detail_collecting=false;
+      
+//     // });
+//     return pic;
+// }
+
+Future<String> getResumeDetails() async {
+  SavedName = await getFieldFromUserDocument("UserName");
+  Dob = await getFieldFromUserDocument("DBdob");
+  Email = await getFieldFromUserDocument("DBemail");
+  Phone = await getFieldFromUserDocument("DBphone");
+  Intro = await getFieldFromUserDocument("DBintro");
+  Skills = await getFieldFromUserDocument("DBskills");
+  Language = await getFieldFromUserDocument("DBlanguage");
+  Experience = await getFieldFromUserDocument("DBexperience");
+  Education = await getFieldFromUserDocument("DBeducation");
+  pic = await getUrlFromUserDocument("ProfilePic");
+  return pic;
+  //print(pic);
+  //print(Phone);
+  //print(Skills);
 }

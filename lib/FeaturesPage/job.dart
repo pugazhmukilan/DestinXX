@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:destin/constants.dart';
-import 'package:flutter/widgets.dart';
 import 'package:destin/Constants/firebasefunctions.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class jobpage extends StatefulWidget {
   const jobpage({super.key});
@@ -93,16 +90,16 @@ class _jobpageState extends State<jobpage> {
     TextEditingController Searchtexteditor =
         TextEditingController(text: Searchtext);
     return isLoading
-        ? MaterialApp(
+        ? const MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
-                body: Center(child: const CircularProgressIndicator())))
+                body: Center(child: CircularProgressIndicator())))
         : MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
               appBar: AppBar(
                 leading: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.navigate_before,
                     size: 42,
                   ),
@@ -110,7 +107,7 @@ class _jobpageState extends State<jobpage> {
                     Navigator.pop(context);
                   },
                 ),
-                title: Text(
+                title: const Text(
                   'Search for Jobs',
                   style: TextStyle(
                       fontSize: 32,
@@ -128,6 +125,13 @@ class _jobpageState extends State<jobpage> {
                     padding: const EdgeInsets.only(
                         top: 10.0, left: 10, right: 10, bottom: 15),
                     child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          boxShadow: kElevationToShadow[3],
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(15),
+                          color: const Color.fromARGB(255, 255, 255, 255)),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 7.0, right: 5.0),
                         child: TextField(
@@ -136,20 +140,13 @@ class _jobpageState extends State<jobpage> {
                           maxLines: null,
                           expands:
                               true, //The maxlength and the maxlines should be null if expeands is true
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none, // Remove default border
                             hintText: 'Search...',
                           ),
                           controller: Searchtexteditor,
                         ),
                       ),
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          boxShadow: kElevationToShadow[3],
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(15),
-                          color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                   Expanded(
@@ -159,18 +156,18 @@ class _jobpageState extends State<jobpage> {
                           return Container(
                               height: 180,
                               decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 255, 255, 1),
+                                color: const Color.fromRGBO(255, 255, 255, 1),
                                 border: Border.all(
                                     width: 3,
-                                    color: Color.fromARGB(
+                                    color: const Color.fromARGB(
                                         255, 29, 28, 25)), // Rectangular border
                                 borderRadius: BorderRadius.circular(
                                     8.0), // Border radius for rounded corners
                                 // Background color
                               ),
-                              margin: EdgeInsets.all(
+                              margin: const EdgeInsets.all(
                                   8.0), // Margin around each item
-                              padding: EdgeInsets.all(
+                              padding: const EdgeInsets.all(
                                   8.0), // Padding inside the container
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
@@ -186,16 +183,16 @@ class _jobpageState extends State<jobpage> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CircleAvatar(
+                                            const CircleAvatar(
                                               radius:
                                                   11.5, //Here we have to add the logo of the company
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 9,
                                             ),
                                             Text(
                                               items[index],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight
@@ -204,16 +201,6 @@ class _jobpageState extends State<jobpage> {
                                           ],
                                         ),
                                         Container(
-                                          child: Center(
-                                            child: Text(
-                                              tags[index],
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 0, 0, 0),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 10),
-                                            ),
-                                          ),
                                           height: 20,
                                           width: 80,
                                           decoration: BoxDecoration(
@@ -222,8 +209,18 @@ class _jobpageState extends State<jobpage> {
                                                   color: Colors.black),
                                               borderRadius:
                                                   BorderRadius.circular(20),
-                                              color: Color.fromRGBO(
+                                              color: const Color.fromRGBO(
                                                   255, 221, 0, 1)),
+                                          child: Center(
+                                            child: Text(
+                                              tags[index],
+                                              style: const TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 10),
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -231,23 +228,23 @@ class _jobpageState extends State<jobpage> {
                                       padding: const EdgeInsets.only(
                                           left: 40, bottom: 2),
                                       child: Text(CompanyName[index],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12)),
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.work_outline_outlined,
-                                          color: const Color.fromARGB(
+                                          color: Color.fromARGB(
                                               255, 107, 107, 107),
                                         ),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 3.0),
                                           child: Text(worktype[index],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 10)),
@@ -262,17 +259,17 @@ class _jobpageState extends State<jobpage> {
                                         children: [
                                           Row(
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 size: 18,
                                                 Icons.calendar_month_outlined,
-                                                color: const Color.fromARGB(
+                                                color: Color.fromARGB(
                                                     255, 107, 107, 107),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 3.0),
                                                 child: Text(Date[index],
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
                                                             FontWeight.w400,
@@ -290,7 +287,7 @@ class _jobpageState extends State<jobpage> {
                                                 fit: BoxFit.cover,
                                               ),
                                               Text(CTC[index],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.w400,
@@ -307,7 +304,7 @@ class _jobpageState extends State<jobpage> {
                                                 fit: BoxFit.contain,
                                               ),
                                               Text(Experience[index],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.w400,
@@ -325,35 +322,35 @@ class _jobpageState extends State<jobpage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             height: 25,
                                             width: 80,
                                             child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                    maximumSize: Size(80, 30),
-                                                    minimumSize: Size(80, 25),
+                                                    maximumSize: const Size(80, 30),
+                                                    minimumSize: const Size(80, 25),
                                                     backgroundColor:
-                                                        Color.fromARGB(
+                                                        const Color.fromARGB(
                                                             255, 86, 237, 59)),
                                                 onPressed:
                                                     () {}, //On press rpute to the details page
-                                                child: Text(
+                                                child: const Text(
                                                   'APPLY',
                                                   style: TextStyle(
                                                       fontSize: 10,
                                                       color: Colors.white),
                                                 )),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
-                                          Container(
+                                          SizedBox(
                                             height: 25,
                                             width: 110,
                                             child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                    maximumSize: Size(90, 30),
-                                                    minimumSize: Size(80, 25),
+                                                    maximumSize: const Size(90, 30),
+                                                    minimumSize: const Size(80, 25),
                                                     shape:
                                                         RoundedRectangleBorder(
                                                             borderRadius:
@@ -364,7 +361,7 @@ class _jobpageState extends State<jobpage> {
                                                         Colors.orange),
                                                 onPressed:
                                                     () {}, //On press rpute to the details page
-                                                child: Text(
+                                                child: const Text(
                                                   'View Details',
                                                   style: TextStyle(
                                                       fontSize: 10,

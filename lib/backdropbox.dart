@@ -1,10 +1,9 @@
 import 'dart:ui';
 
 import 'package:destin/Constants/firebasefunctions.dart';
+import 'package:flutter/material.dart';
 
 import 'constants.dart';
-
-import 'package:flutter/material.dart';
 
 int currentIndex = 2;
 TextEditingController Nametexteditor =
@@ -194,18 +193,4 @@ void textcontrollervalue(String editor, String value) {
   }
 }
 
-Future<void> getResumeDetails() async {
-  SavedName = await getFieldFromUserDocument("UserName");
-  Dob = await getFieldFromUserDocument("DBdob");
-  Email = await getFieldFromUserDocument("DBemail");
-  Phone = await getFieldFromUserDocument("DBphone");
-  Intro = await getFieldFromUserDocument("DBintro");
-  Skills = await getFieldFromUserDocument("DBskills");
-  Language = await getFieldFromUserDocument("DBlanguage");
-  Experience = await getFieldFromUserDocument("DBexperience");
-  Education = await getFieldFromUserDocument("DBeducation");
-  pic = await getUrlFromUserDocument("ProfilePic");
-  //print(pic);
-  //print(Phone);
-  //print(Skills);
-}
+

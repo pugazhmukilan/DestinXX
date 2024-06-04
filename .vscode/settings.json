@@ -4,5 +4,6 @@
         "Callapi",
         "overallscore",
         "setstate"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }

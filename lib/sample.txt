@@ -1,0 +1,388 @@
+SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20, left: 20,top: 20),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                //HEADER HEADER HEADER
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Hello...\u{1F44B}",
+                                  style:TextStyle(fontSize: 20)),
+                              Text(
+                                UserName,
+                                style:TextStyle(fontSize:25,fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        
+                        Expanded(child: CircleAvatar(
+                          radius: 40,
+                          foregroundImage: NetworkImage(pic),
+                        ))
+                      ]),
+
+                  const SizedBox(height: 15),
+                  Text(
+                    "Features",
+                    style: Kcommontextstyle,
+                  ),
+                  Divider(
+                    color: Kgreycolor_light,
+                  ),
+                  //FEATURES FEATURES FEATURES
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        StackWidgets(
+                                      containerHeight: 113,
+                                      containerWidth: 250,
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                      containerColor: Color.fromARGB(255, 255, 241, 202),
+                                      stackImage: "assets/stack_image/interview_stack_image.png",
+                                      waterMarkImage: "assets/stack_image/interview_watermark.png",
+                                      stackImageLeft: 65,
+                                      stackImageSize: 4,
+                                      stackImageTop: 0,
+                                      watermarkLeft: 0,
+                                      
+                                      watermarkTop: 5,
+                                      text1: "Find your",
+                                      text2: "Interview",
+                                      borderRadius: 10,
+                                      text_left:20,
+                                      ontapp: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
+                                                                              },
+                                    ),
+
+                        StackWidgets(
+                                      containerHeight: 113,
+                                      containerWidth: 250,
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                      containerColor: Color.fromARGB(255, 223, 247, 229),
+                                      stackImage: "assets/stack_image/reports_stack_image.png",
+                                      waterMarkImage: "assets/stack_image/reports_watermark.png",
+                                      stackImageLeft: 138,
+                                      stackImageSize: 4,
+                                      stackImageTop: 0,
+                                      watermarkLeft: 0,
+                                      
+                                      watermarkTop: 5,
+                                      text1: "Find your",
+                                      text2: "Reports",
+                                      borderRadius: 10,
+                                      text_left:20,
+                                      ontapp: (){
+                                        _showBottomAlertDialog(context);
+                                                                              },
+                                    ),
+                         StackWidgets(
+                                      containerHeight: 113,
+                                      containerWidth: 250,
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                      containerColor: Color.fromARGB(255, 246, 191, 255),
+                                      stackImage: "assets/stack_image/jobs_stack_image.png",
+                                      waterMarkImage: "assets/stack_image/jobs_watermark.png",
+                                      stackImageLeft: 115,
+                                      stackImageSize: 4,
+                                      stackImageTop: 0,
+                                      watermarkLeft: 0,
+                                      
+                                      watermarkTop: 5,
+                                      text1: "Find your",
+                                      text2: "Jobs",
+                                      borderRadius: 10,
+                                      text_left:20,
+                                      ontapp: (){
+                                        _showBottomAlertDialog(context);
+                                                                              },
+                                    ),
+                        StackWidgets(
+                                      containerHeight: 113,
+                                      containerWidth: 250,
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                      containerColor: Color.fromARGB(255, 222, 255, 231),
+                                      stackImage: "assets/stack_image/job_news_stack_image.png",
+                                      waterMarkImage: "assets/stack_image/job_news_watermark.png",
+                                      stackImageLeft: 120,
+                                      stackImageSize: 4,
+                                      stackImageTop: 0,
+                                      watermarkLeft: 0,
+                                      
+                                      watermarkTop: 5,
+                                      text1: "Find your",
+                                      text2: "Job news",
+                                      borderRadius: 10,
+                                      text_left:20,
+                                      ontapp: (){
+                                        _showBottomAlertDialog(context);
+                                                                              },
+                                    ),
+                        StackWidgets(
+                                      containerHeight: 113,
+                                      containerWidth: 250,
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                      containerColor: Color.fromARGB(255, 253, 198, 185),
+                                      stackImage: "assets/stack_image/quiz_stack_image.png",
+                                      waterMarkImage: "assets/stack_image/quiz_watermark.png",
+                                      stackImageLeft: 115,
+                                      stackImageSize: 4,
+                                      stackImageTop: 0,
+                                      watermarkLeft: 0,
+                                      
+                                      watermarkTop: 5,
+                                      text1: "Find your",
+                                      text2: "Jobs",
+                                      borderRadius: 10,
+                                      text_left:20,
+                                      ontapp: (){
+                                        _showBottomAlertDialog(context);
+                                                                              },
+                                    ),
+                       
+                      ],
+                    ),
+                  ),
+                  StackWidgets(
+                                      containerHeight: 130,
+                                      containerWidth: double.infinity,
+                                      text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                      containerColor: Color.fromARGB(255, 255, 234, 234),
+                                      stackImage: "assets/stack_image/start_interview_stack_image.png",
+                                      waterMarkImage: "assets/stack_image/start_interview_watermark.png",
+                                      stackImageLeft: 140,
+                                      stackImageSize:4,
+                                      stackImageTop: 5,
+                                      watermarkLeft: 0,
+                                      
+                                      watermarkTop: 10,
+                                      text1: "Start your",
+                                      text2: "Interview",
+                                      borderRadius: 10,
+                                      text_left:20,
+                                      ontapp: (){
+                                        _showBottomAlertDialog(context);
+                                                                              },
+                                    ),
+
+                  // ImageFeaturesButton(
+                  //     imagepath:
+                  //         "assets/Page_assets/Start_Interview_Button.png",
+                  //     operation: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: ((context) => const Interview())));
+                  //     }),
+                  Row(
+                    children: [
+                      Image.asset("assets/Page_assets/faangtextimage.png",
+                          height: 18),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Interview",
+                        style: Kcommontextstyle,
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Kgreycolor_light,
+                  ),
+
+
+                  // StackWidgets(
+                  //                     containerHeight: 130,
+                  //                     containerWidth: double.infinity,
+                  //                     text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  //                     text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  //                     containerColor: Color.fromARGB(255, 245, 245, 245),
+                  //                     stackImage: "assets/stack_image/faang_stack_image.png",
+                  //                     waterMarkImage: "assets/stack_image/faang_watermark.png",
+                  //                     stackImageLeft: 130/2,
+                  //                     stackImageSize:4,
+                  //                     stackImageTop: 30,
+                  //                     watermarkLeft: 0,
+                                      
+                  //                     watermarkTop: 10,
+                  //                     text1: "Start your",
+                  //                     text2: "Interview",
+                  //                     borderRadius: 10,
+                  //                     text_left:20,
+                  //                     ontapp: (){
+                  //                       _showBottomAlertDialog(context);
+                  //                                                             },
+                  //                   ),
+
+                            Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: GestureDetector(
+                  onTap: (){
+                    _showBottomAlertDialog(context);
+                
+                  },
+                  child: Container(
+                    height: 130,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Color.fromARGB(255, 245, 245, 245),
+                      boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 98, 98, 98).withOpacity(0.3), // Shadow color
+                                spreadRadius: 0.7, // How wide the shadow should be
+                                blurRadius: 4, // How soft the shadow should be
+                                offset: Offset(1, 2.5), // Changes position of shadow
+                              ),
+                              ],
+                    ),
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Positioned(
+                            
+                            child: Opacity(
+                              opacity: 1,
+                              child: Image.asset("assets/stack_image/faang_watermark.png",scale:3
+                          
+                              )),
+                          ),
+                        ),
+                        Center(
+                          child: Positioned(
+                            
+                            child: Image.asset(
+                              "assets/stack_image/faang_stack_image.png",
+                              scale:3.5,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top:90,
+                          left:110,
+                          child:Text("Interview",style:TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+                  // ImageFeaturesButton(
+                  //     imagepath: "assets/Page_assets/FAANG Button.png",
+                  //     operation: () {
+                  //       _showBottomAlertDialog(context);
+                  //     }),
+
+                  //BOTTOM BOTTOM BOTTOM
+                  const Text("Made with\nCare!",
+                      style: TextStyle(
+                          fontFamily: "inter",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Color.fromARGB(255, 163, 74, 246))),
+                  const SizedBox(height: 10),
+                  const Text("Coded with love by\nus for you!",
+                      style: TextStyle(
+                          fontFamily: "jetBrainsMono",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 123, 123, 123))),
+                  Row(
+                    children: [
+                      NameFeaturesButton(
+                          imagepath: "assets/Page_assets/pugazh.png",
+                          operation: () {
+                            print("this is worlin");
+                             showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/pugazhmukilan',
+                                  instagram: 'https://www.instagram.com/mukil_arena/',
+                                  linkedin:'https://www.linkedin.com/in/pugazh-mukilan-922206251/',
+                                  name: 'Pugazh Mukilan',
+                                );
+                              },
+                            );
+  
+                          }),
+                      NameFeaturesButton(
+                          imagepath: "assets/Page_assets/Hemanthkumar.png",
+                          operation: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/Hemanth-Kumar-04',
+                                  instagram: 'https://www.instagram.com/h_e_m_a_n_t_h04/',
+                                  linkedin:'https://www.linkedin.com/in/hemanth-kumar-4b8471275/',
+                                  name: 'Hemanth Kumar',
+                                );
+                              },
+                            );
+                          }),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      NameFeaturesButton(
+                          imagepath: "assets/Page_assets/Tarun.png",
+                          operation: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/tarun-sakthivel',
+                                  instagram: 'https://www.instagram.com/',
+                                  linkedin:'https://www.linkedin.com/in/tarun-sakthivel-0b904a254/',
+                                  name: 'Tarun',
+                                );
+                              },
+                            );
+                          }),
+                      NameFeaturesButton(
+                          imagepath: "assets/Page_assets/Karthik sagar.png",
+                          operation: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Git_insta_direct_box(
+                                  github: 'https://github.com/karthiksagarN',
+                                  instagram: 'https://www.instagram.com/karthik.sagarn/',
+                                  linkedin:'https://www.linkedin.com/in/karthik-sagar-nallagula-3b1983285/',
+                                  name: 'Karthik sagar',
+                                );
+                              },
+                            );
+                          }),
+                    ],
+                  ),
+                ]),
+          ),
+        )

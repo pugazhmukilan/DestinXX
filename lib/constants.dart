@@ -1,14 +1,18 @@
 import 'dart:math';
 
-import 'package:destin/InterviewPages/Interview.dart';
-import 'package:destin/InterviewPages/Interview_details_Page.dart';
-import 'package:destin/InterviewPages/Start_interview.dart';
+import 'package:destin/Constants/firebasefunctions.dart';
+import 'package:destin/Widgets/Stack_widgets.dart';
+import 'package:destin/main.dart';
 import 'package:flutter/material.dart';
+
+import "InterviewPages/Interview.dart";
+import "InterviewPages/Interview_details_Page.dart";
+import "InterviewPages/Start_interview.dart";
 
 String UserName = "";
 String pic = '';
-late String UserID;
-Color kjobbackgroundcolor = Color.fromARGB(255, 222, 222, 222);
+String UserID = '';
+
 Color Kquizlinecolor = const Color.fromARGB(255, 219, 219, 219);
 Color Kdestinxblack = const Color.fromARGB(255, 29, 29, 29);
 Color Kdestinxorange = const Color.fromARGB(255, 255, 97, 24);
@@ -229,10 +233,101 @@ void showConfirmationDialog(BuildContext context) {
 
 List<List<dynamic>> nestedList(BuildContext context) {
   return [
+    // [
+
+    //   ImageFeaturesButton(
+    //       imagepath: "assets/Page_assets/Start_Interview_Technology.png",
+    //       operation: () {
+    //         Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //                 builder: (BuildContext context) => const Interview_details_Page(
+    //                     type: "Technology",
+    //                     catid: 1,
+    //                     maintext: "TechInterview",
+    //                     imagepath:
+    //                         "assets/Page_assets/technology_page_main.png",
+    //                     appbarimage: "assets/Page_assets/appbar_tech.png",
+    //                     context_text:
+    //                         'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.')));
+    //       }),
+    //   'technology'
+    // ],
+    // [
+    //   ImageFeaturesButton(
+    //       imagepath: "assets/Page_assets/Start_Interview_Management.png",
+    //       operation: () {
+    //         Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //                 builder: (BuildContext context) => const Interview_details_Page(
+    //                     type: "Management",
+    //                     catid: 1,
+    //                     maintext: "Management",
+    //                     imagepath:
+    //                         "assets/Page_assets/management_page_main.png",
+    //                     appbarimage: "assets/Page_assets/appbar_management.png",
+    //                     context_text:
+    //                         'Transform your management role interviews with our state-of-the-art AI interview app! Effortlessly integrate a mix of general inquiries,fundamental projects, and strategic questions to holistically evaluate candidates capabilities. Redefine your hiring approach for a leadership-driven tomorrow')));
+    //       }),
+    //   'management'
+    // ],
+    // [
+    //   ImageFeaturesButton(
+    //       imagepath: "assets/Page_assets/Start_Interview_Design.png",
+    //       operation: () {
+    //         Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //                 builder: (BuildContext context) => const Interview_details_Page(
+    //                     type: "Design",
+    //                     catid: 1,
+    //                     maintext: "Design",
+    //                     imagepath: "assets/Page_assets/design_page_main.png",
+    //                     appbarimage: "assets/Page_assets/appbar_design.png",
+    //                     context_text:
+    //                         "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));
+    //       }),
+    //   'design'
+    // ],
+    // [
+    //   ImageFeaturesButton(
+    //       imagepath: "assets/Page_assets/Start_Interview_HR.png",
+    //       operation: () {
+    //         Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //                 builder: (BuildContext context) => const Interview_details_Page(
+    //                     type: "HR",
+    //                     catid: 1,
+    //                     maintext: "HR Interview",
+    //                     imagepath: "assets/Page_assets/hr_page_main.png",
+    //                     appbarimage: "assets/Page_assets/appbar_hr.png",
+    //                     context_text:
+    //                         "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));
+    //       }),
+    //   'hrinterview'
+    // ],
     [
-      ImageFeaturesButton(
-          imagepath: "assets/Page_assets/Start_Interview_Technology.png",
-          operation: () {
+      StackWidgets(
+          containerHeight: 100,
+          containerWidth: double.infinity,
+          stackImage: "assets/InterviewPage_stack_image/tech_robo.png",
+          waterMarkImage:
+              "assets/InterviewPage_stack_image/tech_robo_watermark.png",
+          stackImageSize: 3.8,
+          stackImageTop: 0,
+          stackImageLeft: 190,
+          watermarkTop: 0,
+          watermarkLeft: 20,
+          text1: "Start your Interview",
+          text2: "Technology",
+          text1Style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: Color.fromARGB(255, 236, 255, 241),
+          borderRadius: 20,
+          ontapp: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -245,50 +340,100 @@ List<List<dynamic>> nestedList(BuildContext context) {
                         appbarimage: "assets/Page_assets/appbar_tech.png",
                         context_text:
                             'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.')));
-          }),
+          },
+          text_left: 30),
       'technology'
     ],
     [
-      ImageFeaturesButton(
-          imagepath: "assets/Page_assets/Start_Interview_Management.png",
-          operation: () {
+      StackWidgets(
+          containerHeight: 100,
+          containerWidth: double.infinity,
+          stackImage: "assets/InterviewPage_stack_image/management.png",
+          waterMarkImage:
+              "assets/InterviewPage_stack_image/management_watermark.png",
+          stackImageSize: 3.8,
+          stackImageTop: 0,
+          stackImageLeft: 190,
+          watermarkTop: 0,
+          watermarkLeft: 20,
+          text1: "Start your Interview",
+          text2: "Management",
+          text1Style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: Color.fromARGB(255, 240, 208, 255),
+          borderRadius: 20,
+          ontapp: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (BuildContext context) => const Interview_details_Page(
                         type: "Management",
                         catid: 1,
-                        maintext: "Management",
+                        maintext: "ManagementInterview",
                         imagepath:
                             "assets/Page_assets/management_page_main.png",
                         appbarimage: "assets/Page_assets/appbar_management.png",
                         context_text:
                             'Transform your management role interviews with our state-of-the-art AI interview app! Effortlessly integrate a mix of general inquiries,fundamental projects, and strategic questions to holistically evaluate candidates capabilities. Redefine your hiring approach for a leadership-driven tomorrow')));
-          }),
+          },
+          text_left: 30),
       'management'
     ],
     [
-      ImageFeaturesButton(
-          imagepath: "assets/Page_assets/Start_Interview_Design.png",
-          operation: () {
+      StackWidgets(
+          containerHeight: 100,
+          containerWidth: double.infinity,
+          stackImage: "assets/InterviewPage_stack_image/designer.png",
+          waterMarkImage:
+              "assets/InterviewPage_stack_image/designer_watermark.png",
+          stackImageSize: 3.8,
+          stackImageTop: 0,
+          stackImageLeft: 190,
+          watermarkTop: 0,
+          watermarkLeft: 20,
+          text1: "Start your Interview",
+          text2: "Design",
+          text1Style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: Color.fromARGB(255, 255, 209, 209),
+          borderRadius: 20,
+          ontapp: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (BuildContext context) => const Interview_details_Page(
                         type: "Design",
                         catid: 1,
-                        maintext: "Design",
+                        maintext: "DesignInterview",
                         imagepath: "assets/Page_assets/design_page_main.png",
                         appbarimage: "assets/Page_assets/appbar_design.png",
                         context_text:
                             "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));
-          }),
+          },
+          text_left: 30),
       'design'
     ],
     [
-      ImageFeaturesButton(
-          imagepath: "assets/Page_assets/Start_Interview_HR.png",
-          operation: () {
+      StackWidgets(
+          containerHeight: 100,
+          containerWidth: double.infinity,
+          stackImage: "assets/InterviewPage_stack_image/hr.png",
+          waterMarkImage: "assets/InterviewPage_stack_image/hr_watermark.png",
+          stackImageSize: 3.8,
+          stackImageTop: 0,
+          stackImageLeft: 190,
+          watermarkTop: 0,
+          watermarkLeft: 20,
+          text1: "Start your Interview",
+          text2: "HR Interview",
+          text1Style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: Color.fromARGB(255, 253, 240, 205),
+          borderRadius: 20,
+          ontapp: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -300,8 +445,16 @@ List<List<dynamic>> nestedList(BuildContext context) {
                         appbarimage: "assets/Page_assets/appbar_hr.png",
                         context_text:
                             "Revolutionize your design role interviews with our avant-garde AI interview app! Merge insightful general questions, creative projects, and design-focused inquiries to thoroughly assess candidates' abilities. Redefine your hiring process for a visually innovative future.")));
-          }),
-      'hrinterview'
+          },
+          text_left: 30),
+      'hr interview'
+    ],
+    [
+      Container(
+        width: double.infinity,
+        height: 0,
+      ),
+      'dummy'
     ],
   ];
 }
@@ -320,4 +473,21 @@ class ImageFeaturesButton extends StatelessWidget {
     return GestureDetector(
         onTap: operation, child: Image.asset(imagepath, height: 145));
   }
+}
+
+Future<String> setdetails() async {
+  UserID = prefs!.getString("email").toString();
+  //getthe username
+  UserName = await getUserName(UserID);
+  pic = await getUrlFromUserDocument("ProfilePic");
+  print("=========================");
+  print("=========================");
+  print("=========================");
+  print("=========================");
+  print("=========================");
+  print("=========================");
+  print("=========================");
+  print(pic);
+  Future.delayed(Duration(seconds: 2));
+  return pic;
 }

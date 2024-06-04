@@ -17,7 +17,7 @@ late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
-List<dynamic> results = [];
+late Map<String, dynamic> result;
 
 late CameraController cameraController;
 
@@ -288,13 +288,13 @@ class _StartinterviewState extends State<Startinterview> {
 
                     //FECTHING THE INFROMATIO USING THE API CALLS
                     Callapi callapi = Callapi();
-                    results = await callapi.fetchData(
+                    result = await callapi.fetchData(
                         Interview_questions, answers, (bool isLoading) {
                       setState(() {
                         is_retriving = isLoading;
                       });
                     });
-                    double score = callapi.calculate_overallscore(results);
+                    //double score = callapi.calculateOverallScore(results);
                     setState(() {
                       is_retriving = false;
                       next_button_live = true;
@@ -306,7 +306,7 @@ class _StartinterviewState extends State<Startinterview> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) =>
-                                Report(result: results, overallscore: score))));
+                                Report(result: result, overallscore: 0.2))));
                   } else {
                     setState(() {
                       answers.add(uniqueSentences.toString());
@@ -317,7 +317,7 @@ class _StartinterviewState extends State<Startinterview> {
                       //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
                       if (_speechEnabled == true) {}
                       question_increment++;
-                      if (question_increment == 6) {
+                      if (question_increment == 7) {
                         //print(dictionary);
                         next_button_live = false;
                       }
@@ -326,10 +326,10 @@ class _StartinterviewState extends State<Startinterview> {
                 },
                 child: next_button_live == false
                     ? is_retriving
-                        ? CircularProgressIndicator(
+                        ? const CircularProgressIndicator(
                             color: Colors.black,
                           )
-                        : Text(
+                        : const Text(
                             "Finish",
                             style: TextStyle(
                               fontFamily: "Inter",
