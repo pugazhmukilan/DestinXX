@@ -8,8 +8,17 @@ import 'package:flutter/material.dart';
 import "InterviewPages/Interview.dart";
 import "InterviewPages/Interview_details_Page.dart";
 import "InterviewPages/Start_interview.dart";
+bool fetched_details = false;
+String UserName = '';
+String Dob = '';
+String Intro = '';
+String Skills = '';
+String Language = '';
+String Experience = '';
+String Education = '';
+String Phone = '';
+String Email = '';
 
-String UserName = "";
 String pic = '';
 late String UserID;
 

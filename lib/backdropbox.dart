@@ -1,8 +1,8 @@
-import 'package:destin/Constants/firebasefunctions.dart';
+
 
 // int currentIndex = 2;
 // TextEditingController Nametexteditor =
-//     TextEditingController(text: SavedName ?? '');
+//     TextEditingController(text: UserName ?? '');
 // TextEditingController Introtexteditor =
 //     TextEditingController(text: Intro ?? '');
 // TextEditingController Skilltexteditor =
@@ -19,15 +19,7 @@ import 'package:destin/Constants/firebasefunctions.dart';
 //     TextEditingController(text: Email ?? '');
 
 //USE THE SHARED PREFERENCE FILE TO SAME THE DATE LOCALLY NOW THEN WE CAN GO FOR THE DATABASE
-String SavedName = '';
-String Dob = '';
-String Intro = '';
-String Skills = '';
-String Language = '';
-String Experience = '';
-String Education = '';
-String Phone = '';
-String Email = '';
+
 
 // class backdropfield extends StatefulWidget {
 //   String Title;
@@ -176,32 +168,32 @@ String Email = '';
 //   }
 // }
 
-void textcontrollervalue(String editor, String value) {
-  if (editor == "Name") {
-    SavedName = value;
-    addFieldToUserDocument("UserName", SavedName);
-  } else if (editor == "Email") {
-    Email = value;
-    addFieldToUserDocument("DBemail", Email);
-  } else if (editor == "Phone") {
-    Phone = value;
-    addFieldToUserDocument("DBphone", Phone);
-  } else if (editor == "Introduction") {
-    Intro = value;
-    addFieldToUserDocument("DBintro", Intro);
-  } else if (editor == "Education") {
-    Education = value;
-    addFieldToUserDocument("DBeducation", Education);
-  } else if (editor == "Skills") {
-    Skills = value;
-    addFieldToUserDocument("DBskills", Skills);
-  } else if (editor == "Language") {
-    Language = value;
-    addFieldToUserDocument("DBlanguage", Language);
-  } else if (editor == "Experience") {
-    Experience = value;
-    addFieldToUserDocument("DBexperience", Experience);
-  }
-}
+// void textcontrollervalue(String editor, String value) {
+//   if (editor == "Name") {
+//     UserName = value;
+//     addFieldToUserDocument("UserName", UserName);
+//   } else if (editor == "Email") {
+//     Email = value;
+//     addFieldToUserDocument("DBemail", Email);
+//   } else if (editor == "Phone") {
+//     Phone = value;
+//     addFieldToUserDocument("DBphone", Phone);
+//   } else if (editor == "Introduction") {
+//     Intro = value;
+//     addFieldToUserDocument("DBintro", Intro);
+//   } else if (editor == "Education") {
+//     Education = value;
+//     addFieldToUserDocument("DBeducation", Education);
+//   } else if (editor == "Skills") {
+//     Skills = value;
+//     addFieldToUserDocument("DBskills", Skills);
+//   } else if (editor == "Language") {
+//     Language = value;
+//     addFieldToUserDocument("DBlanguage", Language);
+//   } else if (editor == "Experience") {
+//     Experience = value;
+//     addFieldToUserDocument("DBexperience", Experience);
+//   }
+// }
 
 

@@ -105,7 +105,7 @@ class _ResumeState extends State<Resume> {
     //SELECTING THE DATE AND TIME
 
     TextEditingController Nametexteditor =
-        TextEditingController(text: SavedName ?? '');
+        TextEditingController(text: UserName ?? '');
     TextEditingController Introtexteditor =
         TextEditingController(text: Intro ?? '');
     TextEditingController Skilltexteditor =

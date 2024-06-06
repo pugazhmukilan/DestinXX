@@ -10,7 +10,7 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import "Constants/firebasefunctions.dart";
 import 'InterviewPages/Interview.dart';
 import 'constants.dart';
-bool fetched_details = false;
+
 final GlobalKey<SliderDrawerState> _sliderDrawerkey =
     GlobalKey<SliderDrawerState>();
 
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body:  fetched_details? homeContainer(context): FutureBuilder<String>(
-          future: getResumeDetails(),
+          future: GetAllDetails(),
           builder: (context,snapshot){
             if (snapshot.connectionState == ConnectionState.waiting) {
             // While waiting for the future to complete, show a loading spinner

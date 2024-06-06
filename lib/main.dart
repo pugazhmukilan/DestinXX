@@ -24,6 +24,8 @@ Future<void> main() async {
   bool isloggedin = await checkLoginStatus();
 
   prefs = await SharedPreferences.getInstance();
+  prefs!.remove('email');
+    prefs!.remove('password');
   try {
     cameras = await availableCameras();
   } on Exception catch (_, e) {
