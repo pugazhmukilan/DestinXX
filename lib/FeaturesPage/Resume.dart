@@ -272,15 +272,24 @@ class _ResumeState extends State<Resume> {
                                       CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(height: 50),
-                                    backdropfield(
-                                      editor: "Name",
-                                      Title: "Name",
-                                      textcontroller: Nametexteditor,
-                                      hint_text: "Type your name..",
-                                      max_lines: 1,
-                                      max_length: 0,
-                                      height: 40,
-                                      width: 180,
+                                    // backdropfield(
+                                    //   editor: "Name",
+                                    //   Title: "Name",
+                                    //   textcontroller: Nametexteditor,
+                                    //   hint_text: "Type your name..",
+                                    //   max_lines: 1,
+                                    //   max_length: 0,
+                                    //   height: 40,
+                                    //   width: 180,
+                                    // ),
+                                     typingfield(
+                                      editor:  Nametexteditor,
+                                      h: 40,
+                                      hinttext: "Type your name..",
+                                      len: 30,
+                                      function: (){
+                                        Email = emailcontroller.text;
+                                      },
                                     ),
                                     //TEXTEDITOR
                                     const SizedBox(height: 10),
@@ -379,108 +388,137 @@ class _ResumeState extends State<Resume> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                backdropfield(
-                                    editor: "Email",
-                                    Title: "Email",
-                                    textcontroller: emailcontroller,
-                                    hint_text: "Email..",
-                                    max_lines: 1,
-                                    max_length: 0,
-                                    height: 80,
-                                    width: 240),
+                          //       backdropfield(
+                          //           editor: "Email",
+                          //           Title: "Email",
+                          //           textcontroller: emailcontroller,
+                          //           hint_text: "Email..",
+                          //           max_lines: 1,
+                          //           max_length: 0,
+                          //           height: 80,
+                          //           width: 240),
                 
+                          //       const SizedBox(height: 20),
+                          //       backdropfield(
+                          //           editor: "Phone",
+                          //           Title: "Phone",
+                          //           textcontroller: Phonetexteditor,
+                          //           hint_text: "Phone number...",
+                          //           max_lines: 1,
+                          //           max_length: 0,
+                          //           height: 80,
+                          //           width: 240),
+                
+                          //       const SizedBox(
+                          //         height: 30,
+                          //       ),
+                
+                          //       //INTRODUCTION
+                          //       //INTRODUCTION
+                          //       //INTRODUCTION
+                          //       backdropfield(
+                          //           editor: "Introduction",
+                          //           Title: "Introduction",
+                          //           textcontroller: Introtexteditor,
+                          //           hint_text: "Here...",
+                          //           max_lines: 0,
+                          //           max_length: 500,
+                          //           height: 240,
+                          //           width: 400),
+                
+                          //       const SizedBox(height: 20),
+                
+                          //       //EDUCATION
+                          //       //EDUCATION
+                          //       //EDUCATION
+                          //       //EDUCATION
+                          //       backdropfield(
+                          //           editor: "Education",
+                          //           Title: "Education",
+                          //           textcontroller: Edutexteditor,
+                          //           hint_text: "Here",
+                          //           max_lines: 0,
+                          //           max_length: 600,
+                          //           height: 340,
+                          //           width: 400),
+                          //     ],
+                          //   ),
+                          // ),
+                           typingfield(
+                                  editor: emailcontroller,
+                                  h: 80,
+                                  hinttext: "Email...",
+                                  len: 30,
+                                  function: (){
+                                    Email = emailcontroller.text;
+                                  },
+                                ),
                                 const SizedBox(height: 20),
-                                backdropfield(
-                                    editor: "Phone",
-                                    Title: "Phone",
-                                    textcontroller: Phonetexteditor,
-                                    hint_text: "Phone number...",
-                                    max_lines: 1,
-                                    max_length: 0,
-                                    height: 80,
-                                    width: 240),
-                
-                                const SizedBox(
-                                  height: 30,
+                                typingfield(
+                                  editor: Phonetexteditor,
+                                  h: 80,
+                                  hinttext: "Phone number...",
+                                  len: 30,
+                                  function: (){
+                                    Phone = Phonetexteditor.text;
+                                  },
+                                ),
+                                const SizedBox(height: 30),
+                                typingfield(
+                                  editor: Introtexteditor,
+                                  h: 240,
+                                  hinttext: "Here...",
+                                  len: 500,
+                                  function: (){
+                                    Intro = Introtexteditor.text;
+                                  },
+                                ),
+                                const SizedBox(height: 20),
+                                typingfield(
+                                  editor: Edutexteditor,
+                                  h: 340,
+                                  hinttext: "Here",
+                                  len: 600,
+                                  function: (){
+                                    Education = Edutexteditor.text;
+                                  },
                                 ),
                 
-                                //INTRODUCTION
-                                //INTRODUCTION
-                                //INTRODUCTION
-                                backdropfield(
-                                    editor: "Introduction",
-                                    Title: "Introduction",
-                                    textcontroller: Introtexteditor,
-                                    hint_text: "Here...",
-                                    max_lines: 0,
-                                    max_length: 500,
-                                    height: 240,
-                                    width: 400),
-                
-                                const SizedBox(height: 20),
-                
-                                //EDUCATION
-                                //EDUCATION
-                                //EDUCATION
-                                //EDUCATION
-                                backdropfield(
-                                    editor: "Education",
-                                    Title: "Education",
-                                    textcontroller: Edutexteditor,
-                                    hint_text: "Here",
-                                    max_lines: 0,
-                                    max_length: 600,
-                                    height: 340,
-                                    width: 400),
-                              ],
-                            ),
-                          ),
-                
                           //LANGUGE AND SKILLS ROW
                           //LANGUGE AND SKILLS ROW
                           //LANGUGE AND SKILLS ROW
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Row(
-                              children: [
-                                //SKILLS
-                                //SKILLS
-                                //SKILLS
-                                //SKILLS
-                
-                                Expanded(
-                                    flex: 1,
-                                    child: backdropfield(
-                                        editor: "Skills",
-                                        Title: "Skills",
-                                        textcontroller: Skilltexteditor,
-                                        hint_text: "Here...",
-                                        max_lines: 0,
-                                        max_length: 500,
-                                        height: 240,
-                                        width: 100)),
-                                const SizedBox(
-                                  width: 15,
+                           Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: typingfield(
+                                        editor: Skilltexteditor,
+                                        h: 240,
+                                        hinttext: "Here...",
+                                        len: 500,
+                                        function: (){
+                                          Skills = Skilltexteditor.text;
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 15),
+                                    Expanded(
+                                      flex: 1,
+                                      child: typingfield(
+                                        editor: Langtexteditor,
+                                        h: 240,
+                                        hinttext: "Here...",
+                                        len: 500,
+                                        function: (){
+                                          Language = Langtexteditor.text;
+                                             },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                //LANGUAGE
-                                //LANGUAGE
-                                //LANGUAGE
-                                //LANGUAGE\
-                
-                                Expanded(
-                                    flex: 1,
-                                    child: backdropfield(
-                                        editor: "Language",
-                                        Title: "Language",
-                                        textcontroller: Langtexteditor,
-                                        hint_text: "Here...",
-                                        max_lines: 0,
-                                        max_length: 500,
-                                        height: 240,
-                                        width: 100)),
-                              ],
-                            ),
-                          ),
+                              ),
                 
                           //EXPERIENCE
                           //EXPERIENCE
@@ -488,15 +526,15 @@ class _ResumeState extends State<Resume> {
                           //EXPERIENCE
                 
                           const SizedBox(height: 10),
-                          backdropfield(
-                              editor: "Experience",
-                              Title: "Experience",
-                              textcontroller: Exptexteditor,
-                              hint_text: "Here...",
-                              max_lines: 0,
-                              max_length: 800,
-                              height: 240,
-                              width: 400),
+                          typingfield(
+                              editor: Exptexteditor,
+                              h: 240,
+                              hinttext: "Here...",
+                              len: 800,
+                              function: (){
+                                Experience = Exptexteditor.text;
+                              },
+                            ),
                 
                           //SAVE BUTTON
                           //SAVE BUTTON
@@ -513,119 +551,170 @@ class _ResumeState extends State<Resume> {
 
 
                           }, child: Text("download")),
-                          Center(
-                            child: Padding(
-                              padding:  EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                  onPressed:
-                                      () {
-                                          setState(() {
-                                            is_downloading = true;
-                                          });
-                                          
-                                          setState(() {
-                                            is_downloading = false;
-                                          });
-
-                                      }, //HAVE TO ADD THE FILE SVAER AND THE LOCATION OF THE FILE SAVING IN THE PHYSICAL DEVICE
-                                  style: ElevatedButton.styleFrom(
-                                    minimumSize: const Size(60, 40),
-                                    maximumSize: const Size(220, 40),
-                                    backgroundColor: const Color.fromARGB(
-                                        255, 13, 12, 12),
-                                  ),
-                                  child: is_downloading? CircularProgressIndicator(color: Kdestinxwhite,): Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Download',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Icon(
-                                        Icons.download,
-                                        color: Colors.white,
-                                      ),
-                                    ],
-                                  )),
-                
-                              /* Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color.fromARGB(
-                                                  255, 3, 205, 10),
-                                          minimumSize: const Size(125, 40),
-                                          disabledForegroundColor:
-                                              Colors.yellow.withOpacity(0.38),
-                                          disabledBackgroundColor:
-                                              Colors.yellow.withOpacity(0.12),
-                                        ),
-                                        onPressed: () async {
-                                          //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
-                                          //STORING THE USERNAME
-                            
-                                          addFieldToUserDocument("UserName",
-                                              Nametexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBeducation",
-                                              Edutexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBexperience",
-                                              Exptexteditor.text);
-                                          addFieldToUserDocument("DBemail",
-                                              Emailtexteditor.text);
-                                          addFieldToUserDocument("DBphone",
-                                              Phonetexteditor.text);
-                                          addFieldToUserDocument("DBintro",
-                                              Introtexteditor.text);
-                                          addFieldToUserDocument("DBlanguage",
-                                              Langtexteditor.text);
-                                          addFieldToUserDocument("DBskills",
-                                              Skilltexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBdob", Dob);
-                            
-                                          pic = await getUrlFromUserDocument(
-                                              "ProfilePic");
-                                          /*addFieldToUserDocument(
-                                              "profilePic", _image1.toString());*/
-                                        },
-                                        child: const Text(
-                                          "Save",
+                          Row(
+                            children: [
+                              Padding(
+                                padding:  EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                    onPressed:
+                                        () {
+                                            setState(() {
+                                              is_downloading = true;
+                                            });
+                                            
+                                            setState(() {
+                                              is_downloading = false;
+                                            });
+                                                            
+                                        }, //HAVE TO ADD THE FILE SVAER AND THE LOCATION OF THE FILE SAVING IN THE PHYSICAL DEVICE
+                                    style: ElevatedButton.styleFrom(
+                                      
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 13, 12, 12),
+                                    ),
+                                    child: is_downloading? CircularProgressIndicator(color: Kdestinxwhite,): Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Download',
                                           style: TextStyle(
-                                              fontFamily: "Inter",
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600,
                                               color: Colors.white),
-                                        )),
-                                  ),
-                                  
-                                ],
-                              ),*/
-                            ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Icon(
+                                          Icons.download,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    )),
+                                            
+                                /* Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 3, 205, 10),
+                                            minimumSize: const Size(125, 40),
+                                            disabledForegroundColor:
+                                                Colors.yellow.withOpacity(0.38),
+                                            disabledBackgroundColor:
+                                                Colors.yellow.withOpacity(0.12),
+                                          ),
+                                          onPressed: () async {
+                                            //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
+                                            //STORING THE USERNAME
+                              
+                                            addFieldToUserDocument("UserName",
+                                                Nametexteditor.text);
+                                            addFieldToUserDocument(
+                                                "DBeducation",
+                                                Edutexteditor.text);
+                                            addFieldToUserDocument(
+                                                "DBexperience",
+                                                Exptexteditor.text);
+                                            addFieldToUserDocument("DBemail",
+                                                Emailtexteditor.text);
+                                            addFieldToUserDocument("DBphone",
+                                                Phonetexteditor.text);
+                                            addFieldToUserDocument("DBintro",
+                                                Introtexteditor.text);
+                                            addFieldToUserDocument("DBlanguage",
+                                                Langtexteditor.text);
+                                            addFieldToUserDocument("DBskills",
+                                                Skilltexteditor.text);
+                                            addFieldToUserDocument(
+                                                "DBdob", Dob);
+                              
+                                            pic = await getUrlFromUserDocument(
+                                                "ProfilePic");
+                                            /*addFieldToUserDocument(
+                                                "profilePic", _image1.toString());*/
+                                          },
+                                          child: const Text(
+                                            "Save",
+                                            style: TextStyle(
+                                                fontFamily: "Inter",
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white),
+                                          )),
+                                    ),
+                                    
+                                  ],
+                                ),*/
+                              ),
+
+
+
+                               ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 3, 205, 10),
+                                            minimumSize: const Size(125, 40),
+                                            disabledForegroundColor:
+                                                Colors.yellow.withOpacity(0.38),
+                                            disabledBackgroundColor:
+                                                Colors.yellow.withOpacity(0.12),
+                                          ),
+                                          onPressed: () async {
+                                            //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
+                                            //STORING THE USERNAME
+                              
+                                            addFieldToUserDocument("UserName",
+                                                Nametexteditor.text);
+                                            addFieldToUserDocument(
+                                                "DBeducation",
+                                                Edutexteditor.text);
+                                            addFieldToUserDocument(
+                                                "DBexperience",
+                                                Exptexteditor.text);
+                                            addFieldToUserDocument("DBemail",
+                                                Emailtexteditor.text);
+                                            addFieldToUserDocument("DBphone",
+                                                Phonetexteditor.text);
+                                            addFieldToUserDocument("DBintro",
+                                                Introtexteditor.text);
+                                            addFieldToUserDocument("DBlanguage",
+                                                Langtexteditor.text);
+                                            addFieldToUserDocument("DBskills",
+                                                Skilltexteditor.text);
+                                            addFieldToUserDocument(
+                                                "DBdob", Dob);
+                              
+                                            
+                                          },
+                                          child: const Text(
+                                            "Save",
+                                            style: TextStyle(
+                                                fontFamily: "Inter",
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white),
+                                          )),
+                              ]),
+                           
+                           
+                           
+                            ],
                           ),
-                        ],
+                       ) ],
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ),
-          )
-        ]));
+    )))))]),
+                );
+              
   }
 }
 
@@ -636,34 +725,46 @@ class typingfield extends StatelessWidget {
     required this.h,
     required this.hinttext,
     required this.len,
+    required this.function,
+
   });
 
-  late TextEditingController editor;
-  late double h;
-  late String hinttext;
-  late int len;
+  final TextEditingController editor;
+  final double h;
+  final String hinttext;
+  final int len;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10, right: 8, left: 8),
-      child: Container(
-        height: h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: KMyborder,
-          color: Kgreycolor_light,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15, bottom: 5),
-          child: TextField(
-            controller: editor,
-            maxLength: len,
-            maxLines: null,
-            // Allow unlimited lines in the text field
-            decoration: const InputDecoration(
-              border: InputBorder.none, // Remove default border
-              hintText: 'Here...',
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+          child: Container(
+            height: h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+              border: Border.all(
+                width: 2,
+                color: const Color.fromARGB(255, 68, 68, 68),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, bottom: 5),
+              child: TextField(
+                onChanged: function(),
+                controller: editor,
+                maxLength: len,
+                maxLines: 30,
+                decoration: InputDecoration(
+                  border: InputBorder.none, // Remove default border
+                  hintText: hinttext,
+                ),
+              ),
             ),
           ),
         ),
@@ -671,7 +772,6 @@ class typingfield extends StatelessWidget {
     );
   }
 }
-
 class Date_element extends StatelessWidget {
   Date_element({
     super.key,

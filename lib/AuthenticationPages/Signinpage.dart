@@ -1,9 +1,9 @@
+import 'package:destin/Home.dart';
 import 'package:destin/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import "../Home.dart";
 import 'Signuppage.dart';
 
 final _auth = FirebaseAuth.instance;
@@ -221,7 +221,7 @@ class _SigninpageState extends State<Signinpage> {
                           try {
                             print(emailcontroller.text);
 
-                            UserCredential user = await _auth.signInWithEmailAndPassword(
+                            await _auth.signInWithEmailAndPassword(
                                 email: emailcontroller.text,
                                 password: passwordcontroller.text);
                             
