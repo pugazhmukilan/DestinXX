@@ -90,8 +90,9 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
+              
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 60),
                 child: GestureDetector(
@@ -103,33 +104,6 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
                                 Textinterview(type: widget.type)));
                   },
                   child: Container(
-                    decoration: BoxDecoration(color:Kdestinxblack,
-                                borderRadius:BorderRadius.circular(15)),
-                    child:Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("TextBased",style:TextStyle(fontSize: 15,fontWeight: FontWeight.w400)),
-                        Text("Interview",style:TextStyle(fontSize: 10,fontWeight: FontWeight.w200)),
-                      ],
-                    )
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Startinterview(type: widget.type)));
-                  },
-                  child: Container(
                     height:60,
                     width: double.infinity,
                     decoration: BoxDecoration(color:Kdestinxblack,
@@ -138,12 +112,50 @@ class _Interview_details_PageState extends State<Interview_details_Page> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("VideoBased",style:TextStyle(fontSize: 15,fontWeight: FontWeight.w400)),
-                        Text("Interview",style:TextStyle(fontSize: 10,fontWeight: FontWeight.w200)),
+                        Text("TextBased",style:TextStyle(fontSize: 15,fontWeight: FontWeight.w400,color: Kdestinxwhite)),
+                        Text("Interview",style:TextStyle(fontSize: 10,fontWeight: FontWeight.w200,color: Kdestinxwhite)),
                       ],
                     )
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 60),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Startinterview(type: widget.type)));
+                      },
+                      child: Container(
+                        height:60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(color:Kdestinxblack,
+                                    borderRadius:BorderRadius.circular(15)),
+                        child:Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("VideoBased",style:TextStyle(fontSize: 15,fontWeight: FontWeight.w400,color: Kdestinxwhite)),
+                            Text("Interview",style:TextStyle(fontSize: 10,fontWeight: FontWeight.w200,color: Kdestinxwhite)),
+                          ],
+                        )
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:120),
+                    child: Text("Recommended!!",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w400,color:Kdestinxorange,),),
+                  )
+                
+                ],
               ),
             ])));
   }
