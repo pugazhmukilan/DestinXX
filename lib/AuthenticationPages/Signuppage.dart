@@ -181,12 +181,12 @@ class _SignuppageState extends State<Signuppage> {
                                 height: 5,
                               ),
                               Container(
-                                height: 52,
+                                height: 60,
                                 width: 380,
                                 decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(
-                                        232, 232, 232, 1),
-                                    borderRadius: BorderRadius.circular(35)),
+                                  border: Border.all(color:Kdestinxblack,width:2),
+                                    color: const Color.fromARGB(255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(20)),
                                 child: TextField(
                                   controller: usernamecontroller,
                                   onChanged: (value) => name,
@@ -229,12 +229,12 @@ class _SignuppageState extends State<Signuppage> {
                               ),
                               Container(
                                 //This is for the email in put textfield
-                                height: 52,
+                                height: 60,
                                 width: 380,
                                 decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(
-                                        232, 232, 232, 1),
-                                    borderRadius: BorderRadius.circular(35)),
+                                  border: Border.all(color:Kdestinxblack,width:2),
+                                    color: const Color.fromARGB(255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(20)),
                                 child: TextField(
                                   controller: emailcontroller,
                                   onChanged: (value) => email,
@@ -256,71 +256,65 @@ class _SignuppageState extends State<Signuppage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left:20,right:20),
-                          child: SizedBox(
-                                  height: 84,
-                                  width: 400,
-                                  child: Column(
-                                    children: [
-                                      const Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: 12,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                'PASSWORD',
-                                                style: TextStyle(
-                                                    fontFamily: 'Inter',
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black),
-                                              ),
-                                            ),
-                                          ]),
-                                      const SizedBox(
-                                        height: 5,
+                          child: Column(
+                            children: [
+                              const Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 12,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        'PASSWORD',
+                                        style: TextStyle(
+                                            fontFamily: 'Inter',
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
                                       ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 52,
-                                          width: 380,
-                                          decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(
-                                                  232, 232, 232, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(35)),
-                                          child: TextField(
-                                            controller: passwordcontroller,
-                                            onChanged: (value) => password,
-                                            obscureText: _obscureText,
-                                            decoration: InputDecoration(
-                                                suffixIcon: IconButton(
-                                                  //Icon button to add the visibility icon to the password textfield
-                                                  icon: Icon(
-                                                    _obscureText
-                                                        ? Icons.visibility_off
-                                                        : Icons.visibility,
-                                                  ),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      _obscureText = !_obscureText;
-                                                    });
-                                                  },
-                                                ),
-                                                border: InputBorder.none,
-                                                hintText: 'Password',
-                                                hintStyle: const TextStyle(
-                                                    fontFamily: 'Inter',
-                                                    fontSize: 15),
-                                                contentPadding:
-                                                    const EdgeInsets.all(20)),
-                                          ),
+                                    ),
+                                  ]),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                height: 65,
+                                width: 380,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color:Kdestinxblack,width:2),
+                                    color: const Color.fromARGB(255, 255, 255, 255),
+                                    borderRadius:
+                                        BorderRadius.circular(20)),
+                                child: TextField(
+                                  controller: passwordcontroller,
+                                  onChanged: (value) => password,
+                                  obscureText: _obscureText,
+                                  decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                        //Icon button to add the visibility icon to the password textfield
+                                        icon: Icon(
+                                          _obscureText
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
                                         ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _obscureText = !_obscureText;
+                                          });
+                                        },
                                       ),
-                                    ],
-                                  ),
+                                      border: InputBorder.none,
+                                      hintText: 'Password',
+                                      hintStyle: const TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: 15),
+                                      contentPadding:
+                                          const EdgeInsets.all(20)),
                                 ),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 30,
@@ -365,7 +359,8 @@ class _SignuppageState extends State<Signuppage> {
                               backgroundColor:
                                   const Color.fromRGBO(255, 52, 52,1),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30))),
+                                  borderRadius: BorderRadius.circular(20
+                                  ))),
                           child: const SizedBox(
                             height: 40,
                             width: 100,
@@ -374,7 +369,7 @@ class _SignuppageState extends State<Signuppage> {
                                 'Login',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white),
                               ),
