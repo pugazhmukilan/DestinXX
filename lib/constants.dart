@@ -49,7 +49,7 @@ TextStyle Kprogressbarnumber = const TextStyle(
     fontWeight: FontWeight.w800,
     color: Colors.black);
 TextStyle Kreporttextstyle = const TextStyle(
-    fontFamily: "Inter",
+    fontFamily: "Poppins",
     fontWeight: FontWeight.w400,
     color: Colors.black,
     fontSize: 15);
@@ -58,6 +58,10 @@ TextStyle Kquizcattext = const TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.w600,
     color: Color.fromARGB(255, 92, 92, 92));
+
+TextStyle Kreporttitletext = const TextStyle(fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins');
 //profile image for the user
 //picking the image from the file using the some modules
 

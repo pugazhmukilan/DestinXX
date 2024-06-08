@@ -1,6 +1,7 @@
 
 import 'dart:ui';
 
+import 'package:destin/FeaturesPage/Feedback_text.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -120,29 +121,7 @@ class _ReportState extends State<Report> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  const Image(
-                    image: AssetImage(
-                        "assets/image_assets/reportpage_image.png"),
-                    height: 150,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: const Text(
-                        "Thank you for your participation in the interview.Your insights and enthusiasm for the position were greatly appreciated",
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                          fontSize: 13,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              
               ClipRect(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
@@ -160,7 +139,7 @@ class _ReportState extends State<Report> {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          Text("Overall analysis", style: Ktitletextstyle),//changeable
+                          Text("Overall analysis", style: Kreporttitletext),//changeable
                            Padding(
                             padding: EdgeInsets.only(top: 30),
                             child: percentage_indicator(
@@ -172,7 +151,7 @@ class _ReportState extends State<Report> {
                             padding: const EdgeInsets.all(10.0),
                             child: Expanded(
                               child: Text(
-                                "Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress.",
+                               generateFeedback(overallscore),
                                 style: Kreporttextstyle,
                                 textAlign: TextAlign.justify,
                               ),
@@ -204,7 +183,7 @@ class _ReportState extends State<Report> {
                           Center(
                               child: Text(
                             "Details",
-                            style: Ktitletextstyle,
+                            style: Kreporttitletext,
                           )),
                           const SizedBox(height: 15),
                           const Padding(
@@ -269,7 +248,7 @@ class _ReportState extends State<Report> {
                         child: Center(
                             child: Text(
                           "Question analysis",
-                          style: Ktitletextstyle,
+                          style: Kreporttitletext,
                         )),
                       ),
                     ),
@@ -311,8 +290,8 @@ class _ReportState extends State<Report> {
                 "question ${i+1}",
                 style: const TextStyle(
                   fontFamily: "Inter",
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
                 ),
                 textAlign: TextAlign.justify,
               ),
