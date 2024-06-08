@@ -1,5 +1,6 @@
-import 'package:destin/API/api_request.dart';
+import 'package:destin/bloc/api_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Constants/Questions.dart';
 import '../FeaturesPage/Report.dart';
@@ -117,193 +118,281 @@ class _TextinterviewState extends State<Textinterview> {
         ),
       ));
     }
-    return Scaffold(
+    return BlocListener<ApiBloc, ApiState>(
+  listener: (context, state) {
+    if (state is ApiFetchingReport) {
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Row(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         CircularProgressIndicator(),
+      //         SizedBox(width: 20),
+      //         Text('Fetching report...'),
+      //       ],
+      //     ),
+      //     duration: Duration(minutes: 1),
+      //   ),
+      // );
+      showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return CustomDialog(); // Custom dialog widget
+                },
+              );
+    } else if (state is ApiFetchSuccessful) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title:Text("Text Based Interview",style: Ktitletextstyle,
-        
+      
+     Navigator.push(
+          context,
+          MaterialPageRoute(
+          builder: ((context) =>  Report(result:state.report,overallscore:0.8))));
+    } else if (state is ApiFailed) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to fetch report. Please try again.'),
+          backgroundColor: Colors.red,
         ),
-        leading: IconButton(
-          onPressed: (){
-
-            Navigator.pop(context);
-          },
-          icon:Icon(Icons.arrow_back_ios)),),
-      backgroundColor: Kbackgroundcolor,
-      
-      body: Container(
-        decoration: BoxDecoration( color: Kdestinxwhite),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-               /* Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          showConfirmationDialog(context);
-                          setState(() {
-                            is_retriving = false;
-                          });
-                          
-                        },
-                        icon: const Icon(Icons.arrow_back_ios)),
-                    Expanded(
-                        child: Text("Text based Interview",
-                            style: Ktitletextstyle)),
-                  ],
-                ),*/
-                
-                Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+      );
+    }
+  },
+  child: Scaffold(
+    appBar: AppBar(
+      automaticallyImplyLeading: false,
+      title: Text(
+        "Text Based Interview",
+        style: Ktitletextstyle,
+      ),
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.arrow_back_ios),
+      ),
+    ),
+    backgroundColor: Kbackgroundcolor,
+    body: Container(
+      decoration: BoxDecoration(color: Kdestinxwhite),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          "assets/image_assets/instruction.png",
+                          height: 200,
+                          width: 200,
+                        ),
+                      ),
+                      const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Center(
-                            child: Image.asset(
-                              "assets/image_assets/instruction.png",
-                              height: 200,
-                              width: 200,
-                            ),
+                          Text("Instructions",
+                              style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black)),
+                          SizedBox(height: 10),
+                          Text(
+                            "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+                            style: TextStyle(fontSize: 15),
+                            textAlign: TextAlign.justify,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                      for (int i = 0; i < Interview_questions.length - 1; i++)
+                        QuestionWidget(
+                          index: i,
+                          question: Interview_questions[i],
+                          controller: controllers[i],
+                        ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            minimumSize: const Size(120, 60),
                           ),
-                          const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("Instructions",
-                                  style: TextStyle(
-                                      fontFamily: "Inter",
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black)),
-                              SizedBox(height: 10),
-                              Text(
-                                "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
-                                style: TextStyle(fontSize: 15),
-                                textAlign: TextAlign.justify,
-                              )
-                            ],
-                          ),
-                          Container(
-                              /*child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/image_assets/instruction.png",
-                                  height: 200,
-                                  width: 200,
-                                ),
-                                SizedBox(width: 30.0),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 100, left: 100),
-                                    child: Container(
-                                      width: 800,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text("Instructions",
-                                              style: TextStyle(
-                                                  fontFamily: "Inter",
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.black)),
-                                          SizedBox(height: 10),
-                                          Text(
-                                            "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
-                                            style: Kcommontextstyle,
-                                            textAlign: TextAlign.justify,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),*/
-                              ),
-                          const SizedBox(
-                            height: 80,
-                          ),
-                          for (int i = 0; i < Interview_questions.length-1; i++)
-                            QuestionWidget(
-                              index: i,
-                              question: Interview_questions[i],
-                              controller: controllers[i],
-                            ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  minimumSize: const Size(120, 60),
-                                ),
-                                onPressed: () async {
-                                  for (int i = 0;
-                                      i < controllers.length-1;
-                                      i++) {
-                                    /*print(
-                                        "====================================================================");
-                                    print(
-                                        "QUESTION $i =========== ${Interview_questions[i]}\n");
-                                    print(
-                                        " =========== ${controllers[i].text}\n");*/
-      
-                                    answers.add(controllers[i]
-                                        .text); // Add user input to answers list
-                                  }
-                                  setState(() {
-                                    
-                                    is_retriving = true;
-                                  });
-                                  Callapi callapi = Callapi();
-                                  result = await callapi.fetchData(Interview_questions, answers, (bool isLoading) {
-                                    setState(() {
-                                      is_retriving = isLoading;
-                                    });
-                                  });
-                                  //double score = callapi.calculateOverallScore(result);
-                                  setState(() {
-                                    is_retriving = false;
-                                  });
-                                //Navigator.push(context,MaterialPageRoute(builder: (context)=>dummy(data : result)));
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: ((context) =>  Report(result:result,overallscore:0.2))));
-                                },
-                                child: is_retriving? CircularProgressIndicator(color: Colors.white,):Text(
+                          onPressed: () async {
+                            for (int i = 0; i < controllers.length - 1; i++) {
+                              answers.add(controllers[i]
+                                  .text); // Add user input to answers list
+                            }
+                            context.read<ApiBloc>().add(ApiCall(
+                                interviewAnswer: answers,
+                                interviewQuestions: Interview_questions));
+                          },
+                          child: is_retriving
+                              ? CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : Text(
                                   "Submit answers",
                                   style: TextStyle(
                                       fontFamily: "Inter",
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255)),
-                                )),
-                          ),
-                        ],
+                                      color: Color.fromARGB(255, 255, 255, 255)),
+                                ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
-              ]),
+              ),
+            ),
+          ],
         ),
       ),
-    );
+    ),
+  ),
+);
+    // return Scaffold(
+      
+    //   appBar: AppBar(
+    //     automaticallyImplyLeading: false,
+    //     title:Text("Text Based Interview",style: Ktitletextstyle,
+        
+    //     ),
+    //     leading: IconButton(
+    //       onPressed: (){
+
+    //         Navigator.pop(context);
+    //       },
+    //       icon:Icon(Icons.arrow_back_ios)),),
+    //   backgroundColor: Kbackgroundcolor,
+      
+    //   body: Container(
+    //     decoration: BoxDecoration( color: Kdestinxwhite),
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(20.0),
+    //       child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.start,
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+               
+                
+    //             Expanded(
+    //               child: Container(
+    //                 child: SingleChildScrollView(
+    //                   scrollDirection: Axis.vertical,
+    //                   child: Column(
+    //                     mainAxisAlignment: MainAxisAlignment.start,
+    //                     crossAxisAlignment: CrossAxisAlignment.start,
+    //                     children: [
+    //                       Center(
+    //                         child: Image.asset(
+    //                           "assets/image_assets/instruction.png",
+    //                           height: 200,
+    //                           width: 200,
+    //                         ),
+    //                       ),
+    //                       const Column(
+    //                         mainAxisAlignment: MainAxisAlignment.center,
+    //                         crossAxisAlignment: CrossAxisAlignment.center,
+    //                         children: [
+    //                           Text("Instructions",
+    //                               style: TextStyle(
+    //                                   fontFamily: "Inter",
+    //                                   fontSize: 25,
+    //                                   fontWeight: FontWeight.w600,
+    //                                   color: Colors.black)),
+    //                           SizedBox(height: 10),
+    //                           Text(
+    //                             "Welcome to the text-based interview! You'll find 10 thoughtfully crafted questions below. Please take your time to read each question carefully and provide your response in the designated box. Ensure you adhere to the specified word limit for each question. Once you've answered a question, simply click the submit button before moving on to the next one. Good luck!",
+    //                             style: TextStyle(fontSize: 15),
+    //                             textAlign: TextAlign.justify,
+    //                           )
+    //                         ],
+    //                       ),
+                          
+    //                       const SizedBox(
+    //                         height: 80,
+    //                       ),
+    //                       for (int i = 0; i < Interview_questions.length-1; i++)
+    //                         QuestionWidget(
+    //                           index: i,
+    //                           question: Interview_questions[i],
+    //                           controller: controllers[i],
+    //                         ),
+    //                       const SizedBox(
+    //                         height: 30,
+    //                       ),
+    //                       Center(
+    //                         child: ElevatedButton(
+    //                             style: ElevatedButton.styleFrom(
+    //                               backgroundColor: Colors.green,
+    //                               minimumSize: const Size(120, 60),
+    //                             ),
+    //                             onPressed: () async {
+    //                               for (int i = 0;
+    //                                   i < controllers.length-1;
+    //                                   i++) {
+                                    
+      
+    //                                 answers.add(controllers[i]
+    //                                     .text); // Add user input to answers list
+    //                               }
+    //                               context.read<ApiBloc>().add(ApiCall(interviewAnswer: answers, interviewQuestions: Interview_questions));
+    //                             //   setState(() {
+                                    
+    //                             //     is_retriving = true;
+    //                             //   });
+    //                             //   Callapi callapi = Callapi();
+    //                             //   result = await callapi.fetchData(Interview_questions, answers, (bool isLoading) {
+    //                             //     setState(() {
+    //                             //       is_retriving = isLoading;
+    //                             //     });
+    //                             //   });
+    //                             //   //double score = callapi.calculateOverallScore(result);
+    //                             //   setState(() {
+    //                             //     is_retriving = false;
+    //                             //   });
+    //                             // //Navigator.push(context,MaterialPageRoute(builder: (context)=>dummy(data : result)));
+    //                             //   Navigator.push(
+    //                             //       context,
+    //                             //       MaterialPageRoute(
+    //                             //           builder: ((context) =>  Report(result:result,overallscore:0.2))));
+    //                             },
+    //                             child: is_retriving? CircularProgressIndicator(color: Colors.white,):Text(
+    //                               "Submit answers",
+    //                               style: TextStyle(
+    //                                   fontFamily: "Inter",
+    //                                   fontSize: 15,
+    //                                   fontWeight: FontWeight.w600,
+    //                                   color:
+    //                                       Color.fromARGB(255, 255, 255, 255)),
+    //                             )),
+    //                       ),
+    //                     ],
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //           ]),
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -393,6 +482,27 @@ class typingfield extends StatelessWidget {
                     fontSize: 10,
                     color: Color.fromARGB(255, 148, 148, 148))),
           ),
+        ),
+      ),
+    );
+  }
+}
+/**/
+
+
+class CustomDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 20),
+            Text('Fetching report...'),
+          ],
         ),
       ),
     );
