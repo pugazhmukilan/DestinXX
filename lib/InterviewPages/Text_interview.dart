@@ -121,19 +121,7 @@ class _TextinterviewState extends State<Textinterview> {
     return BlocListener<ApiBloc, ApiState>(
   listener: (context, state) {
     if (state is ApiFetchingReport) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Row(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         CircularProgressIndicator(),
-      //         SizedBox(width: 20),
-      //         Text('Fetching report...'),
-      //       ],
-      //     ),
-      //     duration: Duration(minutes: 1),
-      //   ),
-      // );
+      
       showDialog(
                 context: context,
                 barrierDismissible: false,
@@ -165,7 +153,7 @@ class _TextinterviewState extends State<Textinterview> {
       automaticallyImplyLeading: false,
       title: Text(
         "Text Based Interview",
-        style: Ktitletextstyle,
+        style: Kinterviewtypetextstyle,
       ),
       leading: IconButton(
         onPressed: () {
@@ -496,11 +484,13 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
+      
+      decoration: BoxDecoration(color: Kdestinxwhite,borderRadius:BorderRadius.circular(10) ),
         padding: EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircularProgressIndicator(),
+            CircularProgressIndicator(color: Kdestinxorange,),
             SizedBox(height: 20),
             Text('Fetching report...'),
           ],

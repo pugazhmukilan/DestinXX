@@ -1,7 +1,9 @@
 import 'package:camera/camera.dart';
-import 'package:destin/API/api_request.dart';
 import 'package:destin/FeaturesPage/Report.dart';
+import 'package:destin/InterviewPages/Text_interview.dart';
+import 'package:destin/bloc/api_bloc/api_bloc.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -17,7 +19,7 @@ late List<String> Interview_questions;
 List<String> answers = [];
 bool next_button_live = true;
 int question_increment = 0;
-late Map<String,dynamic> result;
+late Map<String, dynamic> result;
 
 late CameraController cameraController;
 
@@ -108,7 +110,6 @@ class _StartinterviewState extends State<Startinterview> {
       labelCount++;
     });
   }
-  
 
 //TODO: complete the speech to text and show it using the logern algorithm uasednin the hackthon
   void _initSpeech() async {
@@ -166,15 +167,13 @@ class _StartinterviewState extends State<Startinterview> {
       _isListening = true;
     });
   }
-  
-
 
   //speech to text part
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     cameraController.dispose();
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -253,175 +252,213 @@ class _StartinterviewState extends State<Startinterview> {
 
     return Scaffold(
       backgroundColor: Kbackgroundcolor,
-      
-      appBar: AppBar(actions: const [
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Icon(Icons.mic),
-        )
-      ], title: Text("$type INTERVIEW")),
-      body: Stack(
-        children: [
-          
-          if (cameraController.value.isInitialized)
-            Positioned.fill(
-              child: AspectRatio(
-                aspectRatio: cameraController.value.aspectRatio,
-                child: CameraPreview(cameraController),
-              ),
-            ),
-           
-          
-          Positioned(
-            bottom: 20, // Adjust the position as needed
-            left: 0,
-            right: 0,
-            child: Center(
-              child: ElevatedButton(
-                style: next_button_live == false
-                    ? ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 50, 213, 6),
-                        minimumSize: const Size(150, 80),
-                        
-                      )
-                    : ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 17, 17, 17),
-                        minimumSize: const Size(150, 80),
-                        
-                      ),
-                onPressed: () async {
-                  if (next_button_live == false) {
-                    setState(() {
-                      is_retriving=true;
-                      });
-
-                    //FECTHING THE INFROMATIO USING THE API CALLS
-                    Callapi callapi = Callapi();
-                    result = await callapi.fetchData(Interview_questions, answers, (bool isLoading) {
-                      setState(() {
-                        is_retriving = isLoading;
-                      });
-                    });
-                     //double score = callapi.calculateOverallScore(results);
-                    setState(() {
-                      
-                      is_retriving=false;
-                      next_button_live = true;
-                      question_increment = 0;
-                    });
-                    Navigator.pop(context);
-
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => Report(
-                                result:result,overallscore:0.2))));
-                    
-                  } else {
-                    setState(() {
-                      answers.add(uniqueSentences.toString());
-                      addToDictionary(uniqueSentences.toString());
-                      //print(uniqueSentences);
-                      uniqueSentences.clear();
-                      //print(uniqueSentences);
-                      //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
-                      if (_speechEnabled == true) {}
-                      question_increment++;
-                      if (question_increment ==7) {
-                        //print(dictionary);
-                        next_button_live = false;
-                      }
-                    });
-                  }
-                },
-                child: next_button_live == false
-                    ? is_retriving? CircularProgressIndicator(color: Colors.black,): Text(
-                        "Finish",
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Text(
-                        "Next Question",
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 120, // Adjust the position as needed
-            left: 0,
-            right: 0,
-            child: Center(
-                child: Padding(
-              padding: const EdgeInsets.only(right: 20, left: 20),
-              child: Container(
-                height: 80,
-                width: 260,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(144, 0, 0, 0)),
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: Center(
-                      child: Text(
-                    // If listening is active show the recognized words
-                    _speechToText.isListening
-                        ? _lastWords
-                        // If listening isn't active but could be tell the user
-                        // how to start it, otherwise indicate that speech
-                        // recognition is not yet ready or not supported on
-                        // the target device
-                        : _speechEnabled
-                            ? 'Start speaking...'
-                            : 'Speech not available',
-                    style: const TextStyle(
-                        color: Colors.white, fontFamily: "JetBrainsMono"),
-                    textAlign: TextAlign.center,
-                  )),
-                ),
-              ),
-            )),
-          ),
-          Positioned(
-            bottom: 600, // Adjust the position as needed
-            left: 0,
-            right: 0,
-            child: Center(
-                child: Padding(
-              padding: const EdgeInsets.only(right: 20, left: 20),
-              child: Container(
-                height: 100,
-                width: 300,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(144, 0, 0, 0)),
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: Center(
-                      child: Text(
-                    Interview_questions[question_increment],
-                    style: const TextStyle(
-                        color: Colors.white, fontFamily: "JetBrainsMono"),
-                    textAlign: TextAlign.center,
-                  )),
-                ),
-              ),
-            )),
-          ),
+      appBar: AppBar(
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.mic),
+          )
         ],
+        title: Text(
+          "$type INTERVIEW",
+          style: Kinterviewtypetextstyle,
+        ),
       ),
-    );
+      body: BlocListener<ApiBloc, ApiState>(
+        listener: (context, state) {
+            if (state is ApiFetchingReport) {
+              
+              showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return CustomDialog(); // Custom dialog widget
+                        },
+                      );
+            } else if (state is ApiFetchSuccessful) {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              
+            Navigator.pop(context); 
+            Navigator.pop(context); 
+            Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: ((context) =>  Report(result:state.report,overallscore:0.8))));
+            } else if (state is ApiFailed) {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Failed to fetch report. Please try again.'),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+  },
+       child: Stack(
+            children: [
+              if (cameraController.value.isInitialized)
+                Positioned.fill(
+                  child: AspectRatio(
+                    aspectRatio: cameraController.value.aspectRatio,
+                    child: CameraPreview(cameraController),
+                  ),
+                ),
+              Positioned(
+                bottom: 20, // Adjust the position as needed
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: ElevatedButton(
+                    style: next_button_live == false
+                        ? ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 50, 213, 6),
+                            minimumSize: const Size(150, 80),
+                          )
+                        : ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 17, 17, 17),
+                            minimumSize: const Size(150, 80),
+                          ),
+                    onPressed: () async {
+                      if (next_button_live == false) {
+                        setState(() {
+                          is_retriving = true;
+                        });
+
+                        //FECTHING THE INFROMATIO USING THE API CALLS
+                        // Callapi callapi = Callapi();
+                        // result = await callapi.fetchData(
+                        //     Interview_questions, answers, (bool isLoading) {
+                        //   setState(() {
+                        //     is_retriving = isLoading;
+                        //   });
+                        // });
+                        context.read<ApiBloc>().add(ApiCall(interviewAnswer: answers, interviewQuestions: Interview_questions));
+                        //double score = callapi.calculateOverallScore(results);
+                        setState(() {
+                          
+                          next_button_live = true;
+                          question_increment = 0;
+                        });
+                        // Navigator.pop(context);
+
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: ((context) => Report(
+                        //             result: result, overallscore: 0.2))));
+                      } else {
+                        setState(() {
+                          answers.add(uniqueSentences.toString());
+                          addToDictionary(uniqueSentences.toString());
+                          //print(uniqueSentences);
+                          uniqueSentences.clear();
+                          //print(uniqueSentences);
+                          //Have to send the words that have been saved in the _uniquesentences into the model and clear the List after each question.
+                          if (_speechEnabled == true) {}
+                          question_increment++;
+                          if (question_increment == 7) {
+                            //print(dictionary);
+                            next_button_live = false;
+                          }
+                        });
+                      }
+                    },
+                    child: next_button_live == false
+                        ? is_retriving
+                            ? CircularProgressIndicator(
+                                color: Colors.black,
+                              )
+                            : Text(
+                                "Finish",
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              )
+                        : const Text(
+                            "Next Question",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 120, // Adjust the position as needed
+                left: 0,
+                right: 0,
+                child: Center(
+                    child: Padding(
+                  padding: const EdgeInsets.only(right: 20, left: 20),
+                  child: Container(
+                    height: 80,
+                    width: 260,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color.fromARGB(144, 0, 0, 0)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(13.0),
+                      child: Center(
+                          child: Text(
+                        // If listening is active show the recognized words
+                        _speechToText.isListening
+                            ? _lastWords
+                            // If listening isn't active but could be tell the user
+                            // how to start it, otherwise indicate that speech
+                            // recognition is not yet ready or not supported on
+                            // the target device
+                            : _speechEnabled
+                                ? 'Start speaking...'
+                                : 'Speech not available',
+                        style: const TextStyle(
+                            color: Colors.white, fontFamily: "JetBrainsMono"),
+                        textAlign: TextAlign.center,
+                      )),
+                    ),
+                  ),
+                )),
+              ),
+              Positioned(
+                bottom: 600, // Adjust the position as needed
+                left: 0,
+                right: 0,
+                child: Center(
+                    child: Padding(
+                  padding: const EdgeInsets.only(right: 20, left: 20),
+                  child: Container(
+                    height: 100,
+                    width: 300,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color.fromARGB(144, 0, 0, 0)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(13.0),
+                      child: Center(
+                          child: Text(
+                        Interview_questions[question_increment],
+                        style: const TextStyle(
+                            color: Colors.white, fontFamily: "JetBrainsMono"),
+                        textAlign: TextAlign.center,
+                      )),
+                    ),
+                  ),
+                )),
+              ),
+            ],
+      )));
+        }
+     
+    
   }
-}
+
 
 void showErrorDialog(BuildContext context, String errorMessage) {
   showDialog(
@@ -443,4 +480,3 @@ void showErrorDialog(BuildContext context, String errorMessage) {
     },
   );
 }
-

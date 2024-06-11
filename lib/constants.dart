@@ -36,6 +36,8 @@ Color Kgreytextcolor = const Color.fromARGB(255, 186, 171, 171);
 Color Kprogressbarbackgroundcolor = const Color.fromARGB(255, 230, 230, 230);
 TextStyle Ktitletextstyle = const TextStyle(
     fontFamily: "Inter", fontSize: 30, fontWeight: FontWeight.bold);
+TextStyle Kinterviewtypetextstyle = const TextStyle(
+    fontFamily: "poppins", fontSize: 23, fontWeight: FontWeight.w500);
 TextStyle Kcommontextstyle = const TextStyle(
     fontFamily: "Inter", fontSize: 20, fontWeight: FontWeight.w500);
 TextStyle Kresumetextstyle = const TextStyle(
