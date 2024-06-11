@@ -546,59 +546,59 @@ class _HomeMainState extends State<HomeMain> {
                   //                                                             },
                   //                   ),
 
-                            Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: GestureDetector(
-                  onTap: (){
-                    _showBottomAlertDialog(context);
-                
-                  },
-                  child: Container(
-                    height: 130,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Color.fromARGB(255, 245, 245, 245),
-                      boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 98, 98, 98).withOpacity(0.3), // Shadow color
-                                spreadRadius: 0.7, // How wide the shadow should be
-                                blurRadius: 4, // How soft the shadow should be
-                                offset: Offset(1, 2.5), // Changes position of shadow
-                              ),
-                              ],
-                    ),
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: Positioned(
-                            
-                            child: Opacity(
-                              opacity: 1,
-                              child: Image.asset("assets/stack_image/faang_watermark.png",scale:3
-                          
-                              )),
-                          ),
-                        ),
-                        Center(
-                          child: Positioned(
-                            
-                            child: Image.asset(
-                              "assets/stack_image/faang_stack_image.png",
-                              scale:3.5,
+               Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        _showBottomAlertDialog(context);
+                      },
+                      child: Container(
+                        height: 130,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Color.fromARGB(255, 245, 245, 245),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 98, 98, 98).withOpacity(0.3), // Shadow color
+                              spreadRadius: 0.7, // How wide the shadow should be
+                              blurRadius: 4, // How soft the shadow should be
+                              offset: Offset(1, 2.5), // Changes position of shadow
                             ),
-                          ),
+                          ],
                         ),
-                        Positioned(
-                          top:90,
-                          left:110,
-                          child:Text("Interview",style:TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Center(
+                                child: Opacity(
+                                  opacity: 1,
+                                  child: Image.asset("assets/stack_image/faang_watermark.png", scale: 3),
+                                ),
+                              ),
+                            ),
+                            Positioned.fill(
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/stack_image/faang_stack_image.png",
+                                  scale: 3.5,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 90,
+                              left: 110,
+                              child: Text(
+                                "Interview",
+                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
+
                   // ImageFeaturesButton(
                   //     imagepath: "assets/Page_assets/FAANG Button.png",
                   //     operation: () {

@@ -1,4 +1,4 @@
-import 'package:destin/bloc/api_bloc.dart';
+import 'package:destin/bloc/api_bloc/api_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -144,7 +144,8 @@ class _TextinterviewState extends State<Textinterview> {
     } else if (state is ApiFetchSuccessful) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       
-      
+     Navigator.pop(context); 
+     Navigator.pop(context); 
      Navigator.push(
           context,
           MaterialPageRoute(
