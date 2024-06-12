@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:destin/AuthenticationPages/Signuppage.dart';
 import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:destin/Home.dart';
 import 'package:destin/InterviewPages/Interview.dart';

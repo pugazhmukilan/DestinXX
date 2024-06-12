@@ -67,18 +67,18 @@ class _InterviewState extends State<Interview> {
           selectedFontSize: 12,
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
                 icon: Icon(Icons.file_copy_outlined),
                 label: "Resume"),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,

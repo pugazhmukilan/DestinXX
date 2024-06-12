@@ -322,10 +322,10 @@ List<List<dynamic>> nestedList(BuildContext context) {
           watermarkLeft: 20,
           text1: "Start your Interview",
           text2: "Technology",
-          text1Style: TextStyle(
+          text1Style: const TextStyle(
               fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
-          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          containerColor: Color.fromARGB(255, 236, 255, 241),
+          text2Style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: const Color.fromARGB(255, 236, 255, 241),
           borderRadius: 20,
           ontapp: () {
             Navigator.push(
@@ -358,10 +358,10 @@ List<List<dynamic>> nestedList(BuildContext context) {
           watermarkLeft: 20,
           text1: "Start your Interview",
           text2: "Management",
-          text1Style: TextStyle(
+          text1Style: const TextStyle(
               fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
-          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          containerColor: Color.fromARGB(255, 240, 208, 255),
+          text2Style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: const Color.fromARGB(255, 240, 208, 255),
           borderRadius: 20,
           ontapp: () {
             Navigator.push(
@@ -394,10 +394,10 @@ List<List<dynamic>> nestedList(BuildContext context) {
           watermarkLeft: 20,
           text1: "Start your Interview",
           text2: "Design",
-          text1Style: TextStyle(
+          text1Style: const TextStyle(
               fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
-          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          containerColor: Color.fromARGB(255, 255, 209, 209),
+          text2Style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: const Color.fromARGB(255, 255, 209, 209),
           borderRadius: 20,
           ontapp: () {
             Navigator.push(
@@ -428,10 +428,10 @@ List<List<dynamic>> nestedList(BuildContext context) {
           watermarkLeft: 20,
           text1: "Start your Interview",
           text2: "HR Interview",
-          text1Style: TextStyle(
+          text1Style: const TextStyle(
               fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
-          text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          containerColor: Color.fromARGB(255, 253, 240, 205),
+          text2Style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: const Color.fromARGB(255, 253, 240, 205),
           borderRadius: 20,
           ontapp: () {
             Navigator.push(
@@ -450,7 +450,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
       'hr interview'
     ],
     [
-      Container(
+      const SizedBox(
         width: double.infinity,
         height: 0,
       ),
@@ -488,6 +488,6 @@ Future<String> setdetails() async {
   print("=========================");
   print("=========================");
   print(pic);
-  Future.delayed(Duration(seconds: 2));
+  Future.delayed(const Duration(seconds: 2));
   return pic;
 }
