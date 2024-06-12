@@ -88,11 +88,14 @@ class _SigninpageState extends State<Signinpage> {
                             ),
                             Container(
                               //This is for the email in put textfield
-                              height: 52,
+                              height: 60,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(232, 232, 232, 1),
-                                  borderRadius: BorderRadius.circular(35)),
+                                  border: Border.all(
+                                      color: Kdestinxblack, width: 2),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(20)),
                               child: TextField(
                                 controller: emailcontroller,
                                 //onChanged: (value) =>  setState(() => emailcontroller = value),
@@ -135,11 +138,14 @@ class _SigninpageState extends State<Signinpage> {
                               height: 5,
                             ),
                             Container(
-                              height: 52,
-                              width: 380,
+                              height: 60,
+                              width: double.infinity,
                               decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(232, 232, 232, 1),
-                                  borderRadius: BorderRadius.circular(35)),
+                                  border: Border.all(
+                                      color: Kdestinxblack, width: 2),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(20)),
                               child: TextField(
                                 controller: passwordcontroller,
                                 //onChanged: (value) =>  setState(() => password = value),
@@ -176,17 +182,19 @@ class _SigninpageState extends State<Signinpage> {
                       /*GOOGLE SINGIN GOOGLE SIGNIN*/
                       /*GOOGLE SINGIN GOOGLE SIGNIN*/
 
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: GestureDetector(
-                          onTap: () async {},
-                          child: Image.asset(
-                              "assets/image_assets/Google_auth_button.png"),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 20, right: 20),
+                      //   child: GestureDetector(
+                      //     onTap: () async {
+
+                      //     },
+                      //     child: Image.asset(
+                      //         "assets/image_assets/Google_auth_button.png"),
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 30,
+                      // ),
                       ElevatedButton(
                         onPressed: () async {
                           showDialog(
@@ -214,10 +222,9 @@ class _SigninpageState extends State<Signinpage> {
                           try {
                             print(emailcontroller.text);
 
-                            UserCredential user =
-                                await _auth.signInWithEmailAndPassword(
-                                    email: emailcontroller.text,
-                                    password: passwordcontroller.text);
+                            await _auth.signInWithEmailAndPassword(
+                                email: emailcontroller.text,
+                                password: passwordcontroller.text);
 
                             print("everthying went well");
 
@@ -257,16 +264,16 @@ class _SigninpageState extends State<Signinpage> {
                             backgroundColor:
                                 const Color.fromRGBO(255, 52, 52, 1),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30))),
+                                borderRadius: BorderRadius.circular(18))),
                         child: const SizedBox(
-                          height: 40,
+                          height: 45,
                           width: 100,
                           child: Center(
                             child: Text(
                               'Login',
                               style: TextStyle(
                                   fontFamily: 'Inter',
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white),
                             ),

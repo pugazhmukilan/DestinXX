@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:destin/AuthenticationPages/Signuppage.dart';
 import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:destin/Home.dart';
 import 'package:destin/InterviewPages/Interview.dart';
@@ -102,7 +103,7 @@ class _ResumeState extends State<Resume> {
     //SELECTING THE DATE AND TIME
 
     TextEditingController Nametexteditor =
-        TextEditingController(text: SavedName ?? '');
+        TextEditingController(text: UserName ?? '');
     TextEditingController Introtexteditor =
         TextEditingController(text: Intro ?? '');
     TextEditingController Skilltexteditor =
@@ -120,496 +121,404 @@ class _ResumeState extends State<Resume> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Kbackgroundcolor,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.white,
-          selectedFontSize: 12,
-          unselectedFontSize: 10,
-          selectedIconTheme: const IconThemeData(size: 22),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.file_copy_outlined), label: "Resume"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
-          ],
-          currentIndex: currentIndex,
-          onTap: (int newIndex) {
-            setState(
-              () {
-                currentIndex = newIndex;
-                print("index is equal to+++++++ $currentIndex");
-                if (currentIndex == 0) {
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
-                  setState(() {});
-                } else if (currentIndex == 1) {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Interview()));
-                } else if (currentIndex == 2) {
-                } else if (currentIndex == 3) {
-                  //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
-                  _showBottomAlertDialog(context);
-                }
-              },
-            );
-
-            shape:
-            const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
-            );
-          },
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Kbackgroundcolor,
-        appBar: AppBar(
-          title: Text(
-            "Resume",
-            style: Ktitletextstyle,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
+        selectedFontSize: 12,
+        unselectedFontSize: 10,
+        selectedIconTheme: const IconThemeData(size: 22),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
           ),
-          backgroundColor: Kdestinxwhite,
-          automaticallyImplyLeading: false,
+          BottomNavigationBarItem(
+              icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.file_copy_outlined), label: "Resume"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
+        ],
+        currentIndex: currentIndex,
+        onTap: (int newIndex) {
+          setState(
+            () {
+              currentIndex = newIndex;
+              print("index is equal to+++++++ $currentIndex");
+              if (currentIndex == 0) {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Home()));
+                setState(() {});
+              } else if (currentIndex == 1) {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Interview()));
+              } else if (currentIndex == 2) {
+              } else if (currentIndex == 3) {
+                //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
+                _showBottomAlertDialog(context);
+              }
+            },
+          );
+
+          shape:
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
+          );
+        },
+      ),
+      backgroundColor: Kbackgroundcolor,
+      appBar: AppBar(
+        title: Text(
+          "Resume",
+          style: Ktitletextstyle,
         ),
-        body: Row(children: [
+        backgroundColor: Kdestinxwhite,
+        automaticallyImplyLeading: false,
+      ),
+      body: Row(
+        children: [
           Expanded(
-            child: Container(
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    opacity: 0.8,
-                    image: AssetImage("assets/Page_assets/report_bg.png")),
-                color: Colors.white,
-              ), // THIS IS THE BOX DECORATION OF THE BACKGROUND OF THE RESUME
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
-                child: Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.transparent,
-                    child: SingleChildScrollView(
+              child: Container(
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        opacity: 0.8,
+                        image: AssetImage("assets/Page_assets/report_bg.png")),
+                    color: Colors.white,
+                  ), // THIS IS THE BOX DECORATION OF THE BACKGROUND OF THE RESUME
+                  child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8.0, bottom: 8.0, left: 10, right: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 45, right: 20),
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Stack(children: [
-                                            CircleAvatar(
-                                              backgroundImage: (() {
-                                                try {
-                                                  if (_image1 != null) {
-                                                    return MemoryImage(_image1!)
-                                                        as ImageProvider;
-                                                  } else {
-                                                    // Display the default asset image when _image1 is null
-                                                    return NetworkImage(pic);
-                                                  }
-                                                } catch (e) {
-                                                  print(
-                                                      "Error loading image: $e");
-                                                  // Display the default asset image in case of an error
-                                                  return const AssetImage(
-                                                      'assets/image_assets/user_background.png');
-                                                }
-                                              })(),
-                                              backgroundColor: Kgreycolor_light,
-                                              radius: 50,
-                                            ),
-                                            Positioned(
-                                                bottom: 0,
-                                                right: 0,
-                                                child: CircleAvatar(
-                                                  radius: 16,
-                                                  backgroundColor: Colors.white,
-                                                  child: IconButton(
-                                                    onPressed: () async {
-                                                      selectImage();
-                                                      //setting the profile pic
-                                                    },
-                                                    icon: const Icon(
-                                                      Icons.add_a_photo_rounded,
-                                                      color: Colors.black,
-                                                      size: 21,
-                                                    ),
-                                                  ),
-                                                ))
-                                          ]),
-                                        ),
-                                        const SizedBox(height: 10),
-                                      ]),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 50),
-                                    backdropfield(
-                                        editor: "Name",
-                                        Title: "Name",
-                                        textcontroller: Nametexteditor,
-                                        hint_text: "Type your name..",
-                                        max_lines: 1,
-                                        max_length: 0,
-                                        height: 52,
-                                        width: 180),
-                                    //TEXTEDITOR
-                                    const SizedBox(height: 10),
-
-                                    //NAME
-                                    //NAME
-                                    //NAME
-                                    //NAME
-
-                                    const SizedBox(height: 20),
-
-                                    ClipRect(
-                                      child: BackdropFilter(
-                                        filter: ImageFilter.blur(
-                                            sigmaX: 2, sigmaY: 2),
-                                        child: Container(
-                                          height: 80,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.black,
-                                                  width: 2),
-                                              color: Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                //HAVE TO CHECK
-                                                "Date of Birth",
-                                                style: Kresumetextstyle,
-                                              ),
-                                              Text(
-                                                Dob,
-                                                style: const TextStyle(
-                                                    fontFamily: "Inter",
-                                                    fontSize: 13,
-                                                    color: Color.fromARGB(
-                                                        255, 121, 121, 121),
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 12),
-                                    ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 255, 106, 6),
-                                          minimumSize: const Size(70, 40),
-                                          disabledForegroundColor:
-                                              Colors.red.withOpacity(0.38),
-                                          disabledBackgroundColor:
-                                              Colors.red.withOpacity(0.12),
-                                        ),
-                                        onPressed: () {
-                                          _showDatePicker();
-                                        },
-                                        child: const Text(
-                                          "Choose Date",
-                                          style: TextStyle(
-                                              fontFamily: "Inter",
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        )),
-
-                                    const SizedBox(height: 20),
-
-                                    //ELEVATED BUTTON FOR PIVKING DATE WORKING FINE
-                                    //HAS SOME COMPLICATION WITH THE HOT RELOAD
-                                    //SO NOT USING FOR NOT
-
-                                    //DATE PICKER
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-
-                          //INTRODUCTION AND EDUCATION COLUMN
-                          ////INTRODUCTION AND EDUCATION COLUMN
-                          /////INTRODUCTION AND EDUCATION COLUMN
-                          /// EMAIL
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                backdropfield(
-                                    editor: "Email",
-                                    Title: "Email",
-                                    textcontroller: Emailtexteditor,
-                                    hint_text: "Email..",
-                                    max_lines: 1,
-                                    max_length: 0,
-                                    height: 80,
-                                    width: 240),
-
-                                const SizedBox(height: 20),
-                                backdropfield(
-                                    editor: "Phone",
-                                    Title: "Phone",
-                                    textcontroller: Phonetexteditor,
-                                    hint_text: "Phone number...",
-                                    max_lines: 1,
-                                    max_length: 0,
-                                    height: 80,
-                                    width: 240),
-
-                                const SizedBox(
-                                  height: 30,
-                                ),
-
-                                //INTRODUCTION
-                                //INTRODUCTION
-                                //INTRODUCTION
-                                backdropfield(
-                                    editor: "Introduction",
-                                    Title: "Introduction",
-                                    textcontroller: Introtexteditor,
-                                    hint_text: "Here...",
-                                    max_lines: 0,
-                                    max_length: 500,
-                                    height: 240,
-                                    width: 400),
-
-                                const SizedBox(height: 20),
-
-                                //EDUCATION
-                                //EDUCATION
-                                //EDUCATION
-                                //EDUCATION
-                                backdropfield(
-                                    editor: "Education",
-                                    Title: "Education",
-                                    textcontroller: Edutexteditor,
-                                    hint_text: "Here",
-                                    max_lines: 0,
-                                    max_length: 600,
-                                    height: 340,
-                                    width: 400),
-                              ],
-                            ),
-                          ),
-
-                          //LANGUGE AND SKILLS ROW
-                          //LANGUGE AND SKILLS ROW
-                          //LANGUGE AND SKILLS ROW
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Row(
-                              children: [
-                                //SKILLS
-                                //SKILLS
-                                //SKILLS
-                                //SKILLS
-
-                                Expanded(
-                                    flex: 1,
-                                    child: backdropfield(
-                                        editor: "Skills",
-                                        Title: "Skills",
-                                        textcontroller: Skilltexteditor,
-                                        hint_text: "Here...",
-                                        max_lines: 0,
-                                        max_length: 500,
-                                        height: 240,
-                                        width: 100)),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                //LANGUAGE
-                                //LANGUAGE
-                                //LANGUAGE
-                                //LANGUAGE\
-
-                                Expanded(
-                                    flex: 1,
-                                    child: backdropfield(
-                                        editor: "Language",
-                                        Title: "Language",
-                                        textcontroller: Langtexteditor,
-                                        hint_text: "Here...",
-                                        max_lines: 0,
-                                        max_length: 500,
-                                        height: 240,
-                                        width: 100)),
-                              ],
-                            ),
-                          ),
-
-                          //EXPERIENCE
-                          //EXPERIENCE
-                          //EXPERIENCE
-                          //EXPERIENCE
-
-                          const SizedBox(height: 10),
-                          backdropfield(
-                              editor: "Experience",
-                              Title: "Experience",
-                              textcontroller: Exptexteditor,
-                              hint_text: "Here...",
-                              max_lines: 0,
-                              max_length: 800,
-                              height: 240,
-                              width: 400),
-
-                          //SAVE BUTTON
-                          //SAVE BUTTON
-                          //SAVE BUTTON
-                          //SAVE BUTTON
-
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      is_downloading = true;
-                                    });
-
-                                    setState(() {
-                                      is_downloading = false;
-                                    });
-                                  }, //HAVE TO ADD THE FILE SVAER AND THE LOCATION OF THE FILE SAVING IN THE PHYSICAL DEVICE
-                                  style: ElevatedButton.styleFrom(
-                                    minimumSize: const Size(60, 40),
-                                    maximumSize: const Size(220, 40),
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 13, 12, 12),
+                                Stack(children: [
+                                  CircleAvatar(
+                                    backgroundImage: (() {
+                                      try {
+                                        if (_image1 != null) {
+                                          return MemoryImage(_image1!)
+                                              as ImageProvider;
+                                        } else {
+                                          // Display the default asset image when _image1 is null
+                                          return NetworkImage(pic);
+                                        }
+                                      } catch (e) {
+                                        print("Error loading image: $e");
+                                        // Display the default asset image in case of an error
+                                        return const AssetImage(
+                                            'assets/image_assets/user_background.png');
+                                      }
+                                    })(),
+                                    backgroundColor: Kgreycolor_light,
+                                    radius: 50,
                                   ),
-                                  child: is_downloading
-                                      ? CircularProgressIndicator(
-                                          color: Kdestinxwhite,
-                                        )
-                                      : const Row(
+                                  Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          selectImage();
+                                          //setting the profile pic
+                                        },
+                                        icon: const Icon(
+                                          Icons.add_a_photo_rounded,
+                                          size: 25,
+                                        ),
+                                      ))
+                                ]),
+                                backdropfield(
+                                    Title: "Name",
+                                    textcontroller: Nametexteditor,
+                                    hint_text: 'Enter your name',
+                                    max_lines: 1,
+                                    max_length: 0,
+                                    height: 40,
+                                    width: 180,
+                                    editor: 'Name'),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+
+                            //NAME
+                            //NAME
+                            //NAME
+                            //NAME
+
+                            const SizedBox(height: 20),
+
+                            Row(
+                              children: [
+                                ClipRect(
+                                  child: BackdropFilter(
+                                    filter:
+                                        ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                                    child: Container(
+                                      height: 80,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.black, width: 2),
+                                          color: Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Download',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.white),
+                                              //HAVE TO CHECK
+                                              "Date of Birth",
+                                              style: Kresumetextstyle,
                                             ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Icon(
-                                              Icons.download,
-                                              color: Colors.white,
+                                            Text(
+                                              Dob,
+                                              style: const TextStyle(
+                                                  fontFamily: "Inter",
+                                                  fontSize: 13,
+                                                  color: Color.fromARGB(
+                                                      255, 121, 121, 121),
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                           ],
-                                        )),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                IconButton(
+                                    onPressed: _showDatePicker,
+                                    icon: Icon(Icons.calendar_month_sharp)),
+                                const SizedBox(height: 20),
+                              ],
+                            ),
 
-                              /* Row(
+                            //ELEVATED BUTTON FOR PIVKING DATE WORKING FINE
+                            //HAS SOME COMPLICATION WITH THE HOT RELOAD
+                            //SO NOT USING FOR NOT
+
+                            //DATE PICKER
+                            const SizedBox(height: 20),
+                            backdropfield(
+                                editor: "Email",
+                                Title: "Email",
+                                textcontroller: Emailtexteditor,
+                                hint_text: "Email..",
+                                max_lines: 1,
+                                max_length: 0,
+                                height: 70,
+                                width: 240),
+
+                            const SizedBox(height: 20),
+                            backdropfield(
+                                editor: "Phone",
+                                Title: "Phone",
+                                textcontroller: Phonetexteditor,
+                                hint_text: "Phone number...",
+                                max_lines: 1,
+                                max_length: 0,
+                                height: 70,
+                                width: 240),
+
+                            const SizedBox(
+                              height: 30,
+                            ),
+
+                            //INTRODUCTION
+                            //INTRODUCTION
+                            //INTRODUCTION
+                            backdropfield(
+                                editor: "Introduction",
+                                Title: "Introduction",
+                                textcontroller: Introtexteditor,
+                                hint_text: "Here...",
+                                max_lines: 0,
+                                max_length: 500,
+                                height: 240,
+                                width: 400),
+
+                            const SizedBox(height: 20),
+
+                            //EDUCATION
+                            //EDUCATION
+                            //EDUCATION
+                            //EDUCATION
+                            backdropfield(
+                                editor: "Education",
+                                Title: "Education",
+                                textcontroller: Edutexteditor,
+                                hint_text: "Here",
+                                max_lines: 0,
+                                max_length: 600,
+                                height: 340,
+                                width: 400),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: backdropfield(
+                                        Title: 'Skills',
+                                        textcontroller: Skilltexteditor,
+                                        hint_text: 'type your skills',
+                                        max_lines: 0,
+                                        max_length: 500,
+                                        height: 240,
+                                        width: 135,
+                                        editor: 'Skills'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, right: 8.0, bottom: 8.0),
+                                    child: backdropfield(
+                                        Title: 'Language',
+                                        textcontroller: Langtexteditor,
+                                        hint_text: 'Languages known',
+                                        max_lines: 0,
+                                        max_length: 500,
+                                        height: 240,
+                                        width: 135,
+                                        editor: 'Language'),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            //EXPERIENCE
+                            //EXPERIENCE
+                            //EXPERIENCE
+                            //EXPERIENCE
+
+                            const SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: backdropfield(
+                                  Title: 'Experience',
+                                  textcontroller: Exptexteditor,
+                                  hint_text: 'Your experience in the field',
+                                  max_lines: 0,
+                                  max_length: 800,
+                                  height: 240,
+                                  width: 400,
+                                  editor: 'Experience'),
+                            ),
+
+                            //SAVE BUTTON
+                            //SAVE BUTTON
+                            //SAVE BUTTON
+                            //SAVE BUTTON
+
+                            Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Center(
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
                                     child: ElevatedButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            is_downloading = true;
+                                          });
+
+                                          setState(() {
+                                            is_downloading = false;
+                                          });
+                                        }, //HAVE TO ADD THE FILE SVAER AND THE LOCATION OF THE FILE SAVING IN THE PHYSICAL DEVICE
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color.fromARGB(
-                                                  255, 3, 205, 10),
-                                          minimumSize: const Size(125, 40),
-                                          disabledForegroundColor:
-                                              Colors.yellow.withOpacity(0.38),
-                                          disabledBackgroundColor:
-                                              Colors.yellow.withOpacity(0.12),
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 13, 12, 12),
                                         ),
-                                        onPressed: () async {
-                                          //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
-                                          //STORING THE USERNAME
-                            
-                                          addFieldToUserDocument("UserName",
-                                              Nametexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBeducation",
-                                              Edutexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBexperience",
-                                              Exptexteditor.text);
-                                          addFieldToUserDocument("DBemail",
-                                              Emailtexteditor.text);
-                                          addFieldToUserDocument("DBphone",
-                                              Phonetexteditor.text);
-                                          addFieldToUserDocument("DBintro",
-                                              Introtexteditor.text);
-                                          addFieldToUserDocument("DBlanguage",
-                                              Langtexteditor.text);
-                                          addFieldToUserDocument("DBskills",
-                                              Skilltexteditor.text);
-                                          addFieldToUserDocument(
-                                              "DBdob", Dob);
-                            
-                                          pic = await getUrlFromUserDocument(
-                                              "ProfilePic");
-                                          /*addFieldToUserDocument(
-                                              "profilePic", _image1.toString());*/
-                                        },
-                                        child: const Text(
-                                          "Save",
-                                          style: TextStyle(
-                                              fontFamily: "Inter",
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        )),
+                                        child: is_downloading
+                                            ? CircularProgressIndicator(
+                                                color: Kdestinxwhite,
+                                              )
+                                            : const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Download',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Icon(
+                                                    Icons.download,
+                                                    color: Colors.white,
+                                                  ),
+                                                ],
+                                              )),
                                   ),
-                                  
-                                ],
-                              ),*/
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          )
-        ]));
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 3, 205, 10),
+                                        minimumSize: const Size(125, 40),
+                                        disabledForegroundColor:
+                                            Colors.yellow.withOpacity(0.38),
+                                        disabledBackgroundColor:
+                                            Colors.yellow.withOpacity(0.12),
+                                      ),
+                                      onPressed: () async {
+                                        //STORING THE ELEMENT IN THE SHAREDPREFEREENCE IN THE LOCAL STORGAE
+                                        //STORING THE USERNAME
+
+                                        addFieldToUserDocument(
+                                            "UserName", Nametexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBeducation", Edutexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBexperience", Exptexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBemail", Emailtexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBphone", Phonetexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBintro", Introtexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBlanguage", Langtexteditor.text);
+                                        addFieldToUserDocument(
+                                            "DBskills", Skilltexteditor.text);
+                                        addFieldToUserDocument("DBdob", Dob);
+                                      },
+                                      child: const Text(
+                                        "Save",
+                                        style: TextStyle(
+                                            fontFamily: "Inter",
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white),
+                                      )),
+                                ]),
+                          ],
+                        ),
+                      ))))
+        ],
+      ),
+    );
+    ;
   }
 }
 
@@ -620,34 +529,45 @@ class typingfield extends StatelessWidget {
     required this.h,
     required this.hinttext,
     required this.len,
+    required this.function,
   });
 
-  late TextEditingController editor;
-  late double h;
-  late String hinttext;
-  late int len;
+  final TextEditingController editor;
+  final double h;
+  final String hinttext;
+  final int len;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10, right: 8, left: 8),
-      child: Container(
-        height: h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: KMyborder,
-          color: Kgreycolor_light,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15, bottom: 5),
-          child: TextField(
-            controller: editor,
-            maxLength: len,
-            maxLines: null,
-            // Allow unlimited lines in the text field
-            decoration: const InputDecoration(
-              border: InputBorder.none, // Remove default border
-              hintText: 'Here...',
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+          child: Container(
+            height: h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+              border: Border.all(
+                width: 2,
+                color: const Color.fromARGB(255, 68, 68, 68),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, bottom: 5),
+              child: TextField(
+                onChanged: function(),
+                controller: editor,
+                maxLength: len,
+                maxLines: 30,
+                decoration: InputDecoration(
+                  border: InputBorder.none, // Remove default border
+                  hintText: hinttext,
+                ),
+              ),
             ),
           ),
         ),

@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destin/AuthenticationPages/Loginpage.dart';
-import 'package:destin/backdropbox.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -334,6 +333,7 @@ void signOut(BuildContext context) async {
     prefs!.remove('password');
     UserID = "";
     UserName = "";
+    fetched_details = false;
     pic = "";
     await FirebaseAuth.instance.signOut();
     print("User signed out");
@@ -526,8 +526,8 @@ Future<void> deleteAccountAndSignOut(
       
 //     // });
     
-//     SavedName = await getFieldFromUserDocument("UserName");
-//     print("new user name============================$SavedName");
+//     UserName = await getFieldFromUserDocument("UserName");
+//     print("new user name============================$UserName");
 //     Dob = await getFieldFromUserDocument("DBdob");
 //     Phone = await getFieldFromUserDocument("DBphone");
 //     Email = await getFieldFromUserDocument("DBemail");
@@ -546,7 +546,7 @@ Future<void> deleteAccountAndSignOut(
 // }
 
 Future<String> getResumeDetails() async {
-  SavedName = await getFieldFromUserDocument("UserName");
+  UserName = await getFieldFromUserDocument("UserName");
   Dob = await getFieldFromUserDocument("DBdob");
   Email = await getFieldFromUserDocument("DBemail");
   Phone = await getFieldFromUserDocument("DBphone");
@@ -560,4 +560,23 @@ Future<String> getResumeDetails() async {
   //print(pic);
   //print(Phone);
   //print(Skills);
+}
+
+Future<String> GetAllDetails() async{
+  UserID = await getCurrentUserEmail();
+
+  UserName = await getUserName(UserID);
+  Dob = await getFieldFromUserDocument("DBdob");
+  Email = await getFieldFromUserDocument("DBemail");
+  Phone = await getFieldFromUserDocument("DBphone");
+  Intro = await getFieldFromUserDocument("DBintro");
+  Skills = await getFieldFromUserDocument("DBskills");
+  Language = await getFieldFromUserDocument("DBlanguage");
+  Experience = await getFieldFromUserDocument("DBexperience");
+  Education = await getFieldFromUserDocument("DBeducation");
+  pic = await getUrlFromUserDocument("ProfilePic");
+  //print everything which i ahve fetched here
+  print(UserID);
+  print(UserName);
+    return UserID;
 }

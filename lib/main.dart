@@ -1,7 +1,9 @@
 import 'package:camera/camera.dart';
+import 'package:destin/bloc/api_bloc/api_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'AuthenticationPages/Loginpage.dart';
@@ -23,6 +25,8 @@ Future<void> main() async {
   bool isloggedin = await checkLoginStatus();
 
   prefs = await SharedPreferences.getInstance();
+  // prefs!.remove('email');
+  //   prefs!.remove('password');
   try {
     cameras = await availableCameras();
   } on Exception catch (_, e) {
@@ -38,16 +42,19 @@ Future<void> main() async {
 class MainApp extends StatelessWidget {
   //const MainApp({super.key});
   final bool isloggedin;
-  const MainApp(this.isloggedin, {super.key});
+  MainApp(this.isloggedin, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      color: Kbackgroundcolor,
-      home: Scaffold(
-        body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
-        // body: jobpage(),
+    return BlocProvider(
+      create: (context) => ApiBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        color: Kbackgroundcolor,
+        home: Scaffold(
+          body: isloggedin ? const GetdetailsLoader() : const Loginpage(),
+          //body: Loginpage(),
+        ),
       ),
     );
   }

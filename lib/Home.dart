@@ -1,8 +1,6 @@
 //import 'package:destin/Resume.dart';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:destin/FeaturesPage/Resume.dart';
+import 'package:destin/HomePage/widgetMenu.dart';
 import 'package:destin/Widgets/Stack_widgets.dart';
 import 'package:destin/Widgets/github_insta_creator.dart';
 
@@ -10,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:image_picker/image_picker.dart';
 
 import "Constants/firebasefunctions.dart";
 import 'InterviewPages/Interview.dart';
@@ -43,7 +40,107 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SliderDrawer(
+        body: fetched_details
+            ? homeContainer(context)
+            : FutureBuilder<String>(
+                future: GetAllDetails(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // While waiting for the future to complete, show a loading spinner
+                    return Scaffold(
+                      appBar: AppBar(
+                        backgroundColor: Kdestinxblack,
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Image.asset("assets/logos/Mobile_LoginPageLogo.png",
+                                height: 35),
+                            Image.asset("assets/logos/DESTINX.png", height: 25),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                      bottomNavigationBar: BottomNavigationBar(
+                        type: BottomNavigationBarType.fixed,
+                        backgroundColor: Kbackgroundcolor,
+                        unselectedItemColor: Colors.grey,
+                        selectedItemColor: Colors.white,
+                        selectedFontSize: 12,
+                        unselectedFontSize: 10,
+                        selectedIconTheme: const IconThemeData(size: 22),
+                        items: const [
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.home),
+                            label: "Home",
+                          ),
+                          BottomNavigationBarItem(
+                              icon: Icon(
+                                Icons.meeting_room_outlined,
+                                color: Color.fromARGB(255, 42, 42, 42),
+                              ),
+                              label: "Interview"),
+                          BottomNavigationBarItem(
+                              //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                              icon: Icon(
+                                Icons.file_copy_outlined,
+                                color: Color.fromARGB(255, 42, 42, 42),
+                              ),
+                              label: "Resume"),
+                          BottomNavigationBarItem(
+                              icon: Icon(
+                                Icons.account_circle_outlined,
+                                color: Color.fromARGB(255, 42, 42, 42),
+                              ),
+                              label: "Accounts"),
+                        ],
+                      ),
+                      body: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40),
+                              child: Text(
+                                "Please wait patiently while we fetch your data..",
+                                style: Kcommontextstyle,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            CircularProgressIndicator(
+                              color: Kdestinxorange,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    // If there was an error fetching data, show an error message
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else if (snapshot.hasData) {
+                    // Once the future completes, show the data
+                    fetched_details = true;
+                    return homeContainer(context);
+                  } else {
+                    // Fallback for any other state
+                    return Center(
+                      child: Text('Unexpected state'),
+                    );
+                  }
+                }));
+  }
+
+  SliderDrawer homeContainer(BuildContext context) {
+    return SliderDrawer(
       key: _sliderDrawerkey,
       appBar: SliderAppBar(
         drawerIconColor: Kdestinxwhite,
@@ -69,199 +166,13 @@ class _HomeState extends State<Home> {
             onPressed: () {
               signOut(context);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.logout_outlined,
               color: Colors.white,
             )),
       ),
       slider: const MenuWidget(),
       child: const HomeMain(),
-    ));
-  }
-}
-
-class MenuWidget extends StatefulWidget {
-  const MenuWidget({super.key});
-
-  @override
-  _MenuWidgetState createState() => _MenuWidgetState();
-}
-
-class _MenuWidgetState extends State<MenuWidget> {
-  // @override
-  // void initState(){
-  //   super.initState();
-  //   getResumeDetails();
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Kdestinxblack,
-        /* image: DecorationImage(
-          image: AssetImage('assets/Page_assets/slider_drawer_bg.png'),
-        ),*/
-      ),
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    border: Border.all(color: Colors.transparent),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 8, right: 5, left: 5),
-                    child: Column(
-                      children: [
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     setState(() {});
-                        //   },
-                        //   child: FutureBuilder<String>(
-                        //     future:
-                        //         loadImage(), // Replace 'loadImage()' with your function that fetches the image URL
-                        //     builder: (context, snapshot) {
-                        //       if (snapshot.connectionState ==
-                        //           ConnectionState.waiting) {
-                        //         return const CircularProgressIndicator(); // Display a loading indicator while fetching the image
-                        //       } else if (snapshot.hasError) {
-                        //         return Text('Error: ${snapshot.error}');
-                        //       } else {
-                        //         return CircleAvatar(
-                        //           radius: 60,
-                        //           foregroundImage: NetworkImage(pic),
-                        //           // backgroundImage: NetworkImage(snapshot
-                        //           //     .data!), // Display the image using NetworkImage
-                        //         );
-                        //       }
-                        //     },
-                        //   ),
-                        // ),
-
-                        CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(pic),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: Text(
-                            UserName,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontFamily: "Inter",
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          UserID,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontFamily: "JetBrainsMono",
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Divider(),
-                        const SizedBox(width: 10),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            child: Container(
-              height: 400,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            signOut(context);
-                          },
-                          child: const Text(
-                            'Sign Out',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.logout_outlined,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    indent: 20,
-                    endIndent: 20,
-                    color: Colors.white,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            showConfirmationDialog(context);
-                          },
-                          child: const Text(
-                            'Delete Account',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.delete_forever_outlined,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -281,36 +192,36 @@ class _HomeMainState extends State<HomeMain> {
   @override
   void initState() {
     super.initState();
-    getResumeDetails();
+    //getResumeDetails();
 
     // setdetails();
     // print("===============================$UserName");
   }
 
-  Uint8List? _image1;
+  // Uint8List? _image1;
 
-  final ImagePicker _picker = ImagePicker();
-  XFile? _image;
-  chooseImages(ImageSource source) async {
-    final XFile? image = await _picker.pickImage(source: source);
-    if (image != null) {
-      return await image.readAsBytes();
-    } else {
-      return _showBottomAlertDialog(context);
-    }
-  }
+  // final ImagePicker _picker = ImagePicker();
+  // XFile? _image;
+  // chooseImages(ImageSource source) async {
+  //   final XFile? image = await _picker.pickImage(source: source);
+  //   if (image != null) {
+  //     return await image.readAsBytes();
+  //   } else {
+  //     return _showBottomAlertDialog(context);
+  //   }
+  // }
 
-  void selectImage() async {
-    //have to set the bug for this  if I select the chood=seImage and come out without choosing the image
-    try {
-      Uint8List img = await chooseImages(ImageSource.gallery);
+  // void selectImage() async {
+  //   //have to set the bug for this  if I select the chood=seImage and come out without choosing the image
+  //   try {
+  //     Uint8List img = await chooseImages(ImageSource.gallery);
 
-      setState(() {
-        _image1 =
-            img; //this will make tghe fn not null and galary will be opened
-      });
-    } catch (err) {}
-  }
+  //     setState(() {
+  //       _image1 =
+  //           img; //this will make tghe fn not null and galary will be opened
+  //     });
+  //   } catch (err) {}
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -691,39 +602,40 @@ class _HomeMainState extends State<HomeMain> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: const Color.fromARGB(255, 245, 245, 245),
+                          color: Color.fromARGB(255, 245, 245, 245),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color.fromARGB(255, 98, 98, 98)
+                              color: Color.fromARGB(255, 98, 98, 98)
                                   .withOpacity(0.3), // Shadow color
                               spreadRadius:
                                   0.7, // How wide the shadow should be
                               blurRadius: 4, // How soft the shadow should be
-                              offset: const Offset(
-                                  1, 2.5), // Changes position of shadow
+                              offset:
+                                  Offset(1, 2.5), // Changes position of shadow
                             ),
                           ],
                         ),
                         child: Stack(
                           children: [
-                            Center(
-                              child: Positioned(
+                            Positioned.fill(
+                              child: Center(
                                 child: Opacity(
-                                    opacity: 1,
-                                    child: Image.asset(
-                                        "assets/stack_image/faang_watermark.png",
-                                        scale: 3)),
+                                  opacity: 1,
+                                  child: Image.asset(
+                                      "assets/stack_image/faang_watermark.png",
+                                      scale: 3),
+                                ),
                               ),
                             ),
-                            Center(
-                              child: Positioned(
+                            Positioned.fill(
+                              child: Center(
                                 child: Image.asset(
                                   "assets/stack_image/faang_stack_image.png",
                                   scale: 3.5,
                                 ),
                               ),
                             ),
-                            const Positioned(
+                            Positioned(
                               top: 90,
                               left: 110,
                               child: Text(
@@ -739,6 +651,7 @@ class _HomeMainState extends State<HomeMain> {
                       ),
                     ),
                   ),
+
                   // ImageFeaturesButton(
                   //     imagepath: "assets/Page_assets/FAANG Button.png",
                   //     operation: () {

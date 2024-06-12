@@ -8,8 +8,17 @@ import 'package:flutter/material.dart';
 import "InterviewPages/Interview.dart";
 import "InterviewPages/Interview_details_Page.dart";
 import "InterviewPages/Start_interview.dart";
+bool fetched_details = false;
+String UserName = '';
+String Dob = '';
+String Intro = '';
+String Skills = '';
+String Language = '';
+String Experience = '';
+String Education = '';
+String Phone = '';
+String Email = '';
 
-String UserName = "";
 String pic = '';
 String UserID = '';
 
@@ -27,6 +36,8 @@ Color Kgreytextcolor = const Color.fromARGB(255, 186, 171, 171);
 Color Kprogressbarbackgroundcolor = const Color.fromARGB(255, 230, 230, 230);
 TextStyle Ktitletextstyle = const TextStyle(
     fontFamily: "Inter", fontSize: 30, fontWeight: FontWeight.bold);
+TextStyle Kinterviewtypetextstyle = const TextStyle(
+    fontFamily: "poppins", fontSize: 23, fontWeight: FontWeight.w500);
 TextStyle Kcommontextstyle = const TextStyle(
     fontFamily: "Inter", fontSize: 20, fontWeight: FontWeight.w500);
 TextStyle Kresumetextstyle = const TextStyle(
@@ -40,7 +51,7 @@ TextStyle Kprogressbarnumber = const TextStyle(
     fontWeight: FontWeight.w800,
     color: Colors.black);
 TextStyle Kreporttextstyle = const TextStyle(
-    fontFamily: "Inter",
+    fontFamily: "Poppins",
     fontWeight: FontWeight.w400,
     color: Colors.black,
     fontSize: 15);
@@ -49,6 +60,10 @@ TextStyle Kquizcattext = const TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.w600,
     color: Color.fromARGB(255, 92, 92, 92));
+
+TextStyle Kreporttitletext = const TextStyle(fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins');
 //profile image for the user
 //picking the image from the file using the some modules
 

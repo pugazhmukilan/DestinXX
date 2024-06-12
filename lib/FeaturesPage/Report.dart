@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:destin/FeaturesPage/Feedback_text.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -8,88 +9,48 @@ import '../constants.dart';
 double screenWidth = 0;
 int currentIndex = 0;
 late Map<String, dynamic> result;
-double overallscore = 0.0;
-//final List<String> question = [];
-//final List<String> answer = [];
-//create a map of string and string
-//Map<dynamic, dynamic> dataMap = {};
-/*final List<String> question = [
-  "tell me about yourself",
-  "something",
-  "something question"
-      "something question"
-      "something question"
-      "something question"
-      "something question"
-      "something question"
-      "something question"
-      "sog question"
-      "something question"
-];
-final List<String> answer = [
-  "I'm a recent graduate with a degree in computer science. During my studies, I focused on software development and completed a couple of internships. I enjoy coding and problem-solving. In my free time, I like to explore new technologies and work on small coding projects",
-  "something answer",
-  "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-      "something asnwer 2"
-];
-final List<String> feedback = [
-  "The answer provides a concise overview of your educational background, interests, and experiences. To enhance it, consider incorporating specific achievements or projects from your internships to showcase practical skills. Additionally, mentioning how your skills align with the position you're applying for can make the response more tailored and impactful.",
-  "feedback1",
-  "feedback2"
-      "feedback2"
-      "feedback2"
-      "feedback2"
-      "feedback2"
-      "feedback2"
-      "feedback2"
-      "feedback2"
-      "feedback2"
-];*/
+late double overallscore = 0.0;
 
 class Report extends StatefulWidget {
-  //late  Map<dynamic, dynamic> dataMap;
   Map<String, dynamic> result;
   double overallscore;
   Report({super.key, required this.result, required this.overallscore});
+
   @override
   State<Report> createState() =>
       _ReportState(result: result, overallscore: overallscore);
 }
 
 class _ReportState extends State<Report> {
+  Map<String, dynamic> result;
+  double overallscore;
+
+  _ReportState({required this.result, required this.overallscore});
+
   @override
   void initState() {
     super.initState();
     print(result);
   }
 
-  Map<String, dynamic> result;
-  double overallscore;
-  _ReportState({required this.result, required this.overallscore});
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Add your onPressed logic here
-          },
-          backgroundColor: Colors.black,
-          splashColor: const Color.fromARGB(255, 91, 30, 1),
-          shape: const CircleBorder(),
-          child: const Icon(
-            Icons.download_outlined,
-            color: Color.fromARGB(255, 255, 97, 24),
-            size: 25,
-          )),
+        onPressed: () {
+          //TODO: PRINT FUNCTIONALITY
+          //  _createPDF();
+        },
+        backgroundColor: Colors.black,
+        splashColor: const Color.fromARGB(255, 91, 30, 1),
+        shape: const CircleBorder(),
+        child: const Icon(
+          Icons.download_outlined,
+          color: Color.fromARGB(255, 255, 97, 24),
+          size: 25,
+        ),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(
@@ -103,71 +64,49 @@ class _ReportState extends State<Report> {
       backgroundColor: Kdestinxwhite,
       body: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("assets/Page_assets/report_bg.png"),
-          fit: BoxFit.cover,
-        )),
+          image: DecorationImage(
+            image: AssetImage("assets/Page_assets/report_bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  const Image(
-                    image:
-                        AssetImage("assets/image_assets/reportpage_image.png"),
-                    height: 150,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: const Text(
-                        "Thank you for your participation in the interview.Your insights and enthusiasm for the position were greatly appreciated",
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                          fontSize: 13,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               ClipRect(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255)
-                            .withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          width: 2,
-                          color: const Color.fromARGB(255, 255, 97, 24),
-                        )),
+                      color: const Color.fromARGB(255, 255, 255, 255)
+                          .withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 2,
+                        color: const Color.fromARGB(255, 255, 97, 24),
+                      ),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Text("Overall analysis",
-                              style: Ktitletextstyle), //changeable
+                              style: Kreporttitletext), //changeable
                           Padding(
-                            padding: const EdgeInsets.only(top: 30),
+                            padding: EdgeInsets.only(top: 30),
                             child: percentage_indicator(
-                                percentage: overallscore,
-                                color: Colors.green,
-                                text: "${overallscore * 10}/10"), //changeable
+                              percentage: overallscore,
+                              color: Colors.green,
+                              text: "${overallscore * 10}/10",
+                            ), //changeable
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Expanded(
-                              child: Text(
-                                "Beginning with a score of 4 out of 10, there are clear areas for improvement. Reflect on the feedback and target specific aspects for enhanced future performance. Dedication and focused effort will lead to progress.",
-                                style: Kreporttextstyle,
-                                textAlign: TextAlign.justify,
-                              ),
+                            child: Text(
+                              generateFeedback(overallscore),
+                              style: Kreporttextstyle,
+                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ],
@@ -182,29 +121,30 @@ class _ReportState extends State<Report> {
                   filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                   child: Container(
                     decoration: BoxDecoration(
-                        //color: Color.fromARGB(255, 255, 240, 225),
-                        //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          width: 2,
-                          color: const Color.fromARGB(255, 255, 97, 24),
-                        )),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 2,
+                        color: const Color.fromARGB(255, 255, 97, 24),
+                      ),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Center(
-                              child: Text(
-                            "Details",
-                            style: Ktitletextstyle,
-                          )),
+                            child: Text(
+                              "Details",
+                              style: Kreporttitletext,
+                            ),
+                          ),
                           const SizedBox(height: 15),
                           const Padding(
                             padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                             child: percentage_indicator(
-                                percentage: 0.8,
-                                color: Colors.orange,
-                                text: "8/10"),
+                              percentage: 0.8,
+                              color: Colors.orange,
+                              text: "8/10",
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Text("Confidence", style: Kcommontextstyle),
@@ -213,9 +153,10 @@ class _ReportState extends State<Report> {
                           const Padding(
                             padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                             child: percentage_indicator(
-                                percentage: 0.4,
-                                color: Color.fromARGB(255, 218, 92, 241),
-                                text: "4/10"),
+                              percentage: 0.4,
+                              color: Color.fromARGB(255, 218, 92, 241),
+                              text: "4/10",
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Text("TBD", style: Kcommontextstyle),
@@ -224,9 +165,10 @@ class _ReportState extends State<Report> {
                           const Padding(
                             padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                             child: percentage_indicator(
-                                percentage: 0.6,
-                                color: Color.fromARGB(255, 255, 216, 59),
-                                text: "6/10"),
+                              percentage: 0.6,
+                              color: Color.fromARGB(255, 255, 216, 59),
+                              text: "6/10",
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Text("Fluency", style: Kcommontextstyle),
@@ -243,40 +185,30 @@ class _ReportState extends State<Report> {
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                     child: Container(
                       decoration: BoxDecoration(
-                          image: const DecorationImage(
-                              image: AssetImage(
-                                  "assets/Page_assets/Question_analysis_bg.png")),
-                          //color: Color.fromARGB(255, 255, 240, 225),
-                          //boxShadow: List.filled(3,BoxShadow(color: Color.fromARGB(60, 244, 67, 54),spreadRadius: 0.0,blurRadius: 10)),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            width: 2,
-                            color: const Color.fromARGB(0, 0, 0, 0),
-                          )),
+                        image: const DecorationImage(
+                          image: AssetImage(
+                              "assets/Page_assets/Question_analysis_bg.png"),
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          width: 2,
+                          color: const Color.fromARGB(0, 0, 0, 0),
+                        ),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 30),
                         child: Center(
-                            child: Text(
-                          "Question analysis",
-                          style: Ktitletextstyle,
-                        )),
+                          child: Text(
+                            "Question analysis",
+                            style: Kreporttitletext,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-
-              /*GestureDetector(
-                onTap: (){
-                 
-          
-                },
-                child:Container(
-                  decoration: BoxDecoration(color:Colors.orange),
-                  child:Text("fetch the data"),
-                ),
-              ),*/
               for (int i = 0; i < result['data'].length; i++)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15, top: 15),
@@ -301,8 +233,8 @@ class _ReportState extends State<Report> {
                               "question ${i + 1}",
                               style: const TextStyle(
                                 fontFamily: "Inter",
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
                               ),
                               textAlign: TextAlign.justify,
                             ),
@@ -320,7 +252,6 @@ class _ReportState extends State<Report> {
                               ),
                               textAlign: TextAlign.justify,
                             ),
-                            //
                           ],
                         ),
                       ),
@@ -352,7 +283,7 @@ class percentage_indicator extends StatelessWidget {
     return CircularPercentIndicator(
       radius: 60.0,
       lineWidth: 15.0,
-      percent: percentage, //parameter should be adde in the class call
+      percent: percentage,
       center: Text(
         text,
         style: Kprogressbarnumber,
@@ -366,103 +297,26 @@ class percentage_indicator extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
-
-class FeaturesButton extends StatelessWidget {
-  late Color startcolor;
-  late Color endcolor;
-  late String subtext;
-  late String maintext;
-  late String imagepath;
-  late Function() operation;
-  FeaturesButton({
-    super.key,
-    required this.startcolor,
-    required this.endcolor,
-    required this.subtext,
-    required this.maintext,
-    required this.imagepath,
-    required this.operation,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: operation,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
-        child: Container(
-          width: 400,
-          height: 150,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [startcolor, endcolor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-
-          //content inside the container
-          child: Padding(
-            //giving padding to the whole row to maintain the text properly
-            padding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(subtext,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black)),
-                    Text(maintext,
-                        style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w800,
-                            color: Color.fromARGB(255, 255, 255, 255))),
-                  ],
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                //container image
-                Image.asset(imagepath),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 void _showBottomAlertDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(7.0),
-        child: Container(
-          child: AlertDialog(
-            elevation: 40,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            buttonPadding: const EdgeInsets.all(5),
-            backgroundColor: Colors.black.withOpacity(0.6),
-            alignment: Alignment.bottomCenter,
-            title: const Text(
-              'This page is under construction',
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 255, 205, 23)),
+        child: AlertDialog(
+          elevation: 40,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          buttonPadding: const EdgeInsets.all(5),
+          backgroundColor: Colors.black.withOpacity(0.6),
+          alignment: Alignment.bottomCenter,
+          title: const Text(
+            'This page is under construction',
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w400,
+              color: Color.fromARGB(255, 255, 205, 23),
             ),
           ),
         ),
@@ -470,3 +324,35 @@ void _showBottomAlertDialog(BuildContext context) {
     },
   );
 }
+
+
+
+// Future<void> _createPDF() async{
+//     PdfDocument document = PdfDocument();
+//     final page = document.pages.add(
+      
+//     );
+//     final page2 = document.pages.add();
+
+
+//   //  page.graphics.drawString("Welcome to PDF converter",PdfStandardFont(PdfFontFamily.helvetica,40));
+//   //  page.graphics.drawString(
+    
+//   //   "hello to PDF converter",PdfStandardFont(PdfFontFamily.helvetica,40),bounds: Rect.fromLTRB(200, 200, 10, 10));
+    
+
+//     List<int> bytes  =await document.save();
+//     document.dispose();
+
+//     saveAndLaunch(bytes , 'Output.pdf');
+//   }
+  
+// Future<void> saveAndLaunch(List<int> bytes,String fileName)async{
+  
+
+//   final path = (await getExternalStorageDirectory())?.path;
+//   final file = File('$path/$fileName');
+//   await file.writeAsBytes(bytes,flush :true);
+//   OpenFile.open ('$path/$fileName');
+
+// }

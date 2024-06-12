@@ -147,7 +147,7 @@ class Callapi {
 
   double calculateOverallScore(Map<String, dynamic> result) {
     double score = 0;
-    if (result is List) {
+    if (result != null && result is List) {
       for (int i = 0; i < result.length; i++) {
         if (result[i] is Map<String, dynamic> &&
             result[i].containsKey('Similarity')) {
@@ -158,10 +158,84 @@ class Callapi {
         score /= result.length;
       }
     }
-    print("===========================AVERAGE SCORE IS +++++++ $score");
+    print("===========================AVERAGE SCORE IS +++++++ ${score}");
     return score;
   }
+
+  Future fetchDataBloc(
+    List<String> questions,
+    List<String> answers,
+  ) async {
+    // Set loading indicator to true before fetching data
+
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://karthiksagar.us-east-1.modelbit.com/v1/predict/latest'),
+        body: json.encode({
+          'data': [
+            questions[0],
+            answers[0],
+            questions[1],
+            answers[1],
+            questions[2],
+            answers[2],
+            questions[3],
+            answers[3],
+            questions[4],
+            answers[4],
+            questions[5],
+            answers[5],
+            questions[6],
+            answers[6],
+          ]
+        }),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final decodedResponse = json.decode(response.body);
+        print("${response.statusCode}");
+        print(decodedResponse.runtimeType);
+        print(decodedResponse);
+        //print(calculateOverallScore(decodedResponse));
+        return decodedResponse;
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        // Set loading indicator to false if request fails
+        return [];
+      }
+    } catch (e) {
+      print('Exception during API call: $e');
+      // Set loading indicator to false if exception occurs
+      return [];
+    }
+  }
+
+// double calculateOverallScore(Map<String,dynamic> result) {
+//   double score = 0;
+//   if (result != null && result is List) {
+//     for (int i = 0; i < result.length; i++) {
+//       if (result[i] is Map<String, dynamic> && result[i].containsKey('Similarity')) {
+//         score += result[i]['Similarity'] as double;
+//       }
+//     }
+//     if (result.isNotEmpty) {
+//       score /= result.length;
+//     }
+//   }
+//   print("===========================AVERAGE SCORE IS +++++++ ${score}");
+//   return score;
+// }
 }
+
+
+
+
+
+
+
+
 
 
 
