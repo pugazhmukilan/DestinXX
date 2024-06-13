@@ -20,10 +20,10 @@ String Phone = '';
 String Email = '';
 
 String pic = '';
-late String UserID;
+String UserID = '';
 
 Color Kquizlinecolor = const Color.fromARGB(255, 219, 219, 219);
-Color Kdestinxblack =  const Color.fromARGB(255, 29, 29, 29);
+Color Kdestinxblack = const Color.fromARGB(255, 29, 29, 29);
 Color Kdestinxorange = const Color.fromARGB(255, 255, 97, 24);
 Color Kbackgroundcolor = const Color.fromARGB(255, 29, 29, 29);
 Color Ksidebarcolor = const Color.fromARGB(255, 29, 29, 29);
@@ -249,7 +249,7 @@ void showConfirmationDialog(BuildContext context) {
 List<List<dynamic>> nestedList(BuildContext context) {
   return [
     // [
-      
+
     //   ImageFeaturesButton(
     //       imagepath: "assets/Page_assets/Start_Interview_Technology.png",
     //       operation: () {
@@ -323,44 +323,49 @@ List<List<dynamic>> nestedList(BuildContext context) {
     //       }),
     //   'hrinterview'
     // ],
-     [
-      StackWidgets(containerHeight: 100,
-       containerWidth: double.infinity,
-        stackImage: "assets/InterviewPage_stack_image/tech_robo.png",
-         waterMarkImage: "assets/InterviewPage_stack_image/tech_robo_watermark.png",
+    [
+      StackWidgets(
+          containerHeight: 100,
+          containerWidth: double.infinity,
+          stackImage: "assets/InterviewPage_stack_image/tech_robo.png",
+          waterMarkImage:
+              "assets/InterviewPage_stack_image/tech_robo_watermark.png",
           stackImageSize: 3.8,
-           stackImageTop: 0,
-            stackImageLeft: 190,
-             watermarkTop: 0,
-              watermarkLeft: 20,
-               text1: "Start your Interview",
-                text2: "Technology",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
-                  text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                   containerColor: Color.fromARGB(255, 236 ,255 ,241),
-                    borderRadius: 20,
-                     ontapp: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => const Interview_details_Page(
-                                type: "Technology",
-                                catid: 1,
-                                maintext: "TechInterview",
-                                imagepath:
-                                    "assets/Page_assets/technology_page_main.png",
-                                appbarimage: "assets/Page_assets/appbar_tech.png",
-                                context_text:
-                                    'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.')));
-                     },
-                     
-                      text_left: 30),'technology'
+          stackImageTop: 0,
+          stackImageLeft: 190,
+          watermarkTop: 0,
+          watermarkLeft: 20,
+          text1: "Start your Interview",
+          text2: "Technology",
+          text1Style: const TextStyle(
+              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+          text2Style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          containerColor: const Color.fromARGB(255, 236, 255, 241),
+          borderRadius: 20,
+          ontapp: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => const Interview_details_Page(
+                        type: "Technology",
+                        catid: 1,
+                        maintext: "TechInterview",
+                        imagepath:
+                            "assets/Page_assets/technology_page_main.png",
+                        appbarimage: "assets/Page_assets/appbar_tech.png",
+                        context_text:
+                            'Elevate your tech interviews with our cutting-edge AI interview app! Seamlessly blend general questions, fundamental projects, and technical inquiries to assess candidates skills comprehensively. Revolutionize our hiring process for a tech-savvy future.')));
+          },
+          text_left: 30),
+      'technology'
     ],
     [
-      StackWidgets(containerHeight: 100,
-       containerWidth: double.infinity,
-        stackImage: "assets/InterviewPage_stack_image/management.png",
-         waterMarkImage: "assets/InterviewPage_stack_image/management_watermark.png",
+      StackWidgets(
+          containerHeight: 100,
+          containerWidth: double.infinity,
+          stackImage: "assets/InterviewPage_stack_image/management.png",
+          waterMarkImage:
+              "assets/InterviewPage_stack_image/management_watermark.png",
           stackImageSize: 3.8,
            stackImageTop: 0,
             stackImageLeft: 190,
@@ -588,11 +593,11 @@ List<List<dynamic>> nestedList(BuildContext context) {
                       text_left: 30),'oops'
     ],
     [
-      Container(
+      const SizedBox(
         width: double.infinity,
-        height:0,
-        
-      ),'dummy'
+        height: 0,
+      ),
+      'dummy'
     ],
   ];
 }
@@ -613,7 +618,6 @@ class ImageFeaturesButton extends StatelessWidget {
   }
 }
 
-
 Future<String> setdetails() async {
   UserID = prefs!.getString("email").toString();
   //getthe username
@@ -627,6 +631,6 @@ Future<String> setdetails() async {
   print("=========================");
   print("=========================");
   print(pic);
-  Future.delayed(Duration(seconds: 2));
+  Future.delayed(const Duration(seconds: 2));
   return pic;
 }

@@ -25,7 +25,7 @@ class StackWidgets extends StatelessWidget {
   final double text_left;
   
   // Create a constructor
-  const StackWidgets({
+  const StackWidgets({super.key, 
     required this.containerHeight,
     required this.containerWidth,
     required this.stackImage,
@@ -63,10 +63,10 @@ class StackWidgets extends StatelessWidget {
             color: containerColor,
             boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 98, 98, 98).withOpacity(0.3), // Shadow color
+                      color: const Color.fromARGB(255, 98, 98, 98).withOpacity(0.3), // Shadow color
                       spreadRadius: 0.7, // How wide the shadow should be
                       blurRadius: 4, // How soft the shadow should be
-                      offset: Offset(1, 2.5), // Changes position of shadow
+                      offset: const Offset(1, 2.5), // Changes position of shadow
                     ),
                     ],
           ),

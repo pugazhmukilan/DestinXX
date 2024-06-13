@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-
 class LoadingAndQuizPage extends StatefulWidget {
   final String category;
   final String subcategory;
@@ -94,7 +93,6 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
     });
   }
 
-  
   void showresults(
     BuildContext context,
   ) {
@@ -135,7 +133,8 @@ class _LoadingAndQuizPageState extends State<LoadingAndQuizPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Quiztypes())); // Close the dialog
+                        builder: (context) =>
+                            const Quiztypes())); // Close the dialog
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -297,7 +296,8 @@ void showConfirmationDialog(
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Quiztypes())); // Close the dialog
+                      builder: (context) =>
+                          const Quiztypes())); // Close the dialog
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

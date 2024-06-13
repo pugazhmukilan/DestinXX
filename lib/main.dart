@@ -42,7 +42,7 @@ Future<void> main() async {
 class MainApp extends StatelessWidget {
   //const MainApp({super.key});
   final bool isloggedin;
-   MainApp(this.isloggedin, {super.key});
+  MainApp(this.isloggedin, {super.key});
 
   @override
   Widget build(BuildContext context) {

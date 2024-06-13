@@ -1,12 +1,9 @@
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-class Callapi{
-  
-
+class Callapi {
 //  Future<List<dynamic>> fetchData(List<String> questions, List<String> answers, Function(bool) setLoading) async {
 //     setLoading(true); // Set loading indicator to true before fetching data
 //     try {
@@ -31,9 +28,6 @@ class Callapi{
 //           'Question7': questions[6],
 //           'Answer7': answers[6],
 //         };
-
-
-         
 
 //         var response = await http.post(Uri.parse(url), body: body);
 
@@ -73,155 +67,150 @@ class Callapi{
 //     return score;
 //   }
 
-
-
-
 // }
 
+  Future<void> writeDataToFile(Map<String, dynamic> data) async {
+    // Convert the map data to a JSON string
+    String jsonString = json.encode(data);
 
+    // Get the current directory
+    String currentDirectory = Directory.current.path;
 
-Future<void> writeDataToFile(Map<String, dynamic> data) async {
-  // Convert the map data to a JSON string
-  String jsonString = json.encode(data);
+    // Construct the file path for "report_analysis.json" in the current directory
+    String filePath = '$currentDirectory/report_analysis.json';
 
-  // Get the current directory
-  String currentDirectory = Directory.current.path;
+    // Create a new file
+    File file = File(filePath);
 
-  // Construct the file path for "report_analysis.json" in the current directory
-  String filePath = '$currentDirectory/report_analysis.json';
+    try {
+      // Open the file for writing (create if not exists)
+      IOSink sink = file.openWrite(mode: FileMode.write);
 
-  // Create a new file
-  File file = File(filePath);
+      // Write the JSON data to the file
+      sink.write(jsonString);
 
-  try {
-    // Open the file for writing (create if not exists)
-    IOSink sink = file.openWrite(mode: FileMode.write);
-
-    // Write the JSON data to the file
-    sink.write(jsonString);
-
-    // Close the file
-    await sink.close();
-    print('Data written to file successfully: $filePath');
-  } catch (e) {
-    print('Error writing data to file: $e');
+      // Close the file
+      await sink.close();
+      print('Data written to file successfully: $filePath');
+    } catch (e) {
+      print('Error writing data to file: $e');
+    }
   }
-}
 
+  Future fetchData(List<String> questions, List<String> answers,
+      Function(bool) setLoading) async {
+    setLoading(true); // Set loading indicator to true before fetching data
 
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://karthiksagar.us-east-1.modelbit.com/v1/predict/latest'),
+        body: json.encode({
+          'data': [
+            questions[0],
+            answers[0],
+            questions[1],
+            answers[1],
+            questions[2],
+            answers[2],
+            questions[3],
+            answers[3],
+            questions[4],
+            answers[4],
+            questions[5],
+            answers[5],
+            questions[6],
+            answers[6],
+          ]
+        }),
+        headers: {'Content-Type': 'application/json'},
+      );
 
-
-
-
-
-Future fetchData(List<String> questions, List<String> answers, Function(bool) setLoading) async {
-  setLoading(true); // Set loading indicator to true before fetching data
-  
-  try {
-    final response = await http.post(
-      Uri.parse('https://karthiksagar.us-east-1.modelbit.com/v1/predict/latest'),
-      body: json.encode({
-        'data': [
-           questions[0],
-          answers[0],
-           questions[1],
-           answers[1],
-           questions[2],
-           answers[2],
-           questions[3],
-         answers[3],
-           questions[4],
-           answers[4],
-           questions[5],
-           answers[5],
-           questions[6],
-           answers[6],
-        ]
-      }),
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    if (response.statusCode == 200) {
-      final decodedResponse = json.decode(response.body);
-      print("${response.statusCode}");
-      print(decodedResponse.runtimeType);
-      print(decodedResponse);
-      //print(calculateOverallScore(decodedResponse));
-      return decodedResponse;
-    } else {
-      print('Request failed with status: ${response.statusCode}');
-      setLoading(false); // Set loading indicator to false if request fails
+      if (response.statusCode == 200) {
+        final decodedResponse = json.decode(response.body);
+        print("${response.statusCode}");
+        print(decodedResponse.runtimeType);
+        print(decodedResponse);
+        //print(calculateOverallScore(decodedResponse));
+        return decodedResponse;
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        setLoading(false); // Set loading indicator to false if request fails
+        return [];
+      }
+    } catch (e) {
+      print('Exception during API call: $e');
+      setLoading(false); // Set loading indicator to false if exception occurs
       return [];
     }
-  } catch (e) {
-    print('Exception during API call: $e');
-    setLoading(false); // Set loading indicator to false if exception occurs
-    return [];
   }
-}
 
-double calculateOverallScore(Map<String,dynamic> result) {
-  double score = 0;
-  if (result != null && result is List) {
-    for (int i = 0; i < result.length; i++) {
-      if (result[i] is Map<String, dynamic> && result[i].containsKey('Similarity')) {
-        score += result[i]['Similarity'] as double;
+  double calculateOverallScore(Map<String, dynamic> result) {
+    double score = 0;
+    if (result != null && result is List) {
+      for (int i = 0; i < result.length; i++) {
+        if (result[i] is Map<String, dynamic> &&
+            result[i].containsKey('Similarity')) {
+          score += result[i]['Similarity'] as double;
+        }
+      }
+      if (result.isNotEmpty) {
+        score /= result.length;
       }
     }
-    if (result.isNotEmpty) {
-      score /= result.length;
-    }
+    print("===========================AVERAGE SCORE IS +++++++ ${score}");
+    return score;
   }
-  print("===========================AVERAGE SCORE IS +++++++ ${score}");
-  return score;
-}
 
+  Future fetchDataBloc(
+    List<String> questions,
+    List<String> answers,
+  ) async {
+    // Set loading indicator to true before fetching data
 
-Future fetchDataBloc(List<String> questions, List<String> answers, ) async {
-  // Set loading indicator to true before fetching data
-  
-  try {
-    final response = await http.post(
-      Uri.parse('https://karthiksagar.us-east-1.modelbit.com/v1/predict/latest'),
-      body: json.encode({
-        'data': [
-           questions[0],
-          answers[0],
-           questions[1],
-           answers[1],
-           questions[2],
-           answers[2],
-           questions[3],
-         answers[3],
-           questions[4],
-           answers[4],
-           questions[5],
-           answers[5],
-           questions[6],
-           answers[6],
-        ]
-      }),
-      headers: {'Content-Type': 'application/json'},
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://karthiksagar.us-east-1.modelbit.com/v1/predict/latest'),
+        body: json.encode({
+          'data': [
+            questions[0],
+            answers[0],
+            questions[1],
+            answers[1],
+            questions[2],
+            answers[2],
+            questions[3],
+            answers[3],
+            questions[4],
+            answers[4],
+            questions[5],
+            answers[5],
+            questions[6],
+            answers[6],
+          ]
+        }),
+        headers: {'Content-Type': 'application/json'},
+      );
 
-    if (response.statusCode == 200) {
-      final decodedResponse = json.decode(response.body);
-      print("${response.statusCode}");
-      print(decodedResponse.runtimeType);
-      print(decodedResponse);
-      //print(calculateOverallScore(decodedResponse));
-      return decodedResponse;
-    } else {
-      print('Request failed with status: ${response.statusCode}');
-      // Set loading indicator to false if request fails
+      if (response.statusCode == 200) {
+        final decodedResponse = json.decode(response.body);
+        print("${response.statusCode}");
+        print(decodedResponse.runtimeType);
+        print(decodedResponse);
+        //print(calculateOverallScore(decodedResponse));
+        return decodedResponse;
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        // Set loading indicator to false if request fails
+        return [];
+      }
+    } catch (e) {
+      print('Exception during API call: $e');
+      // Set loading indicator to false if exception occurs
       return [];
     }
-  } catch (e) {
-    print('Exception during API call: $e');
-     // Set loading indicator to false if exception occurs
-    return [];
   }
-}
 
 // double calculateOverallScore(Map<String,dynamic> result) {
 //   double score = 0;
@@ -238,9 +227,6 @@ Future fetchDataBloc(List<String> questions, List<String> answers, ) async {
 //   print("===========================AVERAGE SCORE IS +++++++ ${score}");
 //   return score;
 // }
-
-
-
 }
 
 

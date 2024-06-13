@@ -14,7 +14,6 @@ bool is_testing_mode = true;
 final GlobalKey<SliderDrawerState> _sliderDrawerkey =
     GlobalKey<SliderDrawerState>();
 
-
 // Future<String> loadImage() async {
 //   pic = await getUrlFromUserDocument("ProfilePic");
 //   return pic;
@@ -25,12 +24,9 @@ class Home extends StatefulWidget {
 
   @override
   State<Home> createState() => _HomeState();
-
-  
 }
 
 class _HomeState extends State<Home> {
-
   // @override
   // void initState() {
   //   super.initState();
@@ -38,106 +34,120 @@ class _HomeState extends State<Home> {
   // }
   final GlobalKey<SliderDrawerState> _sliderDrawerkey =
       GlobalKey<SliderDrawerState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:  fetched_details? homeContainer(context): FutureBuilder<String>(
-          future: GetAllDetails(),
-          builder: (context,snapshot){
-            if (snapshot.connectionState == ConnectionState.waiting) {
-            // While waiting for the future to complete, show a loading spinner
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Kdestinxblack,
-                title:Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Image.asset("assets/logos/Mobile_LoginPageLogo.png", height: 35),
-                          Image.asset("assets/logos/DESTINX.png", height: 25),
-                          const SizedBox(
-                            width: 10,
+        body: fetched_details
+            ? homeContainer(context)
+            : FutureBuilder<String>(
+                future: GetAllDetails(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // While waiting for the future to complete, show a loading spinner
+                    return Scaffold(
+                      appBar: AppBar(
+                        backgroundColor: Kdestinxblack,
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Image.asset("assets/logos/Mobile_LoginPageLogo.png",
+                                height: 35),
+                            Image.asset("assets/logos/DESTINX.png", height: 25),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                      bottomNavigationBar: BottomNavigationBar(
+                        type: BottomNavigationBarType.fixed,
+                        backgroundColor: Kbackgroundcolor,
+                        unselectedItemColor: Colors.grey,
+                        selectedItemColor: Colors.white,
+                        selectedFontSize: 12,
+                        unselectedFontSize: 10,
+                        selectedIconTheme: const IconThemeData(size: 22),
+                        items: const [
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.home),
+                            label: "Home",
                           ),
+                          BottomNavigationBarItem(
+                              icon: Icon(
+                                Icons.meeting_room_outlined,
+                                color: Color.fromARGB(255, 42, 42, 42),
+                              ),
+                              label: "Interview"),
+                          BottomNavigationBarItem(
+                              //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
+                              icon: Icon(
+                                Icons.file_copy_outlined,
+                                color: Color.fromARGB(255, 42, 42, 42),
+                              ),
+                              label: "Resume"),
+                          BottomNavigationBarItem(
+                              icon: Icon(
+                                Icons.account_circle_outlined,
+                                color: Color.fromARGB(255, 42, 42, 42),
+                              ),
+                              label: "Accounts"),
                         ],
                       ),
-              
-              
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    backgroundColor: Kbackgroundcolor,
-                    unselectedItemColor: Colors.grey,
-                    selectedItemColor: Colors.white,
-                    selectedFontSize: 12,
-                    unselectedFontSize: 10,
-                    selectedIconTheme: const IconThemeData(size: 22),
-                    items: const [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        label: "Home",
+                      body: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40),
+                              child: Text(
+                                "Please wait patiently while we fetch your data..",
+                                style: Kcommontextstyle,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            CircularProgressIndicator(
+                              color: Kdestinxorange,
+                            ),
+                          ],
+                        ),
                       ),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.meeting_room_outlined,color: Color.fromARGB(255, 42, 42, 42),), label: "Interview"),
-                      BottomNavigationBarItem(
-                          //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
-                          icon:Icon(Icons.file_copy_outlined,color: Color.fromARGB(255, 42, 42, 42),), label: "Resume"),
-
-                      BottomNavigationBarItem(
-                          icon:  Icon(Icons.account_circle_outlined,color: Color.fromARGB(255, 42, 42, 42),), label: "Accounts"),
-                    ],
-                   
-                  ),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Text("Please wait patiently while we fetch your data..",style: Kcommontextstyle,textAlign: TextAlign.center,),
-                    ),
-                    SizedBox(height: 20,),
-                    CircularProgressIndicator(color: Kdestinxorange,),
-
-                  ],
-                ),
-              ),
-
-
-
-            );
-          } else if (snapshot.hasError) {
-            // If there was an error fetching data, show an error message
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else if (snapshot.hasData) {
-            // Once the future completes, show the data
-            fetched_details = true;
-            return homeContainer(context);
-          } else {
-            // Fallback for any other state
-            return Center(
-              child: Text('Unexpected state'),
-            );
-          }
+                    );
+                  } else if (snapshot.hasError) {
+                    // If there was an error fetching data, show an error message
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else if (snapshot.hasData) {
+                    // Once the future completes, show the data
+                    fetched_details = true;
+                    return homeContainer(context);
+                  } else {
+                    // Fallback for any other state
+                    return Center(
+                      child: Text('Unexpected state'),
+                    );
+                  }
+                }));
   }
-  )
-        );
-        }
 
   SliderDrawer homeContainer(BuildContext context) {
     return SliderDrawer(
-              key: _sliderDrawerkey,
-              appBar: SliderAppBar(
+      key: _sliderDrawerkey,
+      appBar: SliderAppBar(
         drawerIconColor: Kdestinxwhite,
         //trailing: Image.asset('assets/Page_assets/appbar_main.png',height: 50,),
         appBarHeight: 80,
-        appBarColor:Kdestinxblack,
+        appBarColor: Kdestinxblack,
         /* flexibleSpace:
               Image.asset("assets/Page_assets/appbar_main.png", height: 300),*/
-        
+
         //backgroundColor: Color.fromARGB(255, 255, 254, 254),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -150,17 +160,20 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        trailing: IconButton(onPressed: (){signOut(context);}, icon: Icon(Icons.logout_outlined)),
-              ),
-              slider: const MenuWidget(),
-              child: const HomeMain(),
-            );
+        trailing: IconButton(
+            onPressed: () {
+              signOut(context);
+            },
+            icon: Icon(
+              Icons.logout_outlined,
+              color: Colors.white,
+            )),
+      ),
+      slider: const MenuWidget(),
+      child: const HomeMain(),
+    );
   }
-  }
-  
-     
- 
-
+}
 
 class HomeMain extends StatefulWidget {
   const HomeMain({super.key});
@@ -170,13 +183,9 @@ class HomeMain extends StatefulWidget {
 }
 
 class _HomeMainState extends State<HomeMain> {
-  
-
   final ScrollController _scrollController = ScrollController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   int currentIndex = 0;
-
-
 
   @override
   void initState() {
@@ -214,7 +223,6 @@ class _HomeMainState extends State<HomeMain> {
 
   @override
   Widget build(BuildContext context) {
-    
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Kdestinxwhite,
@@ -235,10 +243,10 @@ class _HomeMainState extends State<HomeMain> {
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
             BottomNavigationBarItem(
                 //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
-                icon:Icon(Icons.file_copy_outlined), label: "Resume"),
-
+                icon: Icon(Icons.file_copy_outlined),
+                label: "Resume"),
             BottomNavigationBarItem(
-                icon:  Icon(Icons.account_circle_outlined), label: "Accounts"),
+                icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
           currentIndex: currentIndex,
           onTap: (int newIndex) {
@@ -258,16 +266,20 @@ class _HomeMainState extends State<HomeMain> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoadingPage()));*/
-                          //getResumeDetails(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume()));
-                          
+                  //getResumeDetails(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Resume()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   setState(() {
                     currentIndex = newIndex;
                     if (currentIndex == 3) {
-                      _sliderDrawerkey.currentState!
-                          .openSlider(); // Open slider drawer when "Accounts" is pressed
+                      /*_sliderDrawerkey.currentState!
+                          .openSlider(); */ // Open slider drawer when "Accounts" is pressed
+                      SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
+                                                                              
                     } else {
                       // Handle other taps
                     }
@@ -308,7 +320,7 @@ class _HomeMainState extends State<HomeMain> {
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20,top: 20),
+            padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,11 +337,12 @@ class _HomeMainState extends State<HomeMain> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Hello...\u{1F44B}",
-                                  style:TextStyle(fontSize: 20)),
+                              const Text("Hello...\u{1F44B}",
+                                  style: TextStyle(fontSize: 20)),
                               Text(
                                 UserName,
-                                style:TextStyle(fontSize:25,fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.w500),
                               )
                             ],
                           ),
@@ -337,8 +350,8 @@ class _HomeMainState extends State<HomeMain> {
                         const SizedBox(
                           width: 20,
                         ),
-                        
-                        Expanded(child: CircleAvatar(
+                        Expanded(
+                            child: CircleAvatar(
                           radius: 40,
                           foregroundImage: NetworkImage(pic),
                         ))
@@ -361,28 +374,36 @@ class _HomeMainState extends State<HomeMain> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         StackWidgets(
-                                      containerHeight: 113,
-                                      containerWidth: 250,
-                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
-                                      text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                                      containerColor: Color.fromARGB(255, 255, 241, 202),
-                                      stackImage: "assets/stack_image/interview_stack_image.png",
-                                      waterMarkImage: "assets/stack_image/interview_watermark.png",
-                                      stackImageLeft: 65,
-                                      stackImageSize: 4,
-                                      stackImageTop: 0,
-                                      watermarkLeft: 0,
-                                      
-                                      watermarkTop: 5,
-                                      text1: "Find your",
-                                      text2: "Interview",
-                                      borderRadius: 10,
-                                      text_left:20,
-                                      ontapp: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Interview()));
-                                                                              },
-                                    ),
-
+                          containerHeight: 113,
+                          containerWidth: 250,
+                          text1Style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Inter"),
+                          text2Style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                          containerColor:
+                              const Color.fromARGB(255, 255, 241, 202),
+                          stackImage:
+                              "assets/stack_image/interview_stack_image.png",
+                          waterMarkImage:
+                              "assets/stack_image/interview_watermark.png",
+                          stackImageLeft: 65,
+                          stackImageSize: 4,
+                          stackImageTop: 0,
+                          watermarkLeft: 0,
+                          watermarkTop: 5,
+                          text1: "Find your",
+                          text2: "Interview",
+                          borderRadius: 10,
+                          text_left: 20,
+                          ontapp: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Interview()));
+                          },
+                        ),
                         StackWidgets(
                                       containerHeight: 113,
                                       containerWidth: 250,
@@ -533,7 +554,6 @@ class _HomeMainState extends State<HomeMain> {
                     color: Kgreycolor_light,
                   ),
 
-
                   // StackWidgets(
                   //                     containerHeight: 130,
                   //                     containerWidth: double.infinity,
@@ -546,7 +566,7 @@ class _HomeMainState extends State<HomeMain> {
                   //                     stackImageSize:4,
                   //                     stackImageTop: 30,
                   //                     watermarkLeft: 0,
-                                      
+
                   //                     watermarkTop: 10,
                   //                     text1: "Start your",
                   //                     text2: "Interview",
@@ -557,7 +577,7 @@ class _HomeMainState extends State<HomeMain> {
                   //                                                             },
                   //                   ),
 
-               Padding(
+                  Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
                       onTap: () {
@@ -573,10 +593,13 @@ class _HomeMainState extends State<HomeMain> {
                           color: Color.fromARGB(255, 245, 245, 245),
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromARGB(255, 98, 98, 98).withOpacity(0.3), // Shadow color
-                              spreadRadius: 0.7, // How wide the shadow should be
+                              color: Color.fromARGB(255, 98, 98, 98)
+                                  .withOpacity(0.3), // Shadow color
+                              spreadRadius:
+                                  0.7, // How wide the shadow should be
                               blurRadius: 4, // How soft the shadow should be
-                              offset: Offset(1, 2.5), // Changes position of shadow
+                              offset:
+                                  Offset(1, 2.5), // Changes position of shadow
                             ),
                           ],
                         ),
@@ -586,7 +609,9 @@ class _HomeMainState extends State<HomeMain> {
                               child: Center(
                                 child: Opacity(
                                   opacity: 1,
-                                  child: Image.asset("assets/stack_image/faang_watermark.png", scale: 3),
+                                  child: Image.asset(
+                                      "assets/stack_image/faang_watermark.png",
+                                      scale: 3),
                                 ),
                               ),
                             ),
@@ -603,7 +628,10 @@ class _HomeMainState extends State<HomeMain> {
                               left: 110,
                               child: Text(
                                 "Interview",
-                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Inter"),
                               ),
                             ),
                           ],
@@ -828,7 +856,11 @@ class ImageFeaturesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: operation, child: Image.asset(imagepath, fit: BoxFit.contain,));
+        onTap: operation,
+        child: Image.asset(
+          imagepath,
+          fit: BoxFit.contain,
+        ));
   }
 }
 

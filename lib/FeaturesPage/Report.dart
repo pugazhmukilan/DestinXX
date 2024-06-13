@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:destin/FeaturesPage/Feedback_text.dart';
@@ -18,7 +17,8 @@ class Report extends StatefulWidget {
   Report({super.key, required this.result, required this.overallscore});
 
   @override
-  State<Report> createState() => _ReportState(result: result, overallscore: overallscore);
+  State<Report> createState() =>
+      _ReportState(result: result, overallscore: overallscore);
 }
 
 class _ReportState extends State<Report> {
@@ -79,7 +79,8 @@ class _ReportState extends State<Report> {
                   filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+                      color: const Color.fromARGB(255, 255, 255, 255)
+                          .withOpacity(0.3),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         width: 2,
@@ -90,7 +91,8 @@ class _ReportState extends State<Report> {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          Text("Overall analysis", style: Kreporttitletext), //changeable
+                          Text("Overall analysis",
+                              style: Kreporttitletext), //changeable
                           Padding(
                             padding: EdgeInsets.only(top: 30),
                             child: percentage_indicator(
@@ -184,7 +186,8 @@ class _ReportState extends State<Report> {
                     child: Container(
                       decoration: BoxDecoration(
                         image: const DecorationImage(
-                          image: AssetImage("assets/Page_assets/Question_analysis_bg.png"),
+                          image: AssetImage(
+                              "assets/Page_assets/Question_analysis_bg.png"),
                         ),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
@@ -193,7 +196,8 @@ class _ReportState extends State<Report> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 30),
                         child: Center(
                           child: Text(
                             "Question analysis",
@@ -205,7 +209,6 @@ class _ReportState extends State<Report> {
                   ),
                 ),
               ),
-
               for (int i = 0; i < result['data'].length; i++)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15, top: 15),
@@ -302,7 +305,8 @@ void _showBottomAlertDialog(BuildContext context) {
         padding: const EdgeInsets.all(7.0),
         child: AlertDialog(
           elevation: 40,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           buttonPadding: const EdgeInsets.all(5),
           backgroundColor: Colors.black.withOpacity(0.6),
           alignment: Alignment.bottomCenter,

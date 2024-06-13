@@ -13,9 +13,6 @@ final _auth = FirebaseAuth.instance;
 /*GOOGLE AUTHENTICATION FIREBASE USING GOOGLE ACCOUNT*/
 /*GOOGLE AUTHENTICATION FIREBASE USING GOOGLE ACCOUNT*/
 
-
-
-
 class Signinpage extends StatefulWidget {
   const Signinpage({super.key});
 
@@ -30,21 +27,19 @@ class _SigninpageState extends State<Signinpage> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       backgroundColor: Kbackgroundcolor,
       body: Padding(
         padding: const EdgeInsets.all(0.0),
         child: Row(
           children: [
-            
             Expanded(
               flex: 5,
               child: Container(
                 //The container for the whole workspace
                 height: double.infinity,
-                decoration:
-                    BoxDecoration(color: Kdestinxwhite, borderRadius: KMyborder),
+                decoration: BoxDecoration(
+                    color: Kdestinxwhite, borderRadius: KMyborder),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -96,9 +91,10 @@ class _SigninpageState extends State<Signinpage> {
                               height: 60,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  border: Border.all(color:Kdestinxblack,width: 2),
-
-                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  border: Border.all(
+                                      color: Kdestinxblack, width: 2),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextField(
                                 controller: emailcontroller,
@@ -145,8 +141,10 @@ class _SigninpageState extends State<Signinpage> {
                               height: 60,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                border: Border.all(color:Kdestinxblack,width: 2),
-                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  border: Border.all(
+                                      color: Kdestinxblack, width: 2),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   borderRadius: BorderRadius.circular(20)),
                               child: TextField(
                                 controller: passwordcontroller,
@@ -188,7 +186,7 @@ class _SigninpageState extends State<Signinpage> {
                       //   padding: const EdgeInsets.only(left: 20, right: 20),
                       //   child: GestureDetector(
                       //     onTap: () async {
-                           
+
                       //     },
                       //     child: Image.asset(
                       //         "assets/image_assets/Google_auth_button.png"),
@@ -227,7 +225,6 @@ class _SigninpageState extends State<Signinpage> {
                             await _auth.signInWithEmailAndPassword(
                                 email: emailcontroller.text,
                                 password: passwordcontroller.text);
-                            
 
                             print("everthying went well");
 
@@ -242,14 +239,14 @@ class _SigninpageState extends State<Signinpage> {
                             // UserName = await getUserName(UserID);
                             // pic = await getUrlFromUserDocument("ProfilePic");
                             Navigator.pop(context);
-                           
+
                             Navigator.pop(context);
                             Navigator.pop(context);
 
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>  Home()));
+                                    builder: (context) => const Home()));
 
                             emailcontroller.clear();
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../FeaturesPage/Resume.dart';
 import '../Home.dart';
 import '../constants.dart';
+
 bool Resume_detail_collecting = false;
 double screenWidth = 0;
 int currentIndex = 1;
@@ -20,9 +21,7 @@ class Interview extends StatefulWidget {
 }
 
 class _InterviewState extends State<Interview> {
-
-
-    @override
+  @override
   void initState() {
     super.initState();
     mainlist = nestedList(context);
@@ -68,17 +67,17 @@ class _InterviewState extends State<Interview> {
           selectedFontSize: 12,
           unselectedFontSize: 10,
           selectedIconTheme: const IconThemeData(size: 22),
-          items:  [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.meeting_room_outlined), label: "Interview"),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 //icon: Resume_detail_collecting? CircularProgressIndicator(color:Colors.grey):Icon(Icons.file_copy_outlined), label: "Resume"),
-                icon:Icon(Icons.file_copy_outlined), label: "Resume"),
-                
+                icon: Icon(Icons.file_copy_outlined),
+                label: "Resume"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: "Accounts"),
           ],
@@ -98,7 +97,8 @@ class _InterviewState extends State<Interview> {
                 } else if (currentIndex == 2) {
                   print("pressed the 2 in the interview");
                   //getResumeDetails1(context).then((value) =>Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume())));
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Resume()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Resume()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
                   _showBottomAlertDialog(context);
@@ -173,8 +173,6 @@ class _InterviewState extends State<Interview> {
   }
 }
 
-
-
 void _showBottomAlertDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -217,6 +215,6 @@ class ImageFeaturesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: operation, child: Image.asset(imagepath, fit:BoxFit.contain));
+        onTap: operation, child: Image.asset(imagepath, fit: BoxFit.contain));
   }
 }
