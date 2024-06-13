@@ -44,6 +44,18 @@ class _TextinterviewState extends State<Textinterview> {
     } else if (type == "Design") {
       Interview_questions = randomElementsList(Design_questions);
       print(Interview_questions);
+    } else if (type == "Java"){
+      Interview_questions = randomElementsList(Java_questions);
+      print(Interview_questions);
+    }else if (type == "Python"){
+      Interview_questions = randomElementsList(Python_questions);
+      print(Interview_questions);
+    } else if (type == "Web"){
+      Interview_questions = randomElementsList(Webdevelopment_questions);
+      print(Interview_questions);
+    } else if (type == "Oops"){
+      Interview_questions = randomElementsList(Oops_questions);
+      print(Interview_questions);
     }
 
     //ADDING THE CONTROLLERS FOR EACH ASNWERS FOR THE QUESTION
@@ -485,13 +497,14 @@ class CustomDialog extends StatelessWidget {
     return Dialog(
       child: Container(
       
-      decoration: BoxDecoration(color: Kdestinxwhite,borderRadius:BorderRadius.circular(10) ),
+      decoration: BoxDecoration(color: Kdestinxwhite,borderRadius:BorderRadius.circular(10),border: Border.all(width: 2,color: Kdestinxblack.withOpacity(0.5)) ),
         padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircularProgressIndicator(color: Kdestinxorange,),
-            SizedBox(height: 20),
+            
             Text('Fetching report...'),
           ],
         ),

@@ -69,6 +69,18 @@ class _StartinterviewState extends State<Startinterview> {
     } else if (type == "Design") {
       Interview_questions = randomElementsList(Design_questions);
       print(Interview_questions);
+    }else if (type == "Java"){
+      Interview_questions = randomElementsList(Java_questions);
+      print(Interview_questions);
+    }else if (type == "Python"){
+      Interview_questions = randomElementsList(Python_questions);
+      print(Interview_questions);
+    } else if (type == "Web"){
+      Interview_questions = randomElementsList(Webdevelopment_questions);
+      print(Interview_questions);
+    } else if (type == "Oops"){
+      Interview_questions = randomElementsList(Oops_questions);
+      print(Interview_questions);
     }
 
     try {
@@ -172,7 +184,10 @@ class _StartinterviewState extends State<Startinterview> {
   @override
   void dispose() {
     super.dispose();
+    _stopListening();
     cameraController.dispose();
+    //dispose the mic
+
   }
 
   @override
@@ -335,6 +350,8 @@ class _StartinterviewState extends State<Startinterview> {
                         //   });
                         // });
                         context.read<ApiBloc>().add(ApiCall(interviewAnswer: answers, interviewQuestions: Interview_questions));
+                        //mic will be stopped hence the sound gets stopped
+                        _stopListening();
                         //double score = callapi.calculateOverallScore(results);
                         setState(() {
                           

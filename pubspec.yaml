@@ -42,7 +42,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icon_assets/Bar.png
+    
     - assets/icon_assets/threebar.png
     - assets/icon_assets/
     - assets/image_assets/designbackground.png

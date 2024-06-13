@@ -35,7 +35,7 @@ Color Kgreylinecolor = const Color.fromARGB(255, 194, 194, 194);
 Color Kgreytextcolor = const Color.fromARGB(255, 186, 171, 171);
 Color Kprogressbarbackgroundcolor = const Color.fromARGB(255, 230, 230, 230);
 TextStyle Ktitletextstyle = const TextStyle(
-    fontFamily: "Inter", fontSize: 30, fontWeight: FontWeight.bold);
+    fontFamily: "Poppins", fontSize: 30, fontWeight: FontWeight.w700);
 TextStyle Kinterviewtypetextstyle = const TextStyle(
     fontFamily: "poppins", fontSize: 23, fontWeight: FontWeight.w500);
 TextStyle Kcommontextstyle = const TextStyle(
@@ -454,6 +454,138 @@ List<List<dynamic>> nestedList(BuildContext context) {
                             },
                      
                       text_left: 30),'hr interview'
+    ],
+    [
+      StackWidgets(containerHeight: 100,
+       containerWidth: double.infinity,
+        stackImage: "assets/InterviewPage_stack_image/python.png",
+         waterMarkImage: "assets/InterviewPage_stack_image/python_watermark.png",
+          stackImageSize: 4,
+           stackImageTop: 0,
+            stackImageLeft: 190,
+             watermarkTop: 0,
+              watermarkLeft: 20,
+               text1: "Start your Interview",
+                text2: "Python",
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                   containerColor: Color.fromARGB(255, 233 ,245 ,255),
+                    borderRadius: 20,
+                     ontapp: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const Interview_details_Page(
+                                type: "Python",
+                                catid: 1,
+                                maintext: "Python Interview",
+                                
+                                imagepath: "assets/Page_assets/python_main_page.png",
+                                appbarimage: "assets/Page_assets/appbar_python.png",
+                                context_text:
+                                    "Elevate your Python interviews with our state-of-the-art AI interview application! Integrate a diverse range of Python inquiries, hands-on coding exercises, and deep dives into Pythonic principles to holistically evaluate candidates' Python expertise. Redefine your recruitment strategy to align with the dynamic landscape of Python development.")));
+                            },
+                     
+                      text_left: 30),'python'
+    ],
+    [
+      StackWidgets(containerHeight: 100,
+       containerWidth: double.infinity,
+        stackImage: "assets/InterviewPage_stack_image/java.png",
+         waterMarkImage: "assets/InterviewPage_stack_image/java_watermark.png",
+          stackImageSize: 4,
+           stackImageTop: 0,
+            stackImageLeft: 190,
+             watermarkTop: 0,
+              watermarkLeft: 20,
+               text1: "Start your Interview",
+                text2: "Java",
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                   containerColor: Color.fromARGB(255, 196 ,195 ,254),
+                    borderRadius: 20,
+                     ontapp: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const Interview_details_Page(
+                                type: "Java",
+                                catid: 1,
+                                maintext: "Java Interview",
+                                
+                                imagepath: "assets/Page_assets/java_page_main.png",
+                                appbarimage: "assets/Page_assets/appbar_java.png",
+                                context_text:
+                                    "Transform your Java interviews with our cutting-edge AI interview platform! Seamlessly blend fundamental Java questions, advanced coding challenges, and in-depth discussions on Java concepts to comprehensively evaluate candidates' proficiency. Elevate your hiring process to embrace a future driven by robust Java solutions.")));
+                            },
+                     
+                      text_left: 30),'java'
+    ],
+    [
+      StackWidgets(containerHeight: 100,
+       containerWidth: double.infinity,
+        stackImage: "assets/InterviewPage_stack_image/web.png",
+         waterMarkImage: "assets/InterviewPage_stack_image/web_watermark.png",
+          stackImageSize: 4,
+           stackImageTop: 0,
+            stackImageLeft: 190,
+             watermarkTop: 0,
+              watermarkLeft: 20,
+               text1: "Start your Interview",
+                text2: "Web Dev",
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                   containerColor: Color.fromARGB(255, 252 ,217 ,223),
+                    borderRadius: 20,
+                     ontapp: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const Interview_details_Page(
+                                type: "Web",
+                                catid: 1,
+                                maintext: "Web Interview",
+                                
+                                imagepath: "assets/Page_assets/web_page_main.png",
+                                appbarimage: "assets/Page_assets/appbar_web.png",
+                                context_text:
+                                    "Modernize your web dev interviews with our AI tool! Merge tech questions, coding projects, and trend discussions to assess capabilities. Shape hiring to reflect web dev's evolution.")));
+                            },
+                     
+                      text_left: 30),'web'
+    ],
+    [
+      StackWidgets(containerHeight: 100,
+       containerWidth: double.infinity,
+        stackImage: "assets/InterviewPage_stack_image/oops.png",
+         waterMarkImage: "assets/InterviewPage_stack_image/oops_watermark.png",
+          stackImageSize: 4,
+           stackImageTop: 0,
+            stackImageLeft: 190,
+             watermarkTop: 0,
+              watermarkLeft: 20,
+               text1: "Start your Interview",
+                text2: "OOPS",
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                   containerColor: Color.fromARGB(255, 255 ,252 ,252),
+                    borderRadius: 20,
+                     ontapp: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const Interview_details_Page(
+                                type: "Oops",
+                                catid: 1,
+                                maintext: "Oops Interview",
+                                
+                                imagepath: "assets/Page_assets/oops_page_main.png",
+                                appbarimage: "assets/Page_assets/appbar_oops.png",
+                                context_text:
+                                    "Transform OOP interviews with our AI platform! Use varied questions, coding tasks, and architecture discussions to assess. Redefine hiring for stronger OOP solutions.")));
+                            },
+                     
+                      text_left: 30),'oops'
     ],
     [
       Container(

@@ -1,8 +1,8 @@
 //import 'package:destin/Resume.dart';
 import 'package:destin/FeaturesPage/Resume.dart';
 import 'package:destin/HomePage/widgetMenu.dart';
+import 'package:destin/Widgets/CustomSnackBar.dart';
 import 'package:destin/Widgets/Stack_widgets.dart';
-import 'package:destin/Widgets/github_insta_creator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import "Constants/firebasefunctions.dart";
 import 'InterviewPages/Interview.dart';
 import 'constants.dart';
-
+bool is_testing_mode = true;
 final GlobalKey<SliderDrawerState> _sliderDrawerkey =
     GlobalKey<SliderDrawerState>();
 
@@ -402,7 +402,10 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: 10,
                                       text_left:20,
                                       ontapp: (){
-                                        _showBottomAlertDialog(context);
+                                        // ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
                                                                               },
                                     ),
                          StackWidgets(
@@ -424,7 +427,9 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: 10,
                                       text_left:20,
                                       ontapp: (){
-                                        _showBottomAlertDialog(context);
+                                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
                                                                               },
                                     ),
                         StackWidgets(
@@ -446,7 +451,9 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: 10,
                                       text_left:20,
                                       ontapp: (){
-                                        _showBottomAlertDialog(context);
+                                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
                                                                               },
                                     ),
                         StackWidgets(
@@ -468,7 +475,9 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: 10,
                                       text_left:20,
                                       ontapp: (){
-                                        _showBottomAlertDialog(context);
+                                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
                                                                               },
                                     ),
                        
@@ -494,7 +503,9 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: 10,
                                       text_left:20,
                                       ontapp: (){
-                                        _showBottomAlertDialog(context);
+                                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
                                                                               },
                                     ),
 
@@ -550,7 +561,9 @@ class _HomeMainState extends State<HomeMain> {
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
                       onTap: () {
-                        _showBottomAlertDialog(context);
+                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
                       },
                       child: Container(
                         height: 130,
@@ -608,7 +621,7 @@ class _HomeMainState extends State<HomeMain> {
                   //BOTTOM BOTTOM BOTTOM
                   const Text("Made with\nCare!",
                       style: TextStyle(
-                          fontFamily: "inter",
+                          fontFamily: "Poppins",
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           color: Color.fromARGB(255, 163, 74, 246))),
@@ -619,186 +632,189 @@ class _HomeMainState extends State<HomeMain> {
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                           color: Color.fromARGB(255, 123, 123, 123))),
-                  Row(
-                    children: [
-                      NameFeaturesButton(
-                          imagepath: "assets/Page_assets/pugazh.png",
-                          operation: () {
-                            print("this is worlin");
-                             showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Git_insta_direct_box(
-                                  github: 'https://github.com/pugazhmukilan',
-                                  instagram: 'https://www.instagram.com/mukil_arena/',
-                                  linkedin:'https://www.linkedin.com/in/pugazh-mukilan-922206251/',
-                                  name: 'Pugazh Mukilan',
-                                );
-                              },
-                            );
+
+                  //TODO :remove the comments after testing the app
+
+                  // Row(
+                  //   children: [
+                  //     NameFeaturesButton(
+                  //         imagepath: "assets/Page_assets/pugazh.png",
+                  //         operation: () {
+                  //           print("this is worlin");
+                  //            showDialog(
+                  //             context: context,
+                  //             builder: (BuildContext context) {
+                  //               return Git_insta_direct_box(
+                  //                 github: 'https://github.com/pugazhmukilan',
+                  //                 instagram: 'https://www.instagram.com/mukil_arena/',
+                  //                 linkedin:'https://www.linkedin.com/in/pugazh-mukilan-922206251/',
+                  //                 name: 'Pugazh Mukilan',
+                  //               );
+                  //             },
+                  //           );
   
-                          }),
-                      NameFeaturesButton(
-                          imagepath: "assets/Page_assets/Hemanthkumar.png",
-                          operation: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Git_insta_direct_box(
-                                  github: 'https://github.com/Hemanth-Kumar-04',
-                                  instagram: 'https://www.instagram.com/h_e_m_a_n_t_h04/',
-                                  linkedin:'https://www.linkedin.com/in/hemanth-kumar-4b8471275/',
-                                  name: 'Hemanth Kumar',
-                                );
-                              },
-                            );
-                          }),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      NameFeaturesButton(
-                          imagepath: "assets/Page_assets/Tarun.png",
-                          operation: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Git_insta_direct_box(
-                                  github: 'https://github.com/tarun-sakthivel',
-                                  instagram: 'https://www.instagram.com/',
-                                  linkedin:'https://www.linkedin.com/in/tarun-sakthivel-0b904a254/',
-                                  name: 'Tarun',
-                                );
-                              },
-                            );
-                          }),
-                      NameFeaturesButton(
-                          imagepath: "assets/Page_assets/Karthik sagar.png",
-                          operation: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Git_insta_direct_box(
-                                  github: 'https://github.com/karthiksagarN',
-                                  instagram: 'https://www.instagram.com/karthik.sagarn/',
-                                  linkedin:'https://www.linkedin.com/in/karthik-sagar-nallagula-3b1983285/',
-                                  name: 'Karthik sagar',
-                                );
-                              },
-                            );
-                          }),
-                    ],
-                  ),
+                  //         }),
+                  //     NameFeaturesButton(
+                  //         imagepath: "assets/Page_assets/Hemanthkumar.png",
+                  //         operation: () {
+                  //           showDialog(
+                  //             context: context,
+                  //             builder: (BuildContext context) {
+                  //               return Git_insta_direct_box(
+                  //                 github: 'https://github.com/Hemanth-Kumar-04',
+                  //                 instagram: 'https://www.instagram.com/h_e_m_a_n_t_h04/',
+                  //                 linkedin:'https://www.linkedin.com/in/hemanth-kumar-4b8471275/',
+                  //                 name: 'Hemanth Kumar',
+                  //               );
+                  //             },
+                  //           );
+                  //         }),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     NameFeaturesButton(
+                  //         imagepath: "assets/Page_assets/Tarun.png",
+                  //         operation: () {
+                  //           showDialog(
+                  //             context: context,
+                  //             builder: (BuildContext context) {
+                  //               return Git_insta_direct_box(
+                  //                 github: 'https://github.com/tarun-sakthivel',
+                  //                 instagram: 'https://www.instagram.com/',
+                  //                 linkedin:'https://www.linkedin.com/in/tarun-sakthivel-0b904a254/',
+                  //                 name: 'Tarun',
+                  //               );
+                  //             },
+                  //           );
+                  //         }),
+                  //     NameFeaturesButton(
+                  //         imagepath: "assets/Page_assets/Karthik sagar.png",
+                  //         operation: () {
+                  //           showDialog(
+                  //             context: context,
+                  //             builder: (BuildContext context) {
+                  //               return Git_insta_direct_box(
+                  //                 github: 'https://github.com/karthiksagarN',
+                  //                 instagram: 'https://www.instagram.com/karthik.sagarn/',
+                  //                 linkedin:'https://www.linkedin.com/in/karthik-sagar-nallagula-3b1983285/',
+                  //                 name: 'Karthik sagar',
+                  //               );
+                  //             },
+                  //           );
+                  //         }),
+                  //   ],
+                  // ),
                 ]),
           ),
         ));
   }
 }
 
-class FeaturesButton extends StatelessWidget {
-  late Color startcolor;
-  late Color endcolor;
-  late String subtext;
-  late String maintext;
-  late String imagepath;
-  late Function() operation;
-  FeaturesButton({
-    super.key,
-    required this.startcolor,
-    required this.endcolor,
-    required this.subtext,
-    required this.maintext,
-    required this.imagepath,
-    required this.operation,
-  });
+// class FeaturesButton extends StatelessWidget {
+//   late Color startcolor;
+//   late Color endcolor;
+//   late String subtext;
+//   late String maintext;
+//   late String imagepath;
+//   late Function() operation;
+//   FeaturesButton({
+//     super.key,
+//     required this.startcolor,
+//     required this.endcolor,
+//     required this.subtext,
+//     required this.maintext,
+//     required this.imagepath,
+//     required this.operation,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: operation,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
-        child: Container(
-          width: 300,
-          height: 150,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [startcolor, endcolor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: const [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            ),
-            borderRadius: KMyborder,
-          ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: operation,
+//       child: Padding(
+//         padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
+//         child: Container(
+//           width: 300,
+//           height: 150,
+//           decoration: BoxDecoration(
+//             gradient: LinearGradient(
+//               colors: [startcolor, endcolor],
+//               begin: Alignment.topLeft,
+//               end: Alignment.bottomRight,
+//               stops: const [0.0, 1.0],
+//               tileMode: TileMode.clamp,
+//             ),
+//             borderRadius: KMyborder,
+//           ),
 
-          //content inside the container
-          child: Padding(
-            //giving padding to the whole row to maintain the text properly
-            padding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(subtext,
-                        style: const TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black)),
-                    Text(maintext,
-                        style: const TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 32,
-                            fontWeight: FontWeight.w800,
-                            color: Color.fromARGB(255, 255, 255, 255))),
-                  ],
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                //container image
-                Image.asset(imagepath),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//           //content inside the container
+//           child: Padding(
+//             //giving padding to the whole row to maintain the text properly
+//             padding: const EdgeInsets.fromLTRB(25, 18, 25, 18),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               children: [
+//                 Column(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(subtext,
+//                         style: const TextStyle(
+//                             fontFamily: "Inter",
+//                             fontSize: 18,
+//                             fontWeight: FontWeight.w400,
+//                             color: Colors.black)),
+//                     Text(maintext,
+//                         style: const TextStyle(
+//                             fontFamily: "Inter",
+//                             fontSize: 32,
+//                             fontWeight: FontWeight.w800,
+//                             color: Color.fromARGB(255, 255, 255, 255))),
+//                   ],
+//                 ),
+//                 Expanded(
+//                   child: Container(),
+//                 ),
+//                 //container image
+//                 Image.asset(imagepath),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-void _showBottomAlertDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Padding(
-        padding: const EdgeInsets.all(7.0),
-        child: Container(
-          child: AlertDialog(
-            elevation: 40,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            buttonPadding: const EdgeInsets.all(5),
-            backgroundColor: Colors.black.withOpacity(0.6),
-            alignment: Alignment.bottomCenter,
-            title: const Text(
-              'This page is under construction',
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 255, 205, 23)),
-            ),
-          ),
-        ),
-      );
-    },
-  );
-}
+// void _showBottomAlertDialog(BuildContext context) {
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return Padding(
+//         padding: const EdgeInsets.all(7.0),
+//         child: Container(
+//           child: AlertDialog(
+//             elevation: 40,
+//             shape:
+//                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+//             buttonPadding: const EdgeInsets.all(5),
+//             backgroundColor: Colors.black.withOpacity(0.6),
+//             alignment: Alignment.bottomCenter,
+//             title: const Text(
+//               'This page is under construction',
+//               style: TextStyle(
+//                   fontSize: 14,
+//                   fontFamily: 'Inter',
+//                   fontWeight: FontWeight.w400,
+//                   color: Color.fromARGB(255, 255, 205, 23)),
+//             ),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 
 class ImageFeaturesButton extends StatelessWidget {
   late String imagepath;
