@@ -205,7 +205,7 @@ class _TextinterviewState extends State<Textinterview> {
                             children: [
                               Text("Instructions",
                                   style: TextStyle(
-                                      fontFamily: "Inter",
+                                      fontFamily: "Poppins",
                                       fontSize: 25,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black)),
@@ -255,7 +255,7 @@ class _TextinterviewState extends State<Textinterview> {
                                   : Text(
                                       "Submit answers",
                                       style: TextStyle(
-                                          fontFamily: "Inter",
+                                          fontFamily: "Poppins",
                                           fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                           color: Color.fromARGB(
@@ -319,7 +319,7 @@ class _TextinterviewState extends State<Textinterview> {
     //                         children: [
     //                           Text("Instructions",
     //                               style: TextStyle(
-    //                                   fontFamily: "Inter",
+    //                                   fontFamily: "Poppins",
     //                                   fontSize: 25,
     //                                   fontWeight: FontWeight.w600,
     //                                   color: Colors.black)),
@@ -382,7 +382,7 @@ class _TextinterviewState extends State<Textinterview> {
     //                             child: is_retriving? CircularProgressIndicator(color: Colors.white,):Text(
     //                               "Submit answers",
     //                               style: TextStyle(
-    //                                   fontFamily: "Inter",
+    //                                   fontFamily: "Poppins",
     //                                   fontSize: 15,
     //                                   fontWeight: FontWeight.w600,
     //                                   color:
@@ -434,7 +434,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           child: Text(
             "${widget.index + 1})  ${widget.question}",
             style: const TextStyle(
-                fontFamily: "Inter", fontSize: 17, fontWeight: FontWeight.w500),
+                fontFamily: "Poppins", fontSize: 17, fontWeight: FontWeight.w500),
           ),
         ),
         typingfield(

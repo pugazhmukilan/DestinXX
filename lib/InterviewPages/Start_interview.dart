@@ -21,7 +21,7 @@ bool next_button_live = true;
 int question_increment = 0;
 late Map<String, dynamic> result;
 
-late CameraController cameraController;
+
 
 class Startinterview extends StatefulWidget {
   final String type; // Add this line
@@ -88,32 +88,35 @@ class _StartinterviewState extends State<Startinterview> {
     } catch (e) {}
 
     super.initState();
-    try {
-      cameraController =
-          CameraController(cameras[1], ResolutionPreset.ultraHigh);
-      cameraController.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
-      }).catchError((Object e) {
-        if (e is CameraException) {
-          switch (e.code) {
-            case "CameraAccessDenied":
-              print("User denied camera access.");
-              showErrorDialog(context, "User denied camera access.");
-              break;
-            default:
-              print("handle other errors.");
-              showErrorDialog(context,
-                  "An error occurred: ${e.code}\nTry restrating the app");
-              break;
-          }
-        }
-      });
-    } catch (e) {
-      print("no camera is found in the computer, $e");
-    }
+    
+    // permission._checkPermission(context);
+    
+    // try {
+    //   cameraController =
+    //       CameraController(cameras[1], ResolutionPreset.ultraHigh);
+    //   cameraController.initialize().then((_) {
+    //     if (!mounted) {
+    //       return;
+    //     }
+    //     setState(() {});
+    //   }).catchError((Object e) {
+    //     if (e is CameraException) {
+    //       switch (e.code) {
+    //         case "CameraAccessDenied":
+    //           print("User denied camera access.");
+    //           showErrorDialog(context, "User denied camera access.");
+    //           break;
+    //         default:
+    //           print("handle other errors.");
+    //           showErrorDialog(context,
+    //               "An error occurred: ${e.code}\nTry restrating the app");
+    //           break;
+    //       }
+    //     }
+    //   });
+    // } catch (e) {
+    //   print("no camera is found in the computer, $e");
+    // }
   }
 
   void addToDictionary(String text) {
@@ -392,7 +395,7 @@ class _StartinterviewState extends State<Startinterview> {
                               : Text(
                                   "Finish",
                                   style: TextStyle(
-                                    fontFamily: "Inter",
+                                    fontFamily: "Poppins",
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
@@ -401,7 +404,7 @@ class _StartinterviewState extends State<Startinterview> {
                           : const Text(
                               "Next Question",
                               style: TextStyle(
-                                fontFamily: "Inter",
+                                fontFamily: "Poppins",
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -496,3 +499,51 @@ void showErrorDialog(BuildContext context, String errorMessage) {
     },
   );
 }
+
+
+
+// void _checkPermission(BuildContext context) async {
+//   if (await Permission.camera.request().isGranted) {
+//     // Permission is granted
+//     // Initialize camera here
+//     cameraController =
+//           CameraController(cameras[1], ResolutionPreset.ultraHigh);
+//       cameraController.initialize().then((_) {
+//         if (mounted) {
+//           return;
+//         }
+        
+
+//   });
+//   } else {
+//     // Permission denied
+//     // Handle the denial here, show a message to the user, or request again
+//     showErrorDialog(context, "User denied camera access.");
+//   }
+// }
+
+// cameraController =
+//           CameraController(cameras[1], ResolutionPreset.ultraHigh);
+//       cameraController.initialize().then((_) {
+//         if (!mounted) {
+//           return;
+//         }
+//         setState(() {});
+//       }).catchError((Object e) {
+//         if (e is CameraException) {
+//           switch (e.code) {
+//             case "CameraAccessDenied":
+//               print("User denied camera access.");
+//               showErrorDialog(context, "User denied camera access.");
+//               break;
+//             default:
+//               print("handle other errors.");
+//               showErrorDialog(context,
+//                   "An error occurred: ${e.code}\nTry restrating the app");
+//               break;
+//           }
+//         }
+//       });
+
+
+

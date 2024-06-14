@@ -196,31 +196,7 @@ class _HomeMainState extends State<HomeMain> {
     // print("===============================$UserName");
   }
 
-  // Uint8List? _image1;
-
-  // final ImagePicker _picker = ImagePicker();
-  // XFile? _image;
-  // chooseImages(ImageSource source) async {
-  //   final XFile? image = await _picker.pickImage(source: source);
-  //   if (image != null) {
-  //     return await image.readAsBytes();
-  //   } else {
-  //     return _showBottomAlertDialog(context);
-  //   }
-  // }
-
-  // void selectImage() async {
-  //   //have to set the bug for this  if I select the chood=seImage and come out without choosing the image
-  //   try {
-  //     Uint8List img = await chooseImages(ImageSource.gallery);
-
-  //     setState(() {
-  //       _image1 =
-  //           img; //this will make tghe fn not null and galary will be opened
-  //     });
-  //   } catch (err) {}
-  // }
-
+ 
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -338,11 +314,12 @@ class _HomeMainState extends State<HomeMain> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text("Hello...\u{1F44B}",
-                                  style: TextStyle(fontSize: 20)),
+                                  style: TextStyle(fontSize: 20,fontFamily: "Poppins")),
                               Text(
                                 UserName,
                                 style: const TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.w500),
+                                  fontFamily: "Poppins",
+                                    fontSize: 25, fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -354,6 +331,7 @@ class _HomeMainState extends State<HomeMain> {
                             child: CircleAvatar(
                           radius: 40,
                           foregroundImage: NetworkImage(pic),
+                          
                         ))
                       ]),
 
@@ -379,7 +357,7 @@ class _HomeMainState extends State<HomeMain> {
                           text1Style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
-                              fontFamily: "Inter"),
+                              fontFamily: "Poppins"),
                           text2Style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                           containerColor:
@@ -407,7 +385,7 @@ class _HomeMainState extends State<HomeMain> {
                         StackWidgets(
                                       containerHeight: 113,
                                       containerWidth: 250,
-                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                                       text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                       containerColor: Color.fromARGB(255, 223, 247, 229),
                                       stackImage: "assets/stack_image/reports_stack_image.png",
@@ -432,7 +410,7 @@ class _HomeMainState extends State<HomeMain> {
                          StackWidgets(
                                       containerHeight: 113,
                                       containerWidth: 250,
-                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                                       text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                       containerColor: Color.fromARGB(255, 246, 191, 255),
                                       stackImage: "assets/stack_image/jobs_stack_image.png",
@@ -456,7 +434,7 @@ class _HomeMainState extends State<HomeMain> {
                         StackWidgets(
                                       containerHeight: 113,
                                       containerWidth: 250,
-                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                                       text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                       containerColor: Color.fromARGB(255, 222, 255, 231),
                                       stackImage: "assets/stack_image/job_news_stack_image.png",
@@ -480,7 +458,7 @@ class _HomeMainState extends State<HomeMain> {
                         StackWidgets(
                                       containerHeight: 113,
                                       containerWidth: 250,
-                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text1Style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                                       text2Style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                       containerColor: Color.fromARGB(255, 253, 198, 185),
                                       stackImage: "assets/stack_image/quiz_stack_image.png",
@@ -508,7 +486,7 @@ class _HomeMainState extends State<HomeMain> {
                   StackWidgets(
                                       containerHeight: 130,
                                       containerWidth: double.infinity,
-                                      text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                                      text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                                       text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                                       containerColor: Color.fromARGB(255, 255, 234, 234),
                                       stackImage: "assets/stack_image/start_interview_stack_image.png",
@@ -524,10 +502,7 @@ class _HomeMainState extends State<HomeMain> {
                                       borderRadius: 10,
                                       text_left:20,
                                       ontapp: (){
-                                        SnackbarHelper.showSnackbar(context, title: "Under Construction",
-                                         message: "This page is under development you can expect this functionality in the next update",
-                                          icon: Icons.error_outline, color: Colors.red);
-                                                                              },
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>Interview()));}
                                     ),
 
                   // ImageFeaturesButton(
@@ -557,7 +532,7 @@ class _HomeMainState extends State<HomeMain> {
                   // StackWidgets(
                   //                     containerHeight: 130,
                   //                     containerWidth: double.infinity,
-                  //                     text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                  //                     text1Style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   //                     text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   //                     containerColor: Color.fromARGB(255, 245, 245, 245),
                   //                     stackImage: "assets/stack_image/faang_stack_image.png",
@@ -631,7 +606,7 @@ class _HomeMainState extends State<HomeMain> {
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Inter"),
+                                    fontFamily: "Poppins"),
                               ),
                             ),
                           ],
@@ -789,13 +764,13 @@ class _HomeMainState extends State<HomeMain> {
 //                   children: [
 //                     Text(subtext,
 //                         style: const TextStyle(
-//                             fontFamily: "Inter",
+//                             fontFamily: "Poppins",
 //                             fontSize: 18,
 //                             fontWeight: FontWeight.w400,
 //                             color: Colors.black)),
 //                     Text(maintext,
 //                         style: const TextStyle(
-//                             fontFamily: "Inter",
+//                             fontFamily: "Poppins",
 //                             fontSize: 32,
 //                             fontWeight: FontWeight.w800,
 //                             color: Color.fromARGB(255, 255, 255, 255))),
@@ -833,7 +808,7 @@ class _HomeMainState extends State<HomeMain> {
 //               'This page is under construction',
 //               style: TextStyle(
 //                   fontSize: 14,
-//                   fontFamily: 'Inter',
+//                   fontFamily: 'Poppins',
 //                   fontWeight: FontWeight.w400,
 //                   color: Color.fromARGB(255, 255, 205, 23)),
 //             ),

@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:destin/AuthenticationPages/Signuppage.dart';
 import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:destin/Home.dart';
 import 'package:destin/InterviewPages/Interview.dart';
+import 'package:destin/Widgets/CustomSnackBar.dart';
 import 'package:destin/backdropbox.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -82,7 +82,8 @@ class _ResumeState extends State<Resume> {
 
       setState(() {
         _image1 =
-            img; //this will make tghe fn not null and galary will be opened
+            img; 
+       //this will make tghe fn not null and galary will be opened
         saveProfile();
       });
     } catch (err) {}
@@ -90,6 +91,7 @@ class _ResumeState extends State<Resume> {
 
   void saveProfile() async {
     String resp = await saveData(file: _image1!);
+    pic = resp;
 
     //addFieldToUserDocument('profilePic', resp); //Adding the image url into the profilepic field
     //print(resp);
@@ -159,7 +161,10 @@ class _ResumeState extends State<Resume> {
               } else if (currentIndex == 2) {
               } else if (currentIndex == 3) {
                 //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
-                _showBottomAlertDialog(context);
+               SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
+                                                                              
               }
             },
           );
@@ -288,7 +293,7 @@ class _ResumeState extends State<Resume> {
                                             Text(
                                               Dob,
                                               style: const TextStyle(
-                                                  fontFamily: "Inter",
+                                                  fontFamily: "Poppins",
                                                   fontSize: 13,
                                                   color: Color.fromARGB(
                                                       255, 121, 121, 121),
@@ -506,7 +511,7 @@ class _ResumeState extends State<Resume> {
                                       child: const Text(
                                         "Save",
                                         style: TextStyle(
-                                            fontFamily: "Inter",
+                                            fontFamily: "Poppins",
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white),
@@ -642,7 +647,7 @@ void _showBottomAlertDialog(BuildContext context) {
               'This page is under construction',
               style: TextStyle(
                   fontSize: 14,
-                  fontFamily: 'Inter',
+                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 255, 205, 23)),
             ),

@@ -1,4 +1,5 @@
 //import 'package:destin/backdropbox.dart';
+import 'package:destin/Widgets/CustomSnackBar.dart';
 import 'package:flutter/material.dart';
 
 import '../FeaturesPage/Resume.dart';
@@ -101,7 +102,10 @@ class _InterviewState extends State<Interview> {
                       MaterialPageRoute(builder: (context) => const Resume()));
                 } else if (currentIndex == 3) {
                   //THIS  PPAGE IS UNDER THE CONSTRUCTION AND BOTTOM POO BOX WILL COME
-                  _showBottomAlertDialog(context);
+                  SnackbarHelper.showSnackbar(context, title: "Under Construction",
+                                         message: "This page is under development you can expect this functionality in the next update",
+                                          icon: Icons.error_outline, color: Colors.red);
+                                                                              
                 }
               },
             );
@@ -191,7 +195,7 @@ void _showBottomAlertDialog(BuildContext context) {
               'This page is under construction',
               style: TextStyle(
                   fontSize: 14,
-                  fontFamily: 'Inter',
+                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 255, 205, 23)),
             ),

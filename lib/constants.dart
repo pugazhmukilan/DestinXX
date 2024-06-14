@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:camera/camera.dart';
 import 'package:destin/Constants/firebasefunctions.dart';
 import 'package:destin/Widgets/Stack_widgets.dart';
 import 'package:destin/main.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import "InterviewPages/Interview.dart";
 import "InterviewPages/Interview_details_Page.dart";
 import "InterviewPages/Start_interview.dart";
+late CameraController cameraController;
 bool fetched_details = false;
 String UserName = '';
 String Dob = '';
@@ -39,14 +41,14 @@ TextStyle Ktitletextstyle = const TextStyle(
 TextStyle Kinterviewtypetextstyle = const TextStyle(
     fontFamily: "poppins", fontSize: 23, fontWeight: FontWeight.w500);
 TextStyle Kcommontextstyle = const TextStyle(
-    fontFamily: "Inter", fontSize: 20, fontWeight: FontWeight.w500);
+    fontFamily: "Poppins", fontSize: 20, fontWeight: FontWeight.w500);
 TextStyle Kresumetextstyle = const TextStyle(
-    fontFamily: "Inter",
+    fontFamily: "Poppins",
     fontSize: 20,
     fontWeight: FontWeight.w800,
     color: Color.fromARGB(255, 68, 68, 68));
 TextStyle Kprogressbarnumber = const TextStyle(
-    fontFamily: "Inter",
+    fontFamily: "Poppins",
     fontSize: 20,
     fontWeight: FontWeight.w800,
     color: Colors.black);
@@ -56,7 +58,7 @@ TextStyle Kreporttextstyle = const TextStyle(
     color: Colors.black,
     fontSize: 15);
 TextStyle Kquizcattext = const TextStyle(
-    fontFamily: "Inter",
+    fontFamily: "Poppins",
     fontSize: 25,
     fontWeight: FontWeight.w600,
     color: Color.fromARGB(255, 92, 92, 92));
@@ -174,7 +176,7 @@ void _showBottomAlertDialog(BuildContext context) {
               'This page is under construction',
               style: TextStyle(
                   fontSize: 16,
-                  fontFamily: 'Inter',
+                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
                   color: Colors.white),
             ),
@@ -338,7 +340,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
           text1: "Start your Interview",
           text2: "Technology",
           text1Style: const TextStyle(
-              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Inter"),
+              fontSize: 12, fontWeight: FontWeight.w400, fontFamily: "Poppins"),
           text2Style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           containerColor: const Color.fromARGB(255, 236, 255, 241),
           borderRadius: 20,
@@ -373,7 +375,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "Management",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 240 ,208 ,255),
                     borderRadius: 20,
@@ -406,7 +408,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "Design",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 255 ,209 ,209),
                     borderRadius: 20,
@@ -439,7 +441,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "HR Interview",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 253 ,240 ,205),
                     borderRadius: 20,
@@ -472,7 +474,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "Python",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 233 ,245 ,255),
                     borderRadius: 20,
@@ -505,7 +507,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "Java",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 196 ,195 ,254),
                     borderRadius: 20,
@@ -538,7 +540,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "Web Dev",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 252 ,217 ,223),
                     borderRadius: 20,
@@ -571,7 +573,7 @@ List<List<dynamic>> nestedList(BuildContext context) {
               watermarkLeft: 20,
                text1: "Start your Interview",
                 text2: "OOPS",
-                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Inter"),
+                 text1Style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,fontFamily: "Poppins"),
                   text2Style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                    containerColor: Color.fromARGB(255, 255 ,252 ,252),
                     borderRadius: 20,

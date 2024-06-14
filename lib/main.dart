@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'AuthenticationPages/Loginpage.dart';
@@ -27,13 +28,16 @@ Future<void> main() async {
   prefs = await SharedPreferences.getInstance();
   // prefs!.remove('email');
   //   prefs!.remove('password');
-  try {
+  // try {
     cameras = await availableCameras();
-  } on Exception catch (_, e) {
-    print("error in getting cameras");
-    print(e.toString());
-    return;
-  }
+    _checkPermission();
+
+    
+  // } on Exception catch (_, e) {
+  //   print("error in getting cameras");
+  //   print(e.toString());
+  //   return;
+  // }
 
   runApp(MainApp(isloggedin));
   // runApp(const MainApp());
@@ -80,3 +84,36 @@ Future<bool> checkLoginStatus() async {
     return false; // User is not logged in
   }
 }
+
+
+
+void _checkPermission() async {
+  if (await Permission.camera.request().isGranted) {
+    // Permission is granted
+    // Initialize camera here
+    try {
+      List<CameraDescription> cameras = await availableCameras();
+      CameraController cameraController =
+          CameraController(cameras[0], ResolutionPreset.ultraHigh);
+      await cameraController.initialize();
+      // Add your camera handling logic here
+      print('Camera permission is granted');
+    } on CameraException catch (e) {
+      if (e.code == "CameraAccessDenied") {
+        print("User denied camera access.");
+        // showErrorDialog(context, "User denied camera access.");
+      } else {
+        print("Handle other camera errors: ${e.code}");
+        // showErrorDialog(context,
+        //     "An error occurred: ${e.code}\nTry restarting the app");
+      }
+    } catch (e) {
+      print("No camera found on the device: $e");
+    }
+  } else {
+    // Permission denied
+    // Handle the denial here, show a message to the user, or request again
+    print('Camera permission is denied');
+    // showErrorDialog(context, "error occured in the camera fetching.");
+    
+}}
